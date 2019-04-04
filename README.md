@@ -1,4 +1,4 @@
 # Examplar
 
-npm run postinstall
+npm run install
 npm start
