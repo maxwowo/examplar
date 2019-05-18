@@ -10,6 +10,9 @@ import { Col, Icon, Layout, Row } from "antd";
 /* Logo */
 import logo from "../../assets/logo.png";
 
+/* Styles */
+import "./Navbar.less";
+
 const { Header } = Layout;
 
 const Navbar = () => (

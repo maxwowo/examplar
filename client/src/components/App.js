@@ -11,6 +11,9 @@ import Navbar from "./Navbar/Navbar";
 import HomePage from "./HomePage/HomePage";
 import PageNotFoundPage from "./PageNotFoundPage/PageNotFoundPage";
 
+/* Styles */
+import "./App.less";
+
 const App = () => (
   <Router>
     <Navbar/>
