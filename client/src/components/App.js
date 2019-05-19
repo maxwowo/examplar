@@ -4,6 +4,9 @@ import React from "react";
 /* React router */
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+/* Ant Design components */
+import { Layout } from "antd";
+
 /* Navbar */
 import Navbar from "./Navbar/Navbar";
 
@@ -16,11 +19,13 @@ import "./App.less";
 
 const App = () => (
   <Router>
-    <Navbar/>
-    <Switch>
-      <Route exact path="/" component={HomePage}/>
-      <Route path="*" component={PageNotFoundPage}/>
-    </Switch>
+    <Layout id="app-layout">
+      <Navbar/>
+      <Switch>
+        <Route exact path="/" component={HomePage}/>
+        <Route path="*" component={PageNotFoundPage}/>
+      </Switch>
+    </Layout>
   </Router>
 );
 
