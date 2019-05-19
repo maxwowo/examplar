@@ -18,7 +18,7 @@ const HomePage = () => (
     <Title id="title-header" className="text">Find your examplar</Title>
     <Title level={4} className="text">The best solutions written by your fellow students, organized into one
       place.</Title>
-    <SearchBox/>
+    <SearchBox id="home-search-box" />
   </Content>
 );
 

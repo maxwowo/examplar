@@ -2,9 +2,12 @@
 import React from "react";
 
 /* Ant Design components */
-import { Col, Input, Row, Select } from "antd";
+import { Button, Input, Select } from "antd";
 
-const { Search, Group } = Input;
+/* Style */
+import "./SearchBox.less";
+
+const { Group } = Input;
 const { Option } = Select;
 
 const onChange = value => {
@@ -24,40 +27,29 @@ const onSearch = val => {
 };
 
 const SearchBox = () => (
-  <Group size="large">
-    <Row>
+  <Group compact id="search-box-group">
+    <Input id="search-box-input" size="large" placeholder="Search for courses"/>
 
-      <Col span={15}>
-        <Search
-          placeholder="Search for courses"
-          enterButton="Search"
-          size="large"
-          onSearch={value => console.log(value)}
-        />
-      </Col>
+    <Select
+      showSearch
+      style={{ width: 200 }}
+      placeholder="Filter by university"
+      optionFilterProp="children"
+      onChange={onChange}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      onSearch={onSearch}
+      size="large"
+      filterOption={(input, option) =>
+        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+      }
+    >
+      <Option value="jack">Jack</Option>
+      <Option value="lucy">Lucy</Option>
+      <Option value="tom">Tom</Option>
+    </Select>
 
-      <Col span={9}>
-        <Select
-          showSearch
-          style={{ width: 200 }}
-          placeholder="Select a person"
-          optionFilterProp="children"
-          onChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onSearch={onSearch}
-          size="large"
-          filterOption={(input, option) =>
-            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
-        >
-          <Option value="jack">Jack</Option>
-          <Option value="lucy">Lucy</Option>
-          <Option value="tom">Tom</Option>
-        </Select>
-      </Col>
-
-    </Row>
+    <Button type="primary" icon="search" size="large">Search</Button>
   </Group>
 );
 
