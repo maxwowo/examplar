@@ -4,7 +4,7 @@ import React, { Component } from "react";
 /* Ant Design components */
 import { Button, Input, Select } from "antd";
 
-/* Universities */
+/* List of all universities */
 import universities from "../../constants/universities";
 
 /* Style */
@@ -55,7 +55,7 @@ class SearchBox extends Component {
         </Select>
 
         <Button type="primary" id="search-box-btn" icon="search"
-                size="large">Search</Button>
+                size="large"/>
       </Group>
     )
   }

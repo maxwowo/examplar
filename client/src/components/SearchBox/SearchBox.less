@@ -1,21 +1,27 @@
 @import "~antd/lib/style/themes/default";
 
-#search-box-input {
-  width: 50%;
+@search-box-input-width: 15%;
+@search-box-select-width: 15rem;
+@search-box-btn-width: 15%;
 
-  @media only screen and (max-width: @screen-xs) and (max-width: @screen-sm) {
-    width: 35%;
+@search-box-btn-width-phone: 10%;
+
+#search-box-input {
+  width: calc(100% - @search-box-btn-width - @search-box-select-width);
+
+  @media only screen and (max-width: @screen-md) {
+    width: calc(100% - @search-box-btn-width-phone - @search-box-select-width);
   }
 }
 
 #search-box-select {
-  width: 30%;
+  width: @search-box-select-width;
 }
 
 #search-box-btn {
-  width: 15%;
+  width: @search-box-btn-width;
 
-  @media only screen and (max-width: @screen-xs) and (max-width: @screen-sm) {
-    width: 35%;
+  @media only screen and (max-width: @screen-md) {
+    width: @search-box-btn-width-phone;
   }
 }
