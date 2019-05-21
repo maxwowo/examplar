@@ -4,9 +4,6 @@ import React, { Component } from "react";
 /* React Router */
 import { withRouter } from "react-router-dom";
 
-/* Query string API */
-import qs from "querystring";
-
 /* Ant Design components */
 import { Button, Input, Select } from "antd";
 
@@ -67,9 +64,11 @@ class SearchBox extends Component {
     const { course, university } = this.state;
     const { history } = this.props;
 
+    const params = new URLSearchParams({course: course, university: university});
+
     history.push({
       pathname: "/courses",
-      search: qs.stringify({ course: encodeURI(course), university: encodeURI(university) })
+      search: params.toString()
     });
   };
 
