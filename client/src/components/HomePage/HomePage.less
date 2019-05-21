@@ -1,7 +1,18 @@
-#title-header {
-  font-size: 5rem;
+@import "~antd/lib/style/themes/default.less";
+
+#home-page-title {
+  font-size: 4.7rem;
 }
 
-#home-content {
-  margin-top: 10%;
+#home-page-content {
+  margin: 10% auto auto auto;
+  width: 60%;
+
+  @media only screen and (max-width: @screen-xs) and (max-width: @screen-sm) {
+    width: 100%;
+  }
+}
+
+#home-page-subtitle {
+  margin-bottom: @form-item-margin-bottom;
 }

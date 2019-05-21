@@ -1,8 +1,21 @@
+@import "~antd/lib/style/themes/default";
+
 #search-box-input {
-  max-width: 20%;
+  width: 50%;
+
+  @media only screen and (max-width: @screen-xs) and (max-width: @screen-sm) {
+    width: 35%;
+  }
 }
 
-#search-box-group {
-  display: block;
-  margin: auto;
+#search-box-select {
+  width: 30%;
+}
+
+#search-box-btn {
+  width: 15%;
+
+  @media only screen and (max-width: @screen-xs) and (max-width: @screen-sm) {
+    width: 35%;
+  }
 }

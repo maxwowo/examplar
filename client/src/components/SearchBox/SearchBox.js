@@ -7,8 +7,8 @@ import { Button, Input, Select } from "antd";
 /* Style */
 import "./SearchBox.less";
 
-const { Group } = Input;
-const { Option } = Select;
+const {Group} = Input;
+const {Option} = Select;
 
 const onChange = value => {
   console.log(`selected ${value}`);
@@ -27,12 +27,11 @@ const onSearch = val => {
 };
 
 const SearchBox = () => (
-  <Group compact id="search-box-group">
+  <Group compact>
     <Input id="search-box-input" size="large" placeholder="Search for courses"/>
 
     <Select
       showSearch
-      style={{ width: 200 }}
       placeholder="Filter by university"
       optionFilterProp="children"
       onChange={onChange}
@@ -40,6 +39,7 @@ const SearchBox = () => (
       onBlur={onBlur}
       onSearch={onSearch}
       size="large"
+      id="search-box-select"
       filterOption={(input, option) =>
         option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
       }
@@ -49,7 +49,8 @@ const SearchBox = () => (
       <Option value="tom">Tom</Option>
     </Select>
 
-    <Button type="primary" icon="search" size="large">Search</Button>
+    <Button type="primary" id="search-box-btn" icon="search"
+            size="large">Search</Button>
   </Group>
 );
 
