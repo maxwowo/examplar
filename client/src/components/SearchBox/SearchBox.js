@@ -64,7 +64,6 @@ class SearchBox extends Component {
             size="large"
             placeholder="Search for courses"
             name="course"
-            value={this.state.course}
             onChange={this.handleCourseChange}
           />
 
@@ -76,7 +75,6 @@ class SearchBox extends Component {
             size="large"
             id="search-box-select"
             name="university"
-            value={this.state.university}
             onSelect={this.handleUniversitySelect}
           >
             {this.state.options.map((curr, i) => <Option value={curr} key={i}>{curr}</Option>)}
