@@ -20,7 +20,11 @@ class SearchBox extends Component {
   state = {
 
     /* List of universities to be displayed in the select */
-    options: universities.slice(0, numOptions)
+    options: universities.slice(0, numOptions),
+
+    course: "",
+
+    university: ""
   };
 
   /* Changes the options in the select based on the search string */
@@ -38,25 +42,55 @@ class SearchBox extends Component {
     this.setState({ options: matchedOptions });
   };
 
+  handleCourseChange = e => {
+    this.setState({ course: e.target.value });
+  };
+
+  handleUniversitySelect = e => {
+    this.setState({ university: e });
+  };
+
+  handleSubmit = e => {
+    console.log(this.state.course, this.state.university);
+    e.preventDefault();
+  };
+
   render() {
     return (
-      <Group compact>
-        <Input id="search-box-input" size="large" placeholder="Search for courses"/>
+      <form onSubmit={this.handleSubmit}>
+        <Group compact>
+          <Input
+            id="search-box-input"
+            size="large"
+            placeholder="Search for courses"
+            name="course"
+            value={this.state.course}
+            onChange={this.handleCourseChange}
+          />
 
-        <Select
-          showSearch
-          placeholder="Filter by university"
-          optionFilterProp="children"
-          onSearch={this.handleSearch}
-          size="large"
-          id="search-box-select"
-        >
-          {this.state.options.map((curr, i) => <Option value={curr} key={i}>{curr}</Option>)}
-        </Select>
+          <Select
+            showSearch
+            placeholder="Filter by university"
+            optionFilterProp="children"
+            onSearch={this.handleSearch}
+            size="large"
+            id="search-box-select"
+            name="university"
+            value={this.state.university}
+            onSelect={this.handleUniversitySelect}
+          >
+            {this.state.options.map((curr, i) => <Option value={curr} key={i}>{curr}</Option>)}
+          </Select>
 
-        <Button type="primary" id="search-box-btn" icon="search"
-                size="large"/>
-      </Group>
+          <Button
+            type="primary"
+            htmlType="submit"
+            id="search-box-btn"
+            icon="search"
+            size="large"
+          />
+        </Group>
+      </form>
     )
   }
 }
