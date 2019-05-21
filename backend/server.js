@@ -45,23 +45,28 @@ router.get("/courses", function (req, res) {
   res.send([
     {
       courseCode: "COMP1511",
-      courseName: "Fundamentals of Computing"
+      courseName: "Fundamentals of Computing",
+      university: "University of New South Wales"
     },
     {
       courseCode: "COMP2521",
-      courseName: "Data Structures and Algorithms"
+      courseName: "Data Structures and Algorithms",
+      university: "University of New South Wales"
     },
     {
       courseCode: "COMP2111",
-      courseName: "System Modelling and Design"
+      courseName: "System Modelling and Design",
+      university: "University of New South Wales"
     },
     {
       courseCode: "MATH1131",
-      courseName: "Mathematics 1A"
+      courseName: "Mathematics 1A",
+      university: "University of Auckland"
     },
     {
       courseCode: "MATH1231",
-      courseName: "Mathematics 1B"
+      courseName: "Mathematics 1B",
+      university: "University of Auckland"
     }
   ]);
 });

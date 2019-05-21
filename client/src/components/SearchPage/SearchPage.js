@@ -1,14 +1,21 @@
 /* React */
 import React, { Component } from "react";
 
+/* Ant Design */
+import { List } from "antd";
+
 /* Axios */
 import Axios from "axios";
 
 /* React Router */
 import { withRouter } from "react-router-dom";
 
+const {Item} = List;
+
 class SearchPage extends Component {
-  state = {};
+  state = {
+    listItems: []
+  };
 
   componentDidMount() {
     const { location } = this.props;
@@ -23,15 +30,26 @@ class SearchPage extends Component {
         university: !university ? "" : university
       }
     }).then(res => {
-      console.log(res);
+      this.setState({ listItems: [...res.data] });
     }).catch(err => {
-      // console.log(err);
+      console.log(err);
     });
   }
 
   render() {
     return (
-      <div>aoeu</div>
+      <List
+        itemLayout="horizontal"
+        dataSource={this.state.listItems}
+        renderItem={item => (
+          <Item>
+            <Item.Meta
+              title={<a href="https://www.google.com">{item.courseName}</a>}
+              description={`${item.courseCode} @ ${item.university}`}
+            />
+          </Item>
+        )}
+      />
     );
   }
 }
