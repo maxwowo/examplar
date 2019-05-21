@@ -29,7 +29,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:3001",
+  "proxy": "http://127.0.0.1:3001",
   "devDependencies": {
     "babel-plugin-import": "^1.11.2",
     "customize-cra": "^0.2.12",
