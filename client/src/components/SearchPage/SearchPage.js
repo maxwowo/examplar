@@ -1,23 +1,25 @@
 /* React */
 import React, { Component } from "react";
 
+/* Axios */
+import Axios from "axios";
+
 /* React Router */
 import { withRouter } from "react-router-dom";
 
-/* Query string API */
-import qs from "querystring";
-
 class SearchPage extends Component {
+
+
   componentDidMount() {
-    // const params = qs.parse(this.props.location.search);
-    const params = new URLSearchParams(this.props.location.search);
-    console.log(params);
+    const { location } = this.props;
+
+    const params = new URLSearchParams(location.search);
   }
 
   render() {
     return (
       <div>aoeu</div>
-    )
+    );
   }
 }
 
