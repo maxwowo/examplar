@@ -1,57 +1,57 @@
 /* React */
-import React from "react";
+import React, { Component } from "react";
 
 /* Ant Design components */
 import { Button, Input, Select } from "antd";
 
+/* Universities */
+import universities from "../../constants/universities";
+
 /* Style */
 import "./SearchBox.less";
 
-const {Group} = Input;
-const {Option} = Select;
+const { Group } = Input;
+const { Option } = Select;
 
-const onChange = value => {
-  console.log(`selected ${value}`);
-};
+const maxOptionsCount = 4;
+const numOptions = Math.min(maxOptionsCount, universities.length);
 
-const onBlur = () => {
-  console.log("blur");
-};
+class SearchBox extends Component {
+  state = {
+    options: universities.slice(0, numOptions)
+  };
 
-const onFocus = () => {
-  console.log("focus");
-};
+  handleSearch = val => {
+    const matchedOptions = [];
 
-const onSearch = val => {
-  console.log("search:", val);
-};
+    for (let uni of universities)
+      if (matchedOptions.length < numOptions && uni.toLowerCase().indexOf(val.toLowerCase()) >= 0)
+        matchedOptions.push(uni);
 
-const SearchBox = () => (
-  <Group compact>
-    <Input id="search-box-input" size="large" placeholder="Search for courses"/>
+    this.setState({ options: matchedOptions });
+  };
 
-    <Select
-      showSearch
-      placeholder="Filter by university"
-      optionFilterProp="children"
-      onChange={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      onSearch={onSearch}
-      size="large"
-      id="search-box-select"
-      filterOption={(input, option) =>
-        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-      }
-    >
-      <Option value="jack">Jack</Option>
-      <Option value="lucy">Lucy</Option>
-      <Option value="tom">Tom</Option>
-    </Select>
+  render() {
+    return (
+      <Group compact>
+        <Input id="search-box-input" size="large" placeholder="Search for courses"/>
 
-    <Button type="primary" id="search-box-btn" icon="search"
-            size="large">Search</Button>
-  </Group>
-);
+        <Select
+          showSearch
+          placeholder="Filter by university"
+          optionFilterProp="children"
+          onSearch={this.handleSearch}
+          size="large"
+          id="search-box-select"
+        >
+          {this.state.options.map((curr, i) => <Option value={curr} key={i}>{curr}</Option>)}
+        </Select>
+
+        <Button type="primary" id="search-box-btn" icon="search"
+                size="large">Search</Button>
+      </Group>
+    )
+  }
+}
 
 export default SearchBox;
