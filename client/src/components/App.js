@@ -12,6 +12,7 @@ import Navbar from "./Navbar/Navbar";
 
 /* All the pages */
 import HomePage from "./HomePage/HomePage";
+import SearchPage from "./SearchPage/SearchPage";
 import PageNotFoundPage from "./PageNotFoundPage/PageNotFoundPage";
 
 /* Styles */
@@ -23,6 +24,7 @@ const App = () => (
       <Navbar/>
       <Switch>
         <Route exact path="/" component={HomePage}/>
+        <Route path="/courses" component={SearchPage}/>
         <Route path="*" component={PageNotFoundPage}/>
       </Switch>
     </Layout>
