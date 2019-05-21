@@ -18,16 +18,23 @@ const numOptions = Math.min(maxOptionsCount, universities.length);
 
 class SearchBox extends Component {
   state = {
+
+    /* List of universities to be displayed in the select */
     options: universities.slice(0, numOptions)
   };
 
+  /* Changes the options in the select based on the search string */
   handleSearch = val => {
+
+    /* Initially empty list matched universities */
     const matchedOptions = [];
 
+    /* Find universities that match the search string */
     for (let uni of universities)
       if (matchedOptions.length < numOptions && uni.toLowerCase().indexOf(val.toLowerCase()) >= 0)
         matchedOptions.push(uni);
 
+    /* Update the options */
     this.setState({ options: matchedOptions });
   };
 
