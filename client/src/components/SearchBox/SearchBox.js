@@ -1,6 +1,12 @@
 /* React */
 import React, { Component } from "react";
 
+/* React Router */
+import { withRouter } from "react-router-dom";
+
+/* Query string API */
+import qs from "querystring";
+
 /* Ant Design components */
 import { Button, Input, Select } from "antd";
 
@@ -13,7 +19,10 @@ import "./SearchBox.less";
 const { Group } = Input;
 const { Option } = Select;
 
+/* Maximum number of options in the drop-down menu */
 const maxOptionsCount = 4;
+
+/* Get the minimum to avoid stepping out of bounds */
 const numOptions = Math.min(maxOptionsCount, universities.length);
 
 class SearchBox extends Component {
@@ -22,8 +31,10 @@ class SearchBox extends Component {
     /* List of universities to be displayed in the select */
     options: universities.slice(0, numOptions),
 
+    /* Course entered by the user */
     course: "",
 
+    /* University selected by the user */
     university: ""
   };
 
@@ -51,8 +62,15 @@ class SearchBox extends Component {
   };
 
   handleSubmit = e => {
-    console.log(this.state.course, this.state.university);
     e.preventDefault();
+
+    const { course, university } = this.state;
+    const { history } = this.props;
+
+    history.push({
+      pathname: "/courses",
+      search: qs.stringify({ course: encodeURI(course), university: encodeURI(university) })
+    });
   };
 
   render() {
@@ -93,4 +111,4 @@ class SearchBox extends Component {
   }
 }
 
-export default SearchBox;
+export default withRouter(SearchBox);

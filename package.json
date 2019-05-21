@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/maxwowo/examplar#readme",
   "dependencies": {
-    "concurrently": "^4.1.0"
+    "concurrently": "^4.1.0",
+    "querystringify": "^2.1.1"
   }
 }
