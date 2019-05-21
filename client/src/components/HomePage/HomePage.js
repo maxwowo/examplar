@@ -19,7 +19,7 @@ const HomePage = () => (
     <Title level={4} className="text" id="home-page-subtitle">The best solutions written by your fellow students,
       organized into one
       place.</Title>
-    <SearchBox id="home-search-box"/>
+    <SearchBox/>
   </Content>
 );
 

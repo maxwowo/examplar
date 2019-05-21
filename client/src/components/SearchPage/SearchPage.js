@@ -4,13 +4,20 @@ import React, { Component } from "react";
 /* Ant Design */
 import { List } from "antd";
 
+/* Custom components */
+import SearchBox from "../SearchBox/SearchBox";
+
 /* Axios */
 import Axios from "axios";
 
 /* React Router */
 import { withRouter } from "react-router-dom";
 
-const {Item} = List;
+/* Styles */
+import "./SearchPage.less";
+
+const { Item } = List;
+const { Meta } = Item;
 
 class SearchPage extends Component {
   state = {
@@ -38,18 +45,22 @@ class SearchPage extends Component {
 
   render() {
     return (
-      <List
-        itemLayout="horizontal"
-        dataSource={this.state.listItems}
-        renderItem={item => (
-          <Item>
-            <Item.Meta
-              title={<a href="https://www.google.com">{item.courseName}</a>}
-              description={`${item.courseCode} @ ${item.university}`}
-            />
-          </Item>
-        )}
-      />
+      <div id="search-page-content">
+        <SearchBox/>
+        <List
+          size="large"
+          header={<div>Search results</div>}
+          dataSource={this.state.listItems}
+          renderItem={item => (
+            <Item>
+              <Meta
+                title={<a href="https://www.google.com">{item.courseName}</a>}
+                description={`${item.courseCode} @ ${item.university}`}
+              />
+            </Item>
+          )}
+        />
+      </div>
     );
   }
 }
