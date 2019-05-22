@@ -5,10 +5,17 @@ import React, { Component } from "react";
 import Axios from "axios";
 
 class CoursePage extends Component {
+  state = {
+    courseName: null,
+    courseCode: null
+  };
+
   componentDidMount() {
     const courseId = this.props.match.params.id;
 
-
+    Axios.get(`/api/courses/${courseId}`).then(res => {
+      console.log(res);
+    })
   }
 
   render() {

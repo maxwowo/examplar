@@ -6,7 +6,7 @@ Examplar is a platform that allow students to work
 on solutions for past exam papers collaboratively. 
 
 
-### Tech 
+### Stack 
 Examplar is built using the following: 
 * React - UI library
 * React Router - router library

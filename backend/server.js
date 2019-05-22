@@ -61,7 +61,7 @@ router.post("/courses", (req, res) => {
 
   /* Prepared query string */
   const dbQuery = `
-    INSERT INTO examplardb.course_table 
+    INSERT INTO course_table 
     (course_id, course_code, course_name, university_id) 
     VALUES 
     (null, ?, ?, ?)
@@ -74,8 +74,44 @@ router.post("/courses", (req, res) => {
   connection.execute(dbQuery, varList, (err, results, fields) => {
 
     /* Error handling */
-    if (err) res.send(err);
+    if (err) console.log(err);
     else res.send(`${results.insertId}`);
+  });
+});
+
+router.get("/courses/:id", (req, res) => {
+  const { id } = req.params;
+
+  const courseQuery = `
+    SELECT course_code, course_name, university_name 
+    FROM course_table INNER JOIN university_table 
+    ON course_table.university_id = university_table.university_id
+    WHERE course_id = ?
+  `;
+
+  const examQuery = `
+    SELECT exam_id, exam_year, exam_term 
+    FROM exam_table 
+    WHERE course_id = ?
+  `;
+
+  connection.execute(courseQuery, [id], (courseErr, courseResults, courseFields) => {
+    if (courseErr) console.log(courseErr);
+
+    const { course_code, course_name, university_name } = courseResults[0];
+
+    connection.execute(examQuery, [id], (examErr, examResults, examFields) => {
+      if (examErr) console.log(examErr);
+
+      const exams = examResults.map(curr => ({ ...curr }));
+
+      res.json({
+        courseCode: course_code,
+        courseName: course_name,
+        universityName: university_name,
+        exams: exams
+      });
+    });
   });
 });
 
