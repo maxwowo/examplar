@@ -8,9 +8,9 @@ on solutions for past exam papers collaboratively.
 
 ### Tech 
 Examplar is built using the following: 
-* React - frontend
+* React - UI library
 * React Router - router library
-* Ant Design - frontend library
+* Ant Design - UI framework
 * Less - styling solution
 * Node.js - backend
 * Express.js - network app framework
