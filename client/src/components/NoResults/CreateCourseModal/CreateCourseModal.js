@@ -1,6 +1,9 @@
 /* React */
 import React, { Component } from "react";
 
+/* React Router */
+import { withRouter } from "react-router-dom";
+
 /* Axios */
 import Axios from "axios";
 
@@ -8,7 +11,7 @@ import Axios from "axios";
 import { Modal, Form, Input, Button } from "antd";
 
 /* Utility functions */
-import {uniNameToID} from "./util";
+import { uniNameToID } from "./util";
 
 /* Custom components */
 import UniversitySelect from "../../UniversitySelect/UniversitySelect";
@@ -25,18 +28,29 @@ class CreateCourseModal extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
+    /* Validate the form fields */
     this.props.form.validateFields((err, values) => {
 
       /* Only submit a POST request when the form is valid */
       if (!err) {
 
+        const { history } = this.props;
+
+        /* Get the field details */
         const { courseCode, courseName, university } = values;
+
+        /* Get the ID of the university selected in the form */
         const universityID = uniNameToID(university);
 
+        /* Submit a POST request */
         Axios.post("/api/courses", {
           courseCode: courseCode,
           courseName: courseName,
           universityID: universityID
+        }).then(res => {
+
+          /* Redirect to the course page */
+          history.push(`/courses/${res.data}`);
         });
       }
     });
@@ -105,4 +119,4 @@ class CreateCourseModal extends Component {
 
 const WrappedModal = Form.create()(CreateCourseModal);
 
-export default WrappedModal;
+export default withRouter(WrappedModal);

@@ -74,7 +74,8 @@ router.post("/courses", (req, res) => {
   connection.execute(dbQuery, varList, (err, results, fields) => {
 
     /* Error handling */
-    if (err) console.log(err);
+    if (err) res.send(err);
+    else res.send(`${results.insertId}`);
   });
 });
 
