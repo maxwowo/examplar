@@ -86,7 +86,7 @@ class SearchPage extends Component {
     );
 
     return (
-      <Content className="content-body" id="search-page-content">
+      <Content className="container-width" id="search-page-content">
         <SearchBox/>
         <List
           size="large"

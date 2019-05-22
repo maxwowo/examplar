@@ -30,7 +30,7 @@ class CoursePage extends Component {
 
   render() {
     return (
-      <div id="course-page-content" className="content-body">
+      <div id="course-page-content" className="container-width">
         <Sider id="course-page-sider">Sider</Sider>
         <Content id="course-page-content">Content</Content>
       </div>

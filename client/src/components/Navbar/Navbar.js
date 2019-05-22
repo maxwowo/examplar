@@ -18,7 +18,7 @@ const { Header } = Layout;
 
 const Navbar = () => (
   <Header id="navbar">
-      <Row type="flex" align="middle" justify="space-between">
+      <Row type="flex" align="middle" justify="space-between" className="container-width">
 
         <Col>
           <Link to="/">
