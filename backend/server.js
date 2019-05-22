@@ -35,7 +35,7 @@ router.get("/courses", (req, res) => {
     FROM course_table INNER JOIN university_table 
     ON course_table.university_id = university_table.university_id 
     WHERE (course_code LIKE ? OR course_name LIKE ?) AND university_name LIKE ? 
-    LIMIT 10
+    LIMIT 5
   `;
 
   /* Query variables
@@ -57,7 +57,7 @@ router.get("/courses", (req, res) => {
 router.post("/courses", (req, res) => {
 
   /* Get body info */
-  const { courseCode, courseName, universityID } = req.body;
+  const { courseCode, courseName, universityId } = req.body;
 
   /* Prepared query string */
   const dbQuery = `
@@ -68,7 +68,7 @@ router.post("/courses", (req, res) => {
   `;
 
   /* Query variables */
-  const varList = [courseCode, courseName, universityID];
+  const varList = [courseCode, courseName, universityId];
 
   /* Execute prepared query string */
   connection.execute(dbQuery, varList, (err, results, fields) => {

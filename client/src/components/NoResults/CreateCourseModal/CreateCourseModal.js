@@ -11,7 +11,7 @@ import Axios from "axios";
 import { Modal, Form, Input, Button } from "antd";
 
 /* Utility functions */
-import { uniNameToID } from "./util";
+import { uniNameToId } from "./util";
 
 /* Custom components */
 import UniversitySelect from "../../UniversitySelect/UniversitySelect";
@@ -40,13 +40,13 @@ class CreateCourseModal extends Component {
         const { courseCode, courseName, university } = values;
 
         /* Get the ID of the university selected in the form */
-        const universityID = uniNameToID(university);
+        const universityId = uniNameToId(university);
 
         /* Submit a POST request */
         Axios.post("/api/courses", {
           courseCode: courseCode,
           courseName: courseName,
-          universityID: universityID
+          universityId: universityId
         }).then(res => {
 
           /* Redirect to the course page */
