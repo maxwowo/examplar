@@ -14,8 +14,8 @@ class CreateCourseModal extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const itemLayout = {
-      labelCol: { span: 5 },
-      wrapperCol: { span: 19 }
+      labelCol: { span: 6 },
+      wrapperCol: { span: 18 }
     };
 
     return (
@@ -31,11 +31,23 @@ class CreateCourseModal extends Component {
         >
 
           <Item label="Course Code" {...itemLayout}>
-            <Input/>
+            {getFieldDecorator("courseCode", {
+              rules: [{ required: true, message: "Please enter the course code." }]
+            })(
+              <Input/>
+            )}
           </Item>
 
           <Item label="Course Name" {...itemLayout}>
-            <Input/>
+            {getFieldDecorator("courseName", {
+              rules: [{ required: true, message: "Please enter the course name." }]
+            })(
+              <Input/>
+            )}
+          </Item>
+
+          <Item label="University" {...itemLayout}>
+
           </Item>
 
         </Form>
