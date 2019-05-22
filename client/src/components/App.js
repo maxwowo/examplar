@@ -24,7 +24,8 @@ const App = () => (
       <Navbar/>
       <Switch>
         <Route exact path="/" component={HomePage}/>
-        <Route path="/courses" component={SearchPage}/>
+        <Route path="/search" component={SearchPage}/>
+        <Route path="/courses/:id" component={PageNotFoundPage}/>
         <Route path="*" component={PageNotFoundPage}/>
       </Switch>
     </Layout>

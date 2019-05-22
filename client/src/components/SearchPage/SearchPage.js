@@ -11,7 +11,7 @@ import SearchBox from "../SearchBox/SearchBox";
 import Axios from "axios";
 
 /* React Router */
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 /* Styles */
 import "./SearchPage.less";
@@ -88,7 +88,7 @@ class SearchPage extends Component {
           renderItem={item => (
             <Item>
               <Meta
-                title={<a href="https://www.google.com">{item.course_name}</a>}
+                title={<Link to={`/courses/${item.course_id}`}>{item.course_name}</Link>}
                 description={`${item.course_code} @ ${item.university_name}`}
               />
             </Item>

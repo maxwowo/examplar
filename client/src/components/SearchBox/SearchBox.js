@@ -67,7 +67,7 @@ class SearchBox extends Component {
     const params = new URLSearchParams({course: course, university: university});
 
     history.push({
-      pathname: "/courses",
+      pathname: "/search",
       search: params.toString()
     });
   };
