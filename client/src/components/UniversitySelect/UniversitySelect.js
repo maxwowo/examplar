@@ -27,9 +27,14 @@ class UniversitySelect extends Component {
     const matchedOptions = [];
 
     /* Find universities that match the search string */
-    for (let uni of universities)
-      if (matchedOptions.length < numOptions && uni.toLowerCase().indexOf(val.toLowerCase()) >= 0)
+    for (let uni of universities) {
+      let matchedOptionsLen = matchedOptions.length;
+
+      if (matchedOptionsLen < numOptions && uni.toLowerCase().indexOf(val.toLowerCase()) >= 0)
         matchedOptions.push(uni);
+
+      if (matchedOptionsLen === numOptions) break;
+    }
 
     /* Update the options */
     this.setState({ options: matchedOptions });

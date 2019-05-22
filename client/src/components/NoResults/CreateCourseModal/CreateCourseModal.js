@@ -2,13 +2,10 @@
 import React, { Component } from "react";
 
 /* Ant Design components */
-import { Modal, Form, Select, Input } from "antd";
+import { Modal, Form, Input, Button } from "antd";
 
 /* Custom components */
 import UniversitySelect from "../../UniversitySelect/UniversitySelect";
-
-/* Styles */
-import "./CreateCourseModal.less";
 
 const { Item } = Form;
 
@@ -20,7 +17,10 @@ class CreateCourseModal extends Component {
   };
 
   handleSubmit = e => {
-
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) console.log("Received values of form:", values);
+    });
   };
 
   render() {
@@ -29,17 +29,24 @@ class CreateCourseModal extends Component {
       labelCol: { span: 6 },
       wrapperCol: { span: 18 }
     };
+    const { visible, toggleModal } = this.props;
 
     return (
       <Modal
         title="Create course"
-        visible={this.props.visible}
-        onOk={this.props.toggleModal}
-        onCancel={this.props.toggleModal}
+        visible={visible}
+        onOk={toggleModal}
+        onCancel={toggleModal}
+        footer={[
+          <Button key="cancel" onClick={toggleModal}>Cancel</Button>,
+          <Button key="submit" form="create-course-modal-form" htmlType="submit" type="primary"
+                  onClick={this.handleSubmit}>Submit</Button>
+        ]}
       >
         <Form
           onSubmit={this.handleSubmit}
           layout="horizontal"
+          id="create-course-modal-form"
         >
 
           <Item label="Course Code" {...itemLayout}>
@@ -77,6 +84,6 @@ class CreateCourseModal extends Component {
   }
 }
 
-const WrappedModal = Form.create({ name: "coordinated" })(CreateCourseModal);
+const WrappedModal = Form.create()(CreateCourseModal);
 
 export default WrappedModal;
