@@ -61,6 +61,7 @@ class CreateCourseModal extends Component {
             })(
               <UniversitySelect
                 placeholder="Search university"
+                onSelect={e => this.setState({ university: e })}
                 size="medium"
               />
             )}
