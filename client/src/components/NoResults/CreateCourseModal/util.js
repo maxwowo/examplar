@@ -1,5 +1,5 @@
 import universities from "../../../constants/universities";
 
 export const uniNameToId = name => {
-  return universities.indexOf(name) + 1;
+  return universities.indexOf(name);
 };
