@@ -4,6 +4,9 @@ import React, { Component } from "react";
 /* Ant Design components */
 import { Modal, Form, Select, Input } from "antd";
 
+/* Custom components */
+import UniversitySelect from "../../UniversitySelect/UniversitySelect";
+
 const { Item } = Form;
 
 class CreateCourseModal extends Component {
@@ -47,7 +50,10 @@ class CreateCourseModal extends Component {
           </Item>
 
           <Item label="University" {...itemLayout}>
-
+            <UniversitySelect
+              placeholder="Search university"
+              size="medium"
+            />
           </Item>
 
         </Form>
