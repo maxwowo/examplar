@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 
 /* Ant Design */
-import { List } from "antd";
+import { List, Typography, Button } from "antd";
 
 /* Custom components */
 import SearchBox from "../SearchBox/SearchBox";
@@ -18,6 +18,7 @@ import "./SearchPage.less";
 
 const { Item } = List;
 const { Meta } = Item;
+const { Text, Paragraph } = Typography;
 
 class SearchPage extends Component {
   state = {
@@ -77,7 +78,17 @@ class SearchPage extends Component {
   }
 
   render() {
-    const listHeader = <div>Search results</div>;
+
+    const listHeader = (
+      <Text>Search results</Text>
+    );
+
+    const noResult = (
+      <div>
+        <Paragraph>Your search did not match any courses</Paragraph>
+        <Button type="primary" shape="round">Create course</Button>
+      </div>
+    );
 
     return (
       <div className="content-body" id="search-page-content">
@@ -86,7 +97,7 @@ class SearchPage extends Component {
           size="large"
           header={listHeader}
           dataSource={this.state.listItems}
-          locale={{emptyText: <span>aoeu</span>}}
+          locale={{ emptyText: noResult }}
           loading={this.state.listLoading}
           renderItem={item => (
             <Item>
