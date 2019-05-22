@@ -77,13 +77,16 @@ class SearchPage extends Component {
   }
 
   render() {
+    const listHeader = <div>Search results</div>;
+
     return (
-      <div id="search-page-content">
+      <div className="content-body" id="search-page-content">
         <SearchBox/>
         <List
           size="large"
-          header={<div>Search results</div>}
+          header={listHeader}
           dataSource={this.state.listItems}
+          locale={{emptyText: <span>aoeu</span>}}
           loading={this.state.listLoading}
           renderItem={item => (
             <Item>

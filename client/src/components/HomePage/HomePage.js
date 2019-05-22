@@ -14,7 +14,7 @@ const {Title} = Typography;
 const {Content} = Layout;
 
 const HomePage = () => (
-  <Content id="home-page-content">
+  <Content className="content-body">
     <Title id="home-page-title" ellipsis className="text">Find your examplar</Title>
     <Title level={4} className="text" id="home-page-subtitle">The best solutions written by your fellow students,
       organized into one
