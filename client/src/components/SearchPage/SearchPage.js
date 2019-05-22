@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 
 /* Ant Design */
-import { List, Typography, Button } from "antd";
+import { List, Typography } from "antd";
 
 /* Custom components */
 import SearchBox from "../SearchBox/SearchBox";

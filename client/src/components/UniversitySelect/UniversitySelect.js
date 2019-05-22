@@ -44,13 +44,10 @@ class UniversitySelect extends Component {
     return (
       <Select
         showSearch
-        placeholder={this.props.placeholder}
+        {...this.props}
         optionFilterProp="children"
         onSearch={this.handleSearch}
-        size={this.props.size}
-        id={this.props.id}
         name="university"
-        onSelect={this.props.onSelect}
       >
         {this.state.options.map((curr, i) => <Option value={curr} key={i}>{curr}</Option>)}
       </Select>

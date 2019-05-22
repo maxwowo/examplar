@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
 /* Ant Design components */
-import { Button, Input, Select } from "antd";
+import { Button, Input } from "antd";
 
 /* Custom components */
 import UniversitySelect from "../UniversitySelect/UniversitySelect";
