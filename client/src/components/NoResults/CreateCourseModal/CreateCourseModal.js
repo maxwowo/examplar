@@ -1,8 +1,14 @@
 /* React */
 import React, { Component } from "react";
 
+/* Axios */
+import Axios from "axios";
+
 /* Ant Design components */
 import { Modal, Form, Input, Button } from "antd";
+
+/* Utility functions */
+import {uniNameToID} from "./util";
 
 /* Custom components */
 import UniversitySelect from "../../UniversitySelect/UniversitySelect";
@@ -18,8 +24,21 @@ class CreateCourseModal extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
     this.props.form.validateFields((err, values) => {
-      if (!err) console.log("Received values of form:", values);
+
+      /* Only submit a POST request when the form is valid */
+      if (!err) {
+
+        const { courseCode, courseName, university } = values;
+        const universityID = uniNameToID(university);
+
+        Axios.post("/api/courses", {
+          courseCode: courseCode,
+          courseName: courseName,
+          universityID: universityID
+        });
+      }
     });
   };
 

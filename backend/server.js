@@ -23,7 +23,7 @@ const connection = mysql.createConnection({
 });
 
 /* GET route for course searches */
-router.get("/courses", function (req, res) {
+router.get("/courses", (req, res) => {
 
   /* Get request info */
   const { query } = req;
@@ -51,6 +51,30 @@ router.get("/courses", function (req, res) {
     /* Send back an array of json objects
     * Map is used since MySQL returns an array of BinaryRow objects */
     res.send(results.map(curr => ({ ...curr })));
+  });
+});
+
+router.post("/courses", (req, res) => {
+
+  /* Get body info */
+  const { courseCode, courseName, universityID } = req.body;
+
+  /* Prepared query string */
+  const dbQuery = `
+    INSERT INTO examplardb.course_table 
+    (course_id, course_code, course_name, university_id) 
+    VALUES 
+    (null, ?, ?, ?)
+  `;
+
+  /* Query variables */
+  const varList = [courseCode, courseName, universityID];
+
+  /* Execute prepared query string */
+  connection.execute(dbQuery, varList, (err, results, fields) => {
+
+    /* Error handling */
+    if (err) console.log(err);
   });
 });
 

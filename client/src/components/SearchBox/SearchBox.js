@@ -28,11 +28,18 @@ class SearchBox extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
+    /* Get the course and university input from the search boxes */
     const { course, university } = this.state;
+
     const { history } = this.props;
 
-    const params = new URLSearchParams({ course: course, university: university });
+    /* Create a query string using the course and university inputs */
+    const params = new URLSearchParams({
+      course: course,
+      university: university
+    });
 
+    /* Redirect to the search route with the query string */
     history.push({
       pathname: "/search",
       search: params.toString()
