@@ -1,7 +1,7 @@
 /* React */
 import React, { Component } from "react";
 
-/* Ant Design */
+/* Ant Design components */
 import { Typography, Button } from "antd";
 
 /* Custom components */

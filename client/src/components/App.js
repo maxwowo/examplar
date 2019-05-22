@@ -23,12 +23,14 @@ const App = () => (
   <Router>
     <Layout id="app-layout">
       <Navbar/>
-      <Switch>
-        <Route exact path="/" component={HomePage}/>
-        <Route path="/search" component={SearchPage}/>
-        <Route path="/courses/:id" component={CoursePage}/>
-        <Route path="*" component={PageNotFoundPage}/>
-      </Switch>
+      <Layout>
+        <Switch>
+          <Route exact path="/" component={HomePage}/>
+          <Route path="/search" component={SearchPage}/>
+          <Route path="/courses/:id" component={CoursePage}/>
+          <Route path="*" component={PageNotFoundPage}/>
+        </Switch>
+      </Layout>
     </Layout>
   </Router>
 );

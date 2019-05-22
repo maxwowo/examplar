@@ -1,8 +1,8 @@
 /* React */
 import React, { Component } from "react";
 
-/* Ant Design */
-import { List, Typography } from "antd";
+/* Ant Design components */
+import { List, Typography, Layout } from "antd";
 
 /* Custom components */
 import SearchBox from "../SearchBox/SearchBox";
@@ -20,6 +20,7 @@ import "./SearchPage.less";
 const { Item } = List;
 const { Meta } = Item;
 const { Text } = Typography;
+const {Content} = Layout;
 
 class SearchPage extends Component {
   state = {
@@ -85,7 +86,7 @@ class SearchPage extends Component {
     );
 
     return (
-      <div className="content-body" id="search-page-content">
+      <Content className="content-body" id="search-page-content">
         <SearchBox/>
         <List
           size="large"
@@ -102,7 +103,7 @@ class SearchPage extends Component {
             </Item>
           )}
         />
-      </div>
+      </Content>
     );
   }
 }

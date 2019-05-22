@@ -12,26 +12,27 @@ import logo from "../../assets/logo.png";
 
 /* Styles */
 import "./Navbar.less";
+import "../../custom.less";
 
 const { Header } = Layout;
 
 const Navbar = () => (
   <Header id="navbar">
-    <Row type="flex" align="middle" justify="center">
+      <Row type="flex" align="middle" justify="space-between">
 
-      <Col span={5}>
-        <Link to="/">
-          <img id="logo" src={logo} alt="logo"/>
-        </Link>
-      </Col>
+        <Col>
+          <Link to="/">
+            <img id="logo" src={logo} alt="logo"/>
+          </Link>
+        </Col>
 
-      <Col span={5} offset={6}>
-        <Icon className="icon" type="github" onClick={() => {
-          window.open("https://github.com/maxwowo/examplar", "_blank");
-        }}/>
-      </Col>
+        <Col>
+          <Icon className="icon" type="github" onClick={() => {
+            window.open("https://github.com/maxwowo/examplar", "_blank");
+          }}/>
+        </Col>
 
-    </Row>
+      </Row>
   </Header>
 );
 
