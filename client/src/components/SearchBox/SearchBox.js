@@ -25,14 +25,6 @@ class SearchBox extends Component {
     university: ""
   };
 
-  handleCourseChange = e => {
-    this.setState({ course: e.target.value });
-  };
-
-  handleUniversitySelect = e => {
-    this.setState({ university: e });
-  };
-
   handleSubmit = e => {
     e.preventDefault();
 
@@ -56,11 +48,11 @@ class SearchBox extends Component {
             size="large"
             placeholder="Search for courses"
             name="course"
-            onChange={this.handleCourseChange}
+            onChange={e => this.setState({ course: e.target.value })}
           />
 
           <UniversitySelect
-            onSelect={this.handleUniversitySelect}
+            onSelect={e => this.setState({ university: e })}
             placeholder="Filter by university"
             size="large"
           />

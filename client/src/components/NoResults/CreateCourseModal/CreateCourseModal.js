@@ -10,6 +10,12 @@ import UniversitySelect from "../../UniversitySelect/UniversitySelect";
 const { Item } = Form;
 
 class CreateCourseModal extends Component {
+  state = {
+    courseCode: null,
+    courseName: null,
+    university: null
+  };
+
   handleSubmit = e => {
 
   };
@@ -37,7 +43,7 @@ class CreateCourseModal extends Component {
             {getFieldDecorator("courseCode", {
               rules: [{ required: true, message: "Please enter the course code." }]
             })(
-              <Input/>
+              <Input onChange={e => this.setState({ courseCode: e.target.value })}/>
             )}
           </Item>
 
@@ -45,15 +51,19 @@ class CreateCourseModal extends Component {
             {getFieldDecorator("courseName", {
               rules: [{ required: true, message: "Please enter the course name." }]
             })(
-              <Input/>
+              <Input onChange={e => this.setState({ courseName: e.target.value })}/>
             )}
           </Item>
 
           <Item label="University" {...itemLayout}>
-            <UniversitySelect
-              placeholder="Search university"
-              size="medium"
-            />
+            {getFieldDecorator("university", {
+              rules: [{ required: true, message: "Please select a university." }]
+            })(
+              <UniversitySelect
+                placeholder="Search university"
+                size="medium"
+              />
+            )}
           </Item>
 
         </Form>
