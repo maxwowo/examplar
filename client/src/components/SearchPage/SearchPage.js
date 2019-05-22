@@ -21,7 +21,8 @@ const { Meta } = Item;
 
 class SearchPage extends Component {
   state = {
-    listItems: []
+    listItems: [],
+    listLoading: true
   };
 
   componentDidMount() {
@@ -37,7 +38,11 @@ class SearchPage extends Component {
         university: !university ? "" : university
       }
     }).then(res => {
-      this.setState({ listItems: [...res.data] });
+      console.log(res);
+      this.setState({
+        listItems: [...res.data],
+        listLoading: false
+      });
     }).catch(err => {
       console.log(err);
     });
@@ -51,11 +56,12 @@ class SearchPage extends Component {
           size="large"
           header={<div>Search results</div>}
           dataSource={this.state.listItems}
+          loading={this.state.listLoading}
           renderItem={item => (
             <Item>
               <Meta
-                title={<a href="https://www.google.com">{item.courseName}</a>}
-                description={`${item.courseCode} @ ${item.university}`}
+                title={<a href="https://www.google.com">{item.course_name}</a>}
+                description={`${item.course_code} @ ${item.university_name}`}
               />
             </Item>
           )}

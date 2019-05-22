@@ -18,57 +18,22 @@ const connection = mysql.createConnection({
   database: "examplardb"
 });
 
-// // this is our create methid
-// // this method adds new data in our database
-// router.post("/putData", (req, res) => {
-//   let data = new Data();
-
-//   const { id, message } = req.body;
-
-//   if ((!id && id !== 0) || !message) {
-//     return res.json({
-//       success: false,
-//       error: "INVALID INPUTS"
-//     });
-//   }
-//   data.message = message;
-//   data.id = id;
-//   data.save(err => {
-//     if (err) return res.json({ success: false, error: err });
-//     return res.json({ success: true });
-//   });
-// });
-
 router.get("/courses", function (req, res) {
-  const { query } = req;
 
-  res.send([
-    {
-      courseCode: "COMP1511",
-      courseName: "Fundamentals of Computing",
-      university: "University of New South Wales"
-    },
-    {
-      courseCode: "COMP2521",
-      courseName: "Data Structures and Algorithms",
-      university: "University of New South Wales"
-    },
-    {
-      courseCode: "COMP2111",
-      courseName: "System Modelling and Design",
-      university: "University of New South Wales"
-    },
-    {
-      courseCode: "MATH1131",
-      courseName: "Mathematics 1A",
-      university: "University of Auckland"
-    },
-    {
-      courseCode: "MATH1231",
-      courseName: "Mathematics 1B",
-      university: "University of Auckland"
-    }
-  ]);
+  /* Get request info */
+  const { query } = req;
+  const { course, university } = query;
+
+  /* Query variables */
+  const courseQuery = course ? `%${course}%` : "";
+  const universityQuery = university ? `%${university}%` : "";
+
+  /* Prepared query string */
+  const dbQuery = `SELECT course_id, course_code, course_name, university_name FROM course_table INNER JOIN university_table ON course_table.university_id = university_table.university_id WHERE course_code LIKE ? OR course_name LIKE ? OR university_name LIKE ? LIMIT 10`;
+
+  connection.execute(dbQuery, [courseQuery, courseQuery, universityQuery], (err, results, fields) => {
+    res.send(results.map(curr => ({ ...curr })));
+  });
 });
 
 
