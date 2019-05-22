@@ -1,27 +1,20 @@
 @import "../../custom";
 
-@search-box-input-width: 15%;
-@search-box-select-width: 15rem;
-@search-box-btn-width: 15%;
-
-@search-box-btn-width-phone: 10%;
+@search-box-input-width: 50%;
+@search-box-select-width: 40%;
 
 #search-box-input {
-  width: calc(100% - @search-box-btn-width - @search-box-select-width);
-
-  @media only screen and (max-width: @screen-md) {
-    width: calc(100% - @search-box-btn-width-phone - @search-box-select-width);
-  }
+  width: @search-box-input-width;
 }
 
 #search-box-select {
   width: @search-box-select-width;
+
+  * {
+    width: initial;
+  }
 }
 
 #search-box-btn {
-  width: @search-box-btn-width;
-
-  @media only screen and (max-width: @screen-md) {
-    width: @search-box-btn-width-phone;
-  }
+  width: calc(100% - @search-box-select-width - @search-box-input-width);
 }

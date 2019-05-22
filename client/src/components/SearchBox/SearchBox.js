@@ -55,6 +55,7 @@ class SearchBox extends Component {
             onSelect={e => this.setState({ university: e })}
             placeholder="Filter by university"
             size="large"
+            id="search-box-select"
           />
 
           <Button

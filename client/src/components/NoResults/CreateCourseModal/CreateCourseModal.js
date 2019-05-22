@@ -7,6 +7,9 @@ import { Modal, Form, Select, Input } from "antd";
 /* Custom components */
 import UniversitySelect from "../../UniversitySelect/UniversitySelect";
 
+/* Styles */
+import "./CreateCourseModal.less";
+
 const { Item } = Form;
 
 class CreateCourseModal extends Component {
@@ -63,6 +66,7 @@ class CreateCourseModal extends Component {
                 placeholder="Search university"
                 onSelect={e => this.setState({ university: e })}
                 size="medium"
+                id=""
               />
             )}
           </Item>

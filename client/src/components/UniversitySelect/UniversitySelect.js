@@ -43,7 +43,7 @@ class UniversitySelect extends Component {
         optionFilterProp="children"
         onSearch={this.handleSearch}
         size={this.props.size}
-        id="search-box-select"
+        id={this.props.id}
         name="university"
         onSelect={this.props.onSelect}
       >
