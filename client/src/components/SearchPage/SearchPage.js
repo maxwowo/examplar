@@ -25,27 +25,55 @@ class SearchPage extends Component {
     listLoading: true
   };
 
-  componentDidMount() {
-    const { location } = this.props;
+  /* Function that retrieves the list of courses which match search criteria and updates the states accordingly */
+  requestListItems = location => {
 
+    /* Get the search params */
     const params = new URLSearchParams(location.search);
     const course = params.get("course");
     const university = params.get("university");
 
+    /* Submit the GET request */
     Axios.get("/api/courses", {
       params: {
-        course: !course ? "" : course,
-        university: !university ? "" : university
+        course: !course ? "" : course.trim(),
+        university: !university ? "" : university.trim()
       }
     }).then(res => {
-      console.log(res);
+
+      /* Set the new states */
       this.setState({
         listItems: [...res.data],
         listLoading: false
       });
+
     }).catch(err => {
+
+      /* Handle errors */
       console.log(err);
+
     });
+  };
+
+  componentDidMount() {
+    const { location } = this.props;
+
+    /* Grab the list of items when the search page is loaded for the first time */
+    this.requestListItems(location);
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    const { location } = nextProps;
+
+    /* If the user has searched for something else */
+    if (location.search !== this.props.location.search) {
+
+      /* Re-enable the loading animation */
+      this.setState({ listLoading: true });
+
+      /* Grab the list of items again */
+      this.requestListItems(location);
+    }
   }
 
   render() {
