@@ -29,11 +29,6 @@ router.get("/courses", function (req, res) {
   const { query } = req;
   const { course, university } = query;
 
-  /* Query variables */
-  const courseQuery = `%${course}%`;
-  const universityQuery = `%${university}%`;
-  const varList = [courseQuery, courseQuery, universityQuery];
-
   /* Prepared query string */
   const dbQuery = `
     SELECT course_id, course_code, course_name, university_name 
@@ -42,6 +37,13 @@ router.get("/courses", function (req, res) {
     WHERE (course_code LIKE ? OR course_name LIKE ?) AND university_name LIKE ? 
     LIMIT 10
   `;
+
+  /* Query variables
+  * Variables are padded with % to match substrings
+  * A list is prepared to format the variables into the prepared query string */
+  const courseQuery = `%${course}%`;
+  const universityQuery = `%${university}%`;
+  const varList = [courseQuery, courseQuery, universityQuery];
 
   /* Execute prepared query string */
   connection.execute(dbQuery, varList, (err, results, fields) => {
