@@ -32,12 +32,19 @@ router.get("/courses", function (req, res) {
   /* Query variables */
   const courseQuery = `%${course}%`;
   const universityQuery = `%${university}%`;
+  const varList = [courseQuery, courseQuery, universityQuery];
 
   /* Prepared query string */
-  const dbQuery = `SELECT course_id, course_code, course_name, university_name FROM course_table INNER JOIN university_table ON course_table.university_id = university_table.university_id WHERE (course_code LIKE ? OR course_name LIKE ?) AND university_name LIKE ? LIMIT 10`;
+  const dbQuery = `
+    SELECT course_id, course_code, course_name, university_name 
+    FROM course_table INNER JOIN university_table 
+    ON course_table.university_id = university_table.university_id 
+    WHERE (course_code LIKE ? OR course_name LIKE ?) AND university_name LIKE ? 
+    LIMIT 10
+  `;
 
   /* Execute prepared query string */
-  connection.execute(dbQuery, [courseQuery, courseQuery, universityQuery], (err, results, fields) => {
+  connection.execute(dbQuery, varList, (err, results, fields) => {
 
     /* Send back an array of json objects
     * Map is used since MySQL returns an array of BinaryRow objects */
