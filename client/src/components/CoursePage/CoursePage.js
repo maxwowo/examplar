@@ -15,25 +15,24 @@ import CourseContent from "./CourseContent/CourseContent";
 import "./CoursePage.less";
 
 class CoursePage extends Component {
+
   state = {
     courseName: null,
     courseCode: null,
     universityName: null,
-    exams: []
+    exams: [],
+    courseId: this.props.match.params.id
   };
 
   componentDidMount() {
-    const courseId = this.props.match.params.id;
 
-    Axios.get(`/api/courses/${courseId}`).then(res => {
+    Axios.get(`/api/courses/${this.state.courseId}`).then(res => {
       const { data } = res;
       this.setState({ ...data });
     });
   }
 
   render() {
-
-    const courseId = this.props.match.params.id;
 
     return (
       <Row
@@ -52,7 +51,7 @@ class CoursePage extends Component {
         <Col offset={1} span={13}>
           <CourseContent
             exams={this.state.exams}
-            courseId={courseId}
+            courseId={this.state.courseId}
           />
         </Col>
       </Row>

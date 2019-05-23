@@ -14,6 +14,7 @@ const numOptions = Math.min(maxOptionsCount, universities.length);
 const { Option } = Select;
 
 class UniversitySelect extends Component {
+
   state = {
 
     /* List of universities to be displayed in the select */

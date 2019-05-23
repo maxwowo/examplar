@@ -10,6 +10,7 @@ import CreateCourseModal from "./CreateCourseModal/CreateCourseModal";
 const { Paragraph } = Typography;
 
 class NoResults extends Component {
+
   state = {
     visible: false
   };

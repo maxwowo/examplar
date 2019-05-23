@@ -19,6 +19,7 @@ import UniversitySelect from "../../UniversitySelect/UniversitySelect";
 const { Item } = Form;
 
 class CreateCourseModal extends Component {
+
   state = {
     courseCode: null,
     courseName: null,

@@ -23,6 +23,7 @@ const { Text } = Typography;
 const { Content } = Layout;
 
 class SearchPage extends Component {
+
   state = {
     listItems: [],
     listLoading: true
