@@ -26,8 +26,13 @@ class CoursePage extends Component {
 
   componentDidMount() {
 
+    /* Get information about the course */
     Axios.get(`/api/courses/${this.state.courseId}`).then(res => {
+
+      /* Get the response data */
       const { data } = res;
+
+      /* Update the states using the data */
       this.setState({ ...data });
     });
   }
