@@ -40,28 +40,31 @@ class CoursePage extends Component {
   render() {
 
     return (
-      <Row
-        id="course-page-content"
-        type="flex"
+      <div
+        id="course-page-container"
         className="container-width"
-        justify="space-between"
       >
+        <Row
+          type="flex"
+          justify="space-between"
+        >
 
-        <Col xs={24} md={10}>
-          <CourseSider
-            courseName={this.state.courseName}
-            courseCode={this.state.courseCode}
-            universityName={this.state.universityName}
-          />
-        </Col>
+          <Col xs={24} md={10}>
+            <CourseSider
+              courseName={this.state.courseName}
+              courseCode={this.state.courseCode}
+              universityName={this.state.universityName}
+            />
+          </Col>
 
-        <Col xs={24} md={13}>
-          <CourseContent
-            exams={this.state.exams}
-            courseId={this.state.courseId}
-          />
-        </Col>
-      </Row>
+          <Col xs={24} md={13}>
+            <CourseContent
+              exams={this.state.exams}
+              courseId={this.state.courseId}
+            />
+          </Col>
+        </Row>
+      </div>
     );
   }
 }
