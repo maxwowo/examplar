@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 
 /* Ant Design components */
-import { Typography, Button } from "antd/lib/index";
+import { Typography, Button } from "antd";
 
 /* Custom components */
 import CreateCourseModal from "./CreateCourseModal/CreateCourseModal";
@@ -29,7 +29,7 @@ class NoCourses extends Component {
           toggleModal={this.toggleModal}
         />
         <Paragraph>Your search did not match any courses</Paragraph>
-        <Button type="primary" shape="round" onClick={this.toggleModal}>Create course</Button>
+        <Button type="primary" onClick={this.toggleModal}>Create course</Button>
       </div>
     );
   }

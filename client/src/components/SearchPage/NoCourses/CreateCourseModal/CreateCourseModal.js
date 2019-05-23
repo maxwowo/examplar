@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
 /* Axios */
-import Axios from "axios/index";
+import Axios from "axios";
 
 /* Ant Design components */
 import { Modal, Form, Input, Button } from "antd";
@@ -83,7 +83,7 @@ class CreateCourseModal extends Component {
           id="create-course-modal-form"
         >
 
-          <Item label="Course Code" {...itemLayout}>
+          <Item label="Course code" {...itemLayout}>
             {getFieldDecorator("courseCode", {
               rules: [{ required: true, message: "Please enter the course code." }]
             })(
@@ -91,7 +91,7 @@ class CreateCourseModal extends Component {
             )}
           </Item>
 
-          <Item label="Course Name" {...itemLayout}>
+          <Item label="Course name" {...itemLayout}>
             {getFieldDecorator("courseName", {
               rules: [{ required: true, message: "Please enter the course name." }]
             })(
@@ -107,7 +107,6 @@ class CreateCourseModal extends Component {
                 placeholder="Search university"
                 onSelect={e => this.setState({ university: e })}
                 size="default"
-                id=""
               />
             )}
           </Item>
