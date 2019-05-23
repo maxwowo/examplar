@@ -24,7 +24,10 @@ class NoResults extends Component {
   render() {
     return (
       <div>
-        <CreateCourseModal visible={this.state.modalVisible} toggleModal={this.toggleModal}/>
+        <CreateCourseModal
+          visible={this.state.modalVisible}
+          toggleModal={this.toggleModal}
+        />
         <Paragraph>Your search did not match any courses</Paragraph>
         <Button type="primary" shape="round" onClick={this.toggleModal}>Create course</Button>
       </div>
