@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
 /* Axios */
-import Axios from "axios";
+import Axios from "axios/index";
 
 /* Ant Design components */
 import { Modal, Form, Input, Button } from "antd";
@@ -14,7 +14,7 @@ import { Modal, Form, Input, Button } from "antd";
 import { uniNameToId } from "./util";
 
 /* Custom components */
-import UniversitySelect from "../../UniversitySelect/UniversitySelect";
+import UniversitySelect from "../../../UniversitySelect/UniversitySelect";
 
 const { Item } = Form;
 

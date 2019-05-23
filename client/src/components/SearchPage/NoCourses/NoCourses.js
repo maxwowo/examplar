@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 
 /* Ant Design components */
-import { Typography, Button } from "antd";
+import { Typography, Button } from "antd/lib/index";
 
 /* Custom components */
 import CreateCourseModal from "./CreateCourseModal/CreateCourseModal";

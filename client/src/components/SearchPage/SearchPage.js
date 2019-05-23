@@ -6,7 +6,7 @@ import { List, Typography, Layout } from "antd";
 
 /* Custom components */
 import SearchBox from "../SearchBox/SearchBox";
-import NoCourses from "../NoCourses/NoCourses";
+import NoCourses from "./NoCourses/NoCourses";
 
 /* Axios */
 import Axios from "axios";
