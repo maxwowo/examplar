@@ -19,7 +19,7 @@ const CourseContent = props => (
       dataSource={props.exams}
       locale={{ emptyText: "No exams" }}
       renderItem={item => (
-        <Item>
+        <Item actions={[<a>Edit</a>]}>
 
           <Meta
             title={
