@@ -54,6 +54,7 @@ router.get("/courses", (req, res) => {
   });
 });
 
+/* Adds a new course into the database */
 router.post("/courses", (req, res) => {
 
   /* Get body info */
@@ -79,9 +80,13 @@ router.post("/courses", (req, res) => {
   });
 });
 
+/* Gets information about a course */
 router.get("/courses/:id", (req, res) => {
+
+  /* Course ID */
   const { id } = req.params;
 
+  /* Query to get the information about the course */
   const courseQuery = `
     SELECT course_code, course_name, university_name 
     FROM course_table INNER JOIN university_table 
@@ -89,22 +94,31 @@ router.get("/courses/:id", (req, res) => {
     WHERE course_id = ?
   `;
 
+  /* Query to get all of the exams belonging to the course */
   const examQuery = `
     SELECT exam_id, exam_year, exam_term 
     FROM exam_table 
     WHERE course_id = ?
   `;
 
+  /* Chain the course and exam queries*/
   connection.execute(courseQuery, [id], (courseErr, courseResults, courseFields) => {
+
+    /* Error handling */
     if (courseErr) console.log(courseErr);
 
+    /* Get the details of the course */
     const { course_code, course_name, university_name } = courseResults[0];
 
     connection.execute(examQuery, [id], (examErr, examResults, examFields) => {
+
+      /* Error handling */
       if (examErr) console.log(examErr);
 
+      /* Get the list of exams belonging to the course */
       const exams = examResults.map(curr => ({ ...curr }));
 
+      /* Send back a JSON object containing all the relevant information */
       res.json({
         courseCode: course_code,
         courseName: course_name,
