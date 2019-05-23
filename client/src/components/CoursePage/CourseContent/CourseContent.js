@@ -2,14 +2,15 @@
 import React from "react";
 
 /* Ant Design components */
-import { Layout, List } from "antd";
+import { Layout, List, Typography } from "antd";
 import { Link } from "react-router-dom";
 
 const { Content } = Layout;
 const { Item } = List;
 const { Meta } = Item;
+const { Text } = Typography;
 
-const listHeader = "Exams";
+const listHeader = <Text>Exams</Text>;
 
 const CourseContent = props => (
   <Content id="course-page-list">
