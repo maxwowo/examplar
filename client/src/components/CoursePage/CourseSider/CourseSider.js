@@ -34,6 +34,8 @@ class CourseSider extends Component {
         <CreateExamModal
           toggleModal={this.toggleModal}
           visible={this.state.modalVisible}
+          courseId={this.props.courseId}
+          handleAddExam={this.props.handleAddExam}
         />
         <Card
           title={this.props.courseName}

@@ -129,6 +129,36 @@ router.get("/courses/:id", (req, res) => {
   });
 });
 
+router.post("/courses/:id", (req, res) => {
+
+  /* Course ID */
+  const { id } = req.params;
+
+  /* Course details */
+  const { examYear, examTerm } = req.body;
+
+  /* Prepared query string */
+  const dbQuery = `
+    INSERT INTO examplardb.exam_table 
+    (exam_id, exam_year, exam_term, course_id) 
+    VALUES (NULL, ?, ?, ?)
+  `;
+
+  /* Query variables */
+  const varList = [examYear, examTerm, id];
+
+  /* Execute prepared query string */
+  connection.execute(dbQuery, varList, (err, results, fields) => {
+
+    const { insertId } = results;
+
+    /* Error handling */
+    if (err) console.log(err);
+
+    res.send(insertId.toString());
+  });
+});
+
 /* Append /api for HTTP requests */
 app.use("/api", router);
 

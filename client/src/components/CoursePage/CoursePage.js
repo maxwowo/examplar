@@ -24,6 +24,14 @@ class CoursePage extends Component {
     courseId: this.props.match.params.id
   };
 
+  handleAddExam = (id, year, term) => {
+    this.setState({
+      exams: [...this.state.exams, {
+        exam_id: id, exam_year: year, exam_term: term
+      }]
+    });
+  };
+
   componentDidMount() {
 
     /* Get information about the course */
@@ -31,6 +39,7 @@ class CoursePage extends Component {
 
       /* Get the response data */
       const { data } = res;
+      console.log(data);
 
       /* Update the states using the data */
       this.setState({ ...data });
@@ -54,6 +63,8 @@ class CoursePage extends Component {
               courseName={this.state.courseName}
               courseCode={this.state.courseCode}
               universityName={this.state.universityName}
+              courseId={this.state.courseId}
+              handleAddExam={this.handleAddExam}
             />
           </Col>
 

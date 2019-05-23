@@ -26,9 +26,16 @@ class CreateExamModal extends Component {
     /* Validate the form fields */
     this.props.form.validateFields((err, values) => {
 
+      const { courseId } = this.props;
+      const { examYear, examTerm } = values;
+
       /* Only submit a POST request when the form is valid */
       if (!err) {
-        console.log(values);
+
+        Axios.post(`/api/courses/${courseId}`, values).then(res => {
+          const examId = res.data;
+          this.props.handleAddExam(examId, examYear, examTerm);
+        });
       }
     });
   };
