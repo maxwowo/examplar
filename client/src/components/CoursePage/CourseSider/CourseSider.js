@@ -11,7 +11,10 @@ const { Sider } = Layout;
 const { Paragraph } = Typography;
 
 const CourseSider = props => (
-  <Sider id="course-page-sider" width="100%">
+  <Sider
+    id="course-page-sider"
+    width="100%"
+  >
     <Card
       title={props.courseName}
       bordered={false}

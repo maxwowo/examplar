@@ -19,7 +19,7 @@ class CoursePage extends Component {
     courseName: null,
     courseCode: null,
     universityName: null,
-    exams: null
+    exams: []
   };
 
   componentDidMount() {
@@ -32,16 +32,28 @@ class CoursePage extends Component {
   }
 
   render() {
-    console.log(this.state);
+
+    const courseId = this.props.match.params.id;
+
     return (
-      <Row id="course-page-content" className="container-width">
+      <Row
+        id="course-page-content"
+        className="container-width"
+      >
 
         <Col span={10}>
-          <CourseSider {...this.state}/>
+          <CourseSider
+            courseName={this.state.courseName}
+            courseCode={this.state.courseCode}
+            universityName={this.state.universityName}
+          />
         </Col>
 
-        <Col offset={4} span={10}>
-          <CourseContent/>
+        <Col offset={1} span={13}>
+          <CourseContent
+            exams={this.state.exams}
+            courseId={courseId}
+          />
         </Col>
       </Row>
     );

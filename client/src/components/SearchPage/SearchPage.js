@@ -20,7 +20,7 @@ import "./SearchPage.less";
 const { Item } = List;
 const { Meta } = Item;
 const { Text } = Typography;
-const {Content} = Layout;
+const { Content } = Layout;
 
 class SearchPage extends Component {
   state = {
@@ -96,10 +96,18 @@ class SearchPage extends Component {
           loading={this.state.listLoading}
           renderItem={item => (
             <Item>
+
               <Meta
-                title={<Link to={`/courses/${item.course_id}`}>{item.course_name}</Link>}
+                title={
+                  <Link
+                    to={`/courses/${item.course_id}`}
+                  >
+                    {item.course_name}
+                  </Link>
+                }
                 description={`${item.course_code} @ ${item.university_name}`}
               />
+
             </Item>
           )}
         />
