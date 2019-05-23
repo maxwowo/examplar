@@ -2,18 +2,17 @@
 import React, { Component } from "react";
 
 /* Ant Design components */
-import { Layout, Row, Col } from "antd";
-
-/* Custom components */
-import CourseSider from "./CourseSider/CourseSider";
+import { Row, Col } from "antd";
 
 /* Axios */
 import Axios from "axios";
 
+/* Custom components */
+import CourseSider from "./CourseSider/CourseSider";
+import CourseContent from "./CourseContent/CourseContent";
+
 /* Styles */
 import "./CoursePage.less";
-
-const { Content } = Layout;
 
 class CoursePage extends Component {
   state = {
@@ -42,7 +41,7 @@ class CoursePage extends Component {
         </Col>
 
         <Col offset={4} span={10}>
-          <Content id="course-page-list">Content</Content>
+          <CourseContent/>
         </Col>
       </Row>
     );
