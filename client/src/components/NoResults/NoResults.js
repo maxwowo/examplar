@@ -12,19 +12,19 @@ const { Paragraph } = Typography;
 class NoResults extends Component {
 
   state = {
-    visible: false
+    modalVisible: false
   };
 
   toggleModal = () => {
-    const { visible } = this.state;
+    const { modalVisible } = this.state;
 
-    this.setState({ visible: !visible });
+    this.setState({ modalVisible: !modalVisible });
   };
 
   render() {
     return (
       <div>
-        <CreateCourseModal visible={this.state.visible} toggleModal={this.toggleModal}/>
+        <CreateCourseModal visible={this.state.modalVisible} toggleModal={this.toggleModal}/>
         <Paragraph>Your search did not match any courses</Paragraph>
         <Button type="primary" shape="round" onClick={this.toggleModal}>Create course</Button>
       </div>
