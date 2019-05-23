@@ -13,7 +13,7 @@ const { Text } = Typography;
 const listHeader = <Text>Exams</Text>;
 
 const CourseContent = props => (
-  <Content id="course-page-list">
+  <Content>
     <List
       size="large"
       header={listHeader}

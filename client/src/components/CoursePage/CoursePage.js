@@ -42,10 +42,12 @@ class CoursePage extends Component {
     return (
       <Row
         id="course-page-content"
+        type="flex"
         className="container-width"
+        justify="space-between"
       >
 
-        <Col span={10}>
+        <Col xs={24} md={10}>
           <CourseSider
             courseName={this.state.courseName}
             courseCode={this.state.courseCode}
@@ -53,7 +55,7 @@ class CoursePage extends Component {
           />
         </Col>
 
-        <Col offset={1} span={13}>
+        <Col xs={24} md={13}>
           <CourseContent
             exams={this.state.exams}
             courseId={this.state.courseId}
