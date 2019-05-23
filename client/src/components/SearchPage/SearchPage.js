@@ -6,7 +6,7 @@ import { List, Typography, Layout } from "antd";
 
 /* Custom components */
 import SearchBox from "../SearchBox/SearchBox";
-import NoResults from "../NoCourses/NoResults";
+import NoCourses from "../NoCourses/NoCourses";
 
 /* Axios */
 import Axios from "axios";
@@ -93,7 +93,7 @@ class SearchPage extends Component {
           size="large"
           header={listHeader}
           dataSource={this.state.listItems}
-          locale={{ emptyText: <NoResults/> }}
+          locale={{ emptyText: <NoCourses/> }}
           loading={this.state.listLoading}
           renderItem={item => (
             <Item>

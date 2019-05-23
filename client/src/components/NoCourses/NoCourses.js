@@ -9,7 +9,7 @@ import CreateCourseModal from "./CreateCourseModal/CreateCourseModal";
 
 const { Paragraph } = Typography;
 
-class NoResults extends Component {
+class NoCourses extends Component {
 
   state = {
     modalVisible: false
@@ -35,4 +35,4 @@ class NoResults extends Component {
   }
 }
 
-export default NoResults;
+export default NoCourses;
