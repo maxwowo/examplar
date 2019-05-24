@@ -1,7 +1,6 @@
 # Examplar
 
 
-### About
 Examplar is a platform that allow students to work 
 on solutions for past exam papers collaboratively. 
 
@@ -15,12 +14,8 @@ Examplar is built using the following:
 * [MySQL](https://www.mysql.com/)
 
 
-### Requirements 
-* Node.js LTS version 
-* MySQL server
-
-
 ### Installation
+Use the package manager [npm](https://www.npmjs.com/get-npm) to install Examplar. 
 ```bash
 $ cd examplar
 $ npm install
