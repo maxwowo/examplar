@@ -8,20 +8,22 @@ on solutions for past exam papers collaboratively.
 
 ### Stack 
 Examplar is built using the following: 
-* React - UI library
-* React Router - router library
-* Ant Design - UI framework
-* Less - styling solution
-* Node.js - backend
-* Express.js - network app framework
-* MySQL - database 
-* MySQL2 - Node.js MySQL client
+* [React](https://github.com/facebook/react)
+* [React Router](https://github.com/ReactTraining/react-router)
+* [Ant Design](https://github.com/ant-design/ant-design)
+* [Express](https://github.com/expressjs/express)
+* [MySQL](https://www.mysql.com/)
+
+
+### Requirements 
+* Node.js LTS version 
+* MySQL server
 
 
 ### Installation
-```sh
+```bash
 $ cd examplar
-$ npm install 
+$ npm install
 $ npm start
 ```
 
