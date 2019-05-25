@@ -1,5 +1,8 @@
 /* React */
-import React, { Component } from "react";
+import React from "react";
+
+/* Redux */
+import { connect } from "react-redux";
 
 /* React Router */
 import { withRouter } from "react-router-dom";
@@ -13,70 +16,73 @@ import UniversitySelect from "../UniversitySelect/UniversitySelect";
 /* Style */
 import "./SearchBox.less";
 
+/* Constants */
+import {
+  CHANGE_UNIVERSITY_SEARCH,
+  CHANGE_COURSE_SEARCH
+} from "../../constants/actions";
+
 const { Group } = Input;
 
+const mapDispatchToProps = dispatch => ({
+  handleCourseChange: e =>
+    dispatch({ courseSearch: e.target.value, type: CHANGE_COURSE_SEARCH }),
+  handleUniversitySelect: e =>
+    dispatch({ universitySearch: e, type: CHANGE_UNIVERSITY_SEARCH })
+});
 
-class SearchBox extends Component {
-  state = {
+const mapStateToProps = state => ({
+  course: state.home.courseSearch,
+  university: state.home.universitySearch
+});
 
-    /* Course entered by the user */
-    course: "",
+const SearchBox = props => {
 
-    /* University selected by the user */
-    university: ""
-  };
+  const handleSubmit = e => {
 
-  handleSubmit = e => {
     e.preventDefault();
-
-    /* Get the course and university input from the search boxes */
-    const { course, university } = this.state;
-
-    const { history } = this.props;
 
     /* Create a query string using the course and university inputs */
     const params = new URLSearchParams({
-      course: course,
-      university: university
+      course: props.course,
+      university: props.university
     });
 
     /* Redirect to the search route with the query string */
-    history.push({
+    props.history.push({
       pathname: "/search",
       search: params.toString()
     });
   };
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <Group compact>
-          <Input
-            id="search-box-input"
-            size="large"
-            placeholder="Search for courses"
-            name="course"
-            onChange={e => this.setState({ course: e.target.value })}
-          />
+  return (
+    <form onSubmit={handleSubmit}>
+      <Group compact>
+        <Input
+          id="search-box-input"
+          size="large"
+          placeholder="Search for courses"
+          name="course"
+          onChange={props.handleCourseChange}
+        />
 
-          <UniversitySelect
-            onSelect={e => this.setState({ university: e })}
-            placeholder="Filter by university"
-            size="large"
-            id="search-box-select"
-          />
+        <UniversitySelect
+          onSelect={props.handleUniversitySelect}
+          placeholder="Filter by university"
+          size="large"
+          id="search-box-select"
+        />
 
-          <Button
-            type="primary"
-            htmlType="submit"
-            id="search-box-btn"
-            icon="search"
-            size="large"
-          />
-        </Group>
-      </form>
-    );
-  }
-}
+        <Button
+          type="primary"
+          htmlType="submit"
+          id="search-box-btn"
+          icon="search"
+          size="large"
+        />
+      </Group>
+    </form>
+  );
+};
 
-export default withRouter(SearchBox);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchBox));
