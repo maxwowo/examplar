@@ -5,12 +5,12 @@ import {
 } from "../constants/actions";
 
 /* Initial state */
-const initial_state = {
+const initial = {
   courseSearch: "",
   universitySearch: ""
 };
 
-const home = (state = initial_state, action) => {
+const home = (state = initial, action) => {
 
   switch (action.type) {
 

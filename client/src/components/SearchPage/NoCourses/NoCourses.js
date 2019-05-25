@@ -1,6 +1,9 @@
 /* React */
 import React, { Component } from "react";
 
+/* Redux */
+import { connect } from "react-redux";
+
 /* Ant Design components */
 import { Typography, Button } from "antd";
 
@@ -8,6 +11,10 @@ import { Typography, Button } from "antd";
 import CreateCourseModal from "./CreateCourseModal/CreateCourseModal";
 
 const { Paragraph } = Typography;
+
+const mapStateToProps = state => ({
+  modalVisible: state.courseModal.visible
+});
 
 class NoCourses extends Component {
 
@@ -35,4 +42,4 @@ class NoCourses extends Component {
   }
 }
 
-export default NoCourses;
+export default connect(mapStateToProps)(NoCourses);
