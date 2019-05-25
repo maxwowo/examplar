@@ -24,12 +24,26 @@ class CoursePage extends Component {
     courseId: this.props.match.params.id
   };
 
+  sortExams = () => {
+    const examsDup = [...this.state.exams];
+
+    examsDup.sort((a, b) => {
+      if (a.exam_year === b.exam_year) return -(a.exam_term - b.exam_term);
+      return -(a.exam_year - b.exam_year);
+    });
+
+    this.setState({ exams: examsDup });
+  };
+
   handleAddExam = (id, year, term) => {
     this.setState({
       exams: [...this.state.exams, {
         exam_id: id, exam_year: year, exam_term: term
       }]
     });
+
+    /* Sort the exams */
+    this.sortExams();
   };
 
   componentDidMount() {
@@ -38,11 +52,23 @@ class CoursePage extends Component {
     Axios.get(`/api/courses/${this.state.courseId}`).then(res => {
 
       /* Get the response data */
-      const { data } = res;
-      console.log(data);
+      const {
+        courseCode,
+        courseName,
+        exams,
+        universityName
+      } = res.data;
 
       /* Update the states using the data */
-      this.setState({ ...data });
+      this.setState({
+        courseName: courseName,
+        courseCode: courseCode,
+        universityName: universityName,
+        exams: exams
+      });
+
+      /* Sort the exams */
+      this.sortExams();
     });
   }
 
