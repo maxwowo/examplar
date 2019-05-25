@@ -42,8 +42,6 @@ const CreateCourseModal = props => {
       /* Only submit a POST request when the form is valid */
       if (!err) {
 
-        const { history } = props;
-
         /* Get the field details */
         const { courseCode, courseName, university } = values;
 
@@ -58,7 +56,7 @@ const CreateCourseModal = props => {
         }).then(res => {
 
           /* Redirect to the course page */
-          history.push(`/courses/${res.data}`);
+          props.history.push(`/courses/${res.data}`);
 
           props.handleModalToggle();
         });
@@ -66,7 +64,6 @@ const CreateCourseModal = props => {
     });
   };
 
-  const { getFieldDecorator } = props.form;
   const itemLayout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 18 }
@@ -91,7 +88,7 @@ const CreateCourseModal = props => {
       >
 
         <Item label="Course code" {...itemLayout}>
-          {getFieldDecorator("courseCode", {
+          {props.form.getFieldDecorator("courseCode", {
             rules: [{ required: true, message: "Please enter the course code." }]
           })(
             <Input/>
@@ -99,7 +96,7 @@ const CreateCourseModal = props => {
         </Item>
 
         <Item label="Course name" {...itemLayout}>
-          {getFieldDecorator("courseName", {
+          {props.form.getFieldDecorator("courseName", {
             rules: [{ required: true, message: "Please enter the course name." }]
           })(
             <Input/>
@@ -107,7 +104,7 @@ const CreateCourseModal = props => {
         </Item>
 
         <Item label="University" {...itemLayout}>
-          {getFieldDecorator("university", {
+          {props.form.getFieldDecorator("university", {
             rules: [{ required: true, message: "Please select a university." }]
           })(
             <UniversitySelect
