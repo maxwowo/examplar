@@ -32,7 +32,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleSetCourseInfo: (courseName, courseCode, universityName, exams, courseId) => {
+  handleSetCourseInfo: (
+    courseName,
+    courseCode,
+    universityName,
+    exams,
+    courseId
+  ) => {
     dispatch({
       courseName: courseName,
       courseCode: courseCode,
@@ -52,20 +58,29 @@ const mapDispatchToProps = dispatch => ({
 
 class CoursePage extends Component {
 
+  /* Sort the list of exams by
+  * 1. Descending order of year
+  * 2. Descending order of term */
   sortExams = () => {
+
+    /* Create a duplicated list of exams */
     const examsDup = [...this.props.exams];
 
+    /* Sort the duplicated exams */
     examsDup.sort((a, b) => (
       a.exam_year === b.exam_year ?
         -(a.exam_term - b.exam_term) :
         -(a.exam_year - b.exam_year)
     ));
 
+    /* Update the states */
     this.props.handleExamUpdate(examsDup);
   };
 
+  /* Adds a new exam to the exams list */
   handleAddExam = (id, year, term) => {
 
+    /* Add a new exam to the list of exams and update the status */
     this.props.handleExamUpdate([...this.props.exams, {
       exam_id: id,
       exam_year: year,
@@ -78,6 +93,7 @@ class CoursePage extends Component {
 
   componentDidMount() {
 
+    /* Get the course ID from the URL */
     const courseId = this.props.match.params.id;
 
     /* Get information about the course */
