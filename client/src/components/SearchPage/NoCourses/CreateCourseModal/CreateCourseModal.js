@@ -1,5 +1,5 @@
 /* React */
-import React, { Component } from "react";
+import React from "react";
 
 /* React Redux */
 import { connect } from "react-redux";
@@ -18,7 +18,7 @@ import { uniNameToId } from "./util";
 
 /* Custom components */
 import UniversitySelect from "../../../UniversitySelect/UniversitySelect";
-import { CHANGE_COURSE_SEARCH, CHANGE_MODAL_VISIBILITY, CHANGE_UNIVERSITY_SEARCH } from "../../../../constants/actions";
+import { CHANGE_MODAL_VISIBILITY } from "../../../../constants/actions";
 
 const { Item } = Form;
 
@@ -60,7 +60,7 @@ const CreateCourseModal = props => {
           /* Redirect to the course page */
           history.push(`/courses/${res.data}`);
 
-          props.handleModalToggle()
+          props.handleModalToggle();
         });
       }
     });
