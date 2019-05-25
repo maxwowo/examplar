@@ -1,6 +1,9 @@
 /* React */
 import React, { Component } from "react";
 
+/* React Redux */
+import { connect } from "react-redux";
+
 /* React Router */
 import { withRouter } from "react-router-dom";
 
@@ -15,27 +18,31 @@ import { uniNameToId } from "./util";
 
 /* Custom components */
 import UniversitySelect from "../../../UniversitySelect/UniversitySelect";
+import { CHANGE_COURSE_SEARCH, CHANGE_MODAL_VISIBILITY, CHANGE_UNIVERSITY_SEARCH } from "../../../../constants/actions";
 
 const { Item } = Form;
 
-class CreateCourseModal extends Component {
+const mapDispatchToProps = dispatch => ({
+  handleModalToggle: e =>
+    dispatch({ type: CHANGE_MODAL_VISIBILITY })
+});
 
-  state = {
-    courseCode: null,
-    courseName: null,
-    university: null
-  };
+const mapStateToProps = state => ({
+  visible: state.courseModal.visible
+});
 
-  handleSubmit = e => {
+const CreateCourseModal = props => {
+
+  const handleSubmit = e => {
     e.preventDefault();
 
     /* Validate the form fields */
-    this.props.form.validateFields((err, values) => {
+    props.form.validateFields((err, values) => {
 
       /* Only submit a POST request when the form is valid */
       if (!err) {
 
-        const { history } = this.props;
+        const { history } = props;
 
         /* Get the field details */
         const { courseCode, courseName, university } = values;
@@ -52,71 +59,70 @@ class CreateCourseModal extends Component {
 
           /* Redirect to the course page */
           history.push(`/courses/${res.data}`);
+
+          props.handleModalToggle()
         });
       }
     });
   };
 
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    const itemLayout = {
-      labelCol: { span: 6 },
-      wrapperCol: { span: 18 }
-    };
-    const { visible, toggleModal } = this.props;
+  const { getFieldDecorator } = props.form;
+  const itemLayout = {
+    labelCol: { span: 6 },
+    wrapperCol: { span: 18 }
+  };
 
-    return (
-      <Modal
-        title="Create course"
-        visible={visible}
-        onOk={toggleModal}
-        onCancel={toggleModal}
-        footer={[
-          <Button key="cancel" onClick={toggleModal}>Cancel</Button>,
-          <Button key="submit" form="create-course-modal-form" htmlType="submit" type="primary"
-                  onClick={this.handleSubmit}>Submit</Button>
-        ]}
+  return (
+    <Modal
+      title="Create course"
+      visible={props.visible}
+      onOk={props.handleModalToggle}
+      onCancel={props.handleModalToggle}
+      footer={[
+        <Button key="cancel" onClick={props.handleModalToggle}>Cancel</Button>,
+        <Button key="submit" form="create-course-modal-form" htmlType="submit" type="primary"
+                onClick={handleSubmit}>Submit</Button>
+      ]}
+    >
+      <Form
+        onSubmit={handleSubmit}
+        layout="horizontal"
+        id="create-course-modal-form"
       >
-        <Form
-          onSubmit={this.handleSubmit}
-          layout="horizontal"
-          id="create-course-modal-form"
-        >
 
-          <Item label="Course code" {...itemLayout}>
-            {getFieldDecorator("courseCode", {
-              rules: [{ required: true, message: "Please enter the course code." }]
-            })(
-              <Input onChange={e => this.setState({ courseCode: e.target.value })}/>
-            )}
-          </Item>
+        <Item label="Course code" {...itemLayout}>
+          {getFieldDecorator("courseCode", {
+            rules: [{ required: true, message: "Please enter the course code." }]
+          })(
+            <Input/>
+          )}
+        </Item>
 
-          <Item label="Course name" {...itemLayout}>
-            {getFieldDecorator("courseName", {
-              rules: [{ required: true, message: "Please enter the course name." }]
-            })(
-              <Input onChange={e => this.setState({ courseName: e.target.value })}/>
-            )}
-          </Item>
+        <Item label="Course name" {...itemLayout}>
+          {getFieldDecorator("courseName", {
+            rules: [{ required: true, message: "Please enter the course name." }]
+          })(
+            <Input/>
+          )}
+        </Item>
 
-          <Item label="University" {...itemLayout}>
-            {getFieldDecorator("university", {
-              rules: [{ required: true, message: "Please select a university." }]
-            })(
-              <UniversitySelect
-                placeholder="Search university"
-                onSelect={e => this.setState({ university: e })}
-                size="default"
-              />
-            )}
-          </Item>
+        <Item label="University" {...itemLayout}>
+          {getFieldDecorator("university", {
+            rules: [{ required: true, message: "Please select a university." }]
+          })(
+            <UniversitySelect
+              placeholder="Search university"
+              size="default"
+            />
+          )}
+        </Item>
 
-        </Form>
-      </Modal>
-    );
-  }
-}
+      </Form>
+
+    </Modal>
+  );
+};
 
 const WrappedModal = Form.create()(CreateCourseModal);
 
-export default withRouter(WrappedModal);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(WrappedModal));

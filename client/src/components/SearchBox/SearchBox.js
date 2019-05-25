@@ -64,6 +64,7 @@ const SearchBox = props => {
           placeholder="Search for courses"
           name="course"
           onChange={props.handleCourseChange}
+          value={props.course}
         />
 
         <UniversitySelect
@@ -71,6 +72,7 @@ const SearchBox = props => {
           placeholder="Filter by university"
           size="large"
           id="search-box-select"
+          value={props.university ? props.university : undefined}
         />
 
         <Button

@@ -10,36 +10,27 @@ import { Typography, Button } from "antd";
 /* Custom components */
 import CreateCourseModal from "./CreateCourseModal/CreateCourseModal";
 
+/* Constants */
+import { CHANGE_MODAL_VISIBILITY } from "../../../constants/actions";
+
 const { Paragraph } = Typography;
 
-const mapStateToProps = state => ({
-  modalVisible: state.courseModal.visible
+const mapDispatchToProps = dispatch => ({
+  handleModalToggle: e =>
+    dispatch({ type: CHANGE_MODAL_VISIBILITY })
 });
 
-class NoCourses extends Component {
+const NoCourses = props => (
+  <div>
+    <CreateCourseModal/>
+    <Paragraph>Your search did not match any courses</Paragraph>
+    <Button
+      type="primary"
+      onClick={props.handleModalToggle}
+    >
+      Create course
+    </Button>
+  </div>
+);
 
-  state = {
-    modalVisible: false
-  };
-
-  toggleModal = () => {
-    const { modalVisible } = this.state;
-
-    this.setState({ modalVisible: !modalVisible });
-  };
-
-  render() {
-    return (
-      <div>
-        <CreateCourseModal
-          visible={this.state.modalVisible}
-          toggleModal={this.toggleModal}
-        />
-        <Paragraph>Your search did not match any courses</Paragraph>
-        <Button type="primary" onClick={this.toggleModal}>Create course</Button>
-      </div>
-    );
-  }
-}
-
-export default connect(mapStateToProps)(NoCourses);
+export default connect(null, mapDispatchToProps)(NoCourses);

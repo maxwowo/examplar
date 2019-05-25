@@ -14,6 +14,7 @@ const initial = {
 };
 
 const courseModal = (state = initial, action) => {
+
   switch (action.type) {
 
     case CHANGE_MODAL_VISIBILITY:
