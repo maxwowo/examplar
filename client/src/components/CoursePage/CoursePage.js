@@ -1,6 +1,15 @@
 /* React */
 import React, { Component } from "react";
 
+/* Redux */
+import { connect } from "react-redux";
+
+/* Constants */
+import {
+  SET_COURSE_INFO,
+  UPDATE_EXAMS
+} from "../../constants/actions";
+
 /* Ant Design components */
 import { Row, Col } from "antd";
 
@@ -14,33 +23,54 @@ import CourseContent from "./CourseContent/CourseContent";
 /* Styles */
 import "./CoursePage.less";
 
+const mapStateToProps = state => ({
+  exams: state.course.exams,
+  courseName: state.course.courseName,
+  courseCode: state.course.courseCode,
+  universityName: state.course.universityName,
+  courseId: state.course.courseId
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleSetCourseInfo: (courseName, courseCode, universityName, exams, courseId) => {
+    dispatch({
+      courseName: courseName,
+      courseCode: courseCode,
+      universityName: universityName,
+      exams: exams,
+      courseId: courseId,
+      type: SET_COURSE_INFO
+    });
+  },
+  handleExamUpdate: exams => {
+    dispatch({
+      exams: exams,
+      type: UPDATE_EXAMS
+    });
+  }
+});
+
 class CoursePage extends Component {
 
-  state = {
-    courseName: null,
-    courseCode: null,
-    universityName: null,
-    exams: [],
-    courseId: this.props.match.params.id
-  };
-
   sortExams = () => {
-    const examsDup = [...this.state.exams];
+    const examsDup = [...this.props.exams];
 
-    examsDup.sort((a, b) => {
-      if (a.exam_year === b.exam_year) return -(a.exam_term - b.exam_term);
-      return -(a.exam_year - b.exam_year);
-    });
+    examsDup.sort((a, b) => (
+      a.exam_year === b.exam_year ?
+        -(a.exam_term - b.exam_term) :
+        -(a.exam_year - b.exam_year)
+    ));
 
-    this.setState({ exams: examsDup });
+    this.props.handleExamUpdate(examsDup);
   };
 
   handleAddExam = (id, year, term) => {
-    this.setState({
-      exams: [...this.state.exams, {
-        exam_id: id, exam_year: year, exam_term: term
-      }]
-    });
+
+    this.props.handleExamUpdate([...this.props.exams, {
+      exam_id: id,
+      exam_year: year,
+      exam_term: term
+    }]);
 
     /* Sort the exams */
     this.sortExams();
@@ -48,8 +78,10 @@ class CoursePage extends Component {
 
   componentDidMount() {
 
+    const courseId = this.props.match.params.id;
+
     /* Get information about the course */
-    Axios.get(`/api/courses/${this.state.courseId}`).then(res => {
+    Axios.get(`/api/courses/${courseId}`).then(res => {
 
       /* Get the response data */
       const {
@@ -60,12 +92,13 @@ class CoursePage extends Component {
       } = res.data;
 
       /* Update the states using the data */
-      this.setState({
-        courseName: courseName,
-        courseCode: courseCode,
-        universityName: universityName,
-        exams: exams
-      });
+      this.props.handleSetCourseInfo(
+        courseName,
+        courseCode,
+        universityName,
+        exams,
+        courseId
+      );
 
       /* Sort the exams */
       this.sortExams();
@@ -86,18 +119,18 @@ class CoursePage extends Component {
 
           <Col xs={24} md={10}>
             <CourseSider
-              courseName={this.state.courseName}
-              courseCode={this.state.courseCode}
-              universityName={this.state.universityName}
-              courseId={this.state.courseId}
+              courseName={this.props.courseName}
+              courseCode={this.props.courseCode}
+              universityName={this.props.universityName}
+              courseId={this.props.courseId}
               handleAddExam={this.handleAddExam}
             />
           </Col>
 
           <Col xs={24} md={13}>
             <CourseContent
-              exams={this.state.exams}
-              courseId={this.state.courseId}
+              exams={this.props.exams}
+              courseId={this.props.courseId}
             />
           </Col>
         </Row>
@@ -106,4 +139,4 @@ class CoursePage extends Component {
   }
 }
 
-export default CoursePage;
+export default connect(mapStateToProps, mapDispatchToProps)(CoursePage);
