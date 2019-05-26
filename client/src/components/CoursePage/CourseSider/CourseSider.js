@@ -1,5 +1,11 @@
 /* React */
-import React, { Component } from "react";
+import React from "react";
+
+/* Redux */
+import { connect } from "react-redux";
+
+/* Constants */
+import { CHANGE_EXAM_MODAL_VISIBILITY } from "../../../constants/actions";
 
 /* Ant Design components */
 import { Layout, Typography, Card, Button } from "antd";
@@ -10,52 +16,43 @@ import CreateExamModal from "./CreateExamModal/CreateExamModal";
 /* Styles */
 import "./CourseSider.less";
 
+const mapStateToProps = state => ({
+  courseName: state.course.courseName,
+  courseCode: state.course.courseCode,
+  universityName: state.course.universityName
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleModalToggle: e =>
+    dispatch({ type: CHANGE_EXAM_MODAL_VISIBILITY })
+});
+
 const { Sider } = Layout;
 const { Paragraph } = Typography;
 
-class CourseSider extends Component {
+const CourseSider = props => (
+  <Sider
+    id="course-page-sider"
+    width="100%"
+  >
+    <CreateExamModal/>
+    <Card
+      title={props.courseName}
+      bordered={false}
+      id="course-page-card"
+    >
+      <Paragraph>
+        {props.courseCode} @ {props.universityName}
+      </Paragraph>
 
-  state = {
-    modalVisible: false
-  };
-
-  toggleModal = () => {
-    const { modalVisible } = this.state;
-
-    this.setState({ modalVisible: !modalVisible });
-  };
-
-  render() {
-    return (
-      <Sider
-        id="course-page-sider"
-        width="100%"
+      <Button
+        type="primary"
+        onClick={props.handleModalToggle}
       >
-        <CreateExamModal
-          toggleModal={this.toggleModal}
-          visible={this.state.modalVisible}
-          courseId={this.props.courseId}
-          handleAddExam={this.props.handleAddExam}
-        />
-        <Card
-          title={this.props.courseName}
-          bordered={false}
-          id="course-page-card"
-        >
-          <Paragraph>
-            {this.props.courseCode} @ {this.props.universityName}
-          </Paragraph>
+        Add exam
+      </Button>
+    </Card>
+  </Sider>
+);
 
-          <Button
-            type="primary"
-            onClick={this.toggleModal}
-          >
-            Add exam
-          </Button>
-        </Card>
-      </Sider>
-    );
-  }
-}
-
-export default CourseSider;
+export default connect(mapStateToProps, mapDispatchToProps)(CourseSider);

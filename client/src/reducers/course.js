@@ -1,7 +1,8 @@
 /* Constants */
 import {
   SET_COURSE_INFO,
-  UPDATE_EXAMS
+  UPDATE_EXAMS,
+  CHANGE_EXAM_MODAL_VISIBILITY
 } from "../constants/actions";
 
 /* Initial state */
@@ -10,7 +11,8 @@ const initial = {
   courseCode: null,
   universityName: null,
   exams: [],
-  courseId: null
+  courseId: null,
+  modalVisible: false
 };
 
 const course = (state = initial, action) => {
@@ -27,10 +29,17 @@ const course = (state = initial, action) => {
         courseId: action.courseId
       };
 
+
     case UPDATE_EXAMS:
       return {
         ...state,
         exams: action.exams
+      };
+
+    case CHANGE_EXAM_MODAL_VISIBILITY:
+      return {
+        ...state,
+        modalVisible: !state.modalVisible
       };
 
     default:

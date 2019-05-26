@@ -27,8 +27,7 @@ const mapStateToProps = state => ({
   exams: state.course.exams,
   courseName: state.course.courseName,
   courseCode: state.course.courseCode,
-  universityName: state.course.universityName,
-  courseId: state.course.courseId
+  universityName: state.course.universityName
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -77,20 +76,6 @@ class CoursePage extends Component {
     this.props.handleExamUpdate(examsDup);
   };
 
-  /* Adds a new exam to the exams list */
-  handleAddExam = (id, year, term) => {
-
-    /* Add a new exam to the list of exams and update the status */
-    this.props.handleExamUpdate([...this.props.exams, {
-      exam_id: id,
-      exam_year: year,
-      exam_term: term
-    }]);
-
-    /* Sort the exams */
-    this.sortExams();
-  };
-
   componentDidMount() {
 
     /* Get the course ID from the URL */
@@ -134,20 +119,11 @@ class CoursePage extends Component {
         >
 
           <Col xs={24} md={10}>
-            <CourseSider
-              courseName={this.props.courseName}
-              courseCode={this.props.courseCode}
-              universityName={this.props.universityName}
-              courseId={this.props.courseId}
-              handleAddExam={this.handleAddExam}
-            />
+            <CourseSider/>
           </Col>
 
           <Col xs={24} md={13}>
-            <CourseContent
-              exams={this.props.exams}
-              courseId={this.props.courseId}
-            />
+            <CourseContent/>
           </Col>
         </Row>
       </div>

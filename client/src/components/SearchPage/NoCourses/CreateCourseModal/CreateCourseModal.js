@@ -18,13 +18,13 @@ import { uniNameToId } from "./util";
 
 /* Custom components */
 import UniversitySelect from "../../../UniversitySelect/UniversitySelect";
-import { CHANGE_MODAL_VISIBILITY } from "../../../../constants/actions";
+import { CHANGE_COURSE_MODAL_VISIBILITY } from "../../../../constants/actions";
 
 const { Item } = Form;
 
 const mapDispatchToProps = dispatch => ({
   handleModalToggle: e =>
-    dispatch({ type: CHANGE_MODAL_VISIBILITY })
+    dispatch({ type: CHANGE_COURSE_MODAL_VISIBILITY })
 });
 
 const mapStateToProps = state => ({

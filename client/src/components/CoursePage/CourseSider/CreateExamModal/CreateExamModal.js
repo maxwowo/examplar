@@ -1,5 +1,11 @@
 /* React */
-import React, { Component } from "react";
+import React from "react";
+
+/* Redux */
+import { connect } from "react-redux";
+
+/* React Router */
+import { withRouter } from "react-router-dom";
 
 /* Axios */
 import Axios from "axios";
@@ -11,84 +17,86 @@ import { Modal, Form, Button } from "antd";
 import ExamYearSelect from "./ExamYearSelect/ExamYearSelect";
 import ExamTermSelect from "./ExamTermSelect/ExamTermSelect";
 
+/* Constants */
+import { CHANGE_EXAM_MODAL_VISIBILITY } from "../../../../constants/actions";
+
 const { Item } = Form;
 
-class CreateExamModal extends Component {
+const mapStateToProps = state => ({
+  exams: state.course.exams,
+  courseId: state.course.courseId,
+  modalVisible: state.course.modalVisible
+});
 
-  state = {
-    examYear: null,
-    examMonth: null
-  };
+const mapDispatchToProps = dispatch => ({
+  handleModalToggle: e =>
+    dispatch({ type: CHANGE_EXAM_MODAL_VISIBILITY })
+});
 
-  handleSubmit = e => {
+const CreateExamModal = props => {
+
+  const handleSubmit = e => {
     e.preventDefault();
 
     /* Validate the form fields */
-    this.props.form.validateFields((err, values) => {
-
-      const { courseId } = this.props;
-      const { examYear, examTerm } = values;
+    props.form.validateFields((err, values) => {
 
       /* Only submit a POST request when the form is valid */
       if (!err) {
 
-        Axios.post(`/api/courses/${courseId}`, values).then(res => {
-          const examId = res.data;
-          this.props.handleAddExam(examId, examYear, examTerm);
+        Axios.post(`/api/courses/${props.courseId}`, values).then(res => {
+
+          props.history.push(`/courses/${props.courseId}/${res.data}`)
         });
       }
     });
   };
 
-  render() {
+  const { getFieldDecorator } = props.form;
+  const itemLayout = {
+    labelCol: { span: 6 },
+    wrapperCol: { span: 18 }
+  };
 
-    const { getFieldDecorator } = this.props.form;
-    const itemLayout = {
-      labelCol: { span: 6 },
-      wrapperCol: { span: 18 }
-    };
-    const { visible, toggleModal } = this.props;
-
-    return (
-      <Modal
-        title="Add exam"
-        visible={visible}
-        onOk={toggleModal}
-        onCancel={toggleModal}
-        footer={[
-          <Button key="cancel" onClick={toggleModal}>Cancel</Button>,
-          <Button key="submit" form="create-exam-modal-form" htmlType="submit" type="primary"
-                  onClick={this.handleSubmit}>Submit</Button>
-        ]}
+  return (
+    <Modal
+      title="Add exam"
+      visible={props.modalVisible}
+      onOk={props.handleModalToggle}
+      onCancel={props.handleModalToggle}
+      footer={[
+        <Button key="cancel" onClick={props.handleModalToggle}>Cancel</Button>,
+        <Button key="submit" form="create-exam-modal-form" htmlType="submit" type="primary"
+                onClick={handleSubmit}>Submit</Button>
+      ]}
+    >
+      <Form
+        onSubmit={handleSubmit}
+        layout="horizontal"
+        id="create-exam-modal-form"
       >
-        <Form
-          onSubmit={this.handleSubmit}
-          layout="horizontal"
-          id="create-exam-modal-form"
-        >
 
-          <Item label="Exam year" {...itemLayout}>
-            {getFieldDecorator("examYear", {
-              rules: [{ required: true, message: "Please select an exam year." }]
-            })(
-              <ExamYearSelect/>
-            )}
-          </Item>
+        <Item label="Exam year" {...itemLayout}>
+          {getFieldDecorator("examYear", {
+            rules: [{ required: true, message: "Please select an exam year." }]
+          })(
+            <ExamYearSelect/>
+          )}
+        </Item>
 
-          <Item label="Exam term" {...itemLayout}>
-            {getFieldDecorator("examTerm", {
-              rules: [{ required: true, message: "Please select an exam term." }]
-            })(
-              <ExamTermSelect/>
-            )}
-          </Item>
+        <Item label="Exam term" {...itemLayout}>
+          {getFieldDecorator("examTerm", {
+            rules: [{ required: true, message: "Please select an exam term." }]
+          })(
+            <ExamTermSelect/>
+          )}
+        </Item>
 
-        </Form>
-      </Modal>
-    );
-  }
-}
+      </Form>
+    </Modal>
+  );
+};
 
 const WrappedModal = Form.create()(CreateExamModal);
 
-export default WrappedModal;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(WrappedModal));

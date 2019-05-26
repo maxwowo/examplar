@@ -11,13 +11,13 @@ import { Typography, Button } from "antd";
 import CreateCourseModal from "./CreateCourseModal/CreateCourseModal";
 
 /* Constants */
-import { CHANGE_MODAL_VISIBILITY } from "../../../constants/actions";
+import { CHANGE_COURSE_MODAL_VISIBILITY } from "../../../constants/actions";
 
 const { Paragraph } = Typography;
 
 const mapDispatchToProps = dispatch => ({
   handleModalToggle: e =>
-    dispatch({ type: CHANGE_MODAL_VISIBILITY })
+    dispatch({ type: CHANGE_COURSE_MODAL_VISIBILITY })
 });
 
 const NoCourses = props => (

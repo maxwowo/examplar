@@ -1,6 +1,9 @@
 /* React */
 import React from "react";
 
+/* Redux */
+import { connect } from "react-redux";
+
 /* Ant Design components */
 import { Layout, List, Typography } from "antd";
 import { Link } from "react-router-dom";
@@ -11,6 +14,11 @@ const { Meta } = Item;
 const { Text } = Typography;
 
 const listHeader = <Text>Exams</Text>;
+
+const mapStateToProps = state => ({
+  exams: state.course.exams,
+  courseId: state.course.courseId
+});
 
 const CourseContent = props => (
   <Content>
@@ -38,4 +46,4 @@ const CourseContent = props => (
   </Content>
 );
 
-export default CourseContent;
+export default connect(mapStateToProps)(CourseContent);
