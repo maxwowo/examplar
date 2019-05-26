@@ -8,6 +8,7 @@ import { Route, Switch } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
 import SearchPage from "./components/SearchPage/SearchPage";
 import CoursePage from "./components/CoursePage/CoursePage";
+import ExamPage from "./components/ExamPage/ExamPage";
 import PageNotFoundPage from "./components/PageNotFoundPage/PageNotFoundPage";
 
 const Routes = () => (
@@ -15,7 +16,7 @@ const Routes = () => (
     <Route exact path="/" component={HomePage}/>
     <Route path="/search" component={SearchPage}/>
     <Route path="/courses/:courseId" component={CoursePage}/>
-    <Route path="/exams/:examId" component={<div>aoeu</div>}/>
+    <Route path="/exams/:examId" component={ExamPage}/>
     <Route path="*" component={PageNotFoundPage}/>
   </Switch>
 );

@@ -9,9 +9,11 @@ on solutions for past exam papers collaboratively.
 Examplar is built using the following: 
 * [React](https://github.com/facebook/react)
 * [React Router](https://github.com/ReactTraining/react-router)
+* [Axios](https://github.com/axios/axios)
 * [Ant Design](https://github.com/ant-design/ant-design)
 * [Express](https://github.com/expressjs/express)
 * [MySQL](https://www.mysql.com/)
+* [Mysql2](https://github.com/brianmario/mysql2)
 
 
 ### Installation

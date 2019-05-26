@@ -52,7 +52,9 @@ const CreateExamModal = props => {
 
         Axios.post(`/api/courses/${props.courseId}`, values).then(res => {
 
-          props.history.push(`/exams/${res.data}`)
+          props.history.push(`/exams/${res.data}`);
+
+          props.handleModalToggle();
         });
       }
     });
