@@ -79,7 +79,7 @@ class CoursePage extends Component {
   componentDidMount() {
 
     /* Get the course ID from the URL */
-    const courseId = this.props.match.params.id;
+    const courseId = this.props.match.params.courseId;
 
     /* Get information about the course */
     Axios.get(`/api/courses/${courseId}`).then(res => {

@@ -14,7 +14,7 @@ const Routes = () => (
   <Switch>
     <Route exact path="/" component={HomePage}/>
     <Route path="/search" component={SearchPage}/>
-    <Route path="/courses/:id" component={CoursePage}/>
+    <Route path="/courses/:courseId" component={CoursePage}/>
     <Route path="*" component={PageNotFoundPage}/>
   </Switch>
 );
