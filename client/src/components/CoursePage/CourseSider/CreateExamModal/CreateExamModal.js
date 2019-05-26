@@ -84,8 +84,15 @@ const CreateExamModal = (
       >
 
         <Item label="Exam year" {...itemLayout}>
-          {getFieldDecorator("examYear", {
-              rules: [{ required: true, message: "Please select an exam year." }]
+          {getFieldDecorator(
+            "examYear",
+            {
+              rules: [
+                {
+                  required: true,
+                  message: "Please select an exam year."
+                }
+              ]
             }
           )(
             <ExamYearSelect/>
@@ -97,7 +104,12 @@ const CreateExamModal = (
           {getFieldDecorator(
             "examTerm",
             {
-              rules: [{ required: true, message: "Please select an exam term." }]
+              rules: [
+                {
+                  required: true,
+                  message: "Please select an exam term."
+                }
+              ]
             }
           )(
             <ExamTermSelect/>

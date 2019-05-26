@@ -106,7 +106,12 @@ const CreateCourseModal = (
           {form.getFieldDecorator(
             "courseCode",
             {
-              rules: [{ required: true, message: "Please enter the course code." }]
+              rules: [
+                {
+                  required: true,
+                  message: "Please enter the course code."
+                }
+              ]
             }
           )(
             <Input/>
@@ -117,7 +122,13 @@ const CreateCourseModal = (
           {form.getFieldDecorator(
             "courseName",
             {
-              rules: [{ required: true, message: "Please enter the course name." }]
+              rules: [
+                {
+                  required: true,
+                  message: "Please enter the course name."
+
+                }
+              ]
             }
           )(
             <Input/>
@@ -128,7 +139,12 @@ const CreateCourseModal = (
           {form.getFieldDecorator(
             "university",
             {
-              rules: [{ required: true, message: "Please select a university." }]
+              rules: [
+                {
+                  required: true,
+                  message: "Please select a university."
+                }
+              ]
             }
           )(
             <UniversitySelect
