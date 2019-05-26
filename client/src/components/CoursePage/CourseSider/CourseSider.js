@@ -4,9 +4,6 @@ import React from "react";
 /* Redux */
 import { connect } from "react-redux";
 
-/* Constants */
-import { CHANGE_EXAM_MODAL_VISIBILITY } from "../../../constants/actions";
-
 /* Ant Design components */
 import { Layout, Typography, Card, Button } from "antd";
 
@@ -24,37 +21,34 @@ const mapStateToProps = state => (
   }
 );
 
-const mapDispatchToProps = dispatch => (
-  {
-    handleModalToggle: e => dispatch(
-      {
-        type: CHANGE_EXAM_MODAL_VISIBILITY
-      }
-    )
-  }
-);
-
 const { Sider } = Layout;
 const { Paragraph } = Typography;
 
-const CourseSider = props => (
+const CourseSider = (
+  {
+    courseName,
+    courseCode,
+    universityName,
+    handleModalToggle
+  }
+) => (
   <Sider
     id="course-page-sider"
     width="100%"
   >
     <CreateExamModal/>
     <Card
-      title={props.courseName}
+      title={courseName}
       bordered={false}
       id="course-page-card"
     >
       <Paragraph>
-        {props.courseCode} @ {props.universityName}
+        {courseCode} @ {universityName}
       </Paragraph>
 
       <Button
         type="primary"
-        onClick={props.handleModalToggle}
+        onClick={handleModalToggle}
       >
         Add exam
       </Button>
@@ -62,4 +56,4 @@ const CourseSider = props => (
   </Sider>
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(CourseSider);
+export default connect(mapStateToProps)(CourseSider);

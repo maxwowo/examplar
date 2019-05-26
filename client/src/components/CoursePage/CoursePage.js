@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 /* Constants */
 import {
+  CHANGE_EXAM_MODAL_VISIBILITY,
   SET_COURSE_INFO,
   UPDATE_EXAMS
 } from "../../constants/actions";
@@ -54,6 +55,11 @@ const mapDispatchToProps = dispatch => (
       {
         exams: exams,
         type: UPDATE_EXAMS
+      }
+    ),
+    handleModalToggle: e => dispatch(
+      {
+        type: CHANGE_EXAM_MODAL_VISIBILITY
       }
     )
   }
@@ -127,7 +133,9 @@ class CoursePage extends Component {
         >
 
           <Col xs={24} md={10}>
-            <CourseSider/>
+            <CourseSider
+              handleModalToggle={this.props.handleModalToggle}
+            />
           </Col>
 
           <Col xs={24} md={13}>
