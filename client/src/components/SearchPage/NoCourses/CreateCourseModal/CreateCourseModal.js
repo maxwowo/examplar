@@ -22,11 +22,11 @@ import { CHANGE_COURSE_MODAL_VISIBILITY } from "../../../../constants/actions";
 
 const { Item } = Form;
 
-const mapStateToProps = state =>
-  ({
-      visible: state.courseModal.visible
-    }
-  );
+const mapStateToProps = state => (
+  {
+    visible: state.courseModal.visible
+  }
+);
 
 const CreateCourseModal = (
   {

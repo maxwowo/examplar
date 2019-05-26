@@ -26,12 +26,11 @@ const mapStateToProps = state => (
 
 const mapDispatchToProps = dispatch => (
   {
-    handleModalToggle: e =>
-      dispatch(
-        {
-          type: CHANGE_EXAM_MODAL_VISIBILITY
-        }
-      )
+    handleModalToggle: e => dispatch(
+      {
+        type: CHANGE_EXAM_MODAL_VISIBILITY
+      }
+    )
   }
 );
 

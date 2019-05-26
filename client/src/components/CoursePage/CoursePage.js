@@ -40,24 +40,22 @@ const mapDispatchToProps = dispatch => (
       universityName,
       exams,
       courseId
-    ) =>
-      dispatch(
-        {
-          courseName: courseName,
-          courseCode: courseCode,
-          universityName: universityName,
-          exams: exams,
-          courseId: courseId,
-          type: SET_COURSE_INFO
-        }
-      ),
-    handleExamUpdate: exams =>
-      dispatch(
-        {
-          exams: exams,
-          type: UPDATE_EXAMS
-        }
-      )
+    ) => dispatch(
+      {
+        courseName: courseName,
+        courseCode: courseCode,
+        universityName: universityName,
+        exams: exams,
+        courseId: courseId,
+        type: SET_COURSE_INFO
+      }
+    ),
+    handleExamUpdate: exams => dispatch(
+      {
+        exams: exams,
+        type: UPDATE_EXAMS
+      }
+    )
   }
 );
 

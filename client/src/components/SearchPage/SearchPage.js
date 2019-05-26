@@ -34,26 +34,23 @@ const { Content } = Layout;
 
 const mapDispatchToProps = dispatch => (
   {
-    handleCourseChange: e =>
-      dispatch(
-        {
-          courseSearch: e.target.value,
-          type: CHANGE_COURSE_SEARCH
-        }
-      ),
-    handleUniversitySelect: e =>
-      dispatch(
-        {
-          universitySearch: e,
-          type: CHANGE_UNIVERSITY_SEARCH
-        }
-      ),
-    handleModalToggle: e =>
-      dispatch(
-        {
-          type: CHANGE_COURSE_MODAL_VISIBILITY
-        }
-      )
+    handleCourseChange: e => dispatch(
+      {
+        courseSearch: e.target.value,
+        type: CHANGE_COURSE_SEARCH
+      }
+    ),
+    handleUniversitySelect: e => dispatch(
+      {
+        universitySearch: e,
+        type: CHANGE_UNIVERSITY_SEARCH
+      }
+    ),
+    handleModalToggle: e => dispatch(
+      {
+        type: CHANGE_COURSE_MODAL_VISIBILITY
+      }
+    )
   }
 );
 

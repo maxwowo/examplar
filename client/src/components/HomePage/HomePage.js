@@ -24,13 +24,12 @@ const { Content } = Layout;
 
 const mapDispatchToProps = dispatch => (
   {
-    handleCourseChange: e =>
-      dispatch(
-        {
-          courseSearch: e.target.value,
-          type: CHANGE_COURSE_SEARCH
-        }
-      ),
+    handleCourseChange: e => dispatch(
+      {
+        courseSearch: e.target.value,
+        type: CHANGE_COURSE_SEARCH
+      }
+    ),
     handleUniversitySelect: e =>
       dispatch(
         {
