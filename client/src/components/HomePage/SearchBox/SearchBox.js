@@ -11,7 +11,7 @@ import { withRouter } from "react-router-dom";
 import { Button, Input } from "antd";
 
 /* Custom components */
-import UniversitySelect from "../UniversitySelect/UniversitySelect";
+import UniversitySelect from "../../UniversitySelect/UniversitySelect";
 
 /* Style */
 import "./SearchBox.less";
@@ -20,7 +20,7 @@ import "./SearchBox.less";
 import {
   CHANGE_UNIVERSITY_SEARCH,
   CHANGE_COURSE_SEARCH
-} from "../../constants/actions";
+} from "../../../constants/actions";
 
 const { Group } = Input;
 

@@ -11,3 +11,5 @@ export const CHANGE_EXAM_MODAL_VISIBILITY = 3;
 /* Course page related */
 export const SET_COURSE_INFO = 4;
 export const UPDATE_EXAMS = 5;
+
+/* Exam page related */

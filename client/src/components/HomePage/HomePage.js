@@ -5,7 +5,7 @@ import React from "react";
 import { Layout, Typography } from "antd";
 
 /* Custom components */
-import SearchBox from "../SearchBox/SearchBox";
+import SearchBox from "./SearchBox/SearchBox";
 
 /* Style */
 import "./HomePage.less";

@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import { List, Typography, Layout } from "antd";
 
 /* Custom components */
-import SearchBox from "../SearchBox/SearchBox";
+import SearchBox from "../HomePage/SearchBox/SearchBox";
 import NoCourses from "./NoCourses/NoCourses";
 
 /* Axios */
@@ -37,7 +37,7 @@ class SearchPage extends Component {
     const course = params.get("course");
     const university = params.get("university");
 
-    /* Submit the GET request */
+    /* Get all the courses that match the search criteria */
     Axios.get("/api/courses", {
       params: {
         course: !course ? "" : course.trim(),

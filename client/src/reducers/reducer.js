@@ -5,11 +5,13 @@ import { combineReducers } from "redux";
 import home from "./home";
 import course from "./course";
 import courseModal from "./courseModal";
+import exam from "./exam";
 
 const reducer = combineReducers({
   home,
   course,
-  courseModal
+  courseModal,
+  exam
 });
 
 export default reducer;
