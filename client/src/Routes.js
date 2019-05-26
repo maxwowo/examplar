@@ -15,6 +15,7 @@ const Routes = () => (
     <Route exact path="/" component={HomePage}/>
     <Route path="/search" component={SearchPage}/>
     <Route path="/courses/:courseId" component={CoursePage}/>
+    <Route path="/exams/:examId" component={<div>aoeu</div>}/>
     <Route path="*" component={PageNotFoundPage}/>
   </Switch>
 );

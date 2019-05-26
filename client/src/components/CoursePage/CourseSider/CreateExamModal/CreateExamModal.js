@@ -35,6 +35,12 @@ const mapDispatchToProps = dispatch => ({
 
 const CreateExamModal = props => {
 
+  const { getFieldDecorator } = props.form;
+  const itemLayout = {
+    labelCol: { span: 6 },
+    wrapperCol: { span: 18 }
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -46,16 +52,10 @@ const CreateExamModal = props => {
 
         Axios.post(`/api/courses/${props.courseId}`, values).then(res => {
 
-          props.history.push(`/courses/${props.courseId}/exams/${res.data}`)
+          props.history.push(`/exams/${res.data}`)
         });
       }
     });
-  };
-
-  const { getFieldDecorator } = props.form;
-  const itemLayout = {
-    labelCol: { span: 6 },
-    wrapperCol: { span: 18 }
   };
 
   return (

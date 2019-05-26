@@ -33,7 +33,7 @@ const CourseContent = props => (
           <Meta
             title={
               <Link
-                to={`/courses/${props.courseId}/exams/${item.exam_id}`}
+                to={`/exams/${item.exam_id}`}
               >
                 {item.exam_year} term {item.exam_term}
               </Link>
