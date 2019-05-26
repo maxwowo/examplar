@@ -18,7 +18,6 @@ import { uniNameToId } from "./util";
 
 /* Custom components */
 import UniversitySelect from "../../../UniversitySelect/UniversitySelect";
-import { CHANGE_COURSE_MODAL_VISIBILITY } from "../../../../constants/actions";
 
 const { Item } = Form;
 
