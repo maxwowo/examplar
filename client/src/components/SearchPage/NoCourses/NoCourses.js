@@ -1,36 +1,31 @@
 /* React */
 import React from "react";
 
-/* Redux */
-import { connect } from "react-redux";
-
 /* Ant Design components */
 import { Typography, Button } from "antd";
 
 /* Custom components */
 import CreateCourseModal from "./CreateCourseModal/CreateCourseModal";
 
-/* Constants */
-import { CHANGE_COURSE_MODAL_VISIBILITY } from "../../../constants/actions";
-
 const { Paragraph } = Typography;
 
-const mapDispatchToProps = dispatch => ({
-  handleModalToggle: e =>
-    dispatch({ type: CHANGE_COURSE_MODAL_VISIBILITY })
-});
-
-const NoCourses = props => (
+const NoCourses = (
+  {
+    handleModalToggle
+  }
+) => (
   <div>
-    <CreateCourseModal/>
+    <CreateCourseModal
+      handleModalToggle={handleModalToggle}
+    />
     <Paragraph>Your search did not match any courses</Paragraph>
     <Button
       type="primary"
-      onClick={props.handleModalToggle}
+      onClick={handleModalToggle}
     >
       Create course
     </Button>
   </div>
 );
 
-export default connect(null, mapDispatchToProps)(NoCourses);
+export default NoCourses;

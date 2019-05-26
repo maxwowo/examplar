@@ -16,16 +16,24 @@ import CreateExamModal from "./CreateExamModal/CreateExamModal";
 /* Styles */
 import "./CourseSider.less";
 
-const mapStateToProps = state => ({
-  courseName: state.course.courseName,
-  courseCode: state.course.courseCode,
-  universityName: state.course.universityName
-});
+const mapStateToProps = state => (
+  {
+    courseName: state.course.courseName,
+    courseCode: state.course.courseCode,
+    universityName: state.course.universityName
+  }
+);
 
-const mapDispatchToProps = dispatch => ({
-  handleModalToggle: e =>
-    dispatch({ type: CHANGE_EXAM_MODAL_VISIBILITY })
-});
+const mapDispatchToProps = dispatch => (
+  {
+    handleModalToggle: e =>
+      dispatch(
+        {
+          type: CHANGE_EXAM_MODAL_VISIBILITY
+        }
+      )
+  }
+);
 
 const { Sider } = Layout;
 const { Paragraph } = Typography;

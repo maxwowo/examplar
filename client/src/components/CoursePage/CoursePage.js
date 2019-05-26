@@ -23,37 +23,43 @@ import CourseContent from "./CourseContent/CourseContent";
 /* Styles */
 import "./CoursePage.less";
 
-const mapStateToProps = state => ({
-  exams: state.course.exams,
-  courseName: state.course.courseName,
-  courseCode: state.course.courseCode,
-  universityName: state.course.universityName
-});
-
-const mapDispatchToProps = dispatch => ({
-  handleSetCourseInfo: (
-    courseName,
-    courseCode,
-    universityName,
-    exams,
-    courseId
-  ) => {
-    dispatch({
-      courseName: courseName,
-      courseCode: courseCode,
-      universityName: universityName,
-      exams: exams,
-      courseId: courseId,
-      type: SET_COURSE_INFO
-    });
-  },
-  handleExamUpdate: exams => {
-    dispatch({
-      exams: exams,
-      type: UPDATE_EXAMS
-    });
+const mapStateToProps = state => (
+  {
+    exams: state.course.exams,
+    courseName: state.course.courseName,
+    courseCode: state.course.courseCode,
+    universityName: state.course.universityName
   }
-});
+);
+
+const mapDispatchToProps = dispatch => (
+  {
+    handleSetCourseInfo: (
+      courseName,
+      courseCode,
+      universityName,
+      exams,
+      courseId
+    ) =>
+      dispatch(
+        {
+          courseName: courseName,
+          courseCode: courseCode,
+          universityName: universityName,
+          exams: exams,
+          courseId: courseId,
+          type: SET_COURSE_INFO
+        }
+      ),
+    handleExamUpdate: exams =>
+      dispatch(
+        {
+          exams: exams,
+          type: UPDATE_EXAMS
+        }
+      )
+  }
+);
 
 class CoursePage extends Component {
 
@@ -82,28 +88,32 @@ class CoursePage extends Component {
     const courseId = this.props.match.params.courseId;
 
     /* Get information about the course */
-    Axios.get(`/api/courses/${courseId}`).then(res => {
+    Axios.get(
+      `/api/courses/${courseId}`
+    ).then(
+      res => {
 
-      /* Get the response data */
-      const {
-        courseCode,
-        courseName,
-        exams,
-        universityName
-      } = res.data;
+        /* Get the response data */
+        const {
+          courseCode,
+          courseName,
+          exams,
+          universityName
+        } = res.data;
 
-      /* Update the states using the data */
-      this.props.handleSetCourseInfo(
-        courseName,
-        courseCode,
-        universityName,
-        exams,
-        courseId
-      );
+        /* Update the states using the data */
+        this.props.handleSetCourseInfo(
+          courseName,
+          courseCode,
+          universityName,
+          exams,
+          courseId
+        );
 
-      /* Sort the exams */
-      this.sortExams();
-    });
+        /* Sort the exams */
+        this.sortExams();
+      }
+    );
   }
 
   render() {

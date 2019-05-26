@@ -35,7 +35,11 @@ class ExamYearSelect extends Component {
     }
 
     /* Update the options */
-    this.setState({ options: matchedOptions });
+    this.setState(
+      {
+        options: matchedOptions
+      }
+    );
   };
 
   render() {

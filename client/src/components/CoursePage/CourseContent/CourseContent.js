@@ -15,10 +15,12 @@ const { Text } = Typography;
 
 const listHeader = <Text>Exams</Text>;
 
-const mapStateToProps = state => ({
-  exams: state.course.exams,
-  courseId: state.course.courseId
-});
+const mapStateToProps = state => (
+  {
+    exams: state.course.exams,
+    courseId: state.course.courseId
+  }
+);
 
 const CourseContent = props => (
   <Content>

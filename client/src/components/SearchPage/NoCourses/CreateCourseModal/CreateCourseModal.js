@@ -22,46 +22,61 @@ import { CHANGE_COURSE_MODAL_VISIBILITY } from "../../../../constants/actions";
 
 const { Item } = Form;
 
-const mapDispatchToProps = dispatch => ({
-  handleModalToggle: e =>
-    dispatch({ type: CHANGE_COURSE_MODAL_VISIBILITY })
-});
+const mapStateToProps = state =>
+  ({
+      visible: state.courseModal.visible
+    }
+  );
 
-const mapStateToProps = state => ({
-  visible: state.courseModal.visible
-});
-
-const CreateCourseModal = props => {
+const CreateCourseModal = (
+  {
+    form,
+    history,
+    handleModalToggle,
+    visible
+  }
+) => {
 
   const handleSubmit = e => {
     e.preventDefault();
 
     /* Validate the form fields */
-    props.form.validateFields((err, values) => {
+    form.validateFields(
+      (
+        err,
+        {
+          courseCode,
+          courseName,
+          university
+        }
+      ) => {
 
-      /* Only submit a POST request when the form is valid */
-      if (!err) {
+        /* Only submit a POST request when the form is valid */
+        if (!err) {
 
-        /* Get the field details */
-        const { courseCode, courseName, university } = values;
+          /* Get the ID of the university selected in the form */
+          const universityId = uniNameToId(university);
 
-        /* Get the ID of the university selected in the form */
-        const universityId = uniNameToId(university);
+          /* Submit a POST request */
+          Axios.post(
+            "/api/courses",
+            {
+              courseCode: courseCode,
+              courseName: courseName,
+              universityId: universityId
+            }
+          ).then(
+            res => {
 
-        /* Submit a POST request */
-        Axios.post("/api/courses", {
-          courseCode: courseCode,
-          courseName: courseName,
-          universityId: universityId
-        }).then(res => {
+              /* Redirect to the course page */
+              history.push(`/courses/${res.data}`);
 
-          /* Redirect to the course page */
-          props.history.push(`/courses/${res.data}`);
-
-          props.handleModalToggle();
-        });
+              handleModalToggle();
+            }
+          );
+        }
       }
-    });
+    );
   };
 
   const itemLayout = {
@@ -72,11 +87,11 @@ const CreateCourseModal = props => {
   return (
     <Modal
       title="Create course"
-      visible={props.visible}
-      onOk={props.handleModalToggle}
-      onCancel={props.handleModalToggle}
+      visible={visible}
+      onOk={handleModalToggle}
+      onCancel={handleModalToggle}
       footer={[
-        <Button key="cancel" onClick={props.handleModalToggle}>Cancel</Button>,
+        <Button key="cancel" onClick={handleModalToggle}>Cancel</Button>,
         <Button key="submit" form="create-course-modal-form" htmlType="submit" type="primary"
                 onClick={handleSubmit}>Submit</Button>
       ]}
@@ -88,25 +103,34 @@ const CreateCourseModal = props => {
       >
 
         <Item label="Course code" {...itemLayout}>
-          {props.form.getFieldDecorator("courseCode", {
-            rules: [{ required: true, message: "Please enter the course code." }]
-          })(
+          {form.getFieldDecorator(
+            "courseCode",
+            {
+              rules: [{ required: true, message: "Please enter the course code." }]
+            }
+          )(
             <Input/>
           )}
         </Item>
 
         <Item label="Course name" {...itemLayout}>
-          {props.form.getFieldDecorator("courseName", {
-            rules: [{ required: true, message: "Please enter the course name." }]
-          })(
+          {form.getFieldDecorator(
+            "courseName",
+            {
+              rules: [{ required: true, message: "Please enter the course name." }]
+            }
+          )(
             <Input/>
           )}
         </Item>
 
         <Item label="University" {...itemLayout}>
-          {props.form.getFieldDecorator("university", {
-            rules: [{ required: true, message: "Please select a university." }]
-          })(
+          {form.getFieldDecorator(
+            "university",
+            {
+              rules: [{ required: true, message: "Please select a university." }]
+            }
+          )(
             <UniversitySelect
               placeholder="Search university"
               size="default"
@@ -122,4 +146,4 @@ const CreateCourseModal = props => {
 
 const WrappedModal = Form.create()(CreateCourseModal);
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(WrappedModal));
+export default withRouter(connect(mapStateToProps)(WrappedModal));

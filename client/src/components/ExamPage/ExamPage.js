@@ -10,13 +10,13 @@ import { Row, Col } from "antd";
 /* Axios */
 import Axios from "axios";
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => (
+  {}
+);
 
-});
-
-const mapDispatchToProps = dispatch => ({
-
-});
+const mapDispatchToProps = dispatch => (
+  {}
+);
 
 class ExamPage extends Component {
 

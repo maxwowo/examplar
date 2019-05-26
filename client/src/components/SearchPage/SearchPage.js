@@ -1,6 +1,9 @@
 /* React */
 import React, { Component } from "react";
 
+/* Redux */
+import { connect } from "react-redux";
+
 /* Ant Design components */
 import { List, Typography, Layout } from "antd";
 
@@ -17,10 +20,42 @@ import { withRouter, Link } from "react-router-dom";
 /* Styles */
 import "./SearchPage.less";
 
+/* Constants */
+import {
+  CHANGE_COURSE_MODAL_VISIBILITY,
+  CHANGE_COURSE_SEARCH,
+  CHANGE_UNIVERSITY_SEARCH
+} from "../../constants/actions";
+
 const { Item } = List;
 const { Meta } = Item;
 const { Text } = Typography;
 const { Content } = Layout;
+
+const mapDispatchToProps = dispatch => (
+  {
+    handleCourseChange: e =>
+      dispatch(
+        {
+          courseSearch: e.target.value,
+          type: CHANGE_COURSE_SEARCH
+        }
+      ),
+    handleUniversitySelect: e =>
+      dispatch(
+        {
+          universitySearch: e,
+          type: CHANGE_UNIVERSITY_SEARCH
+        }
+      ),
+    handleModalToggle: e =>
+      dispatch(
+        {
+          type: CHANGE_COURSE_MODAL_VISIBILITY
+        }
+      )
+  }
+);
 
 class SearchPage extends Component {
 
@@ -38,25 +73,34 @@ class SearchPage extends Component {
     const university = params.get("university");
 
     /* Get all the courses that match the search criteria */
-    Axios.get("/api/courses", {
-      params: {
-        course: !course ? "" : course.trim(),
-        university: !university ? "" : university.trim()
+    Axios.get(
+      "/api/courses",
+      {
+        params: {
+          course: !course ? "" : course.trim(),
+          university: !university ? "" : university.trim()
+        }
       }
-    }).then(res => {
+    ).then(
+      res => {
 
-      /* Set the new states */
-      this.setState({
-        listItems: [...res.data],
-        listLoading: false
-      });
+        /* Set the new states */
+        this.setState(
+          {
+            listItems: [...res.data],
+            listLoading: false
+          }
+        );
 
-    }).catch(err => {
+      }
+    ).catch(
+      err => {
 
-      /* Handle errors */
-      console.log(err);
+        /* Handle errors */
+        console.log(err);
 
-    });
+      }
+    );
   };
 
   componentDidMount() {
@@ -73,7 +117,11 @@ class SearchPage extends Component {
     if (location.search !== this.props.location.search) {
 
       /* Re-enable the loading animation */
-      this.setState({ listLoading: true });
+      this.setState(
+        {
+          listLoading: true
+        }
+      );
 
       /* Grab the list of items again */
       this.requestListItems(location);
@@ -88,12 +136,17 @@ class SearchPage extends Component {
 
     return (
       <Content className="container-width" id="search-page-container">
-        <SearchBox/>
+        <SearchBox
+          handleCourseChange={this.props.handleCourseChange}
+          handleUniversitySelect={this.props.handleUniversitySelect}
+        />
         <List
           size="large"
           header={listHeader}
           dataSource={this.state.listItems}
-          locale={{ emptyText: <NoCourses/> }}
+          locale={{
+            emptyText: <NoCourses handleModalToggle={this.props.handleModalToggle}/>
+          }}
           loading={this.state.listLoading}
           renderItem={item => (
             <Item>
@@ -117,4 +170,4 @@ class SearchPage extends Component {
   }
 }
 
-export default withRouter(SearchPage);
+export default withRouter(connect(null, mapDispatchToProps)(SearchPage));

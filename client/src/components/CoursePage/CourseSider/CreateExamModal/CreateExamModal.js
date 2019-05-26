@@ -22,16 +22,24 @@ import { CHANGE_EXAM_MODAL_VISIBILITY } from "../../../../constants/actions";
 
 const { Item } = Form;
 
-const mapStateToProps = state => ({
-  exams: state.course.exams,
-  courseId: state.course.courseId,
-  modalVisible: state.course.modalVisible
-});
+const mapStateToProps = state => (
+  {
+    exams: state.course.exams,
+    courseId: state.course.courseId,
+    modalVisible: state.course.modalVisible
+  }
+);
 
-const mapDispatchToProps = dispatch => ({
-  handleModalToggle: e =>
-    dispatch({ type: CHANGE_EXAM_MODAL_VISIBILITY })
-});
+const mapDispatchToProps = dispatch => (
+  {
+    handleModalToggle: e =>
+      dispatch(
+        {
+          type: CHANGE_EXAM_MODAL_VISIBILITY
+        }
+      )
+  }
+);
 
 const CreateExamModal = props => {
 
@@ -47,17 +55,19 @@ const CreateExamModal = props => {
     /* Validate the form fields */
     props.form.validateFields((err, values) => {
 
-      /* Only submit a POST request when the form is valid */
-      if (!err) {
+        /* Only submit a POST request when the form is valid */
+        if (!err) {
 
-        Axios.post(`/api/courses/${props.courseId}`, values).then(res => {
+          Axios.post(`/api/courses/${props.courseId}`, values).then(res => {
 
-          props.history.push(`/exams/${res.data}`);
+              props.history.push(`/exams/${res.data}`);
 
-          props.handleModalToggle();
-        });
+              props.handleModalToggle();
+            }
+          );
+        }
       }
-    });
+    );
   };
 
   return (
@@ -80,18 +90,24 @@ const CreateExamModal = props => {
 
         <Item label="Exam year" {...itemLayout}>
           {getFieldDecorator("examYear", {
-            rules: [{ required: true, message: "Please select an exam year." }]
-          })(
+              rules: [{ required: true, message: "Please select an exam year." }]
+            }
+          )(
             <ExamYearSelect/>
-          )}
+          )
+          }
         </Item>
 
         <Item label="Exam term" {...itemLayout}>
-          {getFieldDecorator("examTerm", {
-            rules: [{ required: true, message: "Please select an exam term." }]
-          })(
+          {getFieldDecorator(
+            "examTerm",
+            {
+              rules: [{ required: true, message: "Please select an exam term." }]
+            }
+          )(
             <ExamTermSelect/>
-          )}
+          )
+          }
         </Item>
 
       </Form>
