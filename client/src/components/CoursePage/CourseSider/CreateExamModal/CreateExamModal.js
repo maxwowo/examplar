@@ -46,7 +46,7 @@ const CreateExamModal = props => {
 
         Axios.post(`/api/courses/${props.courseId}`, values).then(res => {
 
-          props.history.push(`/courses/${props.courseId}/${res.data}`)
+          props.history.push(`/courses/${props.courseId}/exams/${res.data}`)
         });
       }
     });
