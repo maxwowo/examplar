@@ -17,9 +17,6 @@ import { Modal, Form, Button } from "antd";
 import ExamYearSelect from "./ExamYearSelect/ExamYearSelect";
 import ExamTermSelect from "./ExamTermSelect/ExamTermSelect";
 
-/* Constants */
-import { CHANGE_EXAM_MODAL_VISIBILITY } from "../../../../constants/actions";
-
 const { Item } = Form;
 
 const mapStateToProps = state => (
@@ -30,19 +27,18 @@ const mapStateToProps = state => (
   }
 );
 
-const mapDispatchToProps = dispatch => (
+const CreateExamModal = (
   {
-    handleModalToggle: e => dispatch(
-      {
-        type: CHANGE_EXAM_MODAL_VISIBILITY
-      }
-    )
+    form,
+    history,
+    handleModalToggle,
+    exams,
+    courseId,
+    modalVisible
   }
-);
+) => {
 
-const CreateExamModal = props => {
-
-  const { getFieldDecorator } = props.form;
+  const { getFieldDecorator } = form;
   const itemLayout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 18 }
@@ -52,16 +48,16 @@ const CreateExamModal = props => {
     e.preventDefault();
 
     /* Validate the form fields */
-    props.form.validateFields((err, values) => {
+    form.validateFields((err, values) => {
 
         /* Only submit a POST request when the form is valid */
         if (!err) {
 
-          Axios.post(`/api/courses/${props.courseId}`, values).then(res => {
+          Axios.post(`/api/courses/${courseId}`, values).then(res => {
 
-              props.history.push(`/exams/${res.data}`);
+              history.push(`/exams/${res.data}`);
 
-              props.handleModalToggle();
+              handleModalToggle();
             }
           );
         }
@@ -72,11 +68,11 @@ const CreateExamModal = props => {
   return (
     <Modal
       title="Add exam"
-      visible={props.modalVisible}
-      onOk={props.handleModalToggle}
-      onCancel={props.handleModalToggle}
+      visible={modalVisible}
+      onOk={handleModalToggle}
+      onCancel={handleModalToggle}
       footer={[
-        <Button key="cancel" onClick={props.handleModalToggle}>Cancel</Button>,
+        <Button key="cancel" onClick={handleModalToggle}>Cancel</Button>,
         <Button key="submit" form="create-exam-modal-form" htmlType="submit" type="primary"
                 onClick={handleSubmit}>Submit</Button>
       ]}
@@ -116,4 +112,4 @@ const CreateExamModal = props => {
 
 const WrappedModal = Form.create()(CreateExamModal);
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(WrappedModal));
+export default withRouter(connect(mapStateToProps)(WrappedModal));

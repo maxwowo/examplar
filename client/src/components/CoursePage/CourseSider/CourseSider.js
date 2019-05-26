@@ -36,7 +36,9 @@ const CourseSider = (
     id="course-page-sider"
     width="100%"
   >
-    <CreateExamModal/>
+    <CreateExamModal
+      handleModalToggle={handleModalToggle}
+    />
     <Card
       title={courseName}
       bordered={false}
