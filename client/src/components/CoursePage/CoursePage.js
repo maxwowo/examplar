@@ -36,11 +36,13 @@ const mapStateToProps = state => (
 const mapDispatchToProps = dispatch => (
   {
     handleSetCourseInfo: (
-      courseName,
-      courseCode,
-      universityName,
-      exams,
-      courseId
+      {
+        courseName,
+        courseCode,
+        universityName,
+        exams,
+        courseId
+      }
     ) => dispatch(
       {
         courseName: courseName,
@@ -68,19 +70,21 @@ const mapDispatchToProps = dispatch => (
 class CoursePage extends Component {
 
   /* Sort the list of exams by
-  * 1. Descending order of year
-  * 2. Descending order of term */
+  *  1. Descending order of year
+  *  2. Descending order of term */
   sortExams = () => {
 
     /* Create a duplicated list of exams */
     const examsDup = [...this.props.exams];
 
     /* Sort the duplicated exams */
-    examsDup.sort((a, b) => (
-      a.exam_year === b.exam_year ?
-        -(a.exam_term - b.exam_term) :
-        -(a.exam_year - b.exam_year)
-    ));
+    examsDup.sort(
+      (a, b) => (
+        a.examYear === b.examYear ?
+          -(a.examTerm - b.examTerm) :
+          -(a.examYear - b.examYear)
+      )
+    );
 
     /* Update the states */
     this.props.handleExamUpdate(examsDup);
@@ -107,11 +111,13 @@ class CoursePage extends Component {
 
         /* Update the states using the data */
         this.props.handleSetCourseInfo(
-          courseName,
-          courseCode,
-          universityName,
-          exams,
-          courseId
+          {
+            courseName: courseName,
+            courseCode: courseCode,
+            universityName: universityName,
+            exams: exams,
+            courseId: courseId
+          }
         );
 
         /* Sort the exams */

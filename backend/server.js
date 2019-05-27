@@ -116,7 +116,15 @@ router.get("/courses/:id", (req, res) => {
       if (examErr) console.log(examErr);
 
       /* Get the list of exams belonging to the course */
-      const exams = examResults.map(curr => ({ ...curr }));
+      const exams = examResults.map(
+        curr => (
+          {
+            examId: curr.exam_id,
+            examYear: curr.exam_year,
+            examTerm: curr.exam_term
+          }
+        )
+      );
 
       /* Send back a JSON object containing all the relevant information */
       res.json({

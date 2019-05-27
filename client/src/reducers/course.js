@@ -29,7 +29,6 @@ const course = (state = initial, action) => {
         courseId: action.courseId
       };
 
-
     case UPDATE_EXAMS:
       return {
         ...state,
