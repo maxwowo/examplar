@@ -36,15 +36,17 @@ class ExamPage extends Component {
       >
 
         <Col
-          span={5}
+          xs={8}
+          md={6}
           id="exam-sider-container"
         >
           <ExamSider/>
         </Col>
 
         <Col
+          xs={12}
+          md={14}
           offset={1}
-          span={10}
           id="exam-content-container"
         >
           <div>hi</div>
