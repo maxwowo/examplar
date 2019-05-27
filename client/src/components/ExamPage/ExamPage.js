@@ -46,7 +46,6 @@ class ExamPage extends Component {
         <Col
           xs={12}
           md={14}
-          offset={1}
           id="exam-content-container"
         >
           <div>hi</div>

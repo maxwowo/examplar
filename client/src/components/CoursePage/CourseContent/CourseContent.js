@@ -33,7 +33,7 @@ const CourseContent = props => (
         <Item actions={
           [
             <Link to={`/exams/${item.examId}`}>View solution</Link>,
-            <Link to ={`/exams/${item.examId}`}>Contribute</Link>
+            <Link to={`/exams/${item.examId}`}>Contribute</Link>
           ]
         }>
 

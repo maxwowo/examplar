@@ -27,7 +27,6 @@ const ExamSider = (
   >
     <Menu
       mode="inline"
-      style={{ height: "100%", borderRight: 0 }}
     >
       <SubMenu
         key="sub1"
