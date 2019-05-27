@@ -31,16 +31,17 @@ const CourseContent = props => (
       locale={{ emptyText: "No exams" }}
       renderItem={item => (
         <Item actions={
-          [<Link to={`/exams/${item.examId}`}>Edit</Link>]
+          [
+            <Link to={`/exams/${item.examId}`}>Overall</Link>,
+            <Link to ={`/exams/${item.examId}`}>By question</Link>
+          ]
         }>
 
           <Meta
             title={
-              <Link
-                to={`/exams/${item.examId}`}
-              >
+              <Text>
                 {item.examYear} term {item.examTerm}
-              </Link>
+              </Text>
             }
           />
 
