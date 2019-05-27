@@ -27,6 +27,7 @@ const ExamSider = (
   >
     <Menu
       mode="inline"
+      id="exam-page-sider-menu"
     >
       <SubMenu
         key="sub1"
