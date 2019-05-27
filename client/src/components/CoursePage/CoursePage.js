@@ -144,7 +144,7 @@ class CoursePage extends Component {
             />
           </Col>
 
-          <Col xs={24} md={13}>
+          <Col xs={24} md={12}>
             <CourseContent/>
           </Col>
         </Row>

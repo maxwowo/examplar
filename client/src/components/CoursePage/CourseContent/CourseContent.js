@@ -8,6 +8,9 @@ import { connect } from "react-redux";
 import { Layout, List, Typography } from "antd";
 import { Link } from "react-router-dom";
 
+/* Styles */
+import "./CourseContent.less";
+
 const { Content } = Layout;
 const { Item } = List;
 const { Meta } = Item;
@@ -29,19 +32,15 @@ const CourseContent = props => (
       header={listHeader}
       dataSource={props.exams}
       locale={{ emptyText: "No exams" }}
+      id="course-content-list"
       renderItem={item => (
-        <Item actions={
-          [
-            <Link to={`/exams/${item.examId}`}>View solution</Link>,
-            <Link to={`/exams/${item.examId}`}>Contribute</Link>
-          ]
-        }>
+        <Item>
 
           <Meta
             title={
-              <Text>
+              <Link to={`/exams/${item.examId}`}>
                 {item.examYear} term {item.examTerm}
-              </Text>
+              </Link>
             }
           />
 
