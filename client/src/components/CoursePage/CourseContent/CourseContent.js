@@ -32,8 +32,8 @@ const CourseContent = props => (
       renderItem={item => (
         <Item actions={
           [
-            <Link to={`/exams/${item.examId}`}>Overall</Link>,
-            <Link to ={`/exams/${item.examId}`}>By question</Link>
+            <Link to={`/exams/${item.examId}`}>View solution</Link>,
+            <Link to ={`/exams/${item.examId}`}>Contribute</Link>
           ]
         }>
 
