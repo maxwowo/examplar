@@ -12,6 +12,7 @@ import Axios from "axios";
 
 /* Custom components */
 import ExamSider from "./ExamSider/ExamSider";
+import ExamContent from "./ExamContent/ExamContent";
 
 /* Style */
 import "./ExamPage.less";
@@ -37,6 +38,7 @@ class ExamPage extends Component {
 
         <Col
           xs={8}
+          md={6}
           id="exam-page-sider-container"
         >
           <ExamSider/>
@@ -44,9 +46,10 @@ class ExamPage extends Component {
 
         <Col
           xs={16}
+          md={18}
           id="exam-page-content-container"
         >
-          <div>hi</div>
+          <ExamContent/>
         </Col>
 
       </Row>
