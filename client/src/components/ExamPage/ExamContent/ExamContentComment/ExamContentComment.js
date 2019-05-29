@@ -20,7 +20,7 @@ const ExamContentComment = props => (
   >
     <Col span={24}>
       <TextArea
-        rows={8}
+        autosize={{minRows: 8}}
         id="exam-content-comment-textarea"
       />
     </Col>
