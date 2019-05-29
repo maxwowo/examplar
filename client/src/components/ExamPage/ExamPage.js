@@ -31,15 +31,13 @@ class ExamPage extends Component {
     return (
       <Row
         type="flex"
-        justify="center"
-        align="middle"
+        justify="space-between"
         id="exam-page-container"
       >
 
         <Col
           xs={8}
           md={6}
-          id="exam-page-sider-container"
         >
           <ExamSider/>
         </Col>

@@ -5,28 +5,37 @@ import React from "react";
 import { connect } from "react-redux";
 
 /* Ant Design components */
-import {Typography, Row, Col, Input, Button } from "antd";
+import { Typography, Row, Col, Input, Button } from "antd";
 
 /* Styles */
-// import "./ExamContentComment.less";
+import "./ExamContentComment.less";
 
-const {TextArea} = Input;
+const { TextArea } = Input;
 
 const ExamContentComment = props => (
   <Row
-    style={{marginTop: "10px"}}
+    id="exam-content-comment-container"
     type="flex"
     align="middle"
   >
     <Col span={24}>
       <TextArea
+        rows={8}
+        id="exam-content-comment-textarea"
       />
     </Col>
-    <Col span={10}>
+    <Col span={24}>
       <Button
         type="primary"
+        id="exam-content-comment-comment-btn"
       >
         Comment
+      </Button>
+
+      <Button
+        type="secondary"
+      >
+        Preview
       </Button>
     </Col>
   </Row>
