@@ -5,7 +5,10 @@ import React from "react";
 import { connect } from "react-redux";
 
 /* Ant Design components */
-import { Button, Menu, Icon } from "antd";
+import { Button, Menu } from "antd";
+
+/* Custom components */
+import SubMenuButton from "./SubMenuButton/SubMenuButton";
 
 /* Styles */
 import "./ExamSider.less";
@@ -34,6 +37,7 @@ const ExamSider = (
         <Menu.Item key="2">2i)</Menu.Item>
         <Menu.Item key="3">2ii)</Menu.Item>
         <Menu.Item key="4">2iii)</Menu.Item>
+        <SubMenuButton/>
       </SubMenu>
       <SubMenu
         key="sub2"
@@ -58,9 +62,8 @@ const ExamSider = (
       type="primary"
       shape="round"
       id="exam-page-sider-add-big-question-btn"
-    >
-      <Icon type="plus"/>
-    </Button>
+      icon="plus"
+    />
   </div>
 );
 
