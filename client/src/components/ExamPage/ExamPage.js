@@ -45,7 +45,7 @@ class ExamPage extends Component {
   componentWillMount() {
 
     /* Reset the list of sub question solutions */
-    this.props.handleSetQuestions([]);
+    this.props.handleChangeSolutions([]);
   }
 
   componentDidMount() {

@@ -140,6 +140,7 @@ router.get("/courses/:id", (req, resp) => {
   });
 });
 
+/* Adds a new exam along with a default question into the database */
 router.post("/courses/:id", (req, resp) => {
 
   /* Course ID */
