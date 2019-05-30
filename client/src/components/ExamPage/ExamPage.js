@@ -27,6 +27,19 @@ const mapDispatchToProps = dispatch => (
 
 class ExamPage extends Component {
 
+  componentDidMount() {
+
+    const examId = this.props.match.params.examId;
+
+    Axios.get(
+      `/api/exams/${examId}`
+    ).then(
+      res => {
+        console.log(res.data)
+      }
+    )
+  }
+
   render() {
     return (
       <Row

@@ -184,6 +184,54 @@ router.post("/courses/:id", (req, resp) => {
   });
 });
 
+router.get("/exams/:id", (req, resp) => {
+
+  /* Exam id */
+  const { id } = req.params;
+
+  const resArr = [];
+
+  const questionQuery = `
+    SELECT question_id, question_header 
+    FROM examplardb.question_table 
+    WHERE exam_id = ?
+  `;
+
+  const subQuestionQuery = `
+    SELECT * 
+    FROM examplardb.sub_question_table
+  `;
+
+  connection.execute(questionQuery, [id], (questionErr, questionRes) => {
+
+    if (questionErr) console.log(questionErr);
+
+    connection.execute(subQuestionQuery, (subErr, subRes) => {
+
+      if (subErr) console.log(subErr);
+
+      const questions = [];
+
+      for (let question of questionRes) {
+        const subQuestions = [];
+
+        for (let subQuestion of subRes) {
+          if (subQuestion.question_id === question.question_id)
+            subQuestions.push(subQuestion);
+        }
+
+        questions.push({
+          questionId: question.question_id,
+          questionHeader: question.question_header,
+          subQuestions: [...subQuestions]
+        });
+      }
+
+      resp.send(questions);
+    });
+  });
+});
+
 /* Append /api for HTTP requests */
 app.use("/api", router);
 

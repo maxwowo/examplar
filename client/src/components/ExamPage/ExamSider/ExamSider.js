@@ -5,7 +5,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 /* Ant Design components */
-import { Button, Menu } from "antd";
+import { Menu } from "antd";
 
 /* Custom components */
 import SubMenuButton from "./SubMenuButton/SubMenuButton";
