@@ -145,18 +145,25 @@ router.post("/courses/:id", (req, res) => {
   /* Course details */
   const { examYear, examTerm } = req.body;
 
-  /* Prepared query string */
-  const dbQuery = `
+  /* Query string that inserts an exam into the database */
+  const examQuery = `
     INSERT INTO examplardb.exam_table 
     (exam_id, exam_year, exam_term, course_id) 
     VALUES (NULL, ?, ?, ?)
+  `;
+
+  /* Query string that inserts a question to the exam */
+  const questionQuery = `
+    INSERT INTO examplardb.question_table 
+    (question_id, question_header, question_number, exam_id) 
+    VALUES (NULL, 1, '2', '1')
   `;
 
   /* Query variables */
   const varList = [examYear, examTerm, id];
 
   /* Execute prepared query string */
-  connection.execute(dbQuery, varList, (err, results, fields) => {
+  connection.execute(examQuery, varList, (err, results, fields) => {
 
     const { insertId } = results;
 
