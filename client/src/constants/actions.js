@@ -13,3 +13,4 @@ export const SET_COURSE_INFO = "SET_COURSE_INFO";
 export const UPDATE_EXAMS = "UPDATE_EXAMS";
 
 /* Exam page related */
+export const SET_EXAM_QUESTIONS = "SET_EXAM_QUESTIONS";

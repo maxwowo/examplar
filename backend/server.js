@@ -217,7 +217,10 @@ router.get("/exams/:id", (req, resp) => {
 
         for (let subQuestion of subRes) {
           if (subQuestion.question_id === question.question_id)
-            subQuestions.push(subQuestion);
+            subQuestions.push({
+              subQuestionId: subQuestion.sub_question_id,
+              subQuestionNum: subQuestion.sub_question_number
+            });
         }
 
         questions.push({

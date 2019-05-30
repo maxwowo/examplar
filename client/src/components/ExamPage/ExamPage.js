@@ -10,6 +10,11 @@ import { Row, Col } from "antd";
 /* Axios */
 import Axios from "axios";
 
+/* Constants */
+import {
+  SET_EXAM_QUESTIONS
+} from "../../constants/actions";
+
 /* Custom components */
 import ExamSider from "./ExamSider/ExamSider";
 import ExamContent from "./ExamContent/ExamContent";
@@ -17,12 +22,16 @@ import ExamContent from "./ExamContent/ExamContent";
 /* Style */
 import "./ExamPage.less";
 
-const mapStateToProps = state => (
-  {}
-);
-
 const mapDispatchToProps = dispatch => (
-  {}
+  {
+    handleSetQuestions: questions => dispatch(
+      {
+        questions: questions,
+        type: SET_EXAM_QUESTIONS
+      }
+    )
+
+  }
 );
 
 class ExamPage extends Component {
@@ -35,9 +44,10 @@ class ExamPage extends Component {
       `/api/exams/${examId}`
     ).then(
       res => {
-        console.log(res.data)
+        console.log(res.data);
+        this.props.handleSetQuestions(res.data);
       }
-    )
+    );
   }
 
   render() {
@@ -68,4 +78,4 @@ class ExamPage extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExamPage);
+export default connect(null, mapDispatchToProps)(ExamPage);

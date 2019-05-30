@@ -11,50 +11,44 @@ import { Menu } from "antd";
 import SubMenuButton from "./SubMenuButton/SubMenuButton";
 import MenuButton from "./MenuButton/MenuButton";
 
+/* Utility functions */
+import { getQuestionHeader } from "../utils";
+
 /* Styles */
 import "./ExamSider.less";
 
 const { SubMenu } = Menu;
 
 const mapStateToProps = state => (
-  {}
+  {
+    questions: state.exam.questions
+  }
 );
 
 const ExamSider = (
-  {}
+  {
+    questions
+  }
 ) => (
   <Menu
     mode="inline"
     id="exam-page-sider-menu"
   >
-    <SubMenu
-      key="sub1"
-      title={<span>Question One</span>}
-    >
-      <Menu.Item key="1">1i</Menu.Item>
-      <Menu.Item key="2">2i</Menu.Item>
-      <Menu.Item key="3">2ii</Menu.Item>
-      <Menu.Item key="4">2iii</Menu.Item>
-      <SubMenuButton/>
-    </SubMenu>
-    <SubMenu
-      key="sub2"
-      title={<span>Question Two</span>}
-    >
-      <Menu.Item key="5">1i</Menu.Item>
-      <Menu.Item key="6">2i</Menu.Item>
-      <Menu.Item key="7">2ii</Menu.Item>
-      <Menu.Item key="8">2iii</Menu.Item>
-    </SubMenu>
-    <SubMenu
-      key="sub3"
-      title={<span>Question Three</span>}
-    >
-      <Menu.Item key="9">1i</Menu.Item>
-      <Menu.Item key="10">2i</Menu.Item>
-      <Menu.Item key="11">2ii</Menu.Item>
-      <Menu.Item key="12">2iii</Menu.Item>
-    </SubMenu>
+    {questions.map(currQuestion => (
+      <SubMenu
+        key={currQuestion.questionId}
+        title={getQuestionHeader(currQuestion.questionHeader)}
+      >
+        {currQuestion.subQuestions.map(currSubQuestion => (
+          <Menu.Item
+            key={currSubQuestion.subQuestionId}
+          >
+            {currSubQuestion.subQuestionNum}
+          </Menu.Item>
+        ))}
+        <SubMenuButton/>
+      </SubMenu>
+    ))}
     <MenuButton/>
   </Menu>
 );
