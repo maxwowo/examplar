@@ -250,6 +250,25 @@ router.get("/exams/:id", (req, resp) => {
   });
 });
 
+router.get("/subquestions/:id", (req, resp) => {
+
+  /* Sub question id */
+  const { id } = req.params;
+
+  const dbQuery = `
+    SELECT answer_id, answer_text 
+    FROM examplardb.solution_table 
+    WHERE sub_question_id = ?
+  `;
+
+  connection.execute(dbQuery, [id], (err, res) => {
+
+    if (err) console.log(err);
+
+    resp.send(res);
+  });
+});
+
 /* Append /api for HTTP requests */
 app.use("/api", router);
 

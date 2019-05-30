@@ -12,7 +12,8 @@ import Axios from "axios";
 
 /* Constants */
 import {
-  SET_EXAM_QUESTIONS
+  SET_EXAM_QUESTIONS,
+  CHANGE_SUB_QUESTION_SOLUTION
 } from "../../constants/actions";
 
 /* Custom components */
@@ -29,8 +30,13 @@ const mapDispatchToProps = dispatch => (
         questions: questions,
         type: SET_EXAM_QUESTIONS
       }
+    ),
+    handleChangeSolutions: solutions => dispatch(
+      {
+        solutions: solutions,
+        type: CHANGE_SUB_QUESTION_SOLUTION
+      }
     )
-
   }
 );
 
@@ -62,7 +68,9 @@ class ExamPage extends Component {
           xs={8}
           md={6}
         >
-          <ExamSider/>
+          <ExamSider
+            handleChangeSolutions={this.props.handleChangeSolutions}
+          />
         </Col>
 
         <Col

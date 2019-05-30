@@ -12,7 +12,10 @@ import SubMenuButton from "./SubMenuButton/SubMenuButton";
 import MenuButton from "./MenuButton/MenuButton";
 
 /* Utility functions */
-import { getQuestionHeader } from "../utils";
+import {
+  getQuestionHeader,
+  getSolutions
+} from "../utils";
 
 /* Styles */
 import "./ExamSider.less";
@@ -27,12 +30,14 @@ const mapStateToProps = state => (
 
 const ExamSider = (
   {
-    questions
+    questions,
+    handleChangeSolutions
   }
 ) => (
   <Menu
     mode="inline"
     id="exam-page-sider-menu"
+    onSelect={e => handleChangeSolutions(getSolutions(e.key))}
   >
     {questions.map(currQuestion => (
       <SubMenu

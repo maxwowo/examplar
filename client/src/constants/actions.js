@@ -14,3 +14,4 @@ export const UPDATE_EXAMS = "UPDATE_EXAMS";
 
 /* Exam page related */
 export const SET_EXAM_QUESTIONS = "SET_EXAM_QUESTIONS";
+export const CHANGE_SUB_QUESTION_SOLUTION = "CHANGE_SUB_QUESTION_SOLUTION";

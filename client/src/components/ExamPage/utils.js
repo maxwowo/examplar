@@ -1,3 +1,6 @@
+/* Axios */
+import Axios from "axios";
+
 const questionHeaders = {
   1: "One",
   2: "Two",
@@ -12,3 +15,13 @@ const questionHeaders = {
 };
 
 export const getQuestionHeader = n => `Question ${questionHeaders[n]}`;
+
+export const getSolutions = id => {
+  Axios.get(
+    `/api/subquestions/${id}`
+  ).then(
+    res => {
+      return res.data;
+    }
+  );
+};

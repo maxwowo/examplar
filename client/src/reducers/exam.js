@@ -1,11 +1,13 @@
 /* Constants */
 import {
-  SET_EXAM_QUESTIONS
+  SET_EXAM_QUESTIONS,
+  CHANGE_SUB_QUESTION_SOLUTION
 } from "../constants/actions";
 
 /* Initial state */
 const initial = {
-  questions: []
+  questions: [],
+  solutions: []
 };
 
 const exam = (state = initial, action) => {
@@ -14,6 +16,12 @@ const exam = (state = initial, action) => {
       return {
         ...state,
         questions: action.questions
+      };
+
+    case CHANGE_SUB_QUESTION_SOLUTION:
+      return {
+        ...state,
+        solutions: action.solutions
       };
 
     default:
