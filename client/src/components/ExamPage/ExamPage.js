@@ -31,22 +31,22 @@ const mapDispatchToProps = dispatch => (
         type: SET_EXAM_QUESTIONS
       }
     ),
-    handleChangeSolutions: subQuestionId => {
-      Axios.get(
-        `/api/subquestions/${subQuestionId}`
-      ).then(
-        res => dispatch(
-          {
-            solutions: res.data,
-            type: CHANGE_SUB_QUESTION_SOLUTION
-          }
-        )
-      );
-    }
+    handleChangeSolutions: solutions => dispatch(
+      {
+        solutions: solutions,
+        type: CHANGE_SUB_QUESTION_SOLUTION
+      }
+    )
   }
 );
 
 class ExamPage extends Component {
+
+  componentWillMount() {
+
+    /* Reset the list of sub question solutions */
+    this.props.handleSetQuestions([]);
+  }
 
   componentDidMount() {
 
@@ -55,9 +55,7 @@ class ExamPage extends Component {
     Axios.get(
       `/api/exams/${examId}`
     ).then(
-      res => {
-        this.props.handleSetQuestions(res.data);
-      }
+      res => this.props.handleSetQuestions(res.data)
     );
   }
 

@@ -13,11 +13,12 @@ import MenuButton from "./MenuButton/MenuButton";
 
 /* Utility functions */
 import {
-  getQuestionHeader,
+  getQuestionHeader
 } from "../utils";
 
 /* Styles */
 import "./ExamSider.less";
+import Axios from "axios";
 
 const { SubMenu } = Menu;
 
@@ -32,29 +33,48 @@ const ExamSider = (
     questions,
     handleChangeSolutions
   }
-) => (
-  <Menu
-    mode="inline"
-    id="exam-page-sider-menu"
-    onSelect={e => handleChangeSolutions(e.key)}
-  >
-    {questions.map(currQuestion => (
-      <SubMenu
-        key={currQuestion.questionId}
-        title={getQuestionHeader(currQuestion.questionHeader)}
-      >
-        {currQuestion.subQuestions.map(currSubQuestion => (
-          <Menu.Item
-            key={currSubQuestion.subQuestionId}
-          >
-            {currSubQuestion.subQuestionNum}
-          </Menu.Item>
-        ))}
-        <SubMenuButton/>
-      </SubMenu>
-    ))}
-    <MenuButton/>
-  </Menu>
-);
+) => {
+
+  const handleMenuSelect = e => {
+    const subQuestionId = e.key;
+
+    Axios.get(
+      `/api/subquestions/${subQuestionId}`
+    ).then(
+      res => handleChangeSolutions(
+        res.data
+      )
+    );
+  };
+
+  return (
+    <Menu
+      mode="inline"
+      id="exam-page-sider-menu"
+      onSelect={handleMenuSelect}
+    >
+      {questions.map(currQuestion => (
+        <SubMenu
+          key={currQuestion.questionId}
+          title={getQuestionHeader(
+            currQuestion.questionHeader
+          )}
+        >
+          {currQuestion.subQuestions.map(
+            currSubQuestion => (
+              <Menu.Item
+                key={currSubQuestion.subQuestionId}
+              >
+                {currSubQuestion.subQuestionNum}
+              </Menu.Item>
+            )
+          )}
+          <SubMenuButton/>
+        </SubMenu>
+      ))}
+      <MenuButton/>
+    </Menu>
+  );
+};
 
 export default connect(mapStateToProps)(ExamSider);
