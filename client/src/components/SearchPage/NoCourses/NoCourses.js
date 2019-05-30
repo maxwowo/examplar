@@ -2,7 +2,7 @@
 import React from "react";
 
 /* Ant Design components */
-import { Typography, Button } from "antd";
+import { Typography, Button, Empty } from "antd";
 
 /* Custom components */
 import CreateCourseModal from "./CreateCourseModal/CreateCourseModal";
@@ -18,13 +18,17 @@ const NoCourses = (
     <CreateCourseModal
       handleModalToggle={handleModalToggle}
     />
-    <Paragraph>Your search did not match any courses</Paragraph>
-    <Button
-      type="primary"
-      onClick={handleModalToggle}
+    <Empty
+      description="No matching results"
+      image={Empty.PRESENTED_IMAGE_SIMPLE}
     >
-      Create course
-    </Button>
+      <Button
+        type="primary"
+        onClick={handleModalToggle}
+      >
+        Create course
+      </Button>
+    </Empty>
   </div>
 );
 
