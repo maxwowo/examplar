@@ -273,6 +273,27 @@ router.get("/subquestions/:id", (req, resp) => {
   });
 });
 
+router.post("/exams/:id", (req, resp) => {
+
+  /* Exam ID */
+  const { id } = req.params;
+
+  /* Question header */
+  const { questionHeader } = req.body;
+
+  /* Query that inserts a question into the database */
+  const dbQuery = `
+    INSERT INTO examplardb.question_table 
+    (question_id, question_header, exam_id) 
+    VALUES (NULL, ?, ?)
+  `;
+
+  /* Insert the question into the database */
+  connection.execute(dbQuery, [questionHeader, id], (err, res) => {
+    resp.send(res.insertId.toString());
+  });
+});
+
 /* Append /api for HTTP requests */
 app.use("/api", router);
 

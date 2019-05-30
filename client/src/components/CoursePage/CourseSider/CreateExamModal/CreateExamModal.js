@@ -53,7 +53,11 @@ const CreateExamModal = (
         /* Only submit a POST request when the form is valid */
         if (!err) {
 
-          Axios.post(`/api/courses/${courseId}`, values).then(res => {
+          Axios.post(
+            `/api/courses/${courseId}`,
+            values
+          ).then(
+            res => {
 
               history.push(`/exams/${res.data}`);
 

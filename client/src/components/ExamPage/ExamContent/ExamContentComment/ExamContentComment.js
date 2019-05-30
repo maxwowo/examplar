@@ -51,7 +51,6 @@ const ExamContentComment = props => (
       </Col>
     </Row>
   </div>
-
 );
 
 export default ExamContentComment;

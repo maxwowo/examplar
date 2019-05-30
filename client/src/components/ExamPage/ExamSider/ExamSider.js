@@ -31,7 +31,8 @@ const mapStateToProps = state => (
 const ExamSider = (
   {
     questions,
-    handleChangeSolutions
+    handleChangeSolutions,
+    handleSetQuestions
   }
 ) => {
 
@@ -72,7 +73,9 @@ const ExamSider = (
           <SubMenuButton/>
         </SubMenu>
       ))}
-      <MenuButton/>
+      <MenuButton
+        handleSetQuestions={handleSetQuestions}
+      />
     </Menu>
   );
 };

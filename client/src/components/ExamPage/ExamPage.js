@@ -13,7 +13,8 @@ import Axios from "axios";
 /* Constants */
 import {
   SET_EXAM_QUESTIONS,
-  CHANGE_SUB_QUESTION_SOLUTION
+  CHANGE_SUB_QUESTION_SOLUTION,
+  CHANGE_EXAM_ID
 } from "../../constants/actions";
 
 /* Custom components */
@@ -36,6 +37,12 @@ const mapDispatchToProps = dispatch => (
         solutions: solutions,
         type: CHANGE_SUB_QUESTION_SOLUTION
       }
+    ),
+    handleChangeExamId: examId => dispatch(
+      {
+        examId: examId,
+        type: CHANGE_EXAM_ID
+      }
     )
   }
 );
@@ -51,6 +58,8 @@ class ExamPage extends Component {
   componentDidMount() {
 
     const examId = this.props.match.params.examId;
+
+    this.props.handleChangeExamId(examId);
 
     Axios.get(
       `/api/exams/${examId}`
@@ -73,6 +82,7 @@ class ExamPage extends Component {
         >
           <ExamSider
             handleChangeSolutions={this.props.handleChangeSolutions}
+            handleSetQuestions={this.props.handleSetQuestions}
           />
         </Col>
 
