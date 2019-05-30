@@ -5,12 +5,19 @@ import React from "react";
 import { connect } from "react-redux";
 
 /* Ant Design components */
-import { List, Comment } from "antd";
+import { List, Comment, Empty } from "antd";
 
 const mapStateToProps = state => (
   {
     solutions: state.exam.solutions
   }
+);
+
+const empty = (
+  <Empty
+    description="No solutions yet"
+    image={Empty.PRESENTED_IMAGE_SIMPLE}
+  />
 );
 
 const ExamContentList = (
@@ -27,9 +34,8 @@ const ExamContentList = (
         content={item.answerText}
       />
     )}
-  >
-
-  </List>
+    locale={{ emptyText: empty }}
+  />
 );
 
 export default connect(mapStateToProps)(ExamContentList);
