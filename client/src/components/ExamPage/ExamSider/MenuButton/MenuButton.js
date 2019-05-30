@@ -4,12 +4,17 @@ import React from "react";
 /* Ant Design components */
 import { Button } from "antd";
 
-const SubMenuButton = props => (
+/* Styles */
+import "./MenuButton.less";
+
+const MenuButton = props => (
   <Button
     icon="plus"
-    shape="circle"
+    shape="round"
+    type="primary"
+    id="exam-page-sider-menu-btn"
     className="exam-page-sider-btn"
   />
 );
 
-export default SubMenuButton;
+export default MenuButton;

@@ -9,6 +9,7 @@ import { Button, Menu } from "antd";
 
 /* Custom components */
 import SubMenuButton from "./SubMenuButton/SubMenuButton";
+import MenuButton from "./MenuButton/MenuButton";
 
 /* Styles */
 import "./ExamSider.less";
@@ -58,12 +59,7 @@ const ExamSider = (
         <Menu.Item key="12">2iii)</Menu.Item>
       </SubMenu>
     </Menu>
-    <Button
-      type="primary"
-      shape="round"
-      id="exam-page-sider-add-big-question-btn"
-      icon="plus"
-    />
+    <MenuButton/>
   </div>
 );
 
