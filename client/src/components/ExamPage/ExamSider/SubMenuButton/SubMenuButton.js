@@ -4,7 +4,7 @@ import React from "react";
 /* Ant Design components */
 import { Button } from "antd";
 
-const SubMenuButton = props => (
+const SubMenuButton = () => (
   <Button
     icon="plus"
     shape="circle"

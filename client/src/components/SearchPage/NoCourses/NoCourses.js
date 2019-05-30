@@ -2,12 +2,10 @@
 import React from "react";
 
 /* Ant Design components */
-import { Typography, Button, Empty } from "antd";
+import { Button, Empty } from "antd";
 
 /* Custom components */
 import CreateCourseModal from "./CreateCourseModal/CreateCourseModal";
-
-const { Paragraph } = Typography;
 
 const NoCourses = (
   {

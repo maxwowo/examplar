@@ -5,7 +5,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 /* Ant Design components */
-import { Layout, List, Typography } from "antd";
+import { Layout, List, Typography, Empty } from "antd";
 import { Link } from "react-router-dom";
 
 /* Styles */
@@ -25,13 +25,20 @@ const mapStateToProps = state => (
   }
 );
 
+const empty = (
+  <Empty
+    description="No exams yet"
+    image={Empty.PRESENTED_IMAGE_SIMPLE}
+  />
+);
+
 const CourseContent = props => (
   <Content>
     <List
       size="large"
       header={listHeader}
       dataSource={props.exams}
-      locale={{ emptyText: "No exams" }}
+      locale={{ emptyText: empty }}
       id="course-content-list"
       renderItem={item => (
         <Item>
