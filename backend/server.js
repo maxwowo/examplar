@@ -23,7 +23,7 @@ const connection = mysql.createConnection({
 });
 
 /* GET route for course searches */
-router.get("/courses", (req, res) => {
+router.get("/courses", (req, resp) => {
 
   /* Get request info */
   const { query } = req;
@@ -46,16 +46,19 @@ router.get("/courses", (req, res) => {
   const varList = [courseQuery, courseQuery, universityQuery];
 
   /* Execute prepared query string */
-  connection.execute(dbQuery, varList, (err, results, fields) => {
+  connection.execute(dbQuery, varList, (err, res, fields) => {
+
+    /* Error handling */
+    if (err) console.log(err);
 
     /* Send back an array of json objects
     * Map is used since MySQL returns an array of BinaryRow objects */
-    res.send(results.map(curr => ({ ...curr })));
+    resp.send(res.map(curr => ({ ...curr })));
   });
 });
 
 /* Adds a new course into the database */
-router.post("/courses", (req, res) => {
+router.post("/courses", (req, resp) => {
 
   /* Get body info */
   const { courseCode, courseName, universityId } = req.body;
@@ -72,16 +75,16 @@ router.post("/courses", (req, res) => {
   const varList = [courseCode, courseName, universityId];
 
   /* Execute prepared query string */
-  connection.execute(dbQuery, varList, (err, results, fields) => {
+  connection.execute(dbQuery, varList, (err, res) => {
 
     /* Error handling */
     if (err) console.log(err);
-    else res.send(`${results.insertId}`);
+    else resp.send(`${res.insertId}`);
   });
 });
 
 /* Gets information about a course */
-router.get("/courses/:id", (req, res) => {
+router.get("/courses/:id", (req, resp) => {
 
   /* Course ID */
   const { id } = req.params;
@@ -102,21 +105,21 @@ router.get("/courses/:id", (req, res) => {
   `;
 
   /* Chain the course and exam queries*/
-  connection.execute(courseQuery, [id], (courseErr, courseResults, courseFields) => {
+  connection.execute(courseQuery, [id], (courseErr, courseRes) => {
 
     /* Error handling */
     if (courseErr) console.log(courseErr);
 
     /* Get the details of the course */
-    const { course_code, course_name, university_name } = courseResults[0];
+    const { course_code, course_name, university_name } = courseRes[0];
 
-    connection.execute(examQuery, [id], (examErr, examResults, examFields) => {
+    connection.execute(examQuery, [id], (examErr, examRes) => {
 
       /* Error handling */
       if (examErr) console.log(examErr);
 
       /* Get the list of exams belonging to the course */
-      const exams = examResults.map(
+      const exams = examRes.map(
         curr => (
           {
             examId: curr.exam_id,
@@ -127,7 +130,7 @@ router.get("/courses/:id", (req, res) => {
       );
 
       /* Send back a JSON object containing all the relevant information */
-      res.json({
+      resp.json({
         courseCode: course_code,
         courseName: course_name,
         universityName: university_name,
@@ -137,7 +140,7 @@ router.get("/courses/:id", (req, res) => {
   });
 });
 
-router.post("/courses/:id", (req, res) => {
+router.post("/courses/:id", (req, resp) => {
 
   /* Course ID */
   const { id } = req.params;
@@ -152,25 +155,32 @@ router.post("/courses/:id", (req, res) => {
     VALUES (NULL, ?, ?, ?)
   `;
 
-  /* Query string that inserts a question to the exam */
+  /* Query string that inserts a question to the above exam */
   const questionQuery = `
     INSERT INTO examplardb.question_table 
-    (question_id, question_header, question_number, exam_id) 
-    VALUES (NULL, 1, '2', '1')
+    (question_id, question_header, exam_id) 
+    VALUES (NULL, 1, ?)
   `;
 
   /* Query variables */
   const varList = [examYear, examTerm, id];
 
-  /* Execute prepared query string */
-  connection.execute(examQuery, varList, (err, results, fields) => {
+  /* Insert an exam into the database */
+  connection.execute(examQuery, varList, (examErr, examRes) => {
 
-    const { insertId } = results;
+    const { insertId } = examRes;
 
     /* Error handling */
-    if (err) console.log(err);
+    if (examErr) console.log(examErr);
 
-    res.send(insertId.toString());
+    /* Insert a question into the exam */
+    connection.execute(questionQuery, [insertId], questionErr => {
+
+      /* Error handling */
+      if (questionErr) console.log(questionErr);
+
+      resp.send(insertId.toString());
+    });
   });
 });
 
