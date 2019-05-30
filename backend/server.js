@@ -184,38 +184,51 @@ router.post("/courses/:id", (req, resp) => {
   });
 });
 
+/* Gets all questions corresponding to an exam */
 router.get("/exams/:id", (req, resp) => {
 
   /* Exam id */
   const { id } = req.params;
 
-  const resArr = [];
-
+  /* Retrieves the questions of the exam */
   const questionQuery = `
     SELECT question_id, question_header 
     FROM examplardb.question_table 
     WHERE exam_id = ?
   `;
 
+  /* Retrieves all sub questions */
   const subQuestionQuery = `
     SELECT * 
     FROM examplardb.sub_question_table
   `;
 
+  /* Retrieve the questions of the exam */
   connection.execute(questionQuery, [id], (questionErr, questionRes) => {
 
+    /* Error handling */
     if (questionErr) console.log(questionErr);
 
+    /* Retrieve all sub questions */
     connection.execute(subQuestionQuery, (subErr, subRes) => {
 
+      /* Error handling */
       if (subErr) console.log(subErr);
 
+      /* List of questions which will be returned */
       const questions = [];
 
+      /* Go through each question of the exam */
       for (let question of questionRes) {
+
+        /* List of sub questions corresponding to the current question */
         const subQuestions = [];
 
+        /* Go through every sub question */
         for (let subQuestion of subRes) {
+
+          /* If the sub question belong to the question
+          *  add it to the sub questions list */
           if (subQuestion.question_id === question.question_id)
             subQuestions.push({
               subQuestionId: subQuestion.sub_question_id,
@@ -223,6 +236,8 @@ router.get("/exams/:id", (req, resp) => {
             });
         }
 
+        /* Create an info object of the current question and push it
+        *  to the questions list */
         questions.push({
           questionId: question.question_id,
           questionHeader: question.question_header,
