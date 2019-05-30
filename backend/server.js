@@ -265,7 +265,10 @@ router.get("/subquestions/:id", (req, resp) => {
 
     if (err) console.log(err);
 
-    resp.send(res);
+    resp.send(res.map(curr => ({
+      answerId: curr.answer_id,
+      answerText: curr.answer_text
+    })));
   });
 });
 

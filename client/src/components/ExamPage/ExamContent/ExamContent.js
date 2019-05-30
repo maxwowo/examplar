@@ -1,9 +1,6 @@
 /* React */
 import React from "react";
 
-/* Redux */
-import { connect } from "react-redux";
-
 /* Ant Design components */
 import { Layout } from "antd";
 
@@ -16,7 +13,7 @@ import "./ExamContent.less";
 
 const { Content } = Layout;
 
-const ExamContent = props => (
+const ExamContent = () => (
   <Content id="exam-page-content">
     <ExamContentComment/>
     <ExamContentList/>

@@ -7,26 +7,24 @@ import { connect } from "react-redux";
 /* Ant Design components */
 import { List, Comment } from "antd";
 
-const data = [
+const mapStateToProps = state => (
   {
-    content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam assumenda commodi consequuntur cumque delectus ex excepturi fugiat illo ipsa minima neque nisi quidem, sapiente soluta suscipit temporibus tenetur vel."
-  },
-  {
-    content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam assumenda commodi consequuntur cumque delectus ex excepturi fugiat illo ipsa minima neque nisi quidem, sapiente soluta suscipit temporibus tenetur vel."
-  },
-  {
-    content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam assumenda commodi consequuntur cumque delectus ex excepturi fugiat illo ipsa minima neque nisi quidem, sapiente soluta suscipit temporibus tenetur vel."
+    solutions: state.exam.solutions
   }
-];
+);
 
-const ExamContentList = props => (
+const ExamContentList = (
+  {
+    solutions
+  }
+) => (
   <List
-    header="3 solutions"
-    dataSource={data}
+    header={`${solutions.length} solutions`}
+    dataSource={solutions}
     renderItem={item => (
       <Comment
         author="Anonymous"
-        content={item.content}
+        content={item.answerText}
       />
     )}
   >
@@ -34,4 +32,4 @@ const ExamContentList = props => (
   </List>
 );
 
-export default ExamContentList;
+export default connect(mapStateToProps)(ExamContentList);

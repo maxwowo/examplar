@@ -14,7 +14,6 @@ import MenuButton from "./MenuButton/MenuButton";
 /* Utility functions */
 import {
   getQuestionHeader,
-  getSolutions
 } from "../utils";
 
 /* Styles */
@@ -37,7 +36,7 @@ const ExamSider = (
   <Menu
     mode="inline"
     id="exam-page-sider-menu"
-    onSelect={e => handleChangeSolutions(getSolutions(e.key))}
+    onSelect={e => handleChangeSolutions(e.key)}
   >
     {questions.map(currQuestion => (
       <SubMenu
