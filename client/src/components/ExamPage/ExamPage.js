@@ -13,7 +13,7 @@ import Axios from "axios";
 /* Constants */
 import {
   SET_EXAM_QUESTIONS,
-  CHANGE_SUB_QUESTION_SOLUTION,
+  CHANGE_SOLUTIONS,
   CHANGE_EXAM_ID,
   CHANGE_USER_SOLUTION,
   CHANGE_SUB_QUESTION_ID
@@ -37,7 +37,7 @@ const mapDispatchToProps = dispatch => (
     handleChangeSolutions: solutions => dispatch(
       {
         solutions: solutions,
-        type: CHANGE_SUB_QUESTION_SOLUTION
+        type: CHANGE_SOLUTIONS
       }
     ),
     handleChangeExamId: examId => dispatch(

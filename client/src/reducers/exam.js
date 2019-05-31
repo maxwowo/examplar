@@ -1,7 +1,7 @@
 /* Constants */
 import {
   SET_EXAM_QUESTIONS,
-  CHANGE_SUB_QUESTION_SOLUTION,
+  CHANGE_SOLUTIONS,
   CHANGE_EXAM_ID,
   CHANGE_USER_SOLUTION,
   CHANGE_SUB_QUESTION_ID
@@ -24,7 +24,7 @@ const exam = (state = initial, action) => {
         questions: action.questions
       };
 
-    case CHANGE_SUB_QUESTION_SOLUTION:
+    case CHANGE_SOLUTIONS:
       return {
         ...state,
         solutions: action.solutions
