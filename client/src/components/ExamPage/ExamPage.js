@@ -14,7 +14,8 @@ import Axios from "axios";
 import {
   SET_EXAM_QUESTIONS,
   CHANGE_SUB_QUESTION_SOLUTION,
-  CHANGE_EXAM_ID
+  CHANGE_EXAM_ID,
+  CHANGE_USER_SOLUTION
 } from "../../constants/actions";
 
 /* Custom components */
@@ -42,6 +43,17 @@ const mapDispatchToProps = dispatch => (
       {
         examId: examId,
         type: CHANGE_EXAM_ID
+      }
+    ),
+    handleChangeUserSolution: comment => dispatch(
+      {
+        userSolution: comment,
+        type: CHANGE_USER_SOLUTION
+      }
+    ),
+    handleChangeSubQuestionId: subQuestionId => dispatch(
+      {
+        subQuestionId: subQuestionId
       }
     )
   }
@@ -83,6 +95,7 @@ class ExamPage extends Component {
           <ExamSider
             handleChangeSolutions={this.props.handleChangeSolutions}
             handleSetQuestions={this.props.handleSetQuestions}
+            handleChangeSubQuestionId={this.props.handleChangeSubQuestionId}
           />
         </Col>
 
@@ -91,7 +104,9 @@ class ExamPage extends Component {
           md={18}
           id="exam-page-content-container"
         >
-          <ExamContent/>
+          <ExamContent
+            handleChangeUserSolution={this.props.handleChangeUserSolution}
+          />
         </Col>
 
       </Row>

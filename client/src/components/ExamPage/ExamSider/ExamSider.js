@@ -32,12 +32,15 @@ const ExamSider = (
   {
     questions,
     handleChangeSolutions,
-    handleSetQuestions
+    handleSetQuestions,
+    handleChangeSubQuestionId
   }
 ) => {
 
   const handleMenuSelect = e => {
     const subQuestionId = e.key;
+
+    handleChangeSubQuestionId(subQuestionId);
 
     Axios.get(
       `/api/subquestions/${subQuestionId}`

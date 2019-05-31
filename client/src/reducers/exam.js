@@ -2,14 +2,18 @@
 import {
   SET_EXAM_QUESTIONS,
   CHANGE_SUB_QUESTION_SOLUTION,
-  CHANGE_EXAM_ID
+  CHANGE_EXAM_ID,
+  CHANGE_USER_SOLUTION,
+  CHANGE_SUB_QUESTION_ID
 } from "../constants/actions";
 
 /* Initial state */
 const initial = {
   questions: [],
   solutions: [],
-  examId: null
+  examId: null,
+  userSolution: null,
+  subQuestionId: null
 };
 
 const exam = (state = initial, action) => {
@@ -30,6 +34,18 @@ const exam = (state = initial, action) => {
       return {
         ...state,
         examId: action.examId
+      };
+
+    case CHANGE_USER_SOLUTION:
+      return {
+        ...state,
+        userSolution: action.userSolution
+      };
+
+    case CHANGE_SUB_QUESTION_ID:
+      return {
+        ...state,
+        subQuestionId: action.subQuestionId
       };
 
     default:

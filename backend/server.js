@@ -296,7 +296,7 @@ router.post("/exams/:id", (req, resp) => {
 
 router.post("/questions/:id", (req, resp) => {
 
-  /* Question id */
+  /* Question ID */
   const { id } = req.params;
 
   /* Number of the sub question to be added */
@@ -316,7 +316,34 @@ router.post("/questions/:id", (req, resp) => {
     /* Error handling */
     if (err) console.log(err);
 
-    console.log(res.insertId);
+    /* Send back the ID of the newly inserted sub question */
+    resp.send(res.insertId.toString());
+  });
+});
+
+router.post("/subquestions/:id", (req, resp) => {
+
+  /* Sub question ID */
+  const { id } = req.params;
+
+  /* Solution to be inserted */
+  const { userSolution } = req.body;
+
+  /* Query to insert the solution into the database */
+  const dbQuery = `
+    INSERT INTO examplardb.solution_table 
+    (answer_id, answer_text, answer_upvotes, sub_question_id) 
+    VALUES (NULL, ?, 0, ?)
+  `;
+
+  const varList = [userSolution, id];
+
+  connection.execute(dbQuery, varList, (err, res) => {
+
+    /* Error handling */
+    if (err) console.log(err);
+
+    /* Send back the ID of the newly created comment */
     resp.send(res.insertId.toString());
   });
 });

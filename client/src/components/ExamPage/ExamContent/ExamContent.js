@@ -13,9 +13,15 @@ import "./ExamContent.less";
 
 const { Content } = Layout;
 
-const ExamContent = () => (
+const ExamContent = (
+  {
+    handleChangeUserSolution
+  }
+) => (
   <Content id="exam-page-content">
-    <ExamContentComment/>
+    <ExamContentComment
+      handleChangeUserSolution={handleChangeUserSolution}
+    />
     <ExamContentList/>
   </Content>
 );
