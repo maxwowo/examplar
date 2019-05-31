@@ -43,16 +43,21 @@ const ExamContentComment = (
         userSolution: userSolution
       }
     ).then(
-      res => handleChangeSolutions(
-        [
-          ...solutions,
-          {
-            answerId: res.data,
-            answerText: userSolution
-          }
-        ]
-      )
-    )
+      res => {
+
+        handleChangeSolutions(
+          [
+            ...solutions,
+            {
+              answerId: res.data,
+              answerText: userSolution
+            }
+          ]
+        );
+
+        handleChangeUserSolution(null);
+      }
+    );
   };
 
   return (
@@ -69,6 +74,7 @@ const ExamContentComment = (
             autosize={{ minRows: 8 }}
             id="exam-content-comment-textarea"
             onChange={e => handleChangeUserSolution(e.target.value)}
+            value={userSolution}
           />
         </Col>
       </Row>
