@@ -72,6 +72,7 @@ const ExamSider = (
           )}
           <SubMenuButton
             questionId={currQuestion.questionId}
+            handleSetQuestions={handleSetQuestions}
           />
         </SubMenu>
       ))}

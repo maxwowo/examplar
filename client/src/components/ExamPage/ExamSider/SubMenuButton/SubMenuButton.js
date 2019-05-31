@@ -1,6 +1,9 @@
 /* React */
 import React, { Component } from "react";
 
+/* Redux */
+import { connect } from "react-redux";
+
 /* Ant Design components */
 import { Button, Input } from "antd";
 
@@ -12,6 +15,12 @@ import "./SubMenuButton.less";
 
 const { Group } = Input;
 
+const mapStateToProps = state => (
+  {
+    questions: state.exam.questions
+  }
+);
+
 class SubMenuButton extends Component {
   state = {
     showButton: true
@@ -22,6 +31,26 @@ class SubMenuButton extends Component {
       showButton: !this.state.showButton
     }
   );
+
+  handleAddSubQuestion = (id, subQuestionNumber) => {
+
+    const newQuestions = [...this.props.questions];
+
+    for (let q of newQuestions) {
+
+      if (q.questionId === this.props.questionId) {
+        q.subQuestions = [
+          ...q.subQuestions,
+          {
+            subQuestionId: id,
+            subQuestionNum: subQuestionNumber
+          }
+        ];
+
+        this.props.handleSetQuestions(newQuestions);
+      }
+    }
+  };
 
   handleSubmit = e => {
 
@@ -35,7 +64,10 @@ class SubMenuButton extends Component {
       }
     ).then(
       res => {
-        console.log(res);
+        this.handleAddSubQuestion(
+          res.data,
+          value
+        );
         this.toggleShowButton();
       }
     );
@@ -78,4 +110,4 @@ class SubMenuButton extends Component {
 }
 
 
-export default SubMenuButton;
+export default connect(mapStateToProps)(SubMenuButton);
