@@ -23,6 +23,8 @@ const mapStateToProps = state => (
 
 class SubMenuButton extends Component {
   state = {
+
+    /* Whether to show the button or the sub question input */
     showButton: true
   };
 
@@ -32,13 +34,22 @@ class SubMenuButton extends Component {
     }
   );
 
+  /* Adds a sub question
+  *  id: ID of the sub question to be added
+  *  subQuestionNumber: Number of the sub question e.g. 1i */
   handleAddSubQuestion = (id, subQuestionNumber) => {
 
     const newQuestions = [...this.props.questions];
 
+    /* Iterate through the list of questions */
     for (let q of newQuestions) {
 
+      /* Find the question which we're inserting the new
+      *  sub question into */
       if (q.questionId === this.props.questionId) {
+
+        /* Update the sub question list of said question
+        *  so that it contains the new sub question */
         q.subQuestions = [
           ...q.subQuestions,
           {
@@ -47,6 +58,7 @@ class SubMenuButton extends Component {
           }
         ];
 
+        /* Update Redux */
         this.props.handleSetQuestions(newQuestions);
       }
     }
