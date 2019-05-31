@@ -18,14 +18,19 @@ const { Text } = Typography;
 
 const mapStateToProps = state => (
   {
-    userSolution: state.exam.userSolution
+    userSolution: state.exam.userSolution,
+    subQuestionId: state.exam.subQuestionId,
+    solutions: state.exam.solutions
   }
 );
 
 const ExamContentComment = (
   {
     handleChangeUserSolution,
-    userSolution
+    userSolution,
+    subQuestionId,
+    solutions,
+    handleChangeSolutions
   }
 ) => {
 
@@ -33,8 +38,21 @@ const ExamContentComment = (
     e.preventDefault();
 
     Axios.post(
-      `/api/subquestions/`
-    );
+      `/api/subquestions/${subQuestionId}`,
+      {
+        userSolution: userSolution
+      }
+    ).then(
+      res => handleChangeSolutions(
+        [
+          ...solutions,
+          {
+            answerId: res.data,
+            answerText: userSolution
+          }
+        ]
+      )
+    )
   };
 
   return (

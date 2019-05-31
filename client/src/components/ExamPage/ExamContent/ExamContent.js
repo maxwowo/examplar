@@ -15,12 +15,14 @@ const { Content } = Layout;
 
 const ExamContent = (
   {
+    handleChangeSolutions,
     handleChangeUserSolution
   }
 ) => (
   <Content id="exam-page-content">
     <ExamContentComment
       handleChangeUserSolution={handleChangeUserSolution}
+      handleChangeSolutions={handleChangeSolutions}
     />
     <ExamContentList/>
   </Content>

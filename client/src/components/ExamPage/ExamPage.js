@@ -15,7 +15,8 @@ import {
   SET_EXAM_QUESTIONS,
   CHANGE_SUB_QUESTION_SOLUTION,
   CHANGE_EXAM_ID,
-  CHANGE_USER_SOLUTION
+  CHANGE_USER_SOLUTION,
+  CHANGE_SUB_QUESTION_ID
 } from "../../constants/actions";
 
 /* Custom components */
@@ -53,7 +54,8 @@ const mapDispatchToProps = dispatch => (
     ),
     handleChangeSubQuestionId: subQuestionId => dispatch(
       {
-        subQuestionId: subQuestionId
+        subQuestionId: subQuestionId,
+        type: CHANGE_SUB_QUESTION_ID
       }
     )
   }
@@ -106,6 +108,7 @@ class ExamPage extends Component {
         >
           <ExamContent
             handleChangeUserSolution={this.props.handleChangeUserSolution}
+            handleChangeSolutions={this.props.handleChangeSolutions}
           />
         </Col>
 
