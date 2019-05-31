@@ -40,7 +40,7 @@ class SubMenuButton extends Component {
       <div id="exam-sider-sub-menu-group">
         <Group compact>
           <Input
-            size="small"
+            // size="small"
             autoFocus
             id="exam-sider-sub-menu-input"
             name="subQuestion"
@@ -52,7 +52,7 @@ class SubMenuButton extends Component {
             onClick={this.toggleShowButton}
             htmlType="submit"
             icon="close"
-            size="small"
+            // size="small"
             id="exam-sider-sub-menu-cancel-btn"
           />
         </Group>
