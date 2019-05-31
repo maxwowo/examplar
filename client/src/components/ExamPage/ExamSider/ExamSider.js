@@ -70,7 +70,9 @@ const ExamSider = (
               </Menu.Item>
             )
           )}
-          <SubMenuButton/>
+          <SubMenuButton
+            questionId={currQuestion.questionId}
+          />
         </SubMenu>
       ))}
       <MenuButton

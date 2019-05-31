@@ -2,7 +2,10 @@
 import React, { Component } from "react";
 
 /* Ant Design components */
-import { Button, Input, Form } from "antd";
+import { Button, Input } from "antd";
+
+/* Axios */
+import Axios from "axios";
 
 /* Style */
 import "./SubMenuButton.less";
@@ -21,8 +24,21 @@ class SubMenuButton extends Component {
   );
 
   handleSubmit = e => {
-    console.log(e.target.value);
-    this.toggleShowButton();
+
+    /* New sub question number */
+    const { value } = e.target;
+
+    Axios.post(
+      `/api/questions/${this.props.questionId}`,
+      {
+        subQuestionNumber: value
+      }
+    ).then(
+      res => {
+        console.log(res);
+        this.toggleShowButton();
+      }
+    );
   };
 
   render() {
@@ -40,7 +56,6 @@ class SubMenuButton extends Component {
       <div id="exam-sider-sub-menu-group">
         <Group compact>
           <Input
-            // size="small"
             autoFocus
             id="exam-sider-sub-menu-input"
             name="subQuestion"
@@ -52,7 +67,6 @@ class SubMenuButton extends Component {
             onClick={this.toggleShowButton}
             htmlType="submit"
             icon="close"
-            // size="small"
             id="exam-sider-sub-menu-cancel-btn"
           />
         </Group>

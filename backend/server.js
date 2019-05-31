@@ -294,6 +294,33 @@ router.post("/exams/:id", (req, resp) => {
   });
 });
 
+router.post("/questions/:id", (req, resp) => {
+
+  /* Question id */
+  const { id } = req.params;
+
+  /* Number of the sub question to be added */
+  const { subQuestionNumber } = req.body;
+
+  /* Query that inserts a new sub question into the database */
+  const dbQuery = `
+    INSERT INTO examplardb.sub_question_table 
+    (sub_question_id, sub_question_number, question_id) 
+    VALUES (NULL, ?, ?)
+  `;
+
+  const varList = [subQuestionNumber, id];
+
+  connection.execute(dbQuery, varList, (err, res) => {
+
+    /* Error handling */
+    if (err) console.log(err);
+
+    console.log(res.insertId);
+    resp.send(res.insertId.toString());
+  });
+});
+
 /* Append /api for HTTP requests */
 app.use("/api", router);
 
