@@ -16,7 +16,8 @@ import {
   CHANGE_SOLUTIONS,
   CHANGE_EXAM_ID,
   CHANGE_USER_SOLUTION,
-  CHANGE_SUB_QUESTION_ID
+  CHANGE_SUB_QUESTION_ID,
+  RESET_EXAM_PAGE
 } from "../../constants/actions";
 
 /* Custom components */
@@ -57,6 +58,11 @@ const mapDispatchToProps = dispatch => (
         subQuestionId: subQuestionId,
         type: CHANGE_SUB_QUESTION_ID
       }
+    ),
+    handleResetExamPage: () => dispatch(
+      {
+        type: RESET_EXAM_PAGE
+      }
     )
   }
 );
@@ -80,6 +86,10 @@ class ExamPage extends Component {
     ).then(
       res => this.props.handleSetQuestions(res.data)
     );
+  }
+
+  componentWillUnmount() {
+    this.props.handleResetExamPage();
   }
 
   render() {

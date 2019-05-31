@@ -4,7 +4,8 @@ import {
   CHANGE_SOLUTIONS,
   CHANGE_EXAM_ID,
   CHANGE_USER_SOLUTION,
-  CHANGE_SUB_QUESTION_ID
+  CHANGE_SUB_QUESTION_ID,
+  RESET_EXAM_PAGE
 } from "../constants/actions";
 
 /* Initial state */
@@ -46,6 +47,11 @@ const exam = (state = initial, action) => {
       return {
         ...state,
         subQuestionId: action.subQuestionId
+      };
+
+    case RESET_EXAM_PAGE:
+      return {
+        ...initial
       };
 
     default:
