@@ -17,7 +17,8 @@ import {
   CHANGE_EXAM_ID,
   CHANGE_USER_SOLUTION,
   CHANGE_SUB_QUESTION_ID,
-  RESET_EXAM_PAGE
+  RESET_EXAM_PAGE,
+  CHANGE_PREVIEW_SWITCH_STATE
 } from "../../constants/actions";
 
 /* Custom components */
@@ -62,6 +63,12 @@ const mapDispatchToProps = dispatch => (
     handleResetExamPage: () => dispatch(
       {
         type: RESET_EXAM_PAGE
+      }
+    ),
+    handleChangePreviewSwitchState: previewSwitchState => dispatch(
+      {
+        previewSwitchState: previewSwitchState,
+        type: CHANGE_PREVIEW_SWITCH_STATE
       }
     )
   }
@@ -119,6 +126,7 @@ class ExamPage extends Component {
           <ExamContent
             handleChangeUserSolution={this.props.handleChangeUserSolution}
             handleChangeSolutions={this.props.handleChangeSolutions}
+            handleChangePreviewSwitchState={this.props.handleChangePreviewSwitchState}
           />
         </Col>
 

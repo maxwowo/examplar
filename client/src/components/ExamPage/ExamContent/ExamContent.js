@@ -26,7 +26,8 @@ const ExamContent = (
   {
     handleChangeSolutions,
     handleChangeUserSolution,
-    subQuestionId
+    subQuestionId,
+    handleChangePreviewSwitchState
   }
 ) => {
 
@@ -37,6 +38,7 @@ const ExamContent = (
       <ExamContentComment
         handleChangeUserSolution={handleChangeUserSolution}
         handleChangeSolutions={handleChangeSolutions}
+        handleChangePreviewSwitchState={handleChangePreviewSwitchState}
       />
       <ExamContentList/>
     </Content>

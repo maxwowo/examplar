@@ -5,7 +5,8 @@ import {
   CHANGE_EXAM_ID,
   CHANGE_USER_SOLUTION,
   CHANGE_SUB_QUESTION_ID,
-  RESET_EXAM_PAGE
+  RESET_EXAM_PAGE,
+  CHANGE_PREVIEW_SWITCH_STATE
 } from "../constants/actions";
 
 /* Initial state */
@@ -14,7 +15,9 @@ const initial = {
   solutions: [],
   examId: null,
   userSolution: null,
-  subQuestionId: null
+  subQuestionId: null,
+  solutionPreview: null,
+  previewSwitchState: false
 };
 
 const exam = (state = initial, action) => {
@@ -52,6 +55,12 @@ const exam = (state = initial, action) => {
     case RESET_EXAM_PAGE:
       return {
         ...initial
+      };
+
+    case CHANGE_PREVIEW_SWITCH_STATE:
+      return {
+        ...state,
+        previewSwitchState: action.previewSwitchState
       };
 
     default:

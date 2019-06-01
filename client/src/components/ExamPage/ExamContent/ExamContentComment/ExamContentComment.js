@@ -8,7 +8,10 @@ import { connect } from "react-redux";
 import Axios from "axios";
 
 /* Ant Design components */
-import { Typography, Row, Col, Input, Button, Switch } from "antd";
+import { Typography, Row, Col, Input, Button, Switch, Divider } from "antd";
+
+/* Custom components */
+import Latex from "../../../Latex/Latex";
 
 /* Styles */
 import "./ExamContentComment.less";
@@ -20,7 +23,9 @@ const mapStateToProps = state => (
   {
     userSolution: state.exam.userSolution,
     subQuestionId: state.exam.subQuestionId,
-    solutions: state.exam.solutions
+    solutions: state.exam.solutions,
+    solutionPreview: state.exam.solutionPreview,
+    previewSwitchState: state.exam.previewSwitchState
   }
 );
 
@@ -30,9 +35,38 @@ const ExamContentComment = (
     userSolution,
     subQuestionId,
     solutions,
-    handleChangeSolutions
+    handleChangeSolutions,
+    solutionPreview,
+    handleChangePreviewSwitchState,
+    previewSwitchState
   }
 ) => {
+
+  const commentBox = (
+    <Row
+      id="exam-content-comment-container"
+      type="flex"
+      align="middle"
+    >
+
+      <Col span={24}>
+        <TextArea
+          autosize={{ minRows: 8 }}
+          id="exam-content-comment-textarea"
+          onChange={e => handleChangeUserSolution(e.target.value)}
+          value={userSolution}
+        />
+      </Col>
+    </Row>
+  );
+
+  const previewBox = (
+    <div>
+      <Divider/>
+      <Latex content={userSolution}/>
+      <Divider/>
+    </div>
+  );
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -64,18 +98,11 @@ const ExamContentComment = (
     <form
       onSubmit={handleSubmit}
     >
-      <Row
-        id="exam-content-comment-container"
-        type="flex"
-        align="middle"
-      >
+      {!previewSwitchState ? commentBox : previewBox}
+
+      <Row>
         <Col span={24}>
-          <TextArea
-            autosize={{ minRows: 8 }}
-            id="exam-content-comment-textarea"
-            onChange={e => handleChangeUserSolution(e.target.value)}
-            value={userSolution}
-          />
+          {solutionPreview}
         </Col>
       </Row>
 
@@ -99,7 +126,7 @@ const ExamContentComment = (
           >
             Preview
           </Text>
-          <Switch/>
+          <Switch onChange={e => handleChangePreviewSwitchState(e)}/>
         </Col>
       </Row>
     </form>
