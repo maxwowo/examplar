@@ -24,7 +24,7 @@ const MATHJAX_SCRIPT = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/Mat
 const MATHJAX_OPTIONS = {
   tex2jax: {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
-    displayMath: [["$$", "$$"], ["\[", "\]"]]
+    displayMath: [["$$", "$$"], ["\\[", "\\]"]]
   },
   showMathMenu: false,
   showMathMenuMSIE: false

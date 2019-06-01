@@ -9,6 +9,10 @@ class SolutionContent extends Component {
     window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, currentNode]);
   };
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.renderMathJax();
+  }
+
   componentDidMount() {
     this.renderMathJax();
   }
