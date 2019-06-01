@@ -25,9 +25,7 @@ const MATHJAX_OPTIONS = {
   tex2jax: {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\\[", "\\]"]]
-  },
-  showMathMenu: false,
-  showMathMenuMSIE: false
+  }
 };
 
 class App extends Component {

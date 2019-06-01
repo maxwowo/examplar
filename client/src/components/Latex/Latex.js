@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-class SolutionContent extends Component {
+class Latex extends Component {
 
   renderMathJax = () => {
     const currentNode = ReactDOM.findDOMNode(this);
@@ -19,9 +19,9 @@ class SolutionContent extends Component {
 
   render() {
     return (
-      <div dangerouslySetInnerHTML={{__html: this.props.content}}/>
-    )
+      <p>{this.props.content}</p>
+    );
   }
 }
 
-export default SolutionContent;
+export default Latex;

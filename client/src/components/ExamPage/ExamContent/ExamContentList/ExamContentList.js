@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { List, Comment, Empty } from "antd";
 
 /* Custom components */
-import SolutionContent from "./SolutionContent/SolutionContent";
+import Latex from "../../../Latex/Latex";
 
 const mapStateToProps = state => (
   {
@@ -34,7 +34,7 @@ const ExamContentList = (
     renderItem={item => (
       <Comment
         author="Anonymous"
-        content={<SolutionContent content={item.answerText}/>}
+        content={<Latex content={item.answerText}/>}
       />
     )}
     locale={{ emptyText: empty }}
