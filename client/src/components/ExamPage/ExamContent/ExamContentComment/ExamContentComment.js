@@ -8,7 +8,16 @@ import { connect } from "react-redux";
 import Axios from "axios";
 
 /* Ant Design components */
-import { Typography, Row, Col, Input, Button, Switch, Divider } from "antd";
+import {
+  Typography,
+  Row,
+  Col,
+  Input,
+  Button,
+  Switch,
+  Divider,
+  Empty
+} from "antd";
 
 /* Custom components */
 import Latex from "../../../Latex/Latex";
@@ -60,10 +69,17 @@ const ExamContentComment = (
     </Row>
   );
 
+  const emptyPreview = (
+    <Empty
+      description="Comment is empty"
+      image={Empty.PRESENTED_IMAGE_SIMPLE}
+    />
+  );
+
   const previewBox = (
     <div>
-      <Divider/>
-      <Latex content={userSolution}/>
+      <Divider id="exam-content-comment-top-divider"/>
+      {!userSolution ? emptyPreview : <Latex content={userSolution}/>}
       <Divider/>
     </div>
   );
