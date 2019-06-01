@@ -5,7 +5,9 @@ import React from "react";
 import { connect } from "react-redux";
 
 /* Ant Design components */
-import { List, Comment, Empty } from "antd";
+import { List, Comment, Empty, Typography } from "antd";
+
+const { Text } = Typography;
 
 const mapStateToProps = state => (
   {
@@ -31,7 +33,7 @@ const ExamContentList = (
     renderItem={item => (
       <Comment
         author="Anonymous"
-        content={item.answerText}
+        content={<pre>{item.answerText}</pre>}
       />
     )}
     locale={{ emptyText: empty }}
