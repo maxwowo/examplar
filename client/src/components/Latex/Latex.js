@@ -2,6 +2,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
+/* Styles */
+import "./Latex.less";
+
 class Latex extends Component {
 
   renderMathJax = () => {
@@ -19,7 +22,7 @@ class Latex extends Component {
 
   render() {
     return (
-      <p>{this.props.content}</p>
+      <p id="latex-paragraph">{this.props.content}</p>
     );
   }
 }
