@@ -31,7 +31,7 @@ const CreateExamModal = (
   {
     form,
     history,
-    handleModalToggle,
+    handleToggleModal,
     exams,
     courseId,
     modalVisible
@@ -61,7 +61,7 @@ const CreateExamModal = (
 
               history.push(`/exams/${res.data}`);
 
-              handleModalToggle();
+              handleToggleModal();
             }
           );
         }
@@ -73,10 +73,10 @@ const CreateExamModal = (
     <Modal
       title="Add exam"
       visible={modalVisible}
-      onOk={handleModalToggle}
-      onCancel={handleModalToggle}
+      onOk={handleToggleModal}
+      onCancel={handleToggleModal}
       footer={[
-        <Button key="cancel" onClick={handleModalToggle}>Cancel</Button>,
+        <Button key="cancel" onClick={handleToggleModal}>Cancel</Button>,
         <Button key="submit" form="create-exam-modal-form" htmlType="submit" type="primary"
                 onClick={handleSubmit}>Submit</Button>
       ]}

@@ -31,7 +31,7 @@ const CreateCourseModal = (
   {
     form,
     history,
-    handleModalToggle,
+    handleToggleModal,
     visible
   }
 ) => {
@@ -70,7 +70,7 @@ const CreateCourseModal = (
               /* Redirect to the course page */
               history.push(`/courses/${res.data}`);
 
-              handleModalToggle();
+              handleToggleModal();
             }
           );
         }
@@ -87,10 +87,10 @@ const CreateCourseModal = (
     <Modal
       title="Create course"
       visible={visible}
-      onOk={handleModalToggle}
-      onCancel={handleModalToggle}
+      onOk={handleToggleModal}
+      onCancel={handleToggleModal}
       footer={[
-        <Button key="cancel" onClick={handleModalToggle}>Cancel</Button>,
+        <Button key="cancel" onClick={handleToggleModal}>Cancel</Button>,
         <Button key="submit" form="create-course-modal-form" htmlType="submit" type="primary"
                 onClick={handleSubmit}>Submit</Button>
       ]}

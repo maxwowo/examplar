@@ -9,12 +9,12 @@ import CreateCourseModal from "./CreateCourseModal/CreateCourseModal";
 
 const NoCourses = (
   {
-    handleModalToggle
+    handleToggleModal
   }
 ) => (
   <div>
     <CreateCourseModal
-      handleModalToggle={handleModalToggle}
+      handleToggleModal={handleToggleModal}
     />
     <Empty
       description="No matching results"
@@ -22,7 +22,7 @@ const NoCourses = (
     >
       <Button
         type="primary"
-        onClick={handleModalToggle}
+        onClick={handleToggleModal}
       >
         Create course
       </Button>

@@ -53,13 +53,13 @@ const mapDispatchToProps = dispatch => (
         type: SET_COURSE_INFO
       }
     ),
-    handleExamUpdate: exams => dispatch(
+    handleUpdateExams: exams => dispatch(
       {
         exams: exams,
         type: UPDATE_EXAMS
       }
     ),
-    handleModalToggle: e => dispatch(
+    handleToggleModal: () => dispatch(
       {
         type: UPDATE_EXAM_MODAL_VISIBILITY
       }
@@ -87,7 +87,7 @@ class CoursePage extends Component {
     );
 
     /* Update the states */
-    this.props.handleExamUpdate(examsDup);
+    this.props.handleUpdateExams(examsDup);
   };
 
   componentDidMount() {
@@ -140,7 +140,7 @@ class CoursePage extends Component {
 
           <Col xs={24} md={10}>
             <CourseSider
-              handleModalToggle={this.props.handleModalToggle}
+              handleToggleModal={this.props.handleToggleModal}
             />
           </Col>
 

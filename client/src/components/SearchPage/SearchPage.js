@@ -46,7 +46,7 @@ const mapDispatchToProps = dispatch => (
         type: UPDATE_UNIVERSITY_SEARCH
       }
     ),
-    handleModalToggle: e => dispatch(
+    handleToggleModal: e => dispatch(
       {
         type: UPDATE_COURSE_MODAL_VISIBILITY
       }
@@ -142,7 +142,7 @@ class SearchPage extends Component {
           header={listHeader}
           dataSource={this.state.listItems}
           locale={{
-            emptyText: <NoCourses handleModalToggle={this.props.handleModalToggle}/>
+            emptyText: <NoCourses handleToggleModal={this.props.handleToggleModal}/>
           }}
           loading={this.state.listLoading}
           renderItem={item => (

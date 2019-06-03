@@ -29,7 +29,7 @@ const CourseSider = (
     courseName,
     courseCode,
     universityName,
-    handleModalToggle
+    handleToggleModal
   }
 ) => (
   <Sider
@@ -37,7 +37,7 @@ const CourseSider = (
     width="100%"
   >
     <CreateExamModal
-      handleModalToggle={handleModalToggle}
+      handleToggleModal={handleToggleModal}
     />
     <Card
       title={courseName}
@@ -50,7 +50,7 @@ const CourseSider = (
 
       <Button
         type="primary"
-        onClick={handleModalToggle}
+        onClick={handleToggleModal}
       >
         Add exam
       </Button>
