@@ -13,12 +13,12 @@ import Axios from "axios";
 /* Constants */
 import {
   SET_EXAM_QUESTIONS,
-  CHANGE_SOLUTIONS,
-  CHANGE_EXAM_ID,
-  CHANGE_USER_SOLUTION,
-  CHANGE_SUB_QUESTION_ID,
+  UPDATE_SOLUTIONS,
+  UPDATE_EXAM_ID,
+  UPDATE_USER_SOLUTION,
+  UPDATE_SUB_QUESTION_ID,
   RESET_EXAM_PAGE,
-  CHANGE_PREVIEW_SWITCH_STATE
+  UPDATE_PREVIEW_SWITCH_STATE
 } from "../../constants/actions";
 
 /* Custom components */
@@ -39,25 +39,25 @@ const mapDispatchToProps = dispatch => (
     handleChangeSolutions: solutions => dispatch(
       {
         solutions: solutions,
-        type: CHANGE_SOLUTIONS
+        type: UPDATE_SOLUTIONS
       }
     ),
     handleChangeExamId: examId => dispatch(
       {
         examId: examId,
-        type: CHANGE_EXAM_ID
+        type: UPDATE_EXAM_ID
       }
     ),
     handleChangeUserSolution: comment => dispatch(
       {
         userSolution: comment,
-        type: CHANGE_USER_SOLUTION
+        type: UPDATE_USER_SOLUTION
       }
     ),
     handleChangeSubQuestionId: subQuestionId => dispatch(
       {
         subQuestionId: subQuestionId,
-        type: CHANGE_SUB_QUESTION_ID
+        type: UPDATE_SUB_QUESTION_ID
       }
     ),
     handleResetExamPage: () => dispatch(
@@ -68,7 +68,7 @@ const mapDispatchToProps = dispatch => (
     handleChangePreviewSwitchState: previewSwitchState => dispatch(
       {
         previewSwitchState: previewSwitchState,
-        type: CHANGE_PREVIEW_SWITCH_STATE
+        type: UPDATE_PREVIEW_SWITCH_STATE
       }
     )
   }

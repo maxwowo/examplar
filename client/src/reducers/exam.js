@@ -1,12 +1,12 @@
 /* Constants */
 import {
   SET_EXAM_QUESTIONS,
-  CHANGE_SOLUTIONS,
-  CHANGE_EXAM_ID,
-  CHANGE_USER_SOLUTION,
-  CHANGE_SUB_QUESTION_ID,
+  UPDATE_SOLUTIONS,
+  UPDATE_EXAM_ID,
+  UPDATE_USER_SOLUTION,
+  UPDATE_SUB_QUESTION_ID,
   RESET_EXAM_PAGE,
-  CHANGE_PREVIEW_SWITCH_STATE
+  UPDATE_PREVIEW_SWITCH_STATE
 } from "../constants/actions";
 
 /* Initial state */
@@ -28,25 +28,25 @@ const exam = (state = initial, action) => {
         questions: action.questions
       };
 
-    case CHANGE_SOLUTIONS:
+    case UPDATE_SOLUTIONS:
       return {
         ...state,
         solutions: action.solutions
       };
 
-    case CHANGE_EXAM_ID:
+    case UPDATE_EXAM_ID:
       return {
         ...state,
         examId: action.examId
       };
 
-    case CHANGE_USER_SOLUTION:
+    case UPDATE_USER_SOLUTION:
       return {
         ...state,
         userSolution: action.userSolution
       };
 
-    case CHANGE_SUB_QUESTION_ID:
+    case UPDATE_SUB_QUESTION_ID:
       return {
         ...state,
         subQuestionId: action.subQuestionId
@@ -57,7 +57,7 @@ const exam = (state = initial, action) => {
         ...initial
       };
 
-    case CHANGE_PREVIEW_SWITCH_STATE:
+    case UPDATE_PREVIEW_SWITCH_STATE:
       return {
         ...state,
         previewSwitchState: action.previewSwitchState

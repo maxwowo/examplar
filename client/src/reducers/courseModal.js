@@ -1,6 +1,6 @@
 /* Constants */
 import {
-  CHANGE_COURSE_MODAL_VISIBILITY
+  UPDATE_COURSE_MODAL_VISIBILITY
 } from "../constants/actions";
 
 /* Initial state */
@@ -12,7 +12,7 @@ const courseModal = (state = initial, action) => {
 
   switch (action.type) {
 
-    case CHANGE_COURSE_MODAL_VISIBILITY:
+    case UPDATE_COURSE_MODAL_VISIBILITY:
       return {
         ...state, visible: !state.visible
       };

@@ -15,8 +15,8 @@ import "./HomePage.less";
 
 /* Constants */
 import {
-  CHANGE_COURSE_SEARCH,
-  CHANGE_UNIVERSITY_SEARCH
+  UPDATE_COURSE_SEARCH,
+  UPDATE_UNIVERSITY_SEARCH
 } from "../../constants/actions";
 
 const { Title } = Typography;
@@ -27,14 +27,14 @@ const mapDispatchToProps = dispatch => (
     handleCourseChange: e => dispatch(
       {
         courseSearch: e.target.value,
-        type: CHANGE_COURSE_SEARCH
+        type: UPDATE_COURSE_SEARCH
       }
     ),
     handleUniversitySelect: e =>
       dispatch(
         {
           universitySearch: e,
-          type: CHANGE_UNIVERSITY_SEARCH
+          type: UPDATE_UNIVERSITY_SEARCH
         }
       )
   }

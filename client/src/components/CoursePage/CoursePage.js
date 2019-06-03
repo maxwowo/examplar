@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 /* Constants */
 import {
-  CHANGE_EXAM_MODAL_VISIBILITY,
+  UPDATE_EXAM_MODAL_VISIBILITY,
   SET_COURSE_INFO,
   UPDATE_EXAMS
 } from "../../constants/actions";
@@ -61,7 +61,7 @@ const mapDispatchToProps = dispatch => (
     ),
     handleModalToggle: e => dispatch(
       {
-        type: CHANGE_EXAM_MODAL_VISIBILITY
+        type: UPDATE_EXAM_MODAL_VISIBILITY
       }
     )
   }

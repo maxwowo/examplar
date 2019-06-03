@@ -22,9 +22,9 @@ import "./SearchPage.less";
 
 /* Constants */
 import {
-  CHANGE_COURSE_MODAL_VISIBILITY,
-  CHANGE_COURSE_SEARCH,
-  CHANGE_UNIVERSITY_SEARCH
+  UPDATE_COURSE_MODAL_VISIBILITY,
+  UPDATE_COURSE_SEARCH,
+  UPDATE_UNIVERSITY_SEARCH
 } from "../../constants/actions";
 
 const { Item } = List;
@@ -37,18 +37,18 @@ const mapDispatchToProps = dispatch => (
     handleCourseChange: e => dispatch(
       {
         courseSearch: e.target.value,
-        type: CHANGE_COURSE_SEARCH
+        type: UPDATE_COURSE_SEARCH
       }
     ),
     handleUniversitySelect: e => dispatch(
       {
         universitySearch: e,
-        type: CHANGE_UNIVERSITY_SEARCH
+        type: UPDATE_UNIVERSITY_SEARCH
       }
     ),
     handleModalToggle: e => dispatch(
       {
-        type: CHANGE_COURSE_MODAL_VISIBILITY
+        type: UPDATE_COURSE_MODAL_VISIBILITY
       }
     )
   }
