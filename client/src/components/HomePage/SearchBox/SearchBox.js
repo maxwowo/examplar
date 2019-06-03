@@ -31,7 +31,7 @@ const SearchBox = (
     university,
     history,
     handleUpdateCourse,
-    handleUniversitySelect
+    handleUpdateUniversitySelect
   }
 ) => {
 
@@ -69,7 +69,7 @@ const SearchBox = (
         />
 
         <UniversitySelect
-          onSelect={handleUniversitySelect}
+          onSelect={handleUpdateUniversitySelect}
           placeholder="Filter by university"
           size="large"
           id="search-box-select"

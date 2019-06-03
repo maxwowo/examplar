@@ -90,6 +90,7 @@ class SubMenuButton extends Component {
     const button = (
       <Button
         icon="plus"
+        type="primary"
         shape="circle"
         className="exam-page-sider-btn"
         onClick={this.toggleShowButton}

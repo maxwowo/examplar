@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch => (
         type: UPDATE_COURSE_SEARCH
       }
     ),
-    handleUniversitySelect: e =>
+    handleUpdateUniversitySelect: e =>
       dispatch(
         {
           universitySearch: e,
@@ -50,7 +50,7 @@ class HomePage extends Component {
           place.</Title>
         <SearchBox
           handleUpdateCourse={this.props.handleUpdateCourse}
-          handleUniversitySelect={this.props.handleUniversitySelect}
+          handleUpdateUniversitySelect={this.props.handleUpdateUniversitySelect}
         />
       </Content>
     );

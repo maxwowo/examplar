@@ -56,8 +56,8 @@ const MenuButton = (
   return (
     <Button
       icon="plus"
-      shape="round"
       type="primary"
+      shape="round"
       id="exam-page-sider-menu-btn"
       className="exam-page-sider-btn"
       onClick={handleButtonClicked}

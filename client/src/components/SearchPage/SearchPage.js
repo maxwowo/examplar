@@ -40,13 +40,13 @@ const mapDispatchToProps = dispatch => (
         type: UPDATE_COURSE_SEARCH
       }
     ),
-    handleUniversitySelect: e => dispatch(
+    handleUpdateUniversitySelect: e => dispatch(
       {
         universitySearch: e,
         type: UPDATE_UNIVERSITY_SEARCH
       }
     ),
-    handleToggleModal: e => dispatch(
+    handleToggleModal: () => dispatch(
       {
         type: UPDATE_COURSE_MODAL_VISIBILITY
       }
@@ -135,7 +135,7 @@ class SearchPage extends Component {
       <Content className="container-width" id="search-page-container">
         <SearchBox
           handleUpdateCourse={this.props.handleUpdateCourse}
-          handleUniversitySelect={this.props.handleUniversitySelect}
+          handleUpdateUniversitySelect={this.props.handleUpdateUniversitySelect}
         />
         <List
           size="large"
