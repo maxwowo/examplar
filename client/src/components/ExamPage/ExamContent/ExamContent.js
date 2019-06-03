@@ -24,10 +24,10 @@ const mapStateToProps = state => (
 
 const ExamContent = (
   {
-    handleChangeSolutions,
-    handleChangeUserSolution,
+    handleUpdateSolutions,
+    handleUpdateUserSolution,
     subQuestionId,
-    handleChangePreviewSwitchState
+    handleUpdatePreviewSwitchState
   }
 ) => {
 
@@ -36,9 +36,9 @@ const ExamContent = (
   const content = (
     <Content id="exam-page-content">
       <ExamContentComment
-        handleChangeUserSolution={handleChangeUserSolution}
-        handleChangeSolutions={handleChangeSolutions}
-        handleChangePreviewSwitchState={handleChangePreviewSwitchState}
+        handleUpdateUserSolution={handleUpdateUserSolution}
+        handleUpdateSolutions={handleUpdateSolutions}
+        handleUpdatePreviewSwitchState={handleUpdatePreviewSwitchState}
       />
       <ExamContentList/>
     </Content>

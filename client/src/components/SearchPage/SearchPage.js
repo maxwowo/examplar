@@ -34,7 +34,7 @@ const { Content } = Layout;
 
 const mapDispatchToProps = dispatch => (
   {
-    handleCourseChange: e => dispatch(
+    handleUpdateCourse: e => dispatch(
       {
         courseSearch: e.target.value,
         type: UPDATE_COURSE_SEARCH
@@ -134,7 +134,7 @@ class SearchPage extends Component {
     return (
       <Content className="container-width" id="search-page-container">
         <SearchBox
-          handleCourseChange={this.props.handleCourseChange}
+          handleUpdateCourse={this.props.handleUpdateCourse}
           handleUniversitySelect={this.props.handleUniversitySelect}
         />
         <List

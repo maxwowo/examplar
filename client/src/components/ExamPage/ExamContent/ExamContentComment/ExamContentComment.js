@@ -40,13 +40,13 @@ const mapStateToProps = state => (
 
 const ExamContentComment = (
   {
-    handleChangeUserSolution,
+    handleUpdateUserSolution,
     userSolution,
     subQuestionId,
     solutions,
-    handleChangeSolutions,
+    handleUpdateSolutions,
     solutionPreview,
-    handleChangePreviewSwitchState,
+    handleUpdatePreviewSwitchState,
     previewSwitchState
   }
 ) => {
@@ -62,7 +62,7 @@ const ExamContentComment = (
         <TextArea
           autosize={{ minRows: 8 }}
           id="exam-content-comment-textarea"
-          onChange={e => handleChangeUserSolution(e.target.value)}
+          onChange={e => handleUpdateUserSolution(e.target.value)}
           value={userSolution}
         />
       </Col>
@@ -95,7 +95,7 @@ const ExamContentComment = (
     ).then(
       res => {
 
-        handleChangeSolutions(
+        handleUpdateSolutions(
           [
             ...solutions,
             {
@@ -105,7 +105,7 @@ const ExamContentComment = (
           ]
         );
 
-        handleChangeUserSolution(null);
+        handleUpdateUserSolution(null);
       }
     );
   };
@@ -142,7 +142,7 @@ const ExamContentComment = (
           >
             Preview
           </Text>
-          <Switch onChange={e => handleChangePreviewSwitchState(e)}/>
+          <Switch onChange={e => handleUpdatePreviewSwitchState(e)}/>
         </Col>
       </Row>
     </form>

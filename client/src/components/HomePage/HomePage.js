@@ -24,7 +24,7 @@ const { Content } = Layout;
 
 const mapDispatchToProps = dispatch => (
   {
-    handleCourseChange: e => dispatch(
+    handleUpdateCourse: e => dispatch(
       {
         courseSearch: e.target.value,
         type: UPDATE_COURSE_SEARCH
@@ -49,7 +49,7 @@ class HomePage extends Component {
           organized into one
           place.</Title>
         <SearchBox
-          handleCourseChange={this.props.handleCourseChange}
+          handleUpdateCourse={this.props.handleUpdateCourse}
           handleUniversitySelect={this.props.handleUniversitySelect}
         />
       </Content>

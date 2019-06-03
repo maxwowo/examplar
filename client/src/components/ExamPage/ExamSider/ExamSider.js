@@ -31,21 +31,21 @@ const mapStateToProps = state => (
 const ExamSider = (
   {
     questions,
-    handleChangeSolutions,
+    handleUpdateSolutions,
     handleSetQuestions,
-    handleChangeSubQuestionId
+    handleUpdateSubQuestionId
   }
 ) => {
 
   const handleMenuSelect = e => {
     const subQuestionId = e.key;
 
-    handleChangeSubQuestionId(subQuestionId);
+    handleUpdateSubQuestionId(subQuestionId);
 
     Axios.get(
       `/api/subquestions/${subQuestionId}`
     ).then(
-      res => handleChangeSolutions(
+      res => handleUpdateSolutions(
         res.data
       )
     );

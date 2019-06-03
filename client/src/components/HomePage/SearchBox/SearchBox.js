@@ -30,7 +30,7 @@ const SearchBox = (
     course,
     university,
     history,
-    handleCourseChange,
+    handleUpdateCourse,
     handleUniversitySelect
   }
 ) => {
@@ -64,7 +64,7 @@ const SearchBox = (
           size="large"
           placeholder="Search for courses"
           name="course"
-          onChange={handleCourseChange}
+          onChange={handleUpdateCourse}
           value={course}
         />
 

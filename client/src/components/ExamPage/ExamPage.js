@@ -36,25 +36,25 @@ const mapDispatchToProps = dispatch => (
         type: SET_EXAM_QUESTIONS
       }
     ),
-    handleChangeSolutions: solutions => dispatch(
+    handleUpdateSolutions: solutions => dispatch(
       {
         solutions: solutions,
         type: UPDATE_SOLUTIONS
       }
     ),
-    handleChangeExamId: examId => dispatch(
+    handleUpdateExamId: examId => dispatch(
       {
         examId: examId,
         type: UPDATE_EXAM_ID
       }
     ),
-    handleChangeUserSolution: comment => dispatch(
+    handleUpdateUserSolution: comment => dispatch(
       {
         userSolution: comment,
         type: UPDATE_USER_SOLUTION
       }
     ),
-    handleChangeSubQuestionId: subQuestionId => dispatch(
+    handleUpdateSubQuestionId: subQuestionId => dispatch(
       {
         subQuestionId: subQuestionId,
         type: UPDATE_SUB_QUESTION_ID
@@ -65,7 +65,7 @@ const mapDispatchToProps = dispatch => (
         type: RESET_EXAM_PAGE
       }
     ),
-    handleChangePreviewSwitchState: previewSwitchState => dispatch(
+    handleUpdatePreviewSwitchState: previewSwitchState => dispatch(
       {
         previewSwitchState: previewSwitchState,
         type: UPDATE_PREVIEW_SWITCH_STATE
@@ -79,14 +79,14 @@ class ExamPage extends Component {
   componentWillMount() {
 
     /* Reset the list of sub question solutions */
-    this.props.handleChangeSolutions([]);
+    this.props.handleUpdateSolutions([]);
   }
 
   componentDidMount() {
 
     const examId = this.props.match.params.examId;
 
-    this.props.handleChangeExamId(examId);
+    this.props.handleUpdateExamId(examId);
 
     Axios.get(
       `/api/exams/${examId}`
@@ -112,9 +112,9 @@ class ExamPage extends Component {
           md={6}
         >
           <ExamSider
-            handleChangeSolutions={this.props.handleChangeSolutions}
+            handleUpdateSolutions={this.props.handleUpdateSolutions}
             handleSetQuestions={this.props.handleSetQuestions}
-            handleChangeSubQuestionId={this.props.handleChangeSubQuestionId}
+            handleUpdateSubQuestionId={this.props.handleUpdateSubQuestionId}
           />
         </Col>
 
@@ -124,9 +124,9 @@ class ExamPage extends Component {
           id="exam-page-content-container"
         >
           <ExamContent
-            handleChangeUserSolution={this.props.handleChangeUserSolution}
-            handleChangeSolutions={this.props.handleChangeSolutions}
-            handleChangePreviewSwitchState={this.props.handleChangePreviewSwitchState}
+            handleUpdateUserSolution={this.props.handleUpdateUserSolution}
+            handleUpdateSolutions={this.props.handleUpdateSolutions}
+            handleUpdatePreviewSwitchState={this.props.handleUpdatePreviewSwitchState}
           />
         </Col>
 
