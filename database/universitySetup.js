@@ -15,4 +15,3 @@ contents.split("\n").map((curr, i) => {
     console.log(`Inserted ${curr}`);
   });
 });
-console.log("Finished adding universities");

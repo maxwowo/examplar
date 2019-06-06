@@ -27,7 +27,7 @@ $ sudo mysql -u root
   mysql> GRANT ALL PRIVILEGES ON *.* TO 'examplar'@'localhost' IDENTIFIED BY 'password';
   mysql> exit
 $ sudo mysql -u examplar -p < database/setup.sql # Password is 'password'
-$ node database/universitySetup.js # Wait 30 seconds after execution
+$ node database/universitySetup.js # Ctrl + c once the logs stop printing
 $ sudo mysql -u examplar -p < database/dummyData.sql # Password is 'password'
 $ npm start
 ```

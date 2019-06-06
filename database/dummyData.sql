@@ -10,8 +10,14 @@ INSERT INTO `examplardb`.`exam_table` (`exam_id`, `exam_year`, `exam_term`, `cou
 INSERT INTO `examplardb`.`exam_table` (`exam_id`, `exam_year`, `exam_term`, `course_id`) VALUES (NULL, '2019', '1', '1');
 
 -- Dummy questions
-INSERT INTO `examplardb`.`question_table` (`question_id`, `question_header`, `exam_id`) VALUES (NULL, '2', '1');
-INSERT INTO `examplardb`.`question_table` (`question_id`, `question_header`, `exam_id`) VALUES (NULL, '3', '1');
+INSERT INTO `examplardb`.`question_table` (`question_id`, `question_header`, `exam_id`) VALUES (NULL, '1', '1');
+INSERT INTO `examplardb`.`question_table` (`question_id`, `question_header`, `exam_id`) VALUES (NULL, '1', '2');
+INSERT INTO `examplardb`.`question_table` (`question_id`, `question_header`, `exam_id`) VALUES (NULL, '2', '2');
+
+-- Dummy sub questions
+INSERT INTO `examplardb`.`sub_question_table` (`sub_question_id`, `sub_question_number`, `question_id`) VALUES (NULL, '1i', '2');
+INSERT INTO `examplardb`.`sub_question_table` (`sub_question_id`, `sub_question_number`, `question_id`) VALUES (NULL, '1ii', '2');
+INSERT INTO `examplardb`.`sub_question_table` (`sub_question_id`, `sub_question_number`, `question_id`) VALUES (NULL, '2i', '2');
 
 -- Dummy solutions
 INSERT INTO `examplardb`.`solution_table` (`answer_id`, `answer_text`, `answer_upvotes`, `sub_question_id`) VALUES (NULL, 'Hello world', '0', '1');
