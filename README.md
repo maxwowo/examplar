@@ -28,5 +28,6 @@ $ sudo mysql -u root
   mysql> exit
 $ sudo mysql -u examplar -p < database/setup.sql # Password is 'password'
 $ node database/universitySetup.js # Wait 30 seconds after execution
+$ sudo mysql -u examplar -p < database/dummyData.sql # Password is 'password'
 $ npm start
 ```
