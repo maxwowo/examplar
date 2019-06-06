@@ -11,7 +11,8 @@ const connection = mysql.createConnection({
 const contents = fs.readFileSync(`${__dirname}/universities.txt`, "utf8");
 
 contents.split("\n").map((curr, i) => {
-  connection.execute("INSERT INTO `examplardb`.`university_table` (`university_id`, `university_name`) VALUES (?, ?)", [i, curr]);
-  console.log(`Inserted ${curr}`);
+  connection.execute("INSERT INTO `examplardb`.`university_table` (`university_id`, `university_name`) VALUES (?, ?)", [i, curr], (err, res) => {
+    console.log(`Inserted ${curr}`);
+  });
 });
 console.log("Finished adding universities");
