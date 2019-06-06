@@ -21,6 +21,13 @@ Use the package manager [npm](https://www.npmjs.com/get-npm) to install Examplar
 ```bash
 $ cd examplar
 $ npm install
+$ sudo apt-get update 
+$ sudo apt-get install mysql-server
+$ sudo mysql -u root
+  mysql> GRANT ALL PRIVILEGES ON *.* TO 'examplar'@'localhost' IDENTIFIED BY 'password';
+  mysql> exit
+$ sudo mysql -u examplar -p < database/setup.sql # Password is 'password'
+$ node database/universitySetup.js
 $ npm start
 ```
 

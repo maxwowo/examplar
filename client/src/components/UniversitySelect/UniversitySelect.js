@@ -1,7 +1,7 @@
 /* React */
 import React, { Component } from "react";
 
-/* List of all universities */
+/* List of all universities.txt */
 import universities from "../../constants/universities";
 import { Select } from "antd";
 
@@ -17,17 +17,17 @@ class UniversitySelect extends Component {
 
   state = {
 
-    /* List of universities to be displayed in the select */
+    /* List of universities.txt to be displayed in the select */
     options: universities.slice(0, numOptions)
   };
 
   /* Changes the options in the select based on the search string */
   handleSearch = val => {
 
-    /* Initially empty list matched universities */
+    /* Initially empty list matched universities.txt */
     const matchedOptions = [];
 
-    /* Find universities that match the search string */
+    /* Find universities.txt that match the search string */
     for (let uni of universities) {
       let matchedOptionsLen = matchedOptions.length;
 

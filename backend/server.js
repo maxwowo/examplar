@@ -17,7 +17,7 @@ app.use(logger("dev"));
 /* Establish MySQL connection */
 const connection = mysql.createConnection({
   host: "localhost",
-  user: "root",
+  user: "examplar",
   password: "password",
   database: "examplardb"
 });
