@@ -56,6 +56,15 @@ const CreateCourseModal = (
           /* Get the ID of the university selected in the form */
           const universityId = uniNameToId(university);
 
+          // form.setFields({
+          //   courseCode: {
+          //     value: "test",
+          //     errors: [new Error("some err")]
+          //   }
+          // });
+          //
+          // return;
+
           /* Submit a POST request */
           Axios.post(
             "/api/courses",
