@@ -22,7 +22,6 @@
   "dependencies": {
     "concurrently": "^4.1.0",
     "fs": "0.0.1-security",
-    "mysql2": "^1.6.5",
-    "querystringify": "^2.1.1"
+    "mysql2": "^1.6.5"
   }
 }
