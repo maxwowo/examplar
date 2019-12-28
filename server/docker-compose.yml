@@ -8,19 +8,19 @@ services:
       - .:/go/src/examplar
     working_dir: /go/src/examplar
     command: go run main.go
-#    links:
-#      - old_database
+    links:
+      - database
 
-#  old_database:
-#    image: postgres
-#    restart: always
-#    ports:
-#      - "5432:5432"
-#    environment:
-#      - DEBUG=false
-#
-#      - DB_USER=examplar
-#      - DB_PASS=password
-#      - DB_NAME=examplar_db
-#    volumes:
-#      - /srv/docker/postgresql:/var/lib/postgresql
+  database:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - DEBUG=false
+
+      - DB_USER=examplar
+      - DB_PASS=password
+      - DB_NAME=examplar
+    volumes:
+      - /srv/docker/postgresql:/var/lib/postgresql
