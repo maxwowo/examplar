@@ -1,26 +1,29 @@
-version: "3"
-
+version: '2.1'
 services:
   server:
-    image: golang
-#    restart: always
+    image: server
+    build:
+      context: .
+      dockerfile: cmd/server/Dockerfile
     volumes:
-      - .:/go/src/examplar
-    working_dir: /go/src/examplar
-    command: go run main.go
-    links:
-      - database
-
-  database:
-    image: postgres
-    restart: always
+      - /tmp/app:/var/log/app
     ports:
-      - "5432:5432"
+      - "8080:8080"
     environment:
-      - DEBUG=false
-
-      - DB_USER=examplar
-      - DB_PASS=password
-      - DB_NAME=examplar
-    volumes:
-      - /srv/docker/postgresql:/var/lib/postgresql
+      - APP_ENV=local
+      - APP_DSN=postgres://db/examplar?sslmode=disable&user=postgres&password=postgres
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: "postgres"
+    restart: always
+    environment:
+      POSTGRES_USER: "examplar"
+      POSTGRES_PASSWORD: "examplar"
+      POSTGRES_DB: "examplar"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U examplar"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
