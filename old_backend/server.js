@@ -57,7 +57,7 @@ router.get("/courses", (req, resp) => {
   });
 });
 
-/* Adds a new course into the database */
+/* Adds a new course into the old_database */
 router.post("/courses", (req, resp) => {
 
   /* Get body info */
@@ -140,7 +140,7 @@ router.get("/courses/:id", (req, resp) => {
   });
 });
 
-/* Adds a new exam along with a default question into the database */
+/* Adds a new exam along with a default question into the old_database */
 router.post("/courses/:id", (req, resp) => {
 
   /* Course ID */
@@ -149,7 +149,7 @@ router.post("/courses/:id", (req, resp) => {
   /* Course details */
   const { examYear, examTerm } = req.body;
 
-  /* Query string that inserts an exam into the database */
+  /* Query string that inserts an exam into the old_database */
   const examQuery = `
     INSERT INTO examplardb.exam_table 
     (exam_id, exam_year, exam_term, course_id) 
@@ -166,7 +166,7 @@ router.post("/courses/:id", (req, resp) => {
   /* Query variables */
   const varList = [examYear, examTerm, id];
 
-  /* Insert an exam into the database */
+  /* Insert an exam into the old_database */
   connection.execute(examQuery, varList, (examErr, examRes) => {
 
     const { insertId } = examRes;
@@ -281,14 +281,14 @@ router.post("/exams/:id", (req, resp) => {
   /* Question header */
   const { questionHeader } = req.body;
 
-  /* Query that inserts a question into the database */
+  /* Query that inserts a question into the old_database */
   const dbQuery = `
     INSERT INTO examplardb.question_table 
     (question_id, question_header, exam_id) 
     VALUES (NULL, ?, ?)
   `;
 
-  /* Insert the question into the database */
+  /* Insert the question into the old_database */
   connection.execute(dbQuery, [questionHeader, id], (err, res) => {
     resp.send(res.insertId.toString());
   });
@@ -302,7 +302,7 @@ router.post("/questions/:id", (req, resp) => {
   /* Number of the sub question to be added */
   const { subQuestionNumber } = req.body;
 
-  /* Query that inserts a new sub question into the database */
+  /* Query that inserts a new sub question into the old_database */
   const dbQuery = `
     INSERT INTO examplardb.sub_question_table 
     (sub_question_id, sub_question_number, question_id) 
@@ -329,7 +329,7 @@ router.post("/subquestions/:id", (req, resp) => {
   /* Solution to be inserted */
   const { userSolution } = req.body;
 
-  /* Query to insert the solution into the database */
+  /* Query to insert the solution into the old_database */
   const dbQuery = `
     INSERT INTO examplardb.solution_table 
     (answer_id, answer_text, answer_upvotes, sub_question_id) 
@@ -351,5 +351,5 @@ router.post("/subquestions/:id", (req, resp) => {
 /* Append /api for HTTP requests */
 app.use("/api", router);
 
-/* Launch backend into a port */
+/* Launch old_backend into a port */
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));

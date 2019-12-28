@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  server:
+    image: golang
+#    restart: always
+    volumes:
+      - .:/go/src/examplar
+    working_dir: /go/src/examplar
+    command: go run main.go
+#    links:
+#      - old_database
+
+#  old_database:
+#    image: postgres
+#    restart: always
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      - DEBUG=false
+#
+#      - DB_USER=examplar
+#      - DB_PASS=password
+#      - DB_NAME=examplar_db
+#    volumes:
+#      - /srv/docker/postgresql:/var/lib/postgresql
