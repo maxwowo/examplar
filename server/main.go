@@ -4,6 +4,7 @@ import (
 	"flag"
 	"github.com/maxwowo/examplar/configuration"
 	"github.com/maxwowo/examplar/database"
+	"github.com/maxwowo/examplar/server"
 )
 
 func main() {
@@ -13,5 +14,5 @@ func main() {
 
 	configuration.Init(*environment)
 	database.Init()
-	// server.Init()
+	server.Init()
 }
