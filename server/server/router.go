@@ -10,7 +10,7 @@ import (
 func NewRouter() *chi.Mux {
 	router := chi.NewRouter()
 
-	// Base middlewares
+	// Base middleware packages
 	router.Use(middleware.RequestID)
 	router.Use(middleware.RealIP)
 	router.Use(middleware.Logger)
@@ -20,7 +20,6 @@ func NewRouter() *chi.Mux {
 	router.Use(middleware.Timeout(60 * time.Second))
 
 	health := new(controllers.HealthController)
-
 	router.Get("/health", health.Status)
 
 	return router

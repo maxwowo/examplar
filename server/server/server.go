@@ -14,7 +14,8 @@ func Init() {
 
 	address := fmt.Sprintf(":%s", config.GetString("server.port"))
 
-	if err := http.ListenAndServe(address, router); err != nil {
-		log.Fatalln("Server closed unexpectedly.")
+	err := http.ListenAndServe(address, router)
+	if err != nil {
+		log.Fatal(err)
 	}
 }

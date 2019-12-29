@@ -24,7 +24,8 @@ func Init() {
 		config.GetInt("database.port"),
 	)
 
-	if database, err = sql.Open("postgres", connectionString); err != nil {
+	database, err = sql.Open("postgres", connectionString)
+	if err != nil {
 		log.Fatal(err)
 	}
 }
