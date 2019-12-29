@@ -8,10 +8,6 @@ import (
 
 var config *viper.Viper
 
-func init() {
-	println("hello")
-}
-
 func Init(env string) {
 	config = viper.New()
 
