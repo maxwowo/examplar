@@ -1,8 +1,6 @@
 package configuration
 
 import (
-	"log"
-
 	"github.com/spf13/viper"
 )
 
@@ -18,7 +16,7 @@ func Init(env string) {
 
 	err := config.ReadInConfig()
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }
 

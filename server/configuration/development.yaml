@@ -6,4 +6,4 @@ database:
   port: 5432
 
 server:
-  port: 8080
+  address: :8080

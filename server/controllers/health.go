@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"log"
 	"net/http"
 )
 
@@ -12,6 +11,6 @@ func (h HealthController) Status(w http.ResponseWriter, _ *http.Request) {
 
 	_, err := w.Write([]byte("Healthy."))
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }

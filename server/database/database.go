@@ -3,7 +3,6 @@ package database
 import (
 	"database/sql"
 	"fmt"
-	"log"
 
 	_ "github.com/lib/pq"
 
@@ -28,7 +27,7 @@ func Init() {
 
 	database, err = sql.Open("postgres", connectionString)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }
 
