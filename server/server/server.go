@@ -7,7 +7,7 @@ import (
 	"github.com/maxwowo/examplar/configuration"
 )
 
-func Init() {
+func Initialize() {
 	router := NewRouter()
 
 	config := configuration.GetConfig()

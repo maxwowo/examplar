@@ -11,7 +11,7 @@ import (
 
 var database *sql.DB
 
-func Init() {
+func Initialize() {
 	var err error
 
 	config := configuration.GetConfig()

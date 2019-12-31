@@ -13,7 +13,7 @@ func main() {
 
 	flag.Parse()
 
-	configuration.Init(*environment)
-	database.Init()
-	server.Init()
+	configuration.Initialize(*environment)
+	database.Initialize()
+	server.Initialize()
 }

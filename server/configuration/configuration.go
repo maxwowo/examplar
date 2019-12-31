@@ -6,7 +6,7 @@ import (
 
 var config *viper.Viper
 
-func Init(env string) {
+func Initialize(env string) {
 	config = viper.New()
 
 	config.SetConfigType("yaml")
