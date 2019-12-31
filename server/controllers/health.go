@@ -7,10 +7,10 @@ import (
 
 type HealthController struct{}
 
-func (healthController HealthController) Status(response http.ResponseWriter, _ *http.Request) {
-	response.WriteHeader(http.StatusOK)
+func (h HealthController) Status(w http.ResponseWriter, _ *http.Request) {
+	w.WriteHeader(http.StatusOK)
 
-	_, err := response.Write([]byte("Healthy."))
+	_, err := w.Write([]byte("Healthy."))
 	if err != nil {
 		log.Fatal(err)
 	}

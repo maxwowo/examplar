@@ -3,9 +3,11 @@ package database
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/lib/pq"
-	"github.com/maxwowo/examplar/configuration"
 	"log"
+
+	_ "github.com/lib/pq"
+
+	"github.com/maxwowo/examplar/configuration"
 )
 
 var database *sql.DB

@@ -2,18 +2,20 @@ package server
 
 import (
 	"fmt"
-	"github.com/maxwowo/examplar/configuration"
 	"log"
 	"net/http"
+
+	"github.com/maxwowo/examplar/configuration"
 )
 
 func Init() {
-	config := configuration.GetConfig()
-
 	router := NewRouter()
 
-	address := fmt.Sprintf(":%s", config.GetString("server.port"))
+	config := configuration.GetConfig()
+	port := config.GetString("server.port")
+	address := fmt.Sprintf(":%s", port)
 
+	log.Println(fmt.Sprintf("Starting server on %s...", port))
 	err := http.ListenAndServe(address, router)
 	if err != nil {
 		log.Fatal(err)

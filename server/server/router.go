@@ -1,10 +1,12 @@
 package server
 
 import (
+	"time"
+
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+
 	"github.com/maxwowo/examplar/controllers"
-	"time"
 )
 
 func NewRouter() *chi.Mux {

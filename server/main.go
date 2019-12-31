@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+
 	"github.com/maxwowo/examplar/configuration"
 	"github.com/maxwowo/examplar/database"
 	"github.com/maxwowo/examplar/server"
