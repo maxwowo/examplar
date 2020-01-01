@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	environment := flag.String("e", "development", "The environment to deploy in")
+	environment := flag.String("e", "development", "The environment to deploy in.")
 
 	flag.Parse()
 

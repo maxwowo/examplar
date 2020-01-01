@@ -13,8 +13,8 @@ func Initialize(env string) {
 
 	config.SetConfigType("yaml")
 	config.SetConfigName(env)
-	config.AddConfigPath("../configuration/")
-	config.AddConfigPath("configuration/")
+	config.AddConfigPath("configuration")
+	config.AddConfigPath("../../configuration")
 
 	err := config.ReadInConfig()
 	if err != nil {
