@@ -7,10 +7,9 @@ import (
 type HealthController struct{}
 
 func (h HealthController) Status(w http.ResponseWriter, _ *http.Request) {
-	w.WriteHeader(http.StatusOK)
-
-	_, err := w.Write([]byte("Healthy."))
-	if err != nil {
-		panic(err)
-	}
+	RespondData(w, struct {
+		Message string `json:"message"`
+	}{
+		Message: "Healthy.",
+	})
 }

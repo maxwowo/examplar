@@ -3,13 +3,14 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"log"
 
 	_ "github.com/lib/pq"
 
 	"github.com/maxwowo/examplar/configuration"
 )
 
-var database *sql.DB
+var db *sql.DB
 
 func Initialize() {
 	var err error
@@ -25,12 +26,12 @@ func Initialize() {
 		config.GetInt("database.port"),
 	)
 
-	database, err = sql.Open("postgres", connectionString)
+	db, err = sql.Open("postgres", connectionString)
 	if err != nil {
-		panic(err)
+		log.Panic(err)
 	}
 }
 
 func GetDatabase() *sql.DB {
-	return database
+	return db
 }

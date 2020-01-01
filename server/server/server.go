@@ -12,12 +12,12 @@ func Initialize() {
 
 	config := configuration.GetConfig()
 
-	address := config.GetString("server.address")
+	addr := config.GetString("server.address")
 
-	log.Printf("Starting server on %s", address)
+	log.Printf("Starting server on %s", addr)
 
-	err := http.ListenAndServe(address, router)
+	err := http.ListenAndServe(addr, router)
 	if err != nil {
-		panic(err)
+		log.Panic(err)
 	}
 }

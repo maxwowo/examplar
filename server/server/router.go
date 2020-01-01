@@ -21,8 +21,15 @@ func NewRouter() *chi.Mux {
 	// Request timeout middleware
 	router.Use(middleware.Timeout(60 * time.Second))
 
+	// Initializing all controllers
 	health := new(controllers.HealthController)
+	course := new(controllers.CourseController)
+
+	// GET server health
 	router.Get("/health", health.Status)
+
+	// GET courses search
+	router.Get("/courses", course.Search)
 
 	return router
 }
