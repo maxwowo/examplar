@@ -1,6 +1,7 @@
 NAME=examplar
 BUILD_DIRECTORY=build
 MIGRATIONS_DIRECTORY=database/migrations
+PACKAGES_DIRECTORY=packages
 DATABASE_USERNAME=examplar
 DATABASE_PASSWORD=examplar
 DATABASE_NAME=examplar
@@ -43,6 +44,11 @@ endif
 ## migrations-run: Run migrations.
 migrations-run:
 	@migrate -database postgres://$(DATABASE_USERNAME):$(DATABASE_PASSWORD)@localhost:5432/$(DATABASE_NAME)?sslmode=disable -path $(MIGRATIONS_DIRECTORY) up
+
+.PHONY: universities-load
+## universities-load: Fill the universities table with details of universities from all over the world
+universities-load:
+	@go run $(PACKAGES_DIRECTORY)/universities/universities.go
 
 .PHONY: clean
 ## clean: Clean project and previous builds.
