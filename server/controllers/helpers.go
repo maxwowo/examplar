@@ -6,16 +6,16 @@ import (
 	"net/http"
 )
 
-type ErrorResponse struct {
-	Error Error `json:"error"`
+type errorResponse struct {
+	ErrorBody errorBody `json:"error"`
 }
 
-type Error struct {
+type errorBody struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
 }
 
-type DataResponse struct {
+type dataResponse struct {
 	Data interface{} `json:"data"`
 }
 
@@ -31,8 +31,8 @@ func encodeResponse(w http.ResponseWriter, response interface{}) {
 func RespondError(w http.ResponseWriter, status int, msg string) {
 	w.WriteHeader(status)
 
-	errorResponse := ErrorResponse{
-		Error: Error{
+	errorResponse := errorResponse{
+		ErrorBody: errorBody{
 			Code:    status,
 			Message: msg,
 		},
@@ -44,7 +44,7 @@ func RespondError(w http.ResponseWriter, status int, msg string) {
 func RespondData(w http.ResponseWriter, data interface{}) {
 	w.WriteHeader(http.StatusOK)
 
-	dataResponse := DataResponse{
+	dataResponse := dataResponse{
 		Data: data,
 	}
 
