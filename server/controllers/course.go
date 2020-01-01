@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/maxwowo/examplar/models"
+	"github.com/maxwowo/examplar/packages/responder"
 )
 
 type CourseController struct{}
@@ -22,7 +23,7 @@ func (c CourseController) Search(w http.ResponseWriter, r *http.Request) {
 	// Malformed query parameters
 	if !(courseOk && universityOk && len(course) == 1 && len(university) == 1) {
 		errMsg := "Malformed course and/or university query parameters."
-		RespondError(w, http.StatusBadRequest, errMsg)
+		responder.RespondError(w, http.StatusBadRequest, errMsg)
 		return
 	}
 
@@ -33,7 +34,7 @@ func (c CourseController) Search(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Send response
-	RespondData(w, struct {
+	responder.RespondData(w, struct {
 		Courses []models.Course `json:"courses"`
 	}{
 		Courses: courses,
