@@ -64,7 +64,7 @@ func decodeFile(file *os.File, universities *universityDomains) {
 }
 
 func openJSON() *os.File {
-	file, err := os.Open("university_domains.json")
+	file, err := os.Open("packages/uniloader/university_domains.json")
 	if err != nil {
 		log.Fatal(err)
 	}
