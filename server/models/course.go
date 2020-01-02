@@ -42,6 +42,9 @@ func (c Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
 }
 
 func (c Course) GetByCourseUniversity(course string, university string) ([]Course, error) {
+	var courses []Course
+	var err error
+
 	db := database.GetDatabase()
 
 	query := `
@@ -52,12 +55,20 @@ func (c Course) GetByCourseUniversity(course string, university string) ([]Cours
 		LIMIT 5
 	`
 
+	stmt, err := db.Prepare(query)
+	if err != nil {
+		return nil, err
+	}
+	defer func() {
+		err = stmt.Close()
+	}()
+
 	rows, err := db.Query(query, course, university)
 	if err != nil {
 		return nil, err
 	}
 
-	courses := make([]Course, 0)
+	courses = make([]Course, 0)
 
 	for rows.Next() {
 		var row Course
