@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 
 	"github.com/maxwowo/examplar/forms"
@@ -24,7 +23,7 @@ func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 
 	course, err := courseModel.Create(coursePayload)
 	if err != nil {
-		log.Panic(err)
+		panic(err)
 	}
 
 	responder.RespondData(w, course)
@@ -48,7 +47,7 @@ func (c CourseController) Search(w http.ResponseWriter, r *http.Request) {
 	// Get all rows with matching course and university values
 	courses, err := courseModel.GetByCourseUniversity(course[0], university[0])
 	if err != nil {
-		log.Panic(err)
+		panic(err)
 	}
 
 	// Send response

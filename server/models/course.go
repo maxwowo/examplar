@@ -1,8 +1,6 @@
 package models
 
 import (
-	"database/sql"
-
 	"github.com/maxwowo/examplar/database"
 	"github.com/maxwowo/examplar/forms"
 )
@@ -13,7 +11,10 @@ type Course struct {
 	Name string `json:"name"`
 }
 
-func (c Course) Create(coursePayload forms.CreateCourse) (sql.Result, error) {
+func (c Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
+	var course Course
+	var err error
+
 	db := database.GetDatabase()
 
 	query := `
@@ -21,14 +22,23 @@ func (c Course) Create(coursePayload forms.CreateCourse) (sql.Result, error) {
 		(id, code, name, university_id)
 		VALUES 
 		(DEFAULT, $1, $2, $3)
+		RETURNING id, code, name
 	`
 
-	result, err := db.Exec(query, coursePayload.Code, coursePayload.Name, coursePayload.UniversityID)
+	stmt, err := db.Prepare(query)
+	if err != nil {
+		return nil, err
+	}
+	defer func() {
+		err = stmt.Close()
+	}()
+
+	err = stmt.QueryRow(coursePayload.Code, coursePayload.Name, coursePayload.UniversityID).Scan(&course.ID, &course.Code, &course.Name)
 	if err != nil {
 		return nil, err
 	}
 
-	return result, nil
+	return &course, nil
 }
 
 func (c Course) GetByCourseUniversity(course string, university string) ([]Course, error) {

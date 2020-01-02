@@ -48,7 +48,7 @@ migrations-run:
 .PHONY: universities-load
 ## universities-load: Fill the universities table with details of universities from all over the world
 universities-load:
-	@go run $(PACKAGES_DIRECTORY)/universities/universities.go
+	@go run $(PACKAGES_DIRECTORY)/uniloader/uniloader.go
 
 .PHONY: clean
 ## clean: Clean project and previous builds.
