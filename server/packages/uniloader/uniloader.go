@@ -77,7 +77,7 @@ func insert(db *sql.DB, university university) {
 			(id, name, domain)
 			VALUES 
 			(DEFAULT, $1, $2)
-		`
+	`
 
 	_, err := db.Exec(query, university.Name, university.Domains[0])
 	if err != nil {

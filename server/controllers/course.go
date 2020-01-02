@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/maxwowo/examplar/forms"
@@ -12,6 +13,7 @@ import (
 type CourseController struct{}
 
 var courseModel = new(models.Course)
+var universityModel = new(models.University)
 
 func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 	var coursePayload forms.CreateCourse
@@ -21,9 +23,17 @@ func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 		responder.RespondError(w, err.Error(), http.StatusBadRequest)
 	}
 
+	university, err := universityModel.GetByID(coursePayload.UniversityID)
+	if err != nil {
+		log.Panic(err)
+	}
+	if university == nil {
+		responder.RespondError(w, "Supplied university ID does not exist.", http.StatusBadRequest)
+	}
+
 	course, err := courseModel.Create(coursePayload)
 	if err != nil {
-		panic(err)
+		log.Panic(err)
 	}
 
 	responder.RespondData(w, course)
@@ -47,7 +57,7 @@ func (c CourseController) Search(w http.ResponseWriter, r *http.Request) {
 	// Get all rows with matching course and university values
 	courses, err := courseModel.GetByCourseUniversity(course[0], university[0])
 	if err != nil {
-		panic(err)
+		log.Panic(err)
 	}
 
 	// Send response

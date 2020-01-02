@@ -12,7 +12,6 @@ type Course struct {
 }
 
 func (c Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
-	var course Course
 	var err error
 
 	db := database.GetDatabase()
@@ -33,6 +32,8 @@ func (c Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
 		err = stmt.Close()
 	}()
 
+	var course Course
+
 	err = stmt.QueryRow(coursePayload.Code, coursePayload.Name, coursePayload.UniversityID).Scan(&course.ID, &course.Code, &course.Name)
 	if err != nil {
 		return nil, err
@@ -42,7 +43,6 @@ func (c Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
 }
 
 func (c Course) GetByCourseUniversity(course string, university string) ([]Course, error) {
-	var courses []Course
 	var err error
 
 	db := database.GetDatabase()
@@ -67,8 +67,11 @@ func (c Course) GetByCourseUniversity(course string, university string) ([]Cours
 	if err != nil {
 		return nil, err
 	}
+	defer func() {
+		err = rows.Close()
+	}()
 
-	courses = make([]Course, 0)
+	courses := make([]Course, 0)
 
 	for rows.Next() {
 		var row Course
