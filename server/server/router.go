@@ -9,7 +9,7 @@ import (
 	"github.com/maxwowo/examplar/controllers"
 )
 
-func NewRouter() *chi.Mux {
+func newRouter() *chi.Mux {
 	router := chi.NewRouter()
 
 	// Base middleware packages

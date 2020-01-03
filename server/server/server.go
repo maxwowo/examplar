@@ -8,7 +8,7 @@ import (
 )
 
 func Initialize() {
-	router := NewRouter()
+	router := newRouter()
 
 	config := configuration.GetConfig()
 
