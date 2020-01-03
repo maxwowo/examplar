@@ -46,7 +46,6 @@ func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 
 // Searches for courses with matching course and university values
 func (c CourseController) Search(w http.ResponseWriter, r *http.Request) {
-	// Get query parameters
 	query := r.URL.Query()
 
 	course, courseOk := query["course"]
