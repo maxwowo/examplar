@@ -12,25 +12,19 @@ type Course struct {
 }
 
 func (c Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
-	var err error
-
 	db := database.GetDatabase()
 
-	query := `
+	stmt, err := db.Prepare(`
 		INSERT INTO courses
 		(id, code, name, university_id)
 		VALUES 
 		(DEFAULT, $1, $2, $3)
 		RETURNING id, code, name
-	`
-
-	stmt, err := db.Prepare(query)
+	`)
 	if err != nil {
 		return nil, err
 	}
-	defer func() {
-		err = stmt.Close()
-	}()
+	defer stmt.Close()
 
 	var course Course
 
@@ -43,33 +37,25 @@ func (c Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
 }
 
 func (c Course) GetByCourseUniversity(course string, university string) ([]Course, error) {
-	var err error
-
 	db := database.GetDatabase()
 
-	query := `
+	stmt, err := db.Prepare(`
 		SELECT courses.id, courses.code, courses.name, universities.name
 		FROM courses INNER JOIN universities 
 		ON courses.university_id = universities.id 
 		WHERE (courses.code LIKE $1 OR courses.name LIKE $1) AND universities.name LIKE $2 
 		LIMIT 5
-	`
-
-	stmt, err := db.Prepare(query)
+	`)
 	if err != nil {
 		return nil, err
 	}
-	defer func() {
-		err = stmt.Close()
-	}()
+	defer stmt.Close()
 
-	rows, err := db.Query(query, course, university)
+	rows, err := stmt.Query(course, university)
 	if err != nil {
 		return nil, err
 	}
-	defer func() {
-		err = rows.Close()
-	}()
+	defer rows.Close()
 
 	courses := make([]Course, 0)
 

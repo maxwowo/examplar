@@ -34,13 +34,11 @@ func main() {
 
 	log.Println("Opening university domains file...")
 
-	file := openJSON()
-	defer func() {
-		err := file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}()
+	file, err := os.Open("packages/uniloader/university_domains.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
 
 	log.Println("Reading university domains file...")
 
@@ -63,23 +61,19 @@ func decodeFile(file *os.File, universities *universityDomains) {
 	}
 }
 
-func openJSON() *os.File {
-	file, err := os.Open("packages/uniloader/university_domains.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-	return file
-}
-
 func insert(db *sql.DB, university university) {
-	query := `
+	stmt, err := db.Prepare(`
 			INSERT INTO universities
 			(id, name, domain)
 			VALUES 
 			(DEFAULT, $1, $2)
-	`
+	`)
+	if err != nil {
+		log.Panic(err)
+	}
+	defer stmt.Close()
 
-	_, err := db.Exec(query, university.Name, university.Domains[0])
+	_, err = stmt.Exec(university.Name, university.Domains[0])
 	if err != nil {
 		log.Fatal(err)
 	}

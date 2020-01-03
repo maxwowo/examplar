@@ -9,23 +9,17 @@ type University struct {
 }
 
 func (u University) GetByID(ID int) (*University, error) {
-	var err error
-
 	db := database.GetDatabase()
 
-	query := `
+	stmt, err := db.Prepare(`
 		SELECT id, name, domain
 		FROM universities 
 		WHERE id = $1
-	`
-
-	stmt, err := db.Prepare(query)
+	`)
 	if err != nil {
 		return nil, err
 	}
-	defer func() {
-		err = stmt.Close()
-	}()
+	defer stmt.Close()
 
 	var university University
 
