@@ -25,14 +25,13 @@ func NewRouter() *chi.Mux {
 	health := new(controllers.HealthController)
 	course := new(controllers.CourseController)
 
-	// Check server health
+	// All routes
 	router.Get("/health", health.Status)
 
-	// Courses search
-	router.Get("/courses", course.Search)
-
-	// Add course
-	router.Post("/courses", course.Create)
+	router.Route("/courses", func(router chi.Router) {
+		router.Get("/", course.Search)
+		router.Post("/", course.Create)
+	})
 
 	return router
 }
