@@ -18,19 +18,24 @@ var universityModel = new(models.University)
 func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 	var coursePayload forms.CreateCourse
 
+	// Malformed JSON course payload
 	err := json.NewDecoder(r.Body).Decode(&coursePayload)
 	if err != nil {
 		responder.RespondError(w, err.Error(), http.StatusBadRequest)
+		return
 	}
 
-	university, err := universityModel.GetByID(coursePayload.UniversityID)
+	// Invalid university ID
+	universityExists, err := universityModel.ExistsID(coursePayload.UniversityID)
 	if err != nil {
 		log.Panic(err)
 	}
-	if university == nil {
-		responder.RespondError(w, "Supplied university ID does not exist.", http.StatusBadRequest)
+	if !universityExists {
+		responder.RespondError(w, "Invalid university ID.", http.StatusBadRequest)
+		return
 	}
 
+	// Create course
 	course, err := courseModel.Create(coursePayload)
 	if err != nil {
 		log.Panic(err)
@@ -49,8 +54,7 @@ func (c CourseController) Search(w http.ResponseWriter, r *http.Request) {
 
 	// Malformed query parameters
 	if !(courseOk && universityOk && len(course) == 1 && len(university) == 1) {
-		errMsg := "Malformed course and/or university query parameters."
-		responder.RespondError(w, errMsg, http.StatusBadRequest)
+		responder.RespondError(w, "Malformed course and/or university query parameters.", http.StatusBadRequest)
 		return
 	}
 
