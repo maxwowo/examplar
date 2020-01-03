@@ -18,7 +18,7 @@ func Authenticator(next http.Handler) http.Handler {
 		}
 
 		if token == nil || !token.Valid {
-			responder.RespondError(w, "Token not provided or is invalid.", http.StatusUnauthorized)
+			responder.RespondError(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
 			return
 		}
 
