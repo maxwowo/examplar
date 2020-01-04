@@ -24,18 +24,18 @@ build-docker: ## Compile the packages in development mode into a Docker image
 run: build ## Build and run in development mode.
 	@./$(BUILD_DIRECTORY) -e development
 
-.PHONY: run-docker
-run-docker: build-docker ## Build and run in detached development mode
+.PHONY: docker-run
+docker-run: build-docker ## Build and run in detached development mode
 	docker run \
 	--rm \
 	-d \
-	--name examplar \
+	--name examplar_server \
 	-p 8080:8080 \
 	examplar
 
-.PHONY: stop-docker
-stop-docker: ## Stop the docker server instance
-	@docker stop examplar
+.PHONY: docker-stop
+docker-stop: ## Stop the docker server instance
+	@docker stop examplar_server
 
 .PHONY: run-prod
 run-prod: build ## Build and run in production mode.
@@ -46,7 +46,6 @@ migrations-generate: ## Generate migration files.
 ifdef name
 	@docker run \
 	--rm \
-	--name generate_migration \
 	-v $(MIGRATIONS_DIRECTORY):/migrations \
 	-u $(shell id -u $($USER)):$(shell id -g $($USER)) \
 	--network host migrate/migrate \
@@ -68,6 +67,23 @@ migrations-run: ## Run migrations.
 	-path=/migrations/ \
 	-database $(DATABASE_URL) \
 	up
+
+.PHONY: database-start
+database-start: ## Start the database in Docker
+	@mkdir -p /var/lib/examplar/data
+	@docker run \
+	--rm \
+	--name examplar_database \
+	-v /var/lib/examplar/data:/var/lib/postgresql/data \
+	-e POSTGRES_USER=examplar \
+	-e POSTGRES_PASSWORD=examplar \
+	-d \
+	-p 5432:5432 \
+	postgres
+
+.PHONY: database-stop
+database-stop: ## Stop the database in Docker
+	@docker stop examplar_database
 
 .PHONY: universities-load
 universities-load: ## Fill the universities table with details of universities from all over the world
