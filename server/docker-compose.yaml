@@ -1,0 +1,26 @@
+version: "0.1"
+services:
+  server:
+    image: server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /var/lib/examplar/server:/var/log/server
+    ports:
+      - 8080:8080
+    depends_on:
+      database:
+        condition: service_healthy
+  database:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: "examplar"
+      POSTGRES_PASSWORD: "examplar"
+      POSTGRES_DB: "examplar"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U examplar"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

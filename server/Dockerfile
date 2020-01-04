@@ -5,7 +5,7 @@ FROM golang:latest
 LABEL maintainer="Max Wo <maxwo@protonmail.com>"
 
 # Set the Current Working Directory inside the container
-WORKDIR /examplar
+WORKDIR /server
 
 # Copy go mod and sum files
 COPY go.mod go.sum ./
