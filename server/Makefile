@@ -44,12 +44,12 @@ run-prod: build ## Build and run in production mode.
 .PHONY: migrations-generate
 migrations-generate: ## Generate migration files.
 ifdef name
-	@docker run \
+	docker run \
 	--rm \
+	--name generate_migration \
 	-v $(MIGRATIONS_DIRECTORY):/migrations \
-	-u $(shell id -u $($USER)):$(shell id -g $($USER)) \
-	--network host \
-	migrate/migrate \
+	-u 1000:1000 \
+	--network host migrate/migrate \
 	create \
 	-ext sql \
 	-dir /migrations \
@@ -63,7 +63,6 @@ migrations-run: ## Run migrations.
 	@docker run \
 	--rm \
 	-v $(MIGRATIONS_DIRECTORY):/migrations \
-	-u $(shell id -u $($USER)):$(shell id -g $($USER)) \
 	--network host migrate/migrate \
 	-path=/migrations/ \
 	-database $(DATABASE_URL) \
