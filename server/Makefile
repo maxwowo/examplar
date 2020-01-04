@@ -9,33 +9,23 @@ DATABASE_NAME=examplar
 DATABASE_URL=postgres://$(DATABASE_USERNAME):$(DATABASE_PASSWORD)@localhost:5432/$(DATABASE_NAME)?sslmode=disable
 
 .PHONY: help
-all: help
-# help: show this help message
 help: Makefile
-	@echo
-	@echo " Choose a command to run in "$(APP_NAME)":"
-	@echo
-	@sed -n 's/^##//p' $< | column -t -s ':' |  sed -e 's/^/ /'
-	@echo
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: build
-## build: Compile the packages.
-build:
+build: ## build: Compile the packages.
 	@go build -o $(BUILD_DIRECTORY)
 
 .PHONY: run
-## run: Build and run in development mode.
-run: build
+run: build ## run: Build and run in development mode.
 	@./$(BUILD_DIRECTORY) -e development
 
 .PHONY: run-prod
-## run-production: Build and run in production mode.
-run-prod: build
+run-prod: build ## run-production: Build and run in production mode.
 	@./$(BUILD_DIRECTORY) -e production
 
 .PHONY: migrations-generate
-## migrations-generate: Generate migration files.
-migrations-generate:
+migrations-generate: ## migrations-generate: Generate migration files.
 ifdef name
 	@docker run \
 	--rm \
@@ -52,8 +42,7 @@ else
 endif
 
 .PHONY: migrations-run
-## migrations-run: Run migrations.
-migrations-run:
+migrations-run: ## migrations-run: Run migrations.
 	@docker run \
 	--rm \
 	-v $(MIGRATIONS_DIRECTORY):/migrations \
@@ -64,11 +53,9 @@ migrations-run:
 	up
 
 .PHONY: universities-load
-## universities-load: Fill the universities table with details of universities from all over the world
-universities-load:
+universities-load: ## universities-load: Fill the universities table with details of universities from all over the world
 	@go run $(PACKAGES_DIRECTORY)/uniloader/uniloader.go
 
 .PHONY: clean
-## clean: Clean project and previous builds.
-clean:
+clean: ## clean: Clean project and previous builds.
 	@rm -rf $(BUILD_DIRECTORY)
