@@ -37,16 +37,27 @@ run-prod: build
 ## migrations-generate: Generate migration files.
 migrations-generate:
 ifdef name
-	@migrate -ext sql -dir $(MIGRATIONS_DIRECTORY) $(name)
+	@docker run \
+	--rm \
+	--name generate_migration \
+	-v $(MIGRATIONS_DIRECTORY):/migrations \
+	-u $(shell id -u $($USER)):$(shell id -g $($USER)) \
+	--network host migrate/migrate \
+	create \
+	-ext sql \
+	-dir /migrations \
+	$(name)
 else
-	@echo 'No name parameter supplied'
+	@echo 'Example usage: sudo make migrations-generate name=hello'
 endif
 
 .PHONY: migrations-run
 ## migrations-run: Run migrations.
 migrations-run:
 	@docker run \
+	--rm \
 	-v $(MIGRATIONS_DIRECTORY):/migrations \
+	-u $(shell id -u $($USER)):$(shell id -g $($USER)) \
 	--network host migrate/migrate \
 	-path=/migrations/ \
 	-database $(DATABASE_URL) \
