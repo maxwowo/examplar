@@ -87,7 +87,7 @@ database-stop: ## Stop the database in Docker
 
 .PHONY: universities-load
 universities-load: ## Fill the universities table with details of universities from all over the world
-	@go run $(PACKAGES_DIRECTORY)/uniloader/uniloader.go
+	go run $(PACKAGES_DIRECTORY)/uniloader/uniloader.go
 
 .PHONY: clean
 clean: ## Clean project and previous builds.
