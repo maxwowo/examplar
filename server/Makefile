@@ -48,7 +48,8 @@ ifdef name
 	--rm \
 	-v $(MIGRATIONS_DIRECTORY):/migrations \
 	-u $(shell id -u $($USER)):$(shell id -g $($USER)) \
-	--network host migrate/migrate \
+	--network host \
+	migrate/migrate \
 	create \
 	-ext sql \
 	-dir /migrations \
@@ -87,7 +88,13 @@ database-stop: ## Stop the database in Docker
 
 .PHONY: universities-load
 universities-load: ## Fill the universities table with details of universities from all over the world
-	go run $(PACKAGES_DIRECTORY)/uniloader/uniloader.go
+	docker run \
+	--rm \
+	-v $(shell pwd):/usr/src/examplar_server \
+	-w /usr/src/examplar_server \
+	--network host \
+	golang:latest \
+	go run /usr/src/examplar_server/$(PACKAGES_DIRECTORY)/uniloader/uniloader.go
 
 .PHONY: clean
 clean: ## Clean project and previous builds.
