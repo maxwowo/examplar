@@ -1,10 +1,12 @@
 NAME=examplar
 BUILD_DIRECTORY=build
-MIGRATIONS_DIRECTORY=database/migrations
+MIGRATIONS_DIRECTORY=$(shell pwd)/database/migrations
 PACKAGES_DIRECTORY=packages
+
 DATABASE_USERNAME=examplar
 DATABASE_PASSWORD=examplar
 DATABASE_NAME=examplar
+DATABASE_URL=postgres://$(DATABASE_USERNAME):$(DATABASE_PASSWORD)@localhost:5432/$(DATABASE_NAME)?sslmode=disable
 
 .PHONY: help
 all: help
@@ -43,7 +45,12 @@ endif
 .PHONY: migrations-run
 ## migrations-run: Run migrations.
 migrations-run:
-	@migrate -database postgres://$(DATABASE_USERNAME):$(DATABASE_PASSWORD)@localhost:5432/$(DATABASE_NAME)?sslmode=disable -path $(MIGRATIONS_DIRECTORY) up
+	@docker run \
+	-v $(MIGRATIONS_DIRECTORY):/migrations \
+	--network host migrate/migrate \
+	-path=/migrations/ \
+	-database $(DATABASE_URL) \
+	up
 
 .PHONY: universities-load
 ## universities-load: Fill the universities table with details of universities from all over the world
