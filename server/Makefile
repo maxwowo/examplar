@@ -55,7 +55,7 @@ ifdef name
 	-dir /migrations \
 	$(name)
 else
-	@echo 'Example usage: sudo make migrations-generate name=hello'
+	@echo 'Usage: sudo make migrations-generate name=hello'
 endif
 
 .PHONY: migrations-run
