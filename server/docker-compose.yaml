@@ -15,6 +15,8 @@ services:
   database:
     image: postgres:latest
     restart: always
+    volumes:
+      - /var/lib/examplar/data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: "examplar"
       POSTGRES_PASSWORD: "examplar"
