@@ -14,7 +14,7 @@ user: examplar
 password: examplar
 database: examplar
 ```
-. Start the aforementioned local database and then run `sudo make run` to start up the server.
+. Start the aforementioned local database, then run `sudo make run` to start up the server.
 
 # First run
 On the first time running the Examplar server, the database needs to be initialized with university data. There are many ways of achieving this.
