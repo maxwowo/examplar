@@ -2,10 +2,10 @@
 There are many ways to run the Examplar server.
 
 ## With docker-compose
-This is the most painless way of starting the Examplar server. Simply run `sudo docker-compose up -d` in this directory to start up both the server and the database in Docker.
+This is the most painless way of starting the Examplar server. Simply run `sudo make run-bundle` in this directory to start up both the server and the database in Docker.
 
 ## With Docker
-This allows you to run the database and server separately. Run `sudo make database-start` to start up the database. Then run `sudo make docker-run` to start up the server. 
+This allows you to run the database and server separately. Run `sudo make database-start` to start up the database. Then run `sudo make run-docker` to start up the server. 
 
 ## With Go
 Either use `sudo make database-start` to start up the database, or manually set up a local Postgres database with the following credentials

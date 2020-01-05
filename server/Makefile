@@ -24,8 +24,8 @@ build-docker: ## Compile the packages in development mode into a Docker image
 run: build ## Build and run in development mode.
 	@./$(BUILD_DIRECTORY) -e development
 
-.PHONY: docker-run
-docker-run: build-docker ## Build and run in detached development mode
+.PHONY: run-docker
+run-docker: build-docker ## Build and run in detached development mode
 	docker run \
 	--rm \
 	-d \
@@ -33,9 +33,17 @@ docker-run: build-docker ## Build and run in detached development mode
 	-p 8080:8080 \
 	examplar
 
-.PHONY: docker-stop
-docker-stop: ## Stop the docker server instance
+.PHONY: stop-docker
+stop-docker: ## Stop the docker server instance
 	@docker stop examplar_server
+
+.PHONY: run-bundle
+run-bundle: ## Run the server and the database in Docker
+	@docker-compose up -d
+
+.PHONY: stop-bundle:
+stop-bundle: ## Stop the server and database in Docker
+	@docker-compose down
 
 .PHONY: run-prod
 run-prod: build ## Build and run in production mode.
