@@ -1,5 +1,5 @@
 import React from 'react';
-import FullSizeLayout from '../components/FullSizeLayout';
+import PageLayout from '../components/PageLayout';
 
 interface LandingPageProps {
 
@@ -7,9 +7,9 @@ interface LandingPageProps {
 
 const LandingPage: React.FC<LandingPageProps> = () => {
   return (
-    <FullSizeLayout>
+    <PageLayout>
       hello
-    </FullSizeLayout>
+    </PageLayout>
   );
 };
 
