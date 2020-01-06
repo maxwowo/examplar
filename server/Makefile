@@ -52,7 +52,7 @@ run-prod: build ## Build and run in production mode.
 .PHONY: migrations-generate
 migrations-generate: ## Generate migration files.
 ifdef name
-	docker run \
+	@docker run \
 	--rm \
 	--name generate_migration \
 	-v $(MIGRATIONS_DIRECTORY):/migrations \
