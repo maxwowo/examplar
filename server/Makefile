@@ -41,7 +41,7 @@ stop-docker: ## Stop the docker server instance
 run-bundle: ## Run the server and the database in Docker
 	@docker-compose up -d
 
-.PHONY: stop-bundle:
+.PHONY: stop-bundle
 stop-bundle: ## Stop the server and database in Docker
 	@docker-compose down
 
@@ -56,7 +56,7 @@ ifdef name
 	--rm \
 	--name generate_migration \
 	-v $(MIGRATIONS_DIRECTORY):/migrations \
-	-u 1000:1000 \
+	-u $(shell id -u $($USER)):$(shell id -g $($USER)) \
 	--network host migrate/migrate \
 	create \
 	-ext sql \
