@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FullSizeLayout from './FullSizeLayout';
+import FullSizeLayout from './FullSizeLayout/FullSizeLayout';
 import Navbar from './Navbar';
 
 interface PageLayoutProps {

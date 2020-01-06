@@ -1,23 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Layout } from 'antd';
+import styles from './FullSizeLayout.module.less'
 
 interface FullSizeLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
-
-const StyledFullSizeLayout = styled.div`
-  width: 100vw;
-  height: 100vh;
-`;
 
 const FullSizeLayout: React.FC<FullSizeLayoutProps> = (
   {
     children
   }
 ) => (
-  <StyledFullSizeLayout>
+  <Layout
+    className={styles.FullSizeLayout}
+  >
     {children}
-  </StyledFullSizeLayout>
+  </Layout>
 );
 
 export default FullSizeLayout;
