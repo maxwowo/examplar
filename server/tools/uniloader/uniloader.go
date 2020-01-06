@@ -34,7 +34,7 @@ func main() {
 
 	log.Println("Opening university domains file...")
 
-	file, err := os.Open("packages/uniloader/university_domains.json")
+	file, err := os.Open("tools/uniloader/university_domains.json")
 	if err != nil {
 		log.Fatal(err)
 	}

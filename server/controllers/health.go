@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/maxwowo/examplar/packages/responder"
+	"github.com/maxwowo/examplar/tools/responder"
 )
 
 type HealthController struct{}

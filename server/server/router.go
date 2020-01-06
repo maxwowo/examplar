@@ -26,7 +26,7 @@ func init() {
 func newRouter() *chi.Mux {
 	router := chi.NewRouter()
 
-	// Base middleware packages
+	// Base middleware tools
 	router.Use(middleware.RequestID)
 	router.Use(middleware.RealIP)
 	router.Use(middleware.Logger)

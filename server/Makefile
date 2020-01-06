@@ -1,7 +1,7 @@
 NAME=examplar
-BUILD_DIRECTORY=build
-MIGRATIONS_DIRECTORY=$(shell pwd)/database/migrations
-PACKAGES_DIRECTORY=packages
+BUILD_PATH=server
+MIGRATIONS_PATH=$(shell pwd)/database/migrations
+TOOLS_PATH=tools
 
 DATABASE_USERNAME=examplar
 DATABASE_PASSWORD=examplar
@@ -14,7 +14,7 @@ help: Makefile
 
 .PHONY: build
 build: ## Compile the packages.
-	@go build -o $(BUILD_DIRECTORY)
+	@go build -o $(BUILD_PATH)
 
 .PHONY: build-docker
 build-docker: ## Compile the packages in development mode into a Docker image
@@ -22,14 +22,14 @@ build-docker: ## Compile the packages in development mode into a Docker image
 
 .PHONY: run
 run: build ## Build and run in development mode.
-	@./$(BUILD_DIRECTORY) -e development
+	@./$(BUILD_PATH) -e development
 
 .PHONY: run-docker
 run-docker: build-docker ## Build and run in detached development mode
-	docker run \
+	@docker run \
 	--rm \
-	-d \
 	--name examplar_server \
+	-v /var/lib/examplar/server:/var/log/server \
 	-p 8080:8080 \
 	examplar
 
@@ -47,7 +47,7 @@ stop-bundle: ## Stop the server and database in Docker
 
 .PHONY: run-prod
 run-prod: build ## Build and run in production mode.
-	@./$(BUILD_DIRECTORY) -e production
+	@./$(BUILD_PATH) -e production
 
 .PHONY: migrations-generate
 migrations-generate: ## Generate migration files.
@@ -55,7 +55,7 @@ ifdef name
 	@docker run \
 	--rm \
 	--name generate_migration \
-	-v $(MIGRATIONS_DIRECTORY):/migrations \
+	-v $(MIGRATIONS_PATH):/migrations \
 	-u $(shell id -u $($USER)):$(shell id -g $($USER)) \
 	--network host migrate/migrate \
 	create \
@@ -70,7 +70,7 @@ endif
 migrations-run: ## Run migrations.
 	@docker run \
 	--rm \
-	-v $(MIGRATIONS_DIRECTORY):/migrations \
+	-v $(MIGRATIONS_PATH):/migrations \
 	--network host migrate/migrate \
 	-path=/migrations/ \
 	-database $(DATABASE_URL) \
@@ -95,14 +95,14 @@ database-stop: ## Stop the database in Docker
 
 .PHONY: universities-load
 universities-load: ## Fill the universities table with details of universities from all over the world
-	docker run \
+	@docker run \
 	--rm \
 	-v $(shell pwd):/usr/src/examplar_server \
 	-w /usr/src/examplar_server \
 	--network host \
 	golang:latest \
-	go run /usr/src/examplar_server/$(PACKAGES_DIRECTORY)/uniloader/uniloader.go
+	go run /usr/src/examplar_server/$(TOOLS_PATH)/uniloader/uniloader.go
 
 .PHONY: clean
 clean: ## Clean project and previous builds.
-	@rm -rf $(BUILD_DIRECTORY)
+	@rm -rf $(BUILD_PATH)

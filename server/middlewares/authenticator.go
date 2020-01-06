@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-chi/jwtauth"
 
-	"github.com/maxwowo/examplar/packages/responder"
+	"github.com/maxwowo/examplar/tools/responder"
 )
 
 func Authenticator(next http.Handler) http.Handler {
