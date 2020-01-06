@@ -1,7 +1,7 @@
 import React from 'react';
 
-import FullSizeLayout from './FullSizeLayout/FullSizeLayout';
-import Navbar from './Navbar';
+import FullSizeLayout from '../FullSizeLayout/FullSizeLayout';
+import Navbar from '../Navbar/Navbar';
 
 interface PageLayoutProps {
   children: React.ReactNode
