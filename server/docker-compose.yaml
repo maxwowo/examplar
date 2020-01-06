@@ -16,6 +16,8 @@ services:
     container_name: examplar_database
     image: postgres:latest
     restart: always
+    ports:
+      - "5432:5432"
     volumes:
       - /var/lib/examplar/data:/var/lib/postgresql/data
     environment:
