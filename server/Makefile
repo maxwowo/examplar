@@ -1,5 +1,5 @@
 NAME=examplar
-BUILD_PATH=server
+BUILD_PATH=build
 MIGRATIONS_PATH=$(shell pwd)/database/migrations
 TOOLS_PATH=tools
 
@@ -18,7 +18,7 @@ build: ## Compile the packages.
 
 .PHONY: build-docker
 build-docker: ## Compile the packages in development mode into a Docker image
-	docker build -t examplar .
+	docker build -t server .
 
 .PHONY: run
 run: build ## Build and run in development mode.
