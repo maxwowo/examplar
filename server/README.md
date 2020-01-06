@@ -1,26 +1,33 @@
 # Setting up
-There are many ways to run the Examplar server.
+There are many ways to run the Examplar server. **If you plan to run the Examplar server using Docker**, make sure to 
+complete the Docker post-installation steps. This includes creating a Docker group using `$ sudo groupadd docker`, then 
+adding the current user into the Docker group using `$ sudo usermod -aG docker $USER`. If this step wasn't done 
+properly, the generated migration files would be read-only, since they would have to be created by root.
 
 ## With docker-compose
-This is the most painless way of starting the Examplar server. Simply run `sudo make run-bundle` in this directory to start up both the server and the database in Docker.
+This is the most painless way of starting the Examplar server. Simply run `$ make run-bundle` in this directory to start 
+up both the server and the database in Docker.
 
 ## With Docker
-This allows you to run the database and server separately. Run `sudo make database-start` to start up the database. Then run `sudo make run-docker` to start up the server. 
+This allows you to run the database and server separately. Run `$ make database-start` to start up the database. Then 
+run `$ make run-docker` to start up the server. 
 
 ## With Go
-Either use `sudo make database-start` to start up the database, or manually set up a local Postgres database with the following credentials
+Either use `$ make database-start` to start up the database, or manually set up a local Postgres database with the 
+following credentials
 ```
 user: examplar
 password: examplar
 database: examplar
 ```
-. Start the aforementioned local database, then run `sudo make run` to start up the server.
+. Start the aforementioned local database, then run `$ make run` to start up the server.
 
 # First run
-On the first time running the Examplar server, the database needs to be initialized with university data. There are many ways of achieving this.
+On the first time running the Examplar server, the database needs to be initialized with university data. There are 
+many ways of achieving this.
 
 ## With Docker
-Simply run `sudo make universities-load` to run the initialization script in Docker.
+Simply run `$ make universities-load` to run the initialization script in Docker.
 
 ## With Go
-Run `go run packages/uniloader/uniloader.go` in this directory to run the initialization script.
+Run `$ go run packages/uniloader/uniloader.go` in this directory to run the initialization script.

@@ -63,7 +63,7 @@ ifdef name
 	-dir /migrations \
 	$(name)
 else
-	@echo 'Usage: sudo make migrations-generate name=hello'
+	@echo 'Usage: make migrations-generate name=hello'
 endif
 
 .PHONY: migrations-run
