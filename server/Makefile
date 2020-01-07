@@ -1,5 +1,4 @@
-NAME=examplar
-BUILD_PATH=build
+BUILD_PATH=$(shell pwd)/bin/main
 MIGRATIONS_PATH=$(shell pwd)/database/migrations
 TOOLS_PATH=tools
 
@@ -22,7 +21,7 @@ build-docker: ## Compile the packages in development mode into a Docker image
 
 .PHONY: run
 run: build ## Build and run in development mode.
-	@./$(BUILD_PATH) -e development
+	@$(BUILD_PATH) -e development
 
 .PHONY: run-docker
 run-docker: build-docker ## Build and run in detached development mode
@@ -47,7 +46,7 @@ stop-bundle: ## Stop the server and database in Docker
 
 .PHONY: run-prod
 run-prod: build ## Build and run in production mode.
-	@./$(BUILD_PATH) -e production
+	@.$(BUILD_PATH) -e production
 
 .PHONY: migrations-generate
 migrations-generate: ## Generate migration files.
