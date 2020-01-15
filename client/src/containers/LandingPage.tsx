@@ -1,5 +1,7 @@
 import React from 'react';
-import PageLayout from '../components/PageLayout/PageLayout';
+
+import Layout from '../components/Layout';
+import Centered from '../components/Centered';
 
 interface LandingPageProps {
 
@@ -7,9 +9,11 @@ interface LandingPageProps {
 
 const LandingPage: React.FC<LandingPageProps> = () => {
   return (
-    <PageLayout>
-      hello
-    </PageLayout>
+    <Layout>
+      <Centered>
+        hello
+      </Centered>
+    </Layout>
   );
 };
 
