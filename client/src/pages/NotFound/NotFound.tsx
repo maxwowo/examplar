@@ -23,7 +23,8 @@ const NotFound: React.FC<NotFoundProps> = () => (
         <p
           className={classes.description}
         >
-          Page not found,{' '}
+          Page not found,
+          {' '}
           <Link
             to='/'
           >
