@@ -3,9 +3,7 @@ services:
   server:
     container_name: examplar_server
     image: server
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     volumes:
       - /var/lib/examplar/server:/var/log/server
     ports:
