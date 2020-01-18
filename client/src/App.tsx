@@ -1,9 +1,12 @@
 import React from 'react';
 
+import FullPage from './components/FullPage/FullPage';
 import Router from './Router';
 
 const App: React.FC = () => (
-  <Router/>
+  <FullPage>
+    <Router/>
+  </FullPage>
 );
 
 export default App;

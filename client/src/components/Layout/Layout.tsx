@@ -1,5 +1,4 @@
 import React from 'react';
-import FullPage from '../FullPage/FullPage';
 import Navbar from '../Navbar/Navbar';
 
 interface PageLayoutProps {
@@ -11,10 +10,10 @@ const Layout: React.FC<PageLayoutProps> = (
     children
   }
 ) => (
-  <FullPage>
+  <React.Fragment>
     <Navbar/>
     {children}
-  </FullPage>
+  </React.Fragment>
 );
 
 export default Layout;
