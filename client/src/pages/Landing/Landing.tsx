@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Layout from '../components/Layout';
-import Centered from '../components/Centered';
+import Layout from '../../components/Layout/Layout';
+import Centered from '../../components/Centered/Centered';
 
 interface LandingPageProps {
 

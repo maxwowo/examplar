@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import LandingPage from './containers/LandingPage';
+import Landing from './pages/Landing/Landing';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 interface RouterProps {
@@ -12,7 +12,7 @@ const Router: FC<RouterProps> = () => (
       <Route
         exact
         path='/'
-        component={LandingPage}
+        component={Landing}
       />
     </Switch>
   </BrowserRouter>

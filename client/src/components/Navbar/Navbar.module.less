@@ -1,0 +1,25 @@
+@import '~antd/es/style/themes/default';
+@import "~antd/lib/style/color/colors";
+
+@navbar-padding-side: @padding-md;
+
+.navbar {
+  background-color: white;
+  box-shadow: @shadow-1-down;
+  padding: 0 @navbar-padding-side 0 @navbar-padding-side;
+}
+
+.logo {
+  width: 8rem;
+}
+
+.icon {
+  float: right;
+  font-size: 2rem;
+  transition: 0.3s;
+  vertical-align: middle;
+
+  &:hover {
+    color: @primary-color;
+  }
+}
