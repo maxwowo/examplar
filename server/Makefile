@@ -28,7 +28,7 @@ run-docker: build-docker ## Build and run in detached development mode
 	@docker run \
 	--rm \
 	--name examplar_server \
-	-v /var/lib/examplar/server:/var/log/server \
+	-v /var/lib/examplar/server:/var/log/examplar_server \
 	-p 8080:8080 \
 	examplar_server
 
