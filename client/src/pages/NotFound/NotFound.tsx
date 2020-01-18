@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import classes from './NotFound.module.less';
 
 interface NotFoundProps {
@@ -22,11 +24,11 @@ const NotFound: React.FC<NotFoundProps> = () => (
           className={classes.description}
         >
           Page not found,{' '}
-          <a
-            href='/'
+          <Link
+            to='/'
           >
             go back home
-          </a>
+          </Link>
           .
         </p>
       </div>
