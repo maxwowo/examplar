@@ -13,7 +13,6 @@ import (
 type CourseController struct{}
 
 var courseModel = new(models.Course)
-var universityModel = new(models.University)
 
 func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 	var coursePayload forms.CreateCourse

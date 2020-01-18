@@ -8,6 +8,39 @@ type University struct {
 	Domain string `json:"domain"`
 }
 
+func (u University) AllUniversities() ([]University, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		SELECT * FROM universities
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query()
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	universities := make([]University, 0)
+
+	for rows.Next() {
+		var row University
+
+		err = rows.Scan(&row.ID, &row.Name, &row.Domain)
+		if err != nil {
+			return nil, err
+		}
+
+		universities = append(universities, row)
+	}
+
+	return universities, nil
+}
+
 func (u University) ExistsID(ID int) (bool, error) {
 	db := database.GetDatabase()
 
