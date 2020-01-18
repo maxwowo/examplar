@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import Landing from './pages/Landing/Landing';
+import Landing from './Landing/Landing';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import NotFound from './pages/NotFound/NotFound';
+import NotFound from './NotFound/NotFound';
 
 interface RouterProps {
 
