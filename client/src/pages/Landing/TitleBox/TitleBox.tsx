@@ -3,7 +3,7 @@ import { Typography } from 'antd';
 
 import classes from './TitleBox.module.less';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 interface TitleBoxProps {
 
@@ -16,7 +16,14 @@ const TitleBox: React.FC<TitleBoxProps> = () => (
       ellipsis
       className={classes.title}
     >
-      Find your examplar
+      Find your
+      {' '}
+      <Text
+        className={classes.examplar}
+      >
+        Exam
+      </Text>
+      plar
     </Title>
     <Title
       level={4}
