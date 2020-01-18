@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Typography } from 'antd';
 
 import classes from './NotFound.module.less';
+
+const { Title, Text } = Typography;
 
 interface NotFoundProps {
 
@@ -15,12 +18,12 @@ const NotFound: React.FC<NotFoundProps> = () => (
       className={classes.textSection}
     >
       <div>
-        <h1
+        <Title
           className={classes.title}
         >
           404
-        </h1>
-        <p
+        </Title>
+        <Text
           className={classes.description}
         >
           Page not found,
@@ -31,7 +34,7 @@ const NotFound: React.FC<NotFoundProps> = () => (
             go back home
           </Link>
           .
-        </p>
+        </Text>
       </div>
     </section>
   </div>
