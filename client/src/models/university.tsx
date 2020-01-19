@@ -1,4 +1,4 @@
-import client, { ClientErrorBody, ClientResponse } from './client';
+import client, { ClientErrorBody, ClientResponse } from '../services/networking';
 
 export interface University {
   id: string,
@@ -13,8 +13,12 @@ interface GetAllResponseBody {
 export const getAllUniversities = (): Promise<University[] | void> => (
   client
     .get('/universities')
-    .then((res: ClientResponse<GetAllResponseBody>) => res.data.universities)
-    .catch((err: ClientErrorBody) => {
-      throw err;
-    })
+    .then(
+      (res: ClientResponse<GetAllResponseBody>) => res.data.universities
+    )
+    .catch(
+      (err: ClientErrorBody) => {
+        throw err;
+      }
+    )
 );

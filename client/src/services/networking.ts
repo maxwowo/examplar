@@ -16,7 +16,7 @@ export interface ClientError {
   error: ClientErrorBody
 }
 
-interface Client {
+interface Networking {
   get: (url: string) => ClientPromise;
   delete: (url: string) => ClientPromise;
   post: (url: string, data?: any) => ClientPromise;
@@ -49,7 +49,7 @@ const processRequest = (
     )
 );
 
-const client: Client = {
+const client: Networking = {
   get: url => (
     processRequest(clientInstance.get, url)
   ),
