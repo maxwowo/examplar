@@ -1,9 +1,10 @@
 import React from 'react';
 import { Typography } from 'antd';
 
+import Logo from '../../../components/Logo/Logo';
 import classes from './TitleBox.module.less';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 interface TitleBoxProps {
 
@@ -18,12 +19,7 @@ const TitleBox: React.FC<TitleBoxProps> = () => (
     >
       Find your
       {' '}
-      <Text
-        className={classes.examplar}
-      >
-        Exam
-      </Text>
-      plar
+      <Logo/>
     </Title>
     <Title
       level={4}

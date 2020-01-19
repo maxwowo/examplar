@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Icon, Layout, Row } from 'antd';
 
-import logo from '../../assets/logo.png';
+import Logo from '../Logo/Logo';
 import classes from './Navbar.module.less';
 
 const { Header } = Layout;
@@ -26,10 +26,8 @@ const Navbar: React.FC<NavbarProps> = () => (
         <Link
           to="/"
         >
-          <img
+          <Logo
             className={classes.logo}
-            src={logo}
-            alt="logo"
           />
         </Link>
       </Col>
