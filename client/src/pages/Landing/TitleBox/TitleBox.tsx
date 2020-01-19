@@ -25,7 +25,7 @@ const TitleBox: React.FC<TitleBoxProps> = () => (
       level={4}
       className={classes.description}
     >
-      The best solutions written by your fellow students, organized into one place.
+      The best solutions written by students, organized into one place.
     </Title>
   </div>
 );
