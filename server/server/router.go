@@ -1,6 +1,7 @@
 package server
 
 import (
+	"github.com/go-chi/cors"
 	"log"
 	"time"
 
@@ -8,7 +9,6 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/jwtauth"
-
 	"github.com/maxwowo/examplar/controllers"
 	"github.com/maxwowo/examplar/middlewares"
 )
@@ -26,11 +26,21 @@ func init() {
 func newRouter() *chi.Mux {
 	router := chi.NewRouter()
 
+	// Basic CORS
+	corsConfig := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "DELETE", "PUT", "POST"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type"},
+		AllowCredentials: true,
+		MaxAge:           400,
+	})
+
 	// Base middleware tools
 	router.Use(middleware.RequestID)
 	router.Use(middleware.RealIP)
 	router.Use(middleware.Logger)
 	router.Use(middlewares.Recoverer)
+	router.Use(corsConfig.Handler)
 
 	// Request timeout middleware
 	router.Use(middleware.Timeout(60 * time.Second))
