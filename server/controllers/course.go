@@ -7,7 +7,7 @@ import (
 
 	"github.com/maxwowo/examplar/forms"
 	"github.com/maxwowo/examplar/models"
-	"github.com/maxwowo/examplar/tools/responder"
+	"github.com/maxwowo/examplar/packages/responder"
 )
 
 type CourseController struct{}

@@ -8,7 +8,7 @@ import (
 
 	"github.com/go-chi/chi/middleware"
 
-	"github.com/maxwowo/examplar/tools/responder"
+	"github.com/maxwowo/examplar/packages/responder"
 )
 
 func Recoverer(next http.Handler) http.Handler {

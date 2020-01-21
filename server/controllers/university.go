@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"github.com/maxwowo/examplar/models"
-	"github.com/maxwowo/examplar/tools/responder"
+	"github.com/maxwowo/examplar/packages/responder"
 	"log"
 	"net/http"
 )
