@@ -16,6 +16,7 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
     className
   }
 ) => {
+  const [loading, setLoading] = React.useState(true);
   const [options, setOptions] = React.useState([]);
 
   const handleSearch = (val: string) => {

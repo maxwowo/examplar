@@ -47,17 +47,11 @@ func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 func (c CourseController) Search(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 
-	course, courseOk := query["course"]
-	university, universityOk := query["university"]
+	code := query.Get("code")
+	university := query.Get("university")
 
-	// Malformed query parameters
-	if !(courseOk && universityOk && len(course) == 1 && len(university) == 1) {
-		responder.RespondError(w, "Malformed course and/or university query parameters.", http.StatusBadRequest)
-		return
-	}
-
-	// Get all rows with matching course and university values
-	courses, err := courseModel.GetByCourseUniversity(course[0], university[0])
+	// Get all rows with matching code and university values
+	courses, err := courseModel.GetByCourseUniversity(code, university)
 	if err != nil {
 		log.Panic(err)
 	}

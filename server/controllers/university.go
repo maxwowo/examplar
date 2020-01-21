@@ -11,8 +11,12 @@ type UniversityController struct{}
 
 var universityModel = new(models.University)
 
-func (u UniversityController) AllUniversities(w http.ResponseWriter, r *http.Request) {
-	universities, err := universityModel.AllUniversities()
+func (u UniversityController) Search(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query()
+
+	name := query.Get("name")
+
+	universities, err := universityModel.GetByName(name)
 	if err != nil {
 		log.Panic(err)
 	}

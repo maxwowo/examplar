@@ -8,18 +8,20 @@ type University struct {
 	Domain string `json:"domain"`
 }
 
-func (u University) AllUniversities() ([]University, error) {
+func (u University) GetByName(name string) ([]University, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
 		SELECT * FROM universities
+		WHERE name ILIKE '%' || $1 || '%'
+		LIMIT 5
 	`)
 	if err != nil {
 		return nil, err
 	}
 	defer stmt.Close()
 
-	rows, err := stmt.Query()
+	rows, err := stmt.Query(name)
 	if err != nil {
 		return nil, err
 	}

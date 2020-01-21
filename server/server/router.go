@@ -69,7 +69,7 @@ func newRouter() *chi.Mux {
 	})
 
 	router.Route("/universities", func(router chi.Router) {
-		router.Get("/", university.AllUniversities)
+		router.Get("/", university.Search)
 	})
 
 	router.NotFound(notFound.Handle)
