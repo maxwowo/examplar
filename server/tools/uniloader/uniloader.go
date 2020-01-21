@@ -63,10 +63,10 @@ func decodeFile(file *os.File, universities *universityDomains) {
 
 func insert(db *sql.DB, university university) {
 	stmt, err := db.Prepare(`
-			INSERT INTO universities
-			(id, name, domain)
-			VALUES 
-			(DEFAULT, $1, $2)
+		INSERT INTO universities
+		(id, name, domain)
+		VALUES 
+		(DEFAULT, $1, $2)
 	`)
 	if err != nil {
 		log.Panic(err)
