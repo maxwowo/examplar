@@ -13,7 +13,7 @@ const Router: FC<RouterProps> = () => (
     <Switch>
       <Route
         exact
-        path='/'
+        path={`${process.env.PUBLIC_URL}/`}
         component={Landing}
       />
       <Route
