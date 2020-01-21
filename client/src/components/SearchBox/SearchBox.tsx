@@ -12,7 +12,9 @@ interface SearchBoxProps {
 
 const SearchBox: React.FC<SearchBoxProps> = () => {
   return (
-    <form>
+    <form
+      className={classes.searchBox}
+    >
       <Group
         compact
       >
