@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/maxwowo/examplar/database"
 	"github.com/maxwowo/examplar/forms"
+	"github.com/maxwowo/examplar/packages/skylar"
 )
 
 type Course struct {
@@ -43,7 +44,7 @@ func (c Course) GetByCourseUniversity(code string, university string) ([]Course,
 		SELECT courses.id, courses.code, courses.name, universities.name
 		FROM courses INNER JOIN universities 
 		ON courses.university_id = universities.id 
-		WHERE (courses.code LIKE '%' || $1 || '%' OR courses.name LIKE '%'|| $1 || '%') AND universities.name LIKE '%' || $2 || '%' 
+		WHERE (courses.code LIKE $1 OR courses.name LIKE $1) AND universities.name LIKE $2
 		LIMIT 5
 	`)
 	if err != nil {
@@ -51,7 +52,7 @@ func (c Course) GetByCourseUniversity(code string, university string) ([]Course,
 	}
 	defer stmt.Close()
 
-	rows, err := stmt.Query(code, university)
+	rows, err := stmt.Query(skylar.LikePad(code), skylar.LikePad(university))
 	if err != nil {
 		return nil, err
 	}

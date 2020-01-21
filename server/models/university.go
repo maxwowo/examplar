@@ -1,6 +1,9 @@
 package models
 
-import "github.com/maxwowo/examplar/database"
+import (
+	"github.com/maxwowo/examplar/database"
+	"github.com/maxwowo/examplar/packages/skylar"
+)
 
 type University struct {
 	ID     int    `json:"id"`
@@ -13,7 +16,7 @@ func (u University) GetByName(name string) ([]University, error) {
 
 	stmt, err := db.Prepare(`
 		SELECT * FROM universities
-		WHERE name ILIKE '%' || $1 || '%'
+		WHERE name ILIKE $1
 		LIMIT 5
 	`)
 	if err != nil {
@@ -21,7 +24,7 @@ func (u University) GetByName(name string) ([]University, error) {
 	}
 	defer stmt.Close()
 
-	rows, err := stmt.Query(name)
+	rows, err := stmt.Query(skylar.LikePad(name))
 	if err != nil {
 		return nil, err
 	}
