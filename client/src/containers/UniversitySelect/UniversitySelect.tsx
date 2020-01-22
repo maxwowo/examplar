@@ -19,11 +19,24 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
   }
 ) => {
   const [options, setOptions] = React.useState<University[]>([]);
+  React.useEffect(() => {
+    searchByName('')
+      .then(
+        res => setOptions(res.universities)
+      )
+      .catch(
+        (err: ClientError) => console.log(err)
+      );
+  }, []);
 
   const handleSearch = (query: string) => {
     searchByName(query)
       .then(
-        res => setOptions(res)
+        res => {
+          if (query === res.query) {
+            setOptions(res.universities);
+          }
+        }
       )
       .catch(
         (err: ClientError) => console.log(err)

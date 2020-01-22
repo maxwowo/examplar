@@ -9,13 +9,10 @@ export interface University {
 
 interface SearchBody {
   universities: University[]
+  query: string
 }
 
-export const getAllUniversities = (): Promise<University[]> => (
-  searchByName('')
-);
-
-export const searchByName = (query: string): Promise<University[]> => (
+export const searchByName = (query: string): Promise<SearchBody> => (
   client
     .get(
       qs.stringifyUrl(
@@ -28,7 +25,7 @@ export const searchByName = (query: string): Promise<University[]> => (
       )
     )
     .then(
-      (res: ClientResponse<SearchBody>) => res.data.universities
+      (res: ClientResponse<SearchBody>) => res.data
     )
     .catch(
       (err: ClientErrorBody) => {
