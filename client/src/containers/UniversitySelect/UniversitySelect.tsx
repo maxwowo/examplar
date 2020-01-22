@@ -1,5 +1,7 @@
 import React from 'react';
 import { Select } from 'antd';
+import { searchByName, University } from '../../models/university';
+import { ClientError } from '../../services/networking';
 
 const { Option } = Select;
 
@@ -16,11 +18,16 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
     className
   }
 ) => {
-  const [loading, setLoading] = React.useState(true);
-  const [options, setOptions] = React.useState([]);
+  const [options, setOptions] = React.useState<University[]>([]);
 
-  const handleSearch = (val: string) => {
-    console.log(val);
+  const handleSearch = (query: string) => {
+    searchByName(query)
+      .then(
+        res => setOptions(res)
+      )
+      .catch(
+        (err: ClientError) => console.log(err)
+      );
   };
 
   return (
@@ -33,8 +40,8 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
       onSearch={handleSearch}
     >
       {options.map(
-        (curr, i) => (
-          <Option value={curr} key={i}>{curr}</Option>
+        (curr) => (
+          <Option value={curr.name} key={curr.id}>{curr.name}</Option>
         )
       )}
     </Select>

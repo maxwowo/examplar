@@ -1,4 +1,5 @@
 import client, { ClientErrorBody, ClientResponse } from '../services/networking';
+import qs from 'query-string';
 
 export interface University {
   id: string,
@@ -6,15 +7,28 @@ export interface University {
   domain: string
 }
 
-interface GetAllResponseBody {
+interface SearchBody {
   universities: University[]
 }
 
-export const getAllUniversities = (): Promise<University[] | void> => (
+export const getAllUniversities = (): Promise<University[]> => (
+  searchByName('')
+);
+
+export const searchByName = (query: string): Promise<University[]> => (
   client
-    .get('/universities')
+    .get(
+      qs.stringifyUrl(
+        {
+          url: '/universities',
+          query: {
+            name: query
+          }
+        }
+      )
+    )
     .then(
-      (res: ClientResponse<GetAllResponseBody>) => res.data.universities
+      (res: ClientResponse<SearchBody>) => res.data.universities
     )
     .catch(
       (err: ClientErrorBody) => {

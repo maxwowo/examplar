@@ -21,6 +21,7 @@
     "customize-cra": "^0.9.1",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
+    "query-string": "^6.10.1",
     "react": "^16.12.0",
     "react-app-rewired": "^2.1.5",
     "react-dom": "^16.12.0",
