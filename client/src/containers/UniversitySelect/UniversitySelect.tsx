@@ -55,7 +55,7 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
     >
       {options.map(
         (curr) => (
-          <Option value={curr.name} key={curr.id}>{curr.name}</Option>
+          <Option value={curr.id} key={curr.id}>{curr.name}</Option>
         )
       )}
     </Select>
