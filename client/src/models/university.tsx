@@ -2,7 +2,7 @@ import client, { ClientErrorBody, ClientResponse } from '../services/networking'
 import qs from 'query-string';
 
 export interface University {
-  id: string,
+  id: number,
   name: string,
   domain: string
 }
