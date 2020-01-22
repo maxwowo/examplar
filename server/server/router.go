@@ -40,6 +40,7 @@ func newRouter() *chi.Mux {
 	router.Use(middleware.RealIP)
 	router.Use(middleware.Logger)
 	router.Use(middlewares.Recoverer)
+	router.Use(middlewares.Response)
 	router.Use(corsConfig.Handler)
 
 	// Request timeout middleware
