@@ -1,7 +1,8 @@
 import React from 'react';
 import { Select } from 'antd';
+
 import { searchByName, University } from '../../models/university';
-import { ClientError } from '../../services/networking';
+import { notifyUnreachableServer } from '../../tools/errorNotifier';
 
 const { Option } = Select;
 
@@ -25,8 +26,8 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
         res => setOptions(res.universities)
       )
       .catch(
-        (err: ClientError) => console.log(err)
-      );
+        () => notifyUnreachableServer()
+      )
   }, []);
 
   const handleSearch = (query: string) => {
@@ -39,7 +40,7 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
         }
       )
       .catch(
-        (err: ClientError) => console.log(err)
+        () => notifyUnreachableServer()
       );
   };
 
