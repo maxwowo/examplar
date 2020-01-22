@@ -1,6 +1,9 @@
 import { notification } from 'antd';
 
-const notifyError = (title: string, description: string) => {
+const notifyError = (
+  title: string,
+  description: string
+) => {
   notification.error(
     {
       message: title,
