@@ -23,7 +23,9 @@ func (u UniversityController) Search(w http.ResponseWriter, r *http.Request) {
 
 	responder.RespondData(w, struct {
 		Universities []models.University `json:"universities"`
+		Query        string              `json:"query"`
 	}{
 		Universities: universities,
+		Query:        name,
 	})
 }
