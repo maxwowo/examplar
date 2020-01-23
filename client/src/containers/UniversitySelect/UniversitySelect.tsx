@@ -19,6 +19,26 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
     className
   }
 ) => {
+  const [value, setValue] = React.useState<string>('');
+  React.useEffect(
+    () => {
+      searchByName(value)
+        .then(
+          res => {
+            if (value === res.query) {
+              setOptions(res.universities);
+            }
+          }
+        )
+        .catch(
+          () => notifyUnreachableServer()
+        );
+    },
+    [
+      value
+    ]
+  );
+
   const [options, setOptions] = React.useState<University[]>([]);
   React.useEffect(
     () => {
@@ -34,17 +54,7 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
   );
 
   const handleSearch = (query: string) => {
-    searchByName(query)
-      .then(
-        res => {
-          if (query === res.query) {
-            setOptions(res.universities);
-          }
-        }
-      )
-      .catch(
-        () => notifyUnreachableServer()
-      );
+    setValue(query);
   };
 
   return (
