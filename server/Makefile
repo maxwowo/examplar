@@ -16,7 +16,7 @@ build: ## Compile the packages.
 	@go build -o $(BUILD_PATH)
 
 .PHONY: build-docker
-build-docker: ## Compile the packages in development mode into a Docker image
+build-docker: ## Compile the packages in development mode into a Docker image.
 	docker build -t examplar_server .
 
 .PHONY: run
@@ -24,7 +24,7 @@ run: build ## Build and run in development mode.
 	@$(BUILD_PATH) -e development
 
 .PHONY: run-docker
-run-docker: build-docker ## Build and run in detached development mode
+run-docker: build-docker ## Build and run in detached development mode.
 	@docker run \
 	--rm \
 	--name examplar_server \
@@ -33,15 +33,15 @@ run-docker: build-docker ## Build and run in detached development mode
 	examplar_server
 
 .PHONY: stop-docker
-stop-docker: ## Stop the docker server instance
+stop-docker: ## Stop the docker server instance.
 	@docker stop examplar_server
 
 .PHONY: run-bundle
-run-bundle: ## Run the server and the database in Docker
+run-bundle: ## Run the server and the database in Docker.
 	@docker-compose up -d
 
 .PHONY: stop-bundle
-stop-bundle: ## Stop the server and database in Docker
+stop-bundle: ## Stop the server and database in Docker.
 	@docker-compose down
 
 .PHONY: run-prod
@@ -76,7 +76,7 @@ migrations-run: ## Run migrations.
 	up
 
 .PHONY: database-start
-database-start: ## Start the database in Docker
+database-start: ## Start the database in Docker.
 	@mkdir -p /var/lib/examplar/data
 	@docker run \
 	--rm \
@@ -89,11 +89,11 @@ database-start: ## Start the database in Docker
 	postgres
 
 .PHONY: database-stop
-database-stop: ## Stop the database in Docker
+database-stop: ## Stop the database in Docker.
 	@docker stop examplar_database
 
 .PHONY: universities-load
-universities-load: ## Fill the universities table with details of universities from all over the world
+universities-load: ## Fill the universities table with details of universities from all over the world.
 	@docker run \
 	--rm \
 	-v $(shell pwd):/usr/src/examplar_server \
