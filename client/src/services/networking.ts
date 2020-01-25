@@ -1,20 +1,12 @@
-import Axios, { AxiosError, AxiosInstance, AxiosPromise } from 'axios';
+import Axios, { AxiosError, AxiosInstance } from 'axios';
 
 // Types
 export interface ClientResponse<T = any> {
   data: T;
 }
 
-export type ClientPromise<T = any> = Promise<ClientResponse<T>>
-
-export interface ClientErrorBody {
-  code: number,
-  message: string
-}
-
-export interface ClientError {
-  error: ClientErrorBody
-}
+export type ClientPromise<T = any> = Promise<ClientResponse<T>>;
+export type ClientError = AxiosError;
 
 interface Networking {
   get: (url: string) => ClientPromise;
@@ -36,15 +28,15 @@ const clientInstance: AxiosInstance = Axios.create(
 );
 
 const processRequest = (
-  request: (url: string, data?: any) => AxiosPromise,
+  request: (url: string, data?: any) => ClientPromise,
   url: string,
   data?: any
 ): ClientPromise => (
   request(url, data)
     .then(res => res.data)
     .catch(
-      (err: AxiosError<ClientError>) => {
-        throw err.response!.data.error;
+      (err: ClientError) => {
+        throw err;
       }
     )
 );

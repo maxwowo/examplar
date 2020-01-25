@@ -1,4 +1,4 @@
-import client, { ClientErrorBody, ClientResponse } from '../services/networking';
+import client, { ClientError, ClientResponse } from '../services/networking';
 import qs from 'query-string';
 
 export interface University {
@@ -28,7 +28,7 @@ export const searchByName = (query: string): Promise<SearchBody> => (
       (res: ClientResponse<SearchBody>) => res.data
     )
     .catch(
-      (err: ClientErrorBody) => {
+      (err: ClientError) => {
         throw err;
       }
     )

@@ -31,7 +31,9 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
           }
         )
         .catch(
-          () => notifyUnreachableServer()
+          () => {
+            notifyUnreachableServer();
+          }
         );
     },
     [
@@ -47,7 +49,9 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
           res => setOptions(res.universities)
         )
         .catch(
-          () => notifyUnreachableServer()
+          () => {
+            notifyUnreachableServer();
+          }
         );
     },
     []
