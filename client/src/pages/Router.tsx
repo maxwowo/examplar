@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import Landing from './Landing/Landing';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import NotFound from './NotFound/NotFound';
+import Landing from './LandingPage/LandingPage';
+import SearchPage from './SearchPage/SearchPage';
+import NotFoundPage from './NotFoundPage/NotFoundPage';
 
 interface RouterProps {
 
@@ -17,8 +18,12 @@ const Router: FC<RouterProps> = () => (
         component={Landing}
       />
       <Route
+        path={`${process.env.PUBLIC_URL}/search`}
+        component={SearchPage}
+      />
+      <Route
         path='*'
-        component={NotFound}
+        component={NotFoundPage}
       />
     </Switch>
   </BrowserRouter>

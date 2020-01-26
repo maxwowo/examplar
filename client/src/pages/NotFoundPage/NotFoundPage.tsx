@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Typography } from 'antd';
 
-import classes from './NotFound.module.less';
+import classes from './NotFoundPage.module.less';
 
 const { Title, Text } = Typography;
 
@@ -10,7 +10,7 @@ interface NotFoundProps {
 
 }
 
-const NotFound: React.FC<NotFoundProps> = () => (
+const NotFoundPage: React.FC<NotFoundProps> = () => (
   <div
     className={classes.notFound}
   >
@@ -40,4 +40,4 @@ const NotFound: React.FC<NotFoundProps> = () => (
   </div>
 );
 
-export default NotFound;
+export default NotFoundPage;

@@ -21,7 +21,7 @@ const SearchBox: React.FC<SearchBoxProps> = () => {
         <Input
           className={classes.input}
           size="large"
-          placeholder="Search for courses"
+          placeholder="SearchPage for courses"
           name="course"
         />
 
