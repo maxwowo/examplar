@@ -87,4 +87,6 @@ const SearchBox: React.FC<SearchBoxProps> = (
   );
 };
 
-export default withRouter(SearchBox);
+export default withRouter(
+  SearchBox
+);

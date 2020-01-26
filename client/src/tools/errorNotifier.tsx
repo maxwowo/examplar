@@ -1,20 +1,15 @@
 import { notification } from 'antd';
 
-const notifyError = (
-  title: string,
+export const notifyError = (
+  err: Error,
   description: string
 ) => {
+  console.error(err);
+
   notification.error(
     {
-      message: title,
+      message: err.message,
       description: description
     }
-  );
-};
-
-export const notifyUnreachableServer = () => {
-  notifyError(
-    'Cannot not reach the server',
-    'Check your internet connection.'
   );
 };

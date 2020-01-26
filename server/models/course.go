@@ -37,6 +37,43 @@ func (c Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
 	return &course, nil
 }
 
+func (c Course) GetByCourse(course string) ([]Course, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		SELECT courses.id, courses.code, courses.name, universities.id, universities.name
+		FROM courses INNER JOIN universities 
+		ON courses.university_id = universities.id 
+		WHERE (courses.code LIKE $1 OR courses.name LIKE $1)
+		LIMIT 5
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query(skylar.LikePad(course))
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	courses := make([]Course, 0)
+
+	for rows.Next() {
+		var row Course
+
+		err = rows.Scan(&row.ID, &row.Code, &row.Name)
+		if err != nil {
+			return nil, err
+		}
+
+		courses = append(courses, row)
+	}
+
+	return courses, nil
+}
+
 func (c Course) GetByCourseUniversity(course string, university int) ([]Course, error) {
 	db := database.GetDatabase()
 

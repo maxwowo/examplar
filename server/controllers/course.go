@@ -46,20 +46,30 @@ func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 
 // Searches for courses with matching course and university values
 func (c CourseController) Search(w http.ResponseWriter, r *http.Request) {
+	var courses []models.Course
+	var err error
+
 	query := r.URL.Query()
 
 	course := query.Get("course")
 	universityID := query.Get("universityId")
 
-	IntUniversityID, err := strconv.Atoi(universityID)
-	if err != nil {
-		responder.RespondError(w, "Malformed university ID.", http.StatusBadRequest)
-	}
+	if universityID != "" {
+		IntUniversityID, err := strconv.Atoi(universityID)
+		if err != nil {
+			responder.RespondError(w, "Malformed university ID.", http.StatusBadRequest)
+		}
 
-	// Get all rows with matching course and universityID values
-	courses, err := courseModel.GetByCourseUniversity(course, IntUniversityID)
-	if err != nil {
-		log.Panic(err)
+		// Get all rows with matching course and universityID values
+		courses, err = courseModel.GetByCourseUniversity(course, IntUniversityID)
+		if err != nil {
+			log.Panic(err)
+		}
+	} else {
+		courses, err = courseModel.GetByCourse(course)
+		if err != nil {
+			log.Panic(err)
+		}
 	}
 
 	// Send response

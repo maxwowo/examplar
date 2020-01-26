@@ -1,8 +1,9 @@
 import React from 'react';
 import { Icon, List, Spin, Typography } from 'antd';
+import { Link } from 'react-router-dom';
 
 import { Course } from '../../models/course';
-import { Link } from 'react-router-dom';
+import EmptyCourseResults from '../EmptyCourseResults/EmptyCourseResults';
 
 interface CourseResultsProps {
   loading: boolean;
@@ -23,6 +24,13 @@ const CourseResults: React.FC<CourseResultsProps> = (
       </Typography.Text>
     }
     dataSource={courses}
+    locale={
+      {
+        emptyText: (
+          <EmptyCourseResults/>
+        )
+      }
+    }
     loading={
       {
         spinning: loading,

@@ -5,7 +5,7 @@ import Layout from '../../components/Layout/Layout';
 import CourseResults from '../../components/CourseResults/CourseResults';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import { Course, CourseBody, searchByCourseUniversityId } from '../../models/course';
-import { notifyUnreachableServer } from '../../tools/errorNotifier';
+import { notifyError } from '../../tools/errorNotifier';
 import classes from './SearchPage.module.less';
 
 interface SearchProps extends RouteComponentProps {
@@ -31,14 +31,21 @@ const SearchPage: React.FC<SearchProps> = (
         universityId ? universityId : ''
       )
         .then(
-          (res: CourseBody) => {
+          (
+            res: CourseBody
+          ) => {
             setCourses(res.courses);
             setLoading(false);
           }
         )
         .catch(
-          () => {
-            notifyUnreachableServer();
+          (
+            err: Error
+          ) => {
+            notifyError(
+              err,
+              'Could not obtain search results.'
+            );
           }
         );
     },
@@ -69,4 +76,6 @@ const SearchPage: React.FC<SearchProps> = (
   );
 };
 
-export default withRouter(SearchPage);
+export default withRouter(
+  SearchPage
+);

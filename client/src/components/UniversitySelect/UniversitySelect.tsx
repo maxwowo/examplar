@@ -2,7 +2,7 @@ import React from 'react';
 import { Select } from 'antd';
 
 import { SearchBody, searchByName, University } from '../../models/university';
-import { notifyUnreachableServer } from '../../tools/errorNotifier';
+import { notifyError } from '../../tools/errorNotifier';
 
 const { Option } = Select;
 
@@ -10,7 +10,7 @@ interface UniversitySelectProps {
   placeholder: string;
   size: 'default' | 'large' | 'small';
   className?: string;
-  handleUniversityChange: (
+  handleUniversityChange?: (
     value: number
   ) => void;
 }
@@ -28,15 +28,22 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
     () => {
       searchByName(value)
         .then(
-          (res: SearchBody) => {
+          (
+            res: SearchBody
+          ) => {
             if (value === res.query) {
               setOptions(res.universities);
             }
           }
         )
         .catch(
-          () => {
-            notifyUnreachableServer();
+          (
+            err: Error
+          ) => {
+            notifyError(
+              err,
+              'Could not obtain university list.'
+            );
           }
         );
     },
