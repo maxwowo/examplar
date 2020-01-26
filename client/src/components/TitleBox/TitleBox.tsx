@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from 'antd';
 
-import Logo from '../../../components/Logo/Logo';
+import Logo from '../Logo/Logo';
 import classes from './TitleBox.module.less';
 
 const { Title } = Typography;
