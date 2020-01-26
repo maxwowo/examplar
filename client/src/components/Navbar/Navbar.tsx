@@ -5,14 +5,12 @@ import { Col, Icon, Layout, Row } from 'antd';
 import Logo from '../Logo/Logo';
 import classes from './Navbar.module.less';
 
-const { Header } = Layout;
-
 interface NavbarProps {
 
 }
 
 const Navbar: React.FC<NavbarProps> = () => (
-  <Header
+  <Layout.Header
     className={classes.navbar}
   >
     <Row
@@ -43,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = () => (
       </Col>
 
     </Row>
-  </Header>
+  </Layout.Header>
 );
 
 export default Navbar;

@@ -5,8 +5,6 @@ import { Typography } from 'antd';
 import Space from '../../components/Space/Space';
 import classes from './NotFoundPage.module.less';
 
-const { Title, Text } = Typography;
-
 interface NotFoundProps {
 
 }
@@ -19,12 +17,12 @@ const NotFoundPage: React.FC<NotFoundProps> = () => (
       className={classes.textSection}
     >
       <div>
-        <Title
+        <Typography.Title
           className={classes.title}
         >
           404
-        </Title>
-        <Text
+        </Typography.Title>
+        <Typography.Text
           className={classes.description}
         >
           Page not found,
@@ -35,7 +33,7 @@ const NotFoundPage: React.FC<NotFoundProps> = () => (
             go back home
           </Link>
           .
-        </Text>
+        </Typography.Text>
       </div>
     </section>
   </div>

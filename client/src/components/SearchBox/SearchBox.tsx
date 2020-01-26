@@ -31,7 +31,7 @@ const SearchBox: React.FC<SearchBoxProps> = (
           url: '/search',
           query: {
             course: inputValue!,
-            university: universityId!
+            universityId: universityId!
           }
         }
       )

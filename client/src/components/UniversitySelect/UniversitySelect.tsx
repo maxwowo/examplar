@@ -46,7 +46,9 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
   );
   React.useEffect(
     getByName,
-    [getByName]
+    [
+      getByName
+    ]
   );
 
   const [options, setOptions] = React.useState<University[]>([]);

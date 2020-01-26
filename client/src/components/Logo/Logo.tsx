@@ -4,8 +4,6 @@ import classNames from 'classnames';
 
 import classes from './Logo.module.less';
 
-const { Text } = Typography;
-
 interface LogoProps {
   className?: string
 }
@@ -21,16 +19,16 @@ const Logo: React.FC<LogoProps> = (
       className
     )}
   >
-    <Text
+    <Typography.Text
       className={classes.exam}
     >
       Exam
-    </Text>
-    <Text
+    </Typography.Text>
+    <Typography.Text
       className={classes.plar}
     >
       plar
-    </Text>
+    </Typography.Text>
   </div>
 );
 
