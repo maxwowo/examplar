@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Landing from './LandingPage/LandingPage';
@@ -9,7 +9,7 @@ interface RouterProps {
 
 }
 
-const Router: FC<RouterProps> = () => (
+const Router: React.FC<RouterProps> = () => (
   <BrowserRouter>
     <Switch>
       <Route

@@ -10,13 +10,17 @@ interface UniversitySelectProps {
   placeholder: string;
   size: 'default' | 'large' | 'small';
   className?: string;
+  handleUniversityChange: (
+    value: number
+  ) => void;
 }
 
 const UniversitySelect: React.FC<UniversitySelectProps> = (
   {
     placeholder,
     size,
-    className
+    className,
+    handleUniversityChange
   }
 ) => {
   const [value, setValue] = React.useState<string>('');
@@ -57,6 +61,7 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
       showSearch
       placeholder={placeholder}
       size={size}
+      onChange={handleUniversityChange}
       optionFilterProp="children"
       onSearch={handleSearch}
     >
