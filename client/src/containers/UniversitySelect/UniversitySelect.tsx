@@ -20,7 +20,7 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
   }
 ) => {
   const [value, setValue] = React.useState<string>('');
-  React.useEffect(
+  const getByName = React.useCallback(
     () => {
       searchByName(value)
         .then(
@@ -39,6 +39,10 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
     [
       value
     ]
+  );
+  React.useEffect(
+    getByName,
+    [getByName]
   );
 
   const [options, setOptions] = React.useState<University[]>([]);
