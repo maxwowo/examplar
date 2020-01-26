@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Input } from 'antd';
 
-import UniversitySelect from '../../containers/UniversitySelect/UniversitySelect';
+import UniversitySelect from '../UniversitySelect/UniversitySelect';
 import classes from './SearchBox.module.less';
 
 const { Group } = Input;
