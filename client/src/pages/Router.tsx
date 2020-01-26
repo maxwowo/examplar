@@ -14,11 +14,11 @@ const Router: React.FC<RouterProps> = () => (
     <Switch>
       <Route
         exact
-        path={`${process.env.PUBLIC_URL}/`}
+        path={'/'}
         component={Landing}
       />
       <Route
-        path={`${process.env.PUBLIC_URL}/search`}
+        path={'/search'}
         component={SearchPage}
       />
       <Route
