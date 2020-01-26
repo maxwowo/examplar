@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography } from 'antd';
 
 import Logo from '../Logo/Logo';
+import Space from '../Space/Space';
 import classes from './TitleBox.module.less';
 
 const { Title } = Typography;
@@ -18,7 +19,7 @@ const TitleBox: React.FC<TitleBoxProps> = () => (
       className={classes.title}
     >
       Find your
-      {' '}
+      <Space/>
       <Logo/>
     </Title>
     <Title

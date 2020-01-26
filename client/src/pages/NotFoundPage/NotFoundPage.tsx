@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Typography } from 'antd';
 
+import Space from '../../components/Space/Space';
 import classes from './NotFoundPage.module.less';
 
 const { Title, Text } = Typography;
@@ -27,7 +28,7 @@ const NotFoundPage: React.FC<NotFoundProps> = () => (
           className={classes.description}
         >
           Page not found,
-          {' '}
+          <Space/>
           <Link
             to='/'
           >
