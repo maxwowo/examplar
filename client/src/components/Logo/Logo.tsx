@@ -16,7 +16,10 @@ const Logo: React.FC<LogoProps> = (
   }
 ) => (
   <div
-    className={classNames(classes.logo, className)}
+    className={classNames(
+      classes.logo,
+      className
+    )}
   >
     <Text
       className={classes.exam}

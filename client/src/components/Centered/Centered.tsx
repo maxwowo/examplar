@@ -1,19 +1,27 @@
 import React from 'react';
+import classNames from 'classnames';
 import classes from './Centered.module.less';
 
 interface CenteredProps {
   children: React.ReactNode;
+  className?: string;
 }
 
 const Centered: React.FC<CenteredProps> = (
   {
-    children
+    children,
+    className
   }
 ) => (
   <div
-    className={classes.centered}
+    className={classNames(
+      classes.centered,
+      className
+    )}
   >
-    {children}
+    <div>
+      {children}
+    </div>
   </div>
 );
 

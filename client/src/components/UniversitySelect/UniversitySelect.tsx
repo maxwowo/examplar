@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select } from 'antd';
 
-import { searchByName, University } from '../../models/university';
+import { SearchBody, searchByName, University } from '../../models/university';
 import { notifyUnreachableServer } from '../../tools/errorNotifier';
 
 const { Option } = Select;
@@ -28,7 +28,7 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
     () => {
       searchByName(value)
         .then(
-          res => {
+          (res: SearchBody) => {
             if (value === res.query) {
               setOptions(res.universities);
             }

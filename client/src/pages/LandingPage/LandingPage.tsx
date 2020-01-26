@@ -9,17 +9,13 @@ interface LandingPageProps {
 
 }
 
-const LandingPage: React.FC<LandingPageProps> = () => {
-  return (
-    <Layout>
-      <Centered>
-        <div>
-          <TitleBox/>
-          <SearchBox/>
-        </div>
-      </Centered>
-    </Layout>
-  );
-};
+const LandingPage: React.FC<LandingPageProps> = () => (
+  <Layout>
+    <Centered>
+      <TitleBox/>
+      <SearchBox/>
+    </Centered>
+  </Layout>
+);
 
 export default LandingPage;

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/maxwowo/examplar/forms"
 	"github.com/maxwowo/examplar/models"
@@ -47,11 +48,16 @@ func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 func (c CourseController) Search(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 
-	code := query.Get("code")
-	university := query.Get("university")
+	course := query.Get("course")
+	universityID := query.Get("universityId")
 
-	// Get all rows with matching code and university values
-	courses, err := courseModel.GetByCourseUniversity(code, university)
+	IntUniversityID, err := strconv.Atoi(universityID)
+	if err != nil {
+		responder.RespondError(w, "Malformed university ID.", http.StatusBadRequest)
+	}
+
+	// Get all rows with matching course and universityID values
+	courses, err := courseModel.GetByCourseUniversity(course, IntUniversityID)
 	if err != nil {
 		log.Panic(err)
 	}
