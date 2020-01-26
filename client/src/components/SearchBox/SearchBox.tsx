@@ -64,7 +64,7 @@ const SearchBox: React.FC<SearchBoxProps> = (
           className={classes.input}
           onChange={handleInputChange}
           size="large"
-          placeholder="SearchPage for courses"
+          placeholder="Search for courses"
           name="course"
         />
 
