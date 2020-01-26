@@ -3,7 +3,6 @@ import { Select } from 'antd';
 
 import { searchByName, University } from '../../models/university';
 import { notifyUnreachableServer } from '../../tools/errorNotifier';
-import useDidMountEffect from '../../hooks/useDidMountEffect';
 
 const { Option } = Select;
 
@@ -43,21 +42,6 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
   );
 
   const [options, setOptions] = React.useState<University[]>([]);
-  useDidMountEffect(
-    () => {
-      searchByName('')
-        .then(
-          res => {
-            setOptions(res.universities);
-          }
-        )
-        .catch(
-          () => {
-            notifyUnreachableServer();
-          }
-        );
-    }
-  );
 
   const handleSearch = (query: string) => {
     setValue(query);
