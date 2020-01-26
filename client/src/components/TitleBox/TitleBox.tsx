@@ -1,11 +1,8 @@
 import React from 'react';
-import { Typography } from 'antd';
 
 import Logo from '../Logo/Logo';
 import Space from '../Space/Space';
 import classes from './TitleBox.module.less';
-
-const { Title } = Typography;
 
 interface TitleBoxProps {
 
@@ -13,21 +10,18 @@ interface TitleBoxProps {
 
 const TitleBox: React.FC<TitleBoxProps> = () => (
   <div>
-    <Title
-      level={1}
-      ellipsis
+    <h1
       className={classes.title}
     >
       Find your
       <Space/>
       <Logo/>
-    </Title>
-    <Title
-      level={4}
+    </h1>
+    <h4
       className={classes.description}
     >
       The best solutions written by students, organized into one place.
-    </Title>
+    </h4>
   </div>
 );
 
