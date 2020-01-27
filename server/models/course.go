@@ -1,6 +1,7 @@
 package models
 
 import (
+	"database/sql"
 	"github.com/maxwowo/examplar/database"
 	"github.com/maxwowo/examplar/forms"
 	"github.com/maxwowo/examplar/packages/skylar"
@@ -10,6 +11,23 @@ type Course struct {
 	ID   int    `json:"id"`
 	Code string `json:"code"`
 	Name string `json:"name"`
+}
+
+func buildCourses(rows *sql.Rows) ([]Course, error) {
+	courses := make([]Course, 0)
+
+	for rows.Next() {
+		var row Course
+
+		err := rows.Scan(&row.ID, &row.Code, &row.Name)
+		if err != nil {
+			return nil, err
+		}
+
+		courses = append(courses, row)
+	}
+
+	return courses, nil
 }
 
 func (c Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
@@ -58,20 +76,7 @@ func (c Course) GetByCourse(course string) ([]Course, error) {
 	}
 	defer rows.Close()
 
-	courses := make([]Course, 0)
-
-	for rows.Next() {
-		var row Course
-
-		err = rows.Scan(&row.ID, &row.Code, &row.Name)
-		if err != nil {
-			return nil, err
-		}
-
-		courses = append(courses, row)
-	}
-
-	return courses, nil
+	return buildCourses(rows)
 }
 
 func (c Course) GetByCourseUniversity(course string, university int) ([]Course, error) {
@@ -95,18 +100,5 @@ func (c Course) GetByCourseUniversity(course string, university int) ([]Course, 
 	}
 	defer rows.Close()
 
-	courses := make([]Course, 0)
-
-	for rows.Next() {
-		var row Course
-
-		err = rows.Scan(&row.ID, &row.Code, &row.Name)
-		if err != nil {
-			return nil, err
-		}
-
-		courses = append(courses, row)
-	}
-
-	return courses, nil
+	return buildCourses(rows)
 }
