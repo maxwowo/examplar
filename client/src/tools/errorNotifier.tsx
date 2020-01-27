@@ -1,15 +1,27 @@
 import { notification } from 'antd';
 
-export const notifyError = (
+const notifyError = (
   err: Error,
+  title: string,
   description: string
 ) => {
   console.error(err);
 
   notification.error(
     {
-      message: err.message,
+      message: title,
       description: description
     }
+  );
+};
+
+export const notifyNetworkError = (
+  err: Error,
+  description: string
+) => {
+  notifyError(
+    err,
+    'Network Error',
+    description
   );
 };

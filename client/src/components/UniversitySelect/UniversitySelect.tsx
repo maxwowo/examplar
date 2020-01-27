@@ -2,7 +2,7 @@ import React from 'react';
 import { Select } from 'antd';
 
 import { SearchBody, searchByName, University } from '../../models/university';
-import { notifyError } from '../../tools/errorNotifier';
+import { notifyNetworkError } from '../../tools/errorNotifier';
 
 const { Option } = Select;
 
@@ -40,7 +40,7 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
           (
             err: Error
           ) => {
-            notifyError(
+            notifyNetworkError(
               err,
               'Could not obtain university list.'
             );
