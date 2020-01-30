@@ -1,17 +1,24 @@
 @import '../../../node_modules/antd/es/style/themes/default';
 
 .title {
+  font-size: 6.5vw;
+  font-weight: 700;
+
+  @media only screen and (max-width: @screen-md) {
+    font-size: 10vw;
+  }
+
   &&& {
-    font-size: 6.5vw;
-    font-weight: 700;
     margin: 0;
     padding: 0;
   }
 }
 
 .description {
-  &&& {
-    font-weight: 600;
-    font-size: 1.9vw;
+  font-weight: 600;
+  font-size: 1.9vw;
+
+  @media only screen and (max-width: @screen-md) {
+    font-size: 2.9vw;
   }
 }
