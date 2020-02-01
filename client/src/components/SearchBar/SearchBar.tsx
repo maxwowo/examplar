@@ -54,7 +54,7 @@ const SearchBar: React.FC<SearchBoxProps> = (
 
   return (
     <form
-      className={classes.searchBox}
+      className={classes.searchBar}
       onSubmit={handleSubmit}
     >
       <Group
