@@ -4,8 +4,6 @@ import { Select } from 'antd';
 import { SearchBody, searchByName, University } from '../../models/university';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 
-const { Option } = Select;
-
 interface UniversitySelectProps {
   placeholder: string;
   size: 'default' | 'large' | 'small';
@@ -23,7 +21,12 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
     handleUniversityChange
   }
 ) => {
-  const [value, setValue] = React.useState<string>('');
+  const [
+    value,
+    setValue
+  ] = React.useState<string>(
+    ''
+  );
   const getByName = React.useCallback(
     () => {
       searchByName(value)
@@ -58,7 +61,12 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
     ]
   );
 
-  const [options, setOptions] = React.useState<University[]>([]);
+  const [
+    options,
+    setOptions
+  ] = React.useState<University[]>(
+    []
+  );
 
   const handleSearch = (query: string) => {
     setValue(query);
@@ -75,8 +83,14 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
       onSearch={handleSearch}
     >
       {options.map(
-        (curr) => (
-          <Option value={curr.id} key={curr.id}>{curr.name}</Option>
+        (
+          curr: University
+        ) => (
+          <Select.Option
+            value={curr.id}
+            key={curr.id}>
+            {curr.name}
+          </Select.Option>
         )
       )}
     </Select>
