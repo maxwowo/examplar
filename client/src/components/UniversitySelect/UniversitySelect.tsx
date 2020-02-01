@@ -4,7 +4,7 @@ import { Select } from 'antd';
 import { SearchBody, searchByName, University } from '../../models/university';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 
-interface UniversitySelectProps {
+export interface UniversitySelectProps {
   placeholder: string;
   size: 'default' | 'large' | 'small';
   className?: string;
@@ -13,36 +13,37 @@ interface UniversitySelectProps {
   ) => void;
 }
 
-const UniversitySelect: React.FC<UniversitySelectProps> = (
+const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps> = React.forwardRef((
   {
     placeholder,
     size,
     className,
     handleUniversityChange
-  }
-) => {
-  const [
-    value,
-    setValue
-  ] = React.useState<string>(
-    ''
-  );
-  const getByName = React.useCallback(
-    () => {
-      searchByName(value)
-        .then(
-          (
-            res: SearchBody
-          ) => {
-            if (value === res.query) {
-              setOptions(res.universities);
+  },
+  ref: React.Ref<Select<number>>
+  ) => {
+    const [
+      value,
+      setValue
+    ] = React.useState<string>(
+      ''
+    );
+    const getByName = React.useCallback(
+      () => {
+        searchByName(value)
+          .then(
+            (
+              res: SearchBody
+            ) => {
+              if (value === res.query) {
+                setOptions(res.universities);
+              }
             }
-          }
-        )
-        .catch(
-          (
-            err: Error
-          ) => {
+          )
+          .catch(
+            (
+              err: Error
+            ) => {
             notifyConnectionError(
               err,
               'Could not obtain university list.'
@@ -78,6 +79,7 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
       showSearch
       placeholder={placeholder}
       size={size}
+      ref={ref}
       onChange={handleUniversityChange}
       optionFilterProp="children"
       onSearch={handleSearch}
@@ -95,6 +97,7 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
       )}
     </Select>
   );
-};
+  }
+);
 
 export default UniversitySelect;
