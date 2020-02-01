@@ -13,34 +13,38 @@ const Navbar: React.FC<NavbarProps> = () => (
   <Layout.Header
     className={classes.navbar}
   >
-    <Row
-      type="flex"
-      align="middle"
-      justify="space-between"
-      className="container-width"
+    <div
+      className={classes.navbarBody}
     >
+      <Row
+        type="flex"
+        align="middle"
+        justify="space-between"
+        className="container-width"
+      >
 
-      <Col>
-        <Link
-          to="/"
-        >
-          <Logo
-            className={classes.logo}
+        <Col>
+          <Link
+            to="/"
+          >
+            <Logo
+              className={classes.logo}
+            />
+          </Link>
+        </Col>
+
+        <Col>
+          <Icon
+            className={classes.icon}
+            type="github"
+            onClick={() => {
+              window.open('https://github.com/maxwowo/examplar', '_blank');
+            }}
           />
-        </Link>
-      </Col>
+        </Col>
 
-      <Col>
-        <Icon
-          className={classes.icon}
-          type="github"
-          onClick={() => {
-            window.open('https://github.com/maxwowo/examplar', '_blank');
-          }}
-        />
-      </Col>
-
-    </Row>
+      </Row>
+    </div>
   </Layout.Header>
 );
 
