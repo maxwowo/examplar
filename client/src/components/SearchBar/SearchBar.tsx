@@ -4,7 +4,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import qs from 'query-string';
 
 import UniversitySelect from '../UniversitySelect/UniversitySelect';
-import classes from './SearchBox.module.less';
+import classes from './SearchBar.module.less';
 
 const { Group } = Input;
 
@@ -12,7 +12,7 @@ interface SearchBoxProps extends RouteComponentProps {
 
 }
 
-const SearchBox: React.FC<SearchBoxProps> = (
+const SearchBar: React.FC<SearchBoxProps> = (
   {
     history
   }
@@ -88,5 +88,5 @@ const SearchBox: React.FC<SearchBoxProps> = (
 };
 
 export default withRouter(
-  SearchBox
+  SearchBar
 );
