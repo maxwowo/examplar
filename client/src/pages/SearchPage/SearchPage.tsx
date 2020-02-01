@@ -3,7 +3,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 
 import Layout from '../../components/Layout/Layout';
 import CourseResults from '../../components/CourseResults/CourseResults';
-import SearchBox from '../../components/SearchBox/SearchBox';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import { Course, CourseBody, searchByCourseUniversityId } from '../../models/course';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 import classes from './SearchPage.module.less';
@@ -66,7 +66,7 @@ const SearchPage: React.FC<SearchProps> = (
       <div
         className={classes.resultsBox}
       >
-        <SearchBox/>
+        <SearchBar/>
         <CourseResults
           loading={loading}
           courses={courses}
