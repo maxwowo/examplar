@@ -1,7 +1,6 @@
 @import '~antd/es/style/themes/default';
 
-@search-box-input-width: 50%;
-@search-box-select-width: 42%;
+@submit-button-width: 60px;
 
 .searchBox {
   margin-top: @padding-lg;
@@ -10,13 +9,13 @@
 .input {
   && {
     text-align: left;
-    width: @search-box-input-width;
+    width: calc((100% - @submit-button-width) / 2);
   }
 }
 
 .select {
   &&& {
-    width: @search-box-select-width;
+    width: calc((100% - @submit-button-width) / 2);
 
     * {
       width: initial;
@@ -28,6 +27,6 @@
   && {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    width: calc(100% - @search-box-select-width - @search-box-input-width);
+    width: @submit-button-width;
   }
 }
