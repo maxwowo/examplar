@@ -5,7 +5,7 @@ import Layout from '../../components/Layout/Layout';
 import CourseResults from '../../components/CourseResults/CourseResults';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import { Course, CourseBody, searchByCourseUniversityId } from '../../models/course';
-import { notifyNetworkError } from '../../tools/errorNotifier';
+import { notifyConnectionError } from '../../tools/errorNotifier';
 import classes from './SearchPage.module.less';
 
 interface SearchProps extends RouteComponentProps {
@@ -42,7 +42,7 @@ const SearchPage: React.FC<SearchProps> = (
           (
             err: Error
           ) => {
-            notifyNetworkError(
+            notifyConnectionError(
               err,
               'Could not obtain search results.'
             );

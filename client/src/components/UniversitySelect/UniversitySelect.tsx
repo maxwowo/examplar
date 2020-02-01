@@ -2,11 +2,9 @@ import React from 'react';
 import { Select } from 'antd';
 
 import { SearchBody, searchByName, University } from '../../models/university';
-import { notifyNetworkError } from '../../tools/errorNotifier';
+import { notifyConnectionError } from '../../tools/errorNotifier';
 
-const { Option } = Select;
-
-interface UniversitySelectProps {
+export interface UniversitySelectProps {
   placeholder: string;
   size: 'default' | 'large' | 'small';
   className?: string;
@@ -15,32 +13,38 @@ interface UniversitySelectProps {
   ) => void;
 }
 
-const UniversitySelect: React.FC<UniversitySelectProps> = (
+const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps> = React.forwardRef((
   {
     placeholder,
     size,
     className,
     handleUniversityChange
-  }
-) => {
-  const [value, setValue] = React.useState<string>('');
-  const getByName = React.useCallback(
-    () => {
-      searchByName(value)
-        .then(
-          (
-            res: SearchBody
-          ) => {
-            if (value === res.query) {
-              setOptions(res.universities);
+  },
+  ref: React.Ref<Select<number>>
+  ) => {
+    const [
+      value,
+      setValue
+    ] = React.useState<string>(
+      ''
+    );
+    const getByName = React.useCallback(
+      () => {
+        searchByName(value)
+          .then(
+            (
+              res: SearchBody
+            ) => {
+              if (value === res.query) {
+                setOptions(res.universities);
+              }
             }
-          }
-        )
-        .catch(
-          (
-            err: Error
-          ) => {
-            notifyNetworkError(
+          )
+          .catch(
+            (
+              err: Error
+            ) => {
+            notifyConnectionError(
               err,
               'Could not obtain university list.'
             );
@@ -58,7 +62,12 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
     ]
   );
 
-  const [options, setOptions] = React.useState<University[]>([]);
+  const [
+    options,
+    setOptions
+  ] = React.useState<University[]>(
+    []
+  );
 
   const handleSearch = (query: string) => {
     setValue(query);
@@ -70,17 +79,25 @@ const UniversitySelect: React.FC<UniversitySelectProps> = (
       showSearch
       placeholder={placeholder}
       size={size}
+      ref={ref}
       onChange={handleUniversityChange}
       optionFilterProp="children"
       onSearch={handleSearch}
     >
       {options.map(
-        (curr) => (
-          <Option value={curr.id} key={curr.id}>{curr.name}</Option>
+        (
+          curr: University
+        ) => (
+          <Select.Option
+            value={curr.id}
+            key={curr.id}>
+            {curr.name}
+          </Select.Option>
         )
       )}
     </Select>
   );
-};
+  }
+);
 
 export default UniversitySelect;

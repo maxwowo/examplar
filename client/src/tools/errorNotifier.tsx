@@ -15,13 +15,13 @@ const notifyError = (
   );
 };
 
-export const notifyNetworkError = (
+export const notifyConnectionError = (
   err: Error,
   description: string
 ) => {
   notifyError(
     err,
-    'Network Error',
+    'Connection error',
     description
   );
 };
