@@ -85,6 +85,7 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
       >
 
         <Form.Item
+          hasFeedback
           label="Course code"
         >
           {form.getFieldDecorator(
@@ -106,6 +107,7 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
         </Form.Item>
 
         <Form.Item
+          hasFeedback
           label="Course name"
         >
           {form.getFieldDecorator(
@@ -127,6 +129,7 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
         </Form.Item>
 
         <Form.Item
+          hasFeedback
           label="University"
         >
           {form.getFieldDecorator(
