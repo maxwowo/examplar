@@ -80,7 +80,6 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
     >
       <Form
         onSubmit={handleSubmit}
-        layout="horizontal"
         id="create-course-modal-form"
       >
 
