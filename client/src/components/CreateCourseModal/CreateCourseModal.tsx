@@ -21,11 +21,6 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
 
   };
 
-  const itemLayout = {
-    labelCol: { span: 6 },
-    wrapperCol: { span: 18 }
-  };
-
   return (
     <Modal
       title="Create course"
@@ -58,46 +53,59 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
         id="create-course-modal-form"
       >
 
-        <Form.Item label="Course code" {...itemLayout}>
+        <Form.Item
+          label="Course code"
+        >
           {form.getFieldDecorator(
             'courseCode',
             {
               rules: [
                 {
                   required: true,
+                  whitespace: true,
                   message: 'Please enter the course code.'
                 }
               ]
             }
           )(
-            <Input/>
+            <Input
+              placeholder='Enter course code'
+            />
           )}
         </Form.Item>
 
-        <Form.Item label="Course name" {...itemLayout}>
+        <Form.Item
+          label="Course name"
+        >
           {form.getFieldDecorator(
             'courseName',
             {
               rules: [
                 {
                   required: true,
+                  whitespace: true,
                   message: 'Please enter the course name.'
 
                 }
               ]
             }
           )(
-            <Input/>
+            <Input
+              placeholder='Enter course name'
+            />
           )}
         </Form.Item>
 
-        <Form.Item label="University" {...itemLayout}>
+        <Form.Item
+          label="University"
+        >
           {form.getFieldDecorator(
             'university',
             {
               rules: [
                 {
                   required: true,
+                  whitespace: true,
                   message: 'Please select a university.'
                 }
               ]
