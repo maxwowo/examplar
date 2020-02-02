@@ -1,13 +1,11 @@
 import React from 'react';
-import { Select } from 'antd';
+import { SelectProps } from 'antd/lib/select';
+import { Empty, Select } from 'antd';
 
 import { SearchBody, searchByName, University } from '../../models/university';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 
-export interface UniversitySelectProps {
-  placeholder: string;
-  size: 'default' | 'large' | 'small';
-  className?: string;
+export interface UniversitySelectProps extends SelectProps {
   handleUniversityChange?: (
     value: number
   ) => void;
@@ -79,6 +77,12 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps> =
       showSearch
       placeholder={placeholder}
       size={size}
+      notFoundContent={
+        <Empty
+          description='No matching universities'
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+        />
+      }
       ref={ref}
       onChange={handleUniversityChange}
       optionFilterProp="children"

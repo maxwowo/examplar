@@ -14,6 +14,34 @@ export interface CourseBody {
   courses: Course[];
 }
 
+export interface CreateCourseBody {
+  course: Course;
+}
+
+export const createCourse = (
+  courseCode: string,
+  courseName: string,
+  universityId: number
+): Promise<CreateCourseBody> => (
+  client.post(
+    '/courses'
+  )
+    .then(
+      (
+        res: ClientResponse<CreateCourseBody>
+      ) => (
+        res.data
+      )
+    )
+    .catch(
+      (
+        err: ClientError
+      ) => {
+        throw err;
+      }
+    )
+);
+
 export const searchByCourseUniversityId = (
   course: string,
   universityId: string
