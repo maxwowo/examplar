@@ -129,11 +129,12 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
         registerValidSW(swUrl, config);
       }
     })
-    .catch(() => {
-      console.log(
-        'No internet connection found. App is running in offline mode.'
-      );
-    });
+    .catch(
+      () => {
+        console.log(
+          'No internet connection found. App is running in offline mode.'
+        );
+      });
 }
 
 export function unregister() {

@@ -3,6 +3,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Button, Form, Input, Modal } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import UniversitySelect from '../UniversitySelect/UniversitySelect';
+import { createCourse, CreateCourseBody } from '../../models/course';
 
 interface CreateCourseModalProps extends RouteComponentProps, FormComponentProps {
   handleToggleModal: () => void;
@@ -17,13 +18,39 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
     form
   }
 ) => {
-  const handleSubmit = () => {
+  const handleSubmit = (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
 
-  };
-
-  const itemLayout = {
-    labelCol: { span: 6 },
-    wrapperCol: { span: 18 }
+    form.validateFields(
+      (
+        err,
+        {
+          courseCode,
+          courseName,
+          universityId
+        }
+      ) => {
+        createCourse(
+          courseCode,
+          courseName,
+          universityId
+        )
+          .then(
+            (
+              res: CreateCourseBody
+            ) => {
+              console.log(res);
+            }
+          )
+          .catch(
+            () => {
+              console.error('Create course failed');
+            }
+          );
+      }
+    );
   };
 
   return (
@@ -35,69 +62,82 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
       footer={
         [
           <Button
-            key="cancel"
-            onClick={handleToggleModal}
-          >
-            Cancel
-          </Button>,
-          <Button
             key="submit"
             form="create-course-modal-form"
             htmlType="submit"
             type="primary"
-            onClick={handleSubmit}
           >
             Submit
+          </Button>,
+          <Button
+            key="cancel"
+            onClick={handleToggleModal}
+          >
+            Cancel
           </Button>
         ]
       }
     >
       <Form
         onSubmit={handleSubmit}
-        layout="horizontal"
         id="create-course-modal-form"
       >
 
-        <Form.Item label="Course code" {...itemLayout}>
+        <Form.Item
+          hasFeedback
+          label="Course code"
+        >
           {form.getFieldDecorator(
             'courseCode',
             {
               rules: [
                 {
                   required: true,
+                  whitespace: true,
                   message: 'Please enter the course code.'
                 }
               ]
             }
           )(
-            <Input/>
+            <Input
+              placeholder='Enter course code'
+            />
           )}
         </Form.Item>
 
-        <Form.Item label="Course name" {...itemLayout}>
+        <Form.Item
+          hasFeedback
+          label="Course name"
+        >
           {form.getFieldDecorator(
             'courseName',
             {
               rules: [
                 {
                   required: true,
+                  whitespace: true,
                   message: 'Please enter the course name.'
-
                 }
               ]
             }
           )(
-            <Input/>
+            <Input
+              placeholder='Enter course name'
+            />
           )}
         </Form.Item>
 
-        <Form.Item label="University" {...itemLayout}>
+        <Form.Item
+          hasFeedback
+          label="University"
+        >
           {form.getFieldDecorator(
-            'university',
+            'universityId',
             {
               rules: [
                 {
                   required: true,
+                  type: 'integer',
                   message: 'Please select a university.'
                 }
               ]
