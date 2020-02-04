@@ -39,11 +39,6 @@ const CourseResults: React.FC<CourseResultsProps> = (
             indicator={
               <Icon
                 type='loading'
-                style={
-                  {
-                    fontSize: 30
-                  }
-                }
                 spin
               />
             }
