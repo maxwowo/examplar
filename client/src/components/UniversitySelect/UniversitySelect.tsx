@@ -5,35 +5,40 @@ import { Empty, Select } from 'antd';
 import { SearchBody, searchByName, University } from '../../models/university';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 
-export interface UniversitySelectProps extends SelectProps {
+export interface UniversitySelectProps {
   handleUniversityChange?: (
+    value: number
+  ) => void;
+  onChange?: (
     value: number
   ) => void;
 }
 
-const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps> = React.forwardRef((
+const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & SelectProps> = React.forwardRef((
   {
     placeholder,
     size,
     className,
-    handleUniversityChange
+    handleUniversityChange,
+    onChange,
+    id
   },
   ref: React.Ref<Select<number>>
   ) => {
     const [
-      value,
-      setValue
+      selectValue,
+      setSelectValue
     ] = React.useState<string>(
       ''
     );
     const getByName = React.useCallback(
       () => {
-        searchByName(value)
+        searchByName(selectValue)
           .then(
             (
               res: SearchBody
             ) => {
-              if (value === res.query) {
+              if (selectValue === res.query) {
                 setOptions(res.universities);
               }
             }
@@ -50,7 +55,7 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps> =
         );
     },
     [
-      value
+      selectValue
     ]
   );
   React.useEffect(
@@ -60,33 +65,45 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps> =
     ]
   );
 
-  const [
-    options,
-    setOptions
-  ] = React.useState<University[]>(
-    []
-  );
+    const [
+      options,
+      setOptions
+    ] = React.useState<University[]>(
+      []
+    );
 
-  const handleSearch = (query: string) => {
-    setValue(query);
-  };
+    const handleSearch = (query: string) => {
+      setSelectValue(query);
+    };
 
-  return (
-    <Select
-      className={className}
-      showSearch
-      placeholder={placeholder}
-      size={size}
-      notFoundContent={
-        <Empty
-          description='No matching universities'
+    const handleChange = (
+      value: number
+    ) => {
+      if (handleUniversityChange) {
+        handleUniversityChange(value);
+      }
+
+      if (onChange) {
+        onChange(value);
+      }
+    };
+
+    return (
+      <Select
+        className={className}
+        showSearch
+        placeholder={placeholder}
+        size={size}
+        notFoundContent={
+          <Empty
+            description='No matching universities'
           image={Empty.PRESENTED_IMAGE_SIMPLE}
         />
       }
-      ref={ref}
-      onChange={handleUniversityChange}
-      optionFilterProp="children"
-      onSearch={handleSearch}
+        ref={ref}
+        onChange={handleChange}
+        optionFilterProp="children"
+        onSearch={handleSearch}
     >
       {options.map(
         (
