@@ -17,8 +17,14 @@ const SearchBar: React.FC<SearchBoxProps> = (
     history
   }
 ) => {
-  const [inputValue, setInputValue] = React.useState<string | null>(null);
-  const [universityId, setUniversityId] = React.useState<string | null>(null);
+  const [
+    inputValue,
+    setInputValue
+  ] = React.useState<string | null>(null);
+  const [
+    universityId,
+    setUniversityId
+  ] = React.useState<string | null>(null);
 
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement>

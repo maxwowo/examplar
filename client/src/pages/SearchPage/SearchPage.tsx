@@ -21,9 +21,15 @@ const SearchPage: React.FC<SearchProps> = (
   const course = params.get('course');
   const universityId = params.get('universityId');
 
-  const [loading, setLoading] = React.useState(true);
+  const [
+    loading,
+    setLoading
+  ] = React.useState(true);
 
-  const [courses, setCourses] = React.useState<Course[]>([]);
+  const [
+    courses,
+    setCourses
+  ] = React.useState<Course[]>([]);
   const getByCourseUniversityId = React.useCallback(
     () => {
       searchByCourseUniversityId(

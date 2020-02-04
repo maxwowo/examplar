@@ -8,7 +8,10 @@ interface EmptyCourseResultsProps {
 }
 
 const EmptyCourseResults: React.FC<EmptyCourseResultsProps> = () => {
-  const [modalVisible, setModalVisible] = React.useState(false);
+  const [
+    modalVisible,
+    setModalVisible
+  ] = React.useState(false);
 
   const handleToggleModal = () => {
     setModalVisible(!modalVisible);
