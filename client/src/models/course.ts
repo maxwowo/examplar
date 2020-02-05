@@ -3,11 +3,10 @@ import qs from 'query-string';
 import client, { ClientError, ClientResponse } from '../services/networking';
 
 export interface Course {
-  courseId: number;
-  courseCode: string;
-  courseName: string;
+  id: number;
+  code: string;
+  name: string;
   universityId: number;
-  universityName: string;
 }
 
 export interface CourseBody {
