@@ -56,7 +56,7 @@ const CourseResults: React.FC<CourseResultsProps> = (
               {course.name}
             </Link>
           }
-          description={`${course.code} @ some university`}
+          description={`${course.code} @ something`}
         />
       </List.Item>
     )}
