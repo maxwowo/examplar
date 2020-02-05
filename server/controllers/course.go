@@ -55,13 +55,13 @@ func (c CourseController) Search(w http.ResponseWriter, r *http.Request) {
 	universityID := query.Get("universityId")
 
 	if universityID != "" {
-		IntUniversityID, err := strconv.Atoi(universityID)
+		universityID, err := strconv.Atoi(universityID)
 		if err != nil {
 			responder.RespondError(w, "Malformed university ID.", http.StatusBadRequest)
 		}
 
 		// Get all rows with matching course and universityID values
-		courses, err = courseModel.GetByCourseUniversity(course, IntUniversityID)
+		courses, err = courseModel.GetByCourseUniversity(course, universityID)
 		if err != nil {
 			log.Panic(err)
 		}

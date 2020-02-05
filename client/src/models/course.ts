@@ -24,7 +24,12 @@ export const createCourse = (
   universityId: number
 ): Promise<CreateCourseBody> => (
   client.post(
-    '/courses'
+    '/courses',
+    {
+      code: courseCode,
+      name: courseName,
+      universityId: universityId
+    }
   )
     .then(
       (

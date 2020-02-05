@@ -45,7 +45,8 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
             }
           )
           .catch(
-            () => {
+            (err) => {
+              console.error(err);
               console.error('Create course failed');
             }
           );
