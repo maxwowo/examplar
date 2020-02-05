@@ -8,23 +8,24 @@ import (
 )
 
 type Course struct {
-	ID   int    `json:"id"`
-	Code string `json:"code"`
-	Name string `json:"name"`
+	ID           int    `json:"id"`
+	Code         string `json:"code"`
+	Name         string `json:"name"`
+	UniversityID int    `json:"universityId"`
 }
 
 func buildCourses(rows *sql.Rows) ([]Course, error) {
 	courses := make([]Course, 0)
 
 	for rows.Next() {
-		var row Course
+		var course Course
 
-		err := rows.Scan(&row.ID, &row.Code, &row.Name)
+		err := rows.Scan(&course.ID, &course.Code, &course.Name, &course.UniversityID)
 		if err != nil {
 			return nil, err
 		}
 
-		courses = append(courses, row)
+		courses = append(courses, course)
 	}
 
 	return courses, nil
@@ -59,7 +60,7 @@ func (c Course) GetByCourse(course string) ([]Course, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
-		SELECT courses.id, courses.code, courses.name, universities.id, universities.name
+		SELECT courses.id, courses.code, courses.name, universities.id
 		FROM courses INNER JOIN universities 
 		ON courses.university_id = universities.id 
 		WHERE (courses.code LIKE $1 OR courses.name LIKE $1)
@@ -83,7 +84,7 @@ func (c Course) GetByCourseUniversity(course string, university int) ([]Course, 
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
-		SELECT courses.id, courses.code, courses.name, universities.id, universities.name
+		SELECT courses.id, courses.code, courses.name, universities.id
 		FROM courses INNER JOIN universities 
 		ON courses.university_id = universities.id 
 		WHERE (courses.code LIKE $1 OR courses.name LIKE $1) AND universities.id = $2

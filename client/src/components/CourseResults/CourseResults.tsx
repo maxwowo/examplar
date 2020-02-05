@@ -51,12 +51,12 @@ const CourseResults: React.FC<CourseResultsProps> = (
         <List.Item.Meta
           title={
             <Link
-              to={`/courses/${course.courseId}`}
+              to={`/courses/${course.id}`}
             >
-              {course.courseName}
+              {course.name}
             </Link>
           }
-          description={`${course.courseCode} @ ${course.universityName}`}
+          description={`${course.code} @ something`}
         />
       </List.Item>
     )}

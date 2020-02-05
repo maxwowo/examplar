@@ -3,11 +3,10 @@ import qs from 'query-string';
 import client, { ClientError, ClientResponse } from '../services/networking';
 
 export interface Course {
-  courseId: number;
-  courseCode: string;
-  courseName: string;
+  id: number;
+  code: string;
+  name: string;
   universityId: number;
-  universityName: string;
 }
 
 export interface CourseBody {
@@ -24,7 +23,12 @@ export const createCourse = (
   universityId: number
 ): Promise<CreateCourseBody> => (
   client.post(
-    '/courses'
+    '/courses',
+    {
+      code: courseCode,
+      name: courseName,
+      universityId: universityId
+    }
   )
     .then(
       (
