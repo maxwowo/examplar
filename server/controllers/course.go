@@ -41,7 +41,11 @@ func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 		log.Panic(err)
 	}
 
-	responder.RespondData(w, course)
+	responder.RespondData(w, struct {
+		Course models.Course `json:"course"`
+	}{
+		Course: *course,
+	})
 }
 
 // Searches for courses with matching course and university values
