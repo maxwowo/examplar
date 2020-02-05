@@ -41,7 +41,7 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
             (
               res: CreateCourseBody
             ) => {
-              console.log(res);
+              history.push(`/courses/${res.course.id}`)
             }
           )
           .catch(
