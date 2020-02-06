@@ -18,7 +18,7 @@ const Router: React.FC<RouterProps> = () => (
         component={Landing}
       />
       <Route
-        path={'/search'}
+        path={'/courses'}
         component={SearchPage}
       />
       <Route
