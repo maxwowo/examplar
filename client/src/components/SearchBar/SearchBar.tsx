@@ -34,7 +34,7 @@ const SearchBar: React.FC<SearchBoxProps> = (
     history.push(
       qs.stringifyUrl(
         {
-          url: '/search',
+          url: '/courses',
           query: {
             course: inputValue!,
             universityId: universityId!
