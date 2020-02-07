@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Input } from 'antd';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import qs from 'query-string';
 
 import UniversitySelect from '../UniversitySelect/UniversitySelect';

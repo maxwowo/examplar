@@ -1,13 +1,30 @@
 import React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-interface CoursePageProps {
+import Layout from '../../components/Layout/Layout';
+
+interface CoursePageMatchParams {
+  courseId: string;
+}
+
+interface CoursePageProps extends RouteComponentProps<CoursePageMatchParams> {
 
 }
 
-const CoursePage: React.FC<CoursePageProps> = () => (
-  <div>
-    aoeu
-  </div>
-);
+const CoursePage: React.FC<CoursePageProps> = (
+  {
+    match
+  }
+) => {
+  const courseId = Number(match.params.courseId);
 
-export default CoursePage;
+  return (
+    <Layout>
+      course page
+    </Layout>
+  );
+};
+
+export default withRouter(
+  CoursePage
+);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import Layout from '../../components/Layout/Layout';
 import CourseResults from '../../components/CourseResults/CourseResults';
