@@ -25,20 +25,11 @@ func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Invalid university ID
-	universityExists, err := universityModel.ExistsID(coursePayload.UniversityID)
-	if err != nil {
-		log.Panic(err)
-	}
-	if !universityExists {
-		responder.RespondError(w, "Invalid university ID.", http.StatusBadRequest)
-		return
-	}
-
 	// Create course
 	course, err := courseModel.Create(coursePayload)
 	if err != nil {
-		log.Panic(err)
+		responder.RespondError(w, "Invalid university ID.", http.StatusBadRequest)
+		return
 	}
 
 	responder.RespondData(w, struct {

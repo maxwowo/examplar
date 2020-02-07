@@ -46,27 +46,6 @@ func (u University) SearchByName(name string) ([]University, error) {
 	return universities, nil
 }
 
-func (u University) ExistsID(ID int) (bool, error) {
-	db := database.GetDatabase()
-
-	stmt, err := db.Prepare(`
-		SELECT EXISTS(SELECT 1 FROM universities WHERE id = $1)
-	`)
-	if err != nil {
-		return false, err
-	}
-	defer stmt.Close()
-
-	var exists bool
-
-	err = stmt.QueryRow(ID).Scan(&exists)
-	if err != nil {
-		return false, err
-	}
-
-	return exists, nil
-}
-
 func (u University) Get(ID int) (*University, error) {
 	db := database.GetDatabase()
 
