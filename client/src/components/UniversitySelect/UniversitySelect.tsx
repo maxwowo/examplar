@@ -12,6 +12,7 @@ export interface UniversitySelectProps {
   onChange?: (
     value: number
   ) => void;
+  defaultId?: number;
 }
 
 const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & SelectProps> = React.forwardRef((
@@ -21,7 +22,8 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
     className,
     handleUniversityChange,
     onChange,
-    id
+    id,
+    defaultId
   },
   ref: React.Ref<Select<number>>
   ) => {
@@ -93,6 +95,7 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
         className={className}
         showSearch
         placeholder={placeholder}
+        defaultValue={defaultId}
         size={size}
         notFoundContent={
           <Empty
@@ -111,7 +114,8 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
         ) => (
           <Select.Option
             value={curr.id}
-            key={curr.id}>
+            key={curr.id}
+          >
             {curr.name}
           </Select.Option>
         )
