@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Landing from './LandingPage/LandingPage';
 import SearchPage from './SearchPage/SearchPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
+import CoursePage from './CoursePage/CoursePage';
 
 interface RouterProps {
 
@@ -14,12 +15,16 @@ const Router: React.FC<RouterProps> = () => (
     <Switch>
       <Route
         exact
-        path={'/'}
+        path='/'
         component={Landing}
       />
       <Route
-        path={'/courses'}
+        path='/search'
         component={SearchPage}
+      />
+      <Route
+        path='/courses/:courseId'
+        component={CoursePage}
       />
       <Route
         path='*'
