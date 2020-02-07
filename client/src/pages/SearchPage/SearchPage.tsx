@@ -8,11 +8,11 @@ import { Course, CourseBody, searchByCourseUniversityId } from '../../models/cou
 import { notifyConnectionError } from '../../tools/errorNotifier';
 import classes from './SearchPage.module.less';
 
-interface SearchProps extends RouteComponentProps {
+interface SearchPageProps extends RouteComponentProps {
 
 }
 
-const SearchPage: React.FC<SearchProps> = (
+const SearchPage: React.FC<SearchPageProps> = (
   {
     location
   }
