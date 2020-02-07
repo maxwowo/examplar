@@ -65,12 +65,12 @@ func (c CourseController) Search(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Get all rows with matching course and universityID values
-		courses, err = courseModel.GetByCourseUniversity(course, IntUniversityID)
+		courses, err = courseModel.SearchByCourseUniversity(course, IntUniversityID)
 		if err != nil {
 			log.Panic(err)
 		}
 	} else {
-		courses, err = courseModel.GetByCourse(course)
+		courses, err = courseModel.SearchByCourse(course)
 		if err != nil {
 			log.Panic(err)
 		}
