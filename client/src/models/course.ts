@@ -47,8 +47,8 @@ export const createCourse = (
 );
 
 export const searchByCourseUniversityId = (
-  course: string,
-  universityId: string
+  course?: string | null,
+  universityId?: string | null
 ): Promise<CourseBody> => (
   client
     .get(

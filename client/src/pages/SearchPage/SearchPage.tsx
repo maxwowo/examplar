@@ -33,8 +33,8 @@ const SearchPage: React.FC<SearchPageProps> = (
   const getByCourseUniversityId = React.useCallback(
     () => {
       searchByCourseUniversityId(
-        course ? course : '',
-        universityId ? universityId : ''
+        course,
+        universityId
       )
         .then(
           (
