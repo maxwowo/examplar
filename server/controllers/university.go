@@ -23,7 +23,7 @@ func (u UniversityController) UniversityContext(next http.Handler) http.Handler 
 			log.Panic(err)
 		}
 
-		university, err := universityModel.GetByID(IntUniversityID)
+		university, err := universityModel.Get(IntUniversityID)
 		if err != nil {
 			responder.RespondError(w, "University ID does not exist.", http.StatusBadRequest)
 			return
@@ -54,7 +54,7 @@ func (u UniversityController) Search(w http.ResponseWriter, r *http.Request) {
 
 	name := query.Get("name")
 
-	universities, err := universityModel.GetByName(name)
+	universities, err := universityModel.SearchByName(name)
 	if err != nil {
 		log.Panic(err)
 	}

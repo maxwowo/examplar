@@ -25,20 +25,11 @@ func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Invalid university ID
-	universityExists, err := universityModel.ExistsID(coursePayload.UniversityID)
-	if err != nil {
-		log.Panic(err)
-	}
-	if !universityExists {
-		responder.RespondError(w, "Invalid university ID.", http.StatusBadRequest)
-		return
-	}
-
 	// Create course
 	course, err := courseModel.Create(coursePayload)
 	if err != nil {
-		log.Panic(err)
+		responder.RespondError(w, "Invalid university ID.", http.StatusBadRequest)
+		return
 	}
 
 	responder.RespondData(w, struct {
@@ -65,12 +56,12 @@ func (c CourseController) Search(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Get all rows with matching course and universityID values
-		courses, err = courseModel.GetByCourseUniversity(course, IntUniversityID)
+		courses, err = courseModel.SearchByCourseUniversity(course, IntUniversityID)
 		if err != nil {
 			log.Panic(err)
 		}
 	} else {
-		courses, err = courseModel.GetByCourse(course)
+		courses, err = courseModel.SearchByCourse(course)
 		if err != nil {
 			log.Panic(err)
 		}
