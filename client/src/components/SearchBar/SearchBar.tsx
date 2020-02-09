@@ -42,6 +42,9 @@ const SearchBar: React.FC<SearchBoxProps> = (
             course: inputValue!,
             universityId: universityId!
           }
+        },
+        {
+          skipNull: true
         }
       )
     );
