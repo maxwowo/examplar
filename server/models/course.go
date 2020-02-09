@@ -56,7 +56,7 @@ func (c Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
 	return &course, nil
 }
 
-func (c Course) GetByCourse(course string) ([]Course, error) {
+func (c Course) SearchByCourse(course string) ([]Course, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -80,7 +80,7 @@ func (c Course) GetByCourse(course string) ([]Course, error) {
 	return buildCourses(rows)
 }
 
-func (c Course) GetByCourseUniversity(course string, university int) ([]Course, error) {
+func (c Course) SearchByCourseUniversity(course string, university int) ([]Course, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`

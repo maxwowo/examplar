@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Input } from 'antd';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import qs from 'query-string';
 
 import UniversitySelect from '../UniversitySelect/UniversitySelect';
@@ -9,12 +9,15 @@ import classes from './SearchBar.module.less';
 const { Group } = Input;
 
 interface SearchBoxProps extends RouteComponentProps {
-
+  courseDefaultValue?: string;
+  universitySelectDefaultValue?: number;
 }
 
 const SearchBar: React.FC<SearchBoxProps> = (
   {
-    history
+    history,
+    courseDefaultValue,
+    universitySelectDefaultValue
   }
 ) => {
   const [
@@ -34,7 +37,7 @@ const SearchBar: React.FC<SearchBoxProps> = (
     history.push(
       qs.stringifyUrl(
         {
-          url: '/courses',
+          url: '/search',
           query: {
             course: inputValue!,
             universityId: universityId!
@@ -70,6 +73,7 @@ const SearchBar: React.FC<SearchBoxProps> = (
           className={classes.input}
           onChange={handleInputChange}
           size="large"
+          defaultValue={courseDefaultValue}
           placeholder="Search for courses"
           name="course"
         />
@@ -78,6 +82,7 @@ const SearchBar: React.FC<SearchBoxProps> = (
           handleUniversityChange={handleUniversityChange}
           className={classes.select}
           placeholder="Filter by university"
+          defaultId={universitySelectDefaultValue}
           size="large"
         />
 

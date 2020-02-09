@@ -11,7 +11,7 @@ type University struct {
 	Domain string `json:"domain"`
 }
 
-func (u University) GetByName(name string) ([]University, error) {
+func (u University) SearchByName(name string) ([]University, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -46,28 +46,7 @@ func (u University) GetByName(name string) ([]University, error) {
 	return universities, nil
 }
 
-func (u University) ExistsID(ID int) (bool, error) {
-	db := database.GetDatabase()
-
-	stmt, err := db.Prepare(`
-		SELECT EXISTS(SELECT 1 FROM universities WHERE id = $1)
-	`)
-	if err != nil {
-		return false, err
-	}
-	defer stmt.Close()
-
-	var exists bool
-
-	err = stmt.QueryRow(ID).Scan(&exists)
-	if err != nil {
-		return false, err
-	}
-
-	return exists, nil
-}
-
-func (u University) GetByID(ID int) (*University, error) {
+func (u University) Get(ID int) (*University, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`

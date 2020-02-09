@@ -12,7 +12,7 @@ This allows you to run the database and server separately. Run `$ make database-
 
 ## With Go
 
-Either use `$ make database-start` to start up the database, or manually set up a local Postgres database with the following credentials
+Either use `$ make database-start` to start up the database, or manually set up a local PostgreSQL database with the following credentials
 
 ```
 user: examplar

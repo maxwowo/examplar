@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import Layout from '../../components/Layout/Layout';
 import CourseResults from '../../components/CourseResults/CourseResults';
@@ -8,11 +8,11 @@ import { Course, CourseBody, searchByCourseUniversityId } from '../../models/cou
 import { notifyConnectionError } from '../../tools/errorNotifier';
 import classes from './SearchPage.module.less';
 
-interface SearchProps extends RouteComponentProps {
+interface SearchPageProps extends RouteComponentProps {
 
 }
 
-const SearchPage: React.FC<SearchProps> = (
+const SearchPage: React.FC<SearchPageProps> = (
   {
     location
   }
@@ -72,7 +72,9 @@ const SearchPage: React.FC<SearchProps> = (
       <div
         className={classes.resultsBox}
       >
-        <SearchBar/>
+        <SearchBar
+          courseDefaultValue={course ? course : ''}
+        />
         <CourseResults
           loading={loading}
           courses={courses}
