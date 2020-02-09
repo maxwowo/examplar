@@ -72,9 +72,7 @@ const SearchPage: React.FC<SearchPageProps> = (
       <div
         className={classes.resultsBox}
       >
-        <SearchBar
-          courseDefaultValue={course ? course : ''}
-        />
+        <SearchBar/>
         <CourseResults
           loading={loading}
           courses={courses}
@@ -84,6 +82,4 @@ const SearchPage: React.FC<SearchPageProps> = (
   );
 };
 
-export default withRouter(
-  SearchPage
-);
+export default withRouter(SearchPage);

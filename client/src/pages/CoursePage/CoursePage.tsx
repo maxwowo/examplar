@@ -25,6 +25,4 @@ const CoursePage: React.FC<CoursePageProps> = (
   );
 };
 
-export default withRouter(
-  CoursePage
-);
+export default withRouter(CoursePage);
