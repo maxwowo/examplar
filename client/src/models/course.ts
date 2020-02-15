@@ -13,15 +13,41 @@ export interface CourseBody {
   courses: Course[];
 }
 
-export interface CreateCourseBody {
+export interface GetBody {
   course: Course;
 }
+
+export interface CreateBody {
+  course: Course;
+}
+
+export const get = (
+  courseId: number
+): Promise<GetBody> => (
+  client.get(
+    `/courses/${courseId}`
+  )
+    .then(
+      (
+        res: ClientResponse<GetBody>
+      ) => (
+        res.data
+      )
+    )
+    .catch(
+      (
+        err: ClientError
+      ) => {
+        throw err;
+      }
+    )
+);
 
 export const create = (
   courseCode: string,
   courseName: string,
   universityId: number
-): Promise<CreateCourseBody> => (
+): Promise<CreateBody> => (
   client.post(
     '/courses',
     {
@@ -32,7 +58,7 @@ export const create = (
   )
     .then(
       (
-        res: ClientResponse<CreateCourseBody>
+        res: ClientResponse<CreateBody>
       ) => (
         res.data
       )

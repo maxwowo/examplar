@@ -18,6 +18,7 @@ const CoursePage: React.FC<CoursePageProps> = (
     match
   }
 ) => {
+
   const courseId = Number(match.params.courseId);
 
   return (
