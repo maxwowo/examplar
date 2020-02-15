@@ -4,6 +4,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import PageLayout from '../../components/PageLayout/PageLayout';
 import PageContent from '../../components/PageContent/PageContent';
+import { Course } from '../../models/course';
 
 interface CoursePageMatchParams {
   courseId: string;
@@ -18,6 +19,11 @@ const CoursePage: React.FC<CoursePageProps> = (
     match
   }
 ) => {
+
+  const [
+    course,
+    setCourse
+  ] = React.useState<Course>();
 
   const courseId = Number(match.params.courseId);
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { SelectProps } from 'antd/lib/select';
 import { Empty, Select } from 'antd';
 
-import { search, SearchBody, University } from '../../models/university';
+import universityModel, { SearchBody, University } from '../../models/university';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 
 export interface UniversitySelectProps {
@@ -33,7 +33,7 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
     );
     const getByName = React.useCallback(
       () => {
-        search(selectValue)
+        universityModel.search(selectValue)
           .then(
             (
               res: SearchBody

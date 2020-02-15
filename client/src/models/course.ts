@@ -21,83 +21,87 @@ export interface CreateBody {
   course: Course;
 }
 
-export const get = (
-  courseId: number
-): Promise<GetBody> => (
-  client.get(
-    `/courses/${courseId}`
-  )
-    .then(
-      (
-        res: ClientResponse<GetBody>
-      ) => (
-        res.data
+const courseModel = {
+  get: (
+    courseId: number
+  ): Promise<GetBody> => (
+    client.get(
+      `/courses/${courseId}`
+    )
+      .then(
+        (
+          res: ClientResponse<GetBody>
+        ) => (
+          res.data
+        )
       )
-    )
-    .catch(
-      (
-        err: ClientError
-      ) => {
-        throw err;
-      }
-    )
-);
-
-export const create = (
-  courseCode: string,
-  courseName: string,
-  universityId: number
-): Promise<CreateBody> => (
-  client.post(
-    '/courses',
-    {
-      code: courseCode,
-      name: courseName,
-      universityId: universityId
-    }
-  )
-    .then(
-      (
-        res: ClientResponse<CreateBody>
-      ) => (
-        res.data
-      )
-    )
-    .catch(
-      (
-        err: ClientError
-      ) => {
-        throw err;
-      }
-    )
-);
-
-export const search = (
-  course?: string | null,
-  universityId?: string | null
-): Promise<CourseBody> => (
-  client
-    .get(
-      qs.stringifyUrl(
-        {
-          url: '/courses',
-          query: {
-            course: course,
-            universityId: universityId
-          }
+      .catch(
+        (
+          err: ClientError
+        ) => {
+          throw err;
         }
       )
-    )
-    .then(
-      (
-        res: ClientResponse<CourseBody>
-      ) => (
-        res.data
-      )
-    )
-    .catch(
-      (err: ClientError) => {
-        throw err;
+  ),
+  create: (
+    courseCode: string,
+    courseName: string,
+    universityId: number
+  ): Promise<CreateBody> => (
+    client.post(
+      '/courses',
+      {
+        code: courseCode,
+        name: courseName,
+        universityId: universityId
       }
     )
-);
+      .then(
+        (
+          res: ClientResponse<CreateBody>
+        ) => (
+          res.data
+        )
+      )
+      .catch(
+        (
+          err: ClientError
+        ) => {
+          throw err;
+        }
+      )
+  ),
+  search: (
+    course?: string | null,
+    universityId?: string | null
+  ): Promise<CourseBody> => (
+    client
+      .get(
+        qs.stringifyUrl(
+          {
+            url: '/courses',
+            query: {
+              course: course,
+              universityId: universityId
+            }
+          }
+        )
+      )
+      .then(
+        (
+          res: ClientResponse<CourseBody>
+        ) => (
+          res.data
+        )
+      )
+      .catch(
+        (
+          err: ClientError
+        ) => {
+          throw err;
+        }
+      )
+  )
+};
+
+export default courseModel;
