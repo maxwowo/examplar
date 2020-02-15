@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Layout from '../../components/Layout/Layout';
+import PageLayout from '../../components/PageLayout/PageLayout';
 import Centered from '../../components/Centered/Centered';
 import TitleBox from '../../components/TitleBox/TitleBox';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -10,12 +10,12 @@ interface LandingPageProps {
 }
 
 const LandingPage: React.FC<LandingPageProps> = () => (
-  <Layout>
+  <PageLayout>
     <Centered>
       <TitleBox/>
       <SearchBar/>
     </Centered>
-  </Layout>
+  </PageLayout>
 );
 
 export default LandingPage;

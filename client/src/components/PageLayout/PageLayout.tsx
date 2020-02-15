@@ -5,7 +5,7 @@ interface PageLayoutProps extends React.HTMLAttributes<HTMLElement> {
 
 }
 
-const Layout: React.FC<PageLayoutProps> = (
+const PageLayout: React.FC<PageLayoutProps> = (
   {
     children
   }
@@ -16,4 +16,4 @@ const Layout: React.FC<PageLayoutProps> = (
   </React.Fragment>
 );
 
-export default Layout;
+export default PageLayout;

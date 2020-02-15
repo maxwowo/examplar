@@ -1,7 +1,9 @@
 import React from 'react';
+import { Col, Row } from 'antd';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import Layout from '../../components/Layout/Layout';
+import PageLayout from '../../components/PageLayout/PageLayout';
+import PageContent from '../../components/PageContent/PageContent';
 
 interface CoursePageMatchParams {
   courseId: string;
@@ -19,9 +21,21 @@ const CoursePage: React.FC<CoursePageProps> = (
   const courseId = Number(match.params.courseId);
 
   return (
-    <Layout>
-      course page
-    </Layout>
+    <PageLayout>
+      <PageContent>
+        <Row
+          type='flex'
+          justify='space-between'
+        >
+          <Col
+            xs={24}
+            md={10}
+          >
+            course sider
+          </Col>
+        </Row>
+      </PageContent>
+    </PageLayout>
   );
 };
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import Layout from '../../components/Layout/Layout';
-import Content from '../../components/Content/Content';
+import PageLayout from '../../components/PageLayout/PageLayout';
+import PageContent from '../../components/PageContent/PageContent';
 import CourseResults from '../../components/CourseResults/CourseResults';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { Course, CourseBody, searchByCourseUniversityId } from '../../models/course';
@@ -68,15 +68,15 @@ const SearchPage: React.FC<SearchPageProps> = (
   );
 
   return (
-    <Layout>
-      <Content>
+    <PageLayout>
+      <PageContent>
         <SearchBar/>
         <CourseResults
           loading={loading}
           courses={courses}
         />
-      </Content>
-    </Layout>
+      </PageContent>
+    </PageLayout>
   );
 };
 
