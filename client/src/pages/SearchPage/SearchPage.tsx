@@ -2,11 +2,11 @@ import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import Layout from '../../components/Layout/Layout';
+import Content from '../../components/Content/Content';
 import CourseResults from '../../components/CourseResults/CourseResults';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { Course, CourseBody, searchByCourseUniversityId } from '../../models/course';
 import { notifyConnectionError } from '../../tools/errorNotifier';
-import classes from './SearchPage.module.less';
 
 interface SearchPageProps extends RouteComponentProps {
 
@@ -69,15 +69,13 @@ const SearchPage: React.FC<SearchPageProps> = (
 
   return (
     <Layout>
-      <div
-        className={classes.resultsBox}
-      >
+      <Content>
         <SearchBar/>
         <CourseResults
           loading={loading}
           courses={courses}
         />
-      </div>
+      </Content>
     </Layout>
   );
 };
