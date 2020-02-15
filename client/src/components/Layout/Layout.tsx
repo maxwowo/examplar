@@ -1,8 +1,8 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
 
-interface PageLayoutProps {
-  children: React.ReactNode;
+interface PageLayoutProps extends React.HTMLAttributes<HTMLElement> {
+
 }
 
 const Layout: React.FC<PageLayoutProps> = (

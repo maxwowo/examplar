@@ -2,9 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import classes from './Centered.module.less';
 
-interface CenteredProps {
-  children: React.ReactNode;
-  className?: string;
+interface CenteredProps extends React.HTMLAttributes<HTMLElement> {
+
 }
 
 const Centered: React.FC<CenteredProps> = (
