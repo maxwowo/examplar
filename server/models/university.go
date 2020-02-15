@@ -62,9 +62,6 @@ func (u University) Get(ID int) (*University, error) {
 	var university University
 
 	err = stmt.QueryRow(ID).Scan(&university.ID, &university.Name, &university.Domain)
-	if err != nil {
-		return nil, err
-	}
 
 	return &university, err
 }

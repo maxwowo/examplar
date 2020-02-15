@@ -34,7 +34,7 @@ func (u UniversityController) UniversityContext(next http.Handler) http.Handler 
 	})
 }
 
-func (u UniversityController) GetUniversity(w http.ResponseWriter, r *http.Request) {
+func (u UniversityController) Get(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	university, ok := ctx.Value("university").(*models.University)
