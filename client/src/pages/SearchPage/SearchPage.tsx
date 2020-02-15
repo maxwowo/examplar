@@ -5,7 +5,7 @@ import PageLayout from '../../components/PageLayout/PageLayout';
 import PageContent from '../../components/PageContent/PageContent';
 import CourseResults from '../../components/CourseResults/CourseResults';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { Course, CourseBody, searchByCourseUniversityId } from '../../models/course';
+import { Course, CourseBody, search } from '../../models/course';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 
 interface SearchPageProps extends RouteComponentProps {
@@ -32,7 +32,7 @@ const SearchPage: React.FC<SearchPageProps> = (
   ] = React.useState<Course[]>([]);
   const getByCourseUniversityId = React.useCallback(
     () => {
-      searchByCourseUniversityId(
+      search(
         course,
         universityId
       )

@@ -3,7 +3,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Button, Form, Input, Modal } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import UniversitySelect from '../UniversitySelect/UniversitySelect';
-import { createCourse, CreateCourseBody } from '../../models/course';
+import { create, CreateCourseBody } from '../../models/course';
 
 interface CreateCourseModalProps extends RouteComponentProps, FormComponentProps {
   handleToggleModal: () => void;
@@ -32,7 +32,7 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
           universityId
         }
       ) => {
-        createCourse(
+        create(
           courseCode,
           courseName,
           universityId

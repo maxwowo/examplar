@@ -17,7 +17,7 @@ export interface CreateCourseBody {
   course: Course;
 }
 
-export const createCourse = (
+export const create = (
   courseCode: string,
   courseName: string,
   universityId: number
@@ -46,7 +46,7 @@ export const createCourse = (
     )
 );
 
-export const searchByCourseUniversityId = (
+export const search = (
   course?: string | null,
   universityId?: string | null
 ): Promise<CourseBody> => (

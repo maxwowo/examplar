@@ -13,7 +13,7 @@ export interface SearchBody {
   query: string
 }
 
-export const searchByName = (
+export const search = (
   query: string
 ): Promise<SearchBody> => (
   client
