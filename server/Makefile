@@ -13,13 +13,11 @@ help: Makefile
 
 .PHONY: build
 build: ## Compile the packages.
-	@docker run \
-	--rm \
-	-u $(shell id -u $($USER)):$(shell id -g $($USER)) \
-	-v $(shell pwd):$(shell pwd) \
-	-w $(shell pwd) \
-	golang:latest \
-	go build -o $(BUILD_PATH)
+	@go build -o $(BUILD_PATH)
+
+.PHONY: build-docker
+build-docker: ## Compile the packages in development mode into a Docker image.
+	docker build -t examplar_server .
 
 .PHONY: run
 run: build ## Build and run in development mode.
