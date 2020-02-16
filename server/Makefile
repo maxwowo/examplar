@@ -46,7 +46,7 @@ stop-bundle: ## Stop the server and database in Docker.
 
 .PHONY: run-production
 run-production: build ## Build and run in production mode.
-	@.$(BUILD_PATH) -e production
+	@$(BUILD_PATH) -e production
 
 .PHONY: migrations-generate
 migrations-generate: ## Generate migration files.
