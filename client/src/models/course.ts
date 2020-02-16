@@ -9,15 +9,15 @@ export interface Course {
   universityId: number;
 }
 
-export interface CourseBody {
+interface CourseBody {
   courses: Course[];
 }
 
-export interface GetBody {
+interface GetBody {
   course: Course;
 }
 
-export interface CreateBody {
+interface CreateBody {
   course: Course;
 }
 

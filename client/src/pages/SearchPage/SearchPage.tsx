@@ -5,7 +5,7 @@ import PageLayout from '../../components/PageLayout/PageLayout';
 import PageContent from '../../components/PageContent/PageContent';
 import CourseResults from '../../components/CourseResults/CourseResults';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import courseModel, { Course, CourseBody } from '../../models/course';
+import courseModel, { Course } from '../../models/course';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 
 interface SearchPageProps extends RouteComponentProps {
@@ -36,24 +36,16 @@ const SearchPage: React.FC<SearchPageProps> = (
         course,
         universityId
       )
-        .then(
-          (
-            res: CourseBody
-          ) => {
-            setCourses(res.courses);
-            setLoading(false);
-          }
-        )
-        .catch(
-          (
-            err: Error
-          ) => {
-            notifyConnectionError(
-              err,
-              'Could not obtain search results.'
-            );
-          }
-        );
+        .then(res => {
+          setCourses(res.courses);
+          setLoading(false);
+        })
+        .catch(err => {
+          notifyConnectionError(
+            err,
+            'Could not obtain search results.'
+          );
+        });
     },
     [
       course,

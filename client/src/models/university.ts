@@ -8,11 +8,11 @@ export interface University {
   domain: string;
 }
 
-export interface GetBody {
+interface GetBody {
   university: University;
 }
 
-export interface SearchBody {
+interface SearchBody {
   universities: University[];
   query: string;
 }

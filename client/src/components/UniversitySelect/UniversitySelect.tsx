@@ -2,7 +2,7 @@ import React from 'react';
 import { SelectProps } from 'antd/lib/select';
 import { Empty, Select } from 'antd';
 
-import universityModel, { SearchBody, University } from '../../models/university';
+import universityModel, { University } from '../../models/university';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 
 export interface UniversitySelectProps {
@@ -33,27 +33,21 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
     );
     const getByName = React.useCallback(
       () => {
-        universityModel.search(selectValue)
-          .then(
-            (
-              res: SearchBody
-            ) => {
-              if (selectValue === res.query) {
-                setOptions(res.universities);
-              }
+        universityModel.search(
+          selectValue
+        )
+          .then(res => {
+            if (selectValue === res.query) {
+              setOptions(res.universities);
             }
-          )
-          .catch(
-            (
-              err: Error
-            ) => {
+          })
+          .catch(err => {
             notifyConnectionError(
               err,
               'Could not obtain university list.'
             );
-          }
-        );
-    },
+          });
+      },
     [
       selectValue
     ]
