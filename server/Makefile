@@ -13,7 +13,14 @@ help: Makefile
 
 .PHONY: build
 build: ## Compile the packages.
-	@go build -o $(BUILD_PATH)
+	@docker run \
+	--rm \
+	-u $(shell id -u $($USER)):$(shell id -g $($USER)) \
+	-v $(shell pwd):$(shell pwd) \
+	-w $(shell pwd) \
+	-e XDG_CACHE_HOME='/tmp/.cache' \
+	golang:latest \
+	go build -o $(BUILD_PATH)
 
 .PHONY: build-docker
 build-docker: ## Compile the packages in development mode into a Docker image.
