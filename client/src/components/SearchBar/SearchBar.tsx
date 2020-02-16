@@ -9,15 +9,12 @@ import classes from './SearchBar.module.less';
 const { Group } = Input;
 
 interface SearchBoxProps extends RouteComponentProps {
-  courseDefaultValue?: string;
-  universitySelectDefaultValue?: number;
+
 }
 
 const SearchBar: React.FC<SearchBoxProps> = (
   {
     history,
-    courseDefaultValue,
-    universitySelectDefaultValue
   }
 ) => {
   const [
@@ -42,6 +39,9 @@ const SearchBar: React.FC<SearchBoxProps> = (
             course: inputValue!,
             universityId: universityId!
           }
+        },
+        {
+          skipNull: true
         }
       )
     );
@@ -73,7 +73,6 @@ const SearchBar: React.FC<SearchBoxProps> = (
           className={classes.input}
           onChange={handleInputChange}
           size="large"
-          defaultValue={courseDefaultValue}
           placeholder="Search for courses"
           name="course"
         />
@@ -82,7 +81,6 @@ const SearchBar: React.FC<SearchBoxProps> = (
           handleUniversityChange={handleUniversityChange}
           className={classes.select}
           placeholder="Filter by university"
-          defaultId={universitySelectDefaultValue}
           size="large"
         />
 
@@ -98,6 +96,4 @@ const SearchBar: React.FC<SearchBoxProps> = (
   );
 };
 
-export default withRouter(
-  SearchBar
-);
+export default withRouter(SearchBar);

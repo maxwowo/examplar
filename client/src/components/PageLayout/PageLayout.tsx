@@ -1,11 +1,11 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
 
-interface PageLayoutProps {
-  children: React.ReactNode;
+interface PageLayoutProps extends React.HTMLAttributes<HTMLElement> {
+
 }
 
-const Layout: React.FC<PageLayoutProps> = (
+const PageLayout: React.FC<PageLayoutProps> = (
   {
     children
   }
@@ -16,4 +16,4 @@ const Layout: React.FC<PageLayoutProps> = (
   </React.Fragment>
 );
 
-export default Layout;
+export default PageLayout;

@@ -44,8 +44,8 @@ run-bundle: ## Run the server and the database in Docker.
 stop-bundle: ## Stop the server and database in Docker.
 	@docker-compose down
 
-.PHONY: run-prod
-run-prod: build ## Build and run in production mode.
+.PHONY: run-production
+run-production: build ## Build and run in production mode.
 	@.$(BUILD_PATH) -e production
 
 .PHONY: migrations-generate
