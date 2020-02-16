@@ -20,7 +20,7 @@ interface Networking {
 // Implementation
 const clientInstance: AxiosInstance = Axios.create(
   {
-    baseURL: isDev() ? 'http://localhost:8080' : 'http://172.17.0.1:8080',
+    baseURL: isDev() ? 'http://localhost:8080' : 'http://165.227.98.117:8080',
     timeout: 1000,
     responseType: 'json',
     headers: {
