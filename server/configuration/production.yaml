@@ -1,0 +1,9 @@
+database:
+  user: examplar
+  password: examplar
+  name: examplar
+  host: database
+  port: 5432
+
+server:
+  address: :8080

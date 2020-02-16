@@ -1,7 +1,9 @@
 package controllers
 
 import (
+	"context"
 	"encoding/json"
+	"github.com/go-chi/chi"
 	"log"
 	"net/http"
 	"strconv"
@@ -14,6 +16,41 @@ import (
 type CourseController struct{}
 
 var courseModel = new(models.Course)
+
+func (c CourseController) CourseContext(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		courseID := chi.URLParam(r, "courseID")
+
+		IntCourseID, err := strconv.Atoi(courseID)
+		if err != nil {
+			log.Panic(err)
+		}
+
+		course, err := courseModel.Get(IntCourseID)
+		if err != nil {
+			responder.RespondError(w, "Course ID does not exist.", http.StatusBadRequest)
+			return
+		}
+
+		ctx := context.WithValue(r.Context(), "course", course)
+		next.ServeHTTP(w, r.WithContext(ctx))
+	})
+}
+
+func (c CourseController) Get(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	course, ok := ctx.Value("course").(*models.Course)
+	if !ok {
+		log.Panic("Could not read course ID context value.")
+	}
+
+	responder.RespondData(w, struct {
+		Course models.Course `json:"course"`
+	}{
+		Course: *course,
+	})
+}
 
 func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 	var coursePayload forms.CreateCourse

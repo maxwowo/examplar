@@ -2,7 +2,7 @@ import React from 'react';
 import { SelectProps } from 'antd/lib/select';
 import { Empty, Select } from 'antd';
 
-import { SearchBody, searchByName, University } from '../../models/university';
+import universityModel, { University } from '../../models/university';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 
 export interface UniversitySelectProps {
@@ -12,7 +12,6 @@ export interface UniversitySelectProps {
   onChange?: (
     value: number
   ) => void;
-  defaultId?: number;
 }
 
 const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & SelectProps> = React.forwardRef((
@@ -23,7 +22,6 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
     handleUniversityChange,
     onChange,
     id,
-    defaultId
   },
   ref: React.Ref<Select<number>>
   ) => {
@@ -35,27 +33,21 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
     );
     const getByName = React.useCallback(
       () => {
-        searchByName(selectValue)
-          .then(
-            (
-              res: SearchBody
-            ) => {
-              if (selectValue === res.query) {
-                setOptions(res.universities);
-              }
+        universityModel.search(
+          selectValue
+        )
+          .then(res => {
+            if (selectValue === res.query) {
+              setOptions(res.universities);
             }
-          )
-          .catch(
-            (
-              err: Error
-            ) => {
+          })
+          .catch(err => {
             notifyConnectionError(
               err,
               'Could not obtain university list.'
             );
-          }
-        );
-    },
+          });
+      },
     [
       selectValue
     ]
@@ -95,7 +87,6 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
         className={className}
         showSearch
         placeholder={placeholder}
-        defaultValue={defaultId}
         size={size}
         notFoundContent={
           <Empty

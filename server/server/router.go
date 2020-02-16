@@ -67,6 +67,12 @@ func newRouter() *chi.Mux {
 	router.Route("/courses", func(router chi.Router) {
 		router.Get("/", course.Search)
 		router.Post("/", course.Create)
+
+		router.Route("/{courseID}", func(router chi.Router) {
+			router.Use(course.CourseContext)
+
+			router.Get("/", course.Get)
+		})
 	})
 
 	router.Route("/universities", func(router chi.Router) {
@@ -75,7 +81,7 @@ func newRouter() *chi.Mux {
 		router.Route("/{universityID}", func(router chi.Router) {
 			router.Use(university.UniversityContext)
 
-			router.Get("/", university.GetUniversity)
+			router.Get("/", university.Get)
 		})
 	})
 

@@ -13,7 +13,14 @@ help: Makefile
 
 .PHONY: build
 build: ## Compile the packages.
-	@go build -o $(BUILD_PATH)
+	@docker run \
+	--rm \
+	-u $(shell id -u $($USER)):$(shell id -g $($USER)) \
+	-v $(shell pwd):$(shell pwd) \
+	-w $(shell pwd) \
+	-e XDG_CACHE_HOME='/tmp/.cache' \
+	golang:latest \
+	go build -o $(BUILD_PATH)
 
 .PHONY: build-docker
 build-docker: ## Compile the packages in development mode into a Docker image.
@@ -44,9 +51,9 @@ run-bundle: ## Run the server and the database in Docker.
 stop-bundle: ## Stop the server and database in Docker.
 	@docker-compose down
 
-.PHONY: run-prod
-run-prod: build ## Build and run in production mode.
-	@.$(BUILD_PATH) -e production
+.PHONY: run-production
+run-production: build ## Build and run in production mode.
+	@$(BUILD_PATH) -e production
 
 .PHONY: migrations-generate
 migrations-generate: ## Generate migration files.

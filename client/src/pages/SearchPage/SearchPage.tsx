@@ -1,12 +1,12 @@
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import Layout from '../../components/Layout/Layout';
+import PageLayout from '../../components/PageLayout/PageLayout';
+import PageContent from '../../components/PageContent/PageContent';
 import CourseResults from '../../components/CourseResults/CourseResults';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { Course, CourseBody, searchByCourseUniversityId } from '../../models/course';
+import courseModel, { Course } from '../../models/course';
 import { notifyConnectionError } from '../../tools/errorNotifier';
-import classes from './SearchPage.module.less';
 
 interface SearchPageProps extends RouteComponentProps {
 
@@ -32,28 +32,20 @@ const SearchPage: React.FC<SearchPageProps> = (
   ] = React.useState<Course[]>([]);
   const getByCourseUniversityId = React.useCallback(
     () => {
-      searchByCourseUniversityId(
-        course ? course : '',
-        universityId ? universityId : ''
+      courseModel.search(
+        course,
+        universityId
       )
-        .then(
-          (
-            res: CourseBody
-          ) => {
-            setCourses(res.courses);
-            setLoading(false);
-          }
-        )
-        .catch(
-          (
-            err: Error
-          ) => {
-            notifyConnectionError(
-              err,
-              'Could not obtain search results.'
-            );
-          }
-        );
+        .then(res => {
+          setCourses(res.courses);
+          setLoading(false);
+        })
+        .catch(err => {
+          notifyConnectionError(
+            err,
+            'Could not obtain search results.'
+          );
+        });
     },
     [
       course,
@@ -68,22 +60,16 @@ const SearchPage: React.FC<SearchPageProps> = (
   );
 
   return (
-    <Layout>
-      <div
-        className={classes.resultsBox}
-      >
-        <SearchBar
-          courseDefaultValue={course ? course : ''}
-        />
+    <PageLayout>
+      <PageContent>
+        <SearchBar/>
         <CourseResults
           loading={loading}
           courses={courses}
         />
-      </div>
-    </Layout>
+      </PageContent>
+    </PageLayout>
   );
 };
 
-export default withRouter(
-  SearchPage
-);
+export default withRouter(SearchPage);
