@@ -1,3 +1,7 @@
+# Endpoints
+
+You can access the Examplar server endpoints by connecting to http://165.227.98.117:8080. 
+
 # Setting up
 
 There are many ways to run the Examplar server. **If you plan to run the Examplar server using Docker**, make sure to complete the [Docker post-installation steps](https://docs.docker.com/install/linux/linux-postinstall/). This includes creating a Docker group using `$ sudo groupadd docker`, then adding the current user into the Docker group using `$ sudo usermod -aG docker $USER`, finally logging out then back in or running `$ newgrp docker` on Linux to activate the changes to groups. If this step wasn't done properly, the generated migration files would be read-only because of Docker permission shenanigans.
