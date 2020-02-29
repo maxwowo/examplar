@@ -30,7 +30,8 @@ const SearchPage: React.FC<SearchPageProps> = (
     courses,
     setCourses
   ] = React.useState<Course[]>([]);
-  const getByCourseUniversityId = React.useCallback(
+
+  React.useEffect(
     () => {
       courseModel.search(
         course,
@@ -50,12 +51,6 @@ const SearchPage: React.FC<SearchPageProps> = (
     [
       course,
       universityId
-    ]
-  );
-  React.useEffect(
-    getByCourseUniversityId,
-    [
-      getByCourseUniversityId
     ]
   );
 

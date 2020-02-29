@@ -25,37 +25,33 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
   },
   ref: React.Ref<Select<number>>
   ) => {
-    const [
-      selectValue,
-      setSelectValue
-    ] = React.useState<string>(
-      ''
-    );
-    const getByName = React.useCallback(
-      () => {
-        universityModel.search(
-          selectValue
-        )
-          .then(res => {
-            if (selectValue === res.query) {
-              setOptions(res.universities);
-            }
-          })
-          .catch(err => {
+  const [
+    selectValue,
+    setSelectValue
+  ] = React.useState<string>(
+    ''
+  );
+
+  React.useEffect(
+    () => {
+      universityModel.search(
+        selectValue
+      )
+        .then(res => {
+          if (selectValue === res.query) {
+            setOptions(res.universities);
+          }
+        })
+        .catch(err => {
             notifyConnectionError(
               err,
               'Could not obtain university list.'
             );
-          });
-      },
+          }
+        );
+    },
     [
       selectValue
-    ]
-  );
-  React.useEffect(
-    getByName,
-    [
-      getByName
     ]
   );
 
