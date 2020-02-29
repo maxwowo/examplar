@@ -91,9 +91,9 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
         notFoundContent={
           <Empty
             description='No matching universities'
-          image={Empty.PRESENTED_IMAGE_SIMPLE}
-        />
-      }
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+          />
+        }
         ref={ref}
         onChange={handleChange}
         optionFilterProp="children"
