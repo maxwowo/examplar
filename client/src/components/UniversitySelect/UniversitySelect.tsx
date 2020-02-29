@@ -98,21 +98,21 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
         onChange={handleChange}
         optionFilterProp="children"
         onSearch={handleSearch}
-    >
-      {options.map(
-        (
-          curr: University
-        ) => (
-          <Select.Option
-            value={curr.id}
-            key={curr.id}
-          >
-            {curr.name}
-          </Select.Option>
-        )
-      )}
-    </Select>
-  );
+      >
+        {options.map(
+          (
+            curr: University
+          ) => (
+            <Select.Option
+              value={curr.id}
+              key={curr.id}
+            >
+              {curr.name}
+            </Select.Option>
+          )
+        )}
+      </Select>
+    );
   }
 );
 
