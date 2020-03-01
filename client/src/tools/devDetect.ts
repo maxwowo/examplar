@@ -1,8 +1,9 @@
-import process from 'process';
+import React from 'react';
 
-const development: boolean = process.env.NODE_ENV === 'development';
+const development: boolean = '_self' in React.createElement('div');
 
-const isDev = () => {
+const isDev = (): boolean => {
+  console.log(development);
   return development;
 };
 
