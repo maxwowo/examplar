@@ -1,6 +1,6 @@
 # Endpoints
 
-You can access the Examplar server endpoints by connecting to http://165.227.98.117:8080. 
+You can access the Examplar server endpoints by connecting to [https://server.examplar.org](https://server.examplar.org).
 
 # Setting up
 
