@@ -26,7 +26,11 @@ database: examplar
 
 . Start the aforementioned local database, then run `$ make run` to start up the server.
 
-# First run
+# Database migration
+
+Use `$ make migrations-run` to run the database migrations, and `$ make migrations-generate name=example` to generate a new set of up & down migration files with a specified name.
+
+# University initialization
 
 On the first time running the Examplar server, the database needs to be initialized with university data. There are many ways of achieving this.
 
