@@ -52,6 +52,26 @@ func (c CourseController) Get(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+func (c CourseController) GetExams(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	course, ok := ctx.Value("course").(*models.Course)
+	if !ok {
+		log.Panic("Could not read course ID context value.")
+	}
+
+	exams, err := examModel.GetByCourseID(course.ID)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	responder.RespondData(w, struct {
+		Exams []models.Exam `json:"exams"`
+	}{
+		Exams: exams,
+	})
+}
+
 func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 	var coursePayload forms.CreateCourse
 
