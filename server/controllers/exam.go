@@ -2,7 +2,9 @@ package controllers
 
 import (
 	"context"
+	"encoding/json"
 	"github.com/go-chi/chi"
+	"github.com/maxwowo/examplar/forms"
 	"github.com/maxwowo/examplar/models"
 	"github.com/maxwowo/examplar/packages/responder"
 	"log"
@@ -31,5 +33,29 @@ func (e ExamController) Context(next http.Handler) http.Handler {
 
 		ctx := context.WithValue(r.Context(), "exam", exam)
 		next.ServeHTTP(w, r.WithContext(ctx))
+	})
+}
+
+func (e ExamController) Create(w http.ResponseWriter, r *http.Request) {
+	var examPayload forms.CreateExam
+
+	// Malformed JSON exam payload
+	err := json.NewDecoder(r.Body).Decode(&examPayload)
+	if err != nil {
+		responder.RespondError(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Create exam
+	exam, err := examModel.Create(examPayload)
+	if err != nil {
+		responder.RespondError(w, "Invalid exam ID.", http.StatusBadRequest)
+		return
+	}
+
+	responder.RespondData(w, struct {
+		Exam models.Exam `json:"exam"`
+	}{
+		Exam: *exam,
 	})
 }
