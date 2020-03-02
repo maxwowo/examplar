@@ -14,7 +14,7 @@ type UniversityController struct{}
 
 var universityModel = new(models.University)
 
-func (u UniversityController) UniversityContext(next http.Handler) http.Handler {
+func (u UniversityController) Context(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		universityID := chi.URLParam(r, "universityID")
 

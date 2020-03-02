@@ -17,7 +17,7 @@ type CourseController struct{}
 
 var courseModel = new(models.Course)
 
-func (c CourseController) CourseContext(next http.Handler) http.Handler {
+func (c CourseController) Context(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		courseID := chi.URLParam(r, "courseID")
 
