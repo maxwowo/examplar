@@ -36,7 +36,7 @@ On the first time running the Examplar server, the database needs to be initiali
 
 ## With Docker
 
-Simply run `$ make universities-load` to run the initialization script in Docker.
+**You need Docker for this.** Simply run `$ make universities-load` to run the initialization script in Docker.
 
 ## With Go
 
