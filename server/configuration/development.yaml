@@ -2,7 +2,7 @@ database:
   user: examplar
   password: examplar
   name: examplar
-  host: database
+  host: localhost
   port: 5432
 
 server:
