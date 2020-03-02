@@ -17,11 +17,11 @@ interface TermSelectProps extends SelectProps {
 
 const TermSelect: React.FC<TermSelectProps> = (
   {
-    placeholder
+    ...rest
   }
 ) => (
   <Select
-    placeholder={placeholder}
+    {...rest}
   >
     {terms.map(
       (

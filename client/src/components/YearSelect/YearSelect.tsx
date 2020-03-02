@@ -8,12 +8,12 @@ interface YearSelectProps extends DatePickerProps {
 
 const YearSelect: React.FC<YearSelectProps> = (
   {
-    onChange
+    ...rest
   }
 ) => (
   <DatePicker
-    onChange={onChange}
     mode='year'
+    {...rest}
   />
 );
 

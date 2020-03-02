@@ -1,13 +1,14 @@
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { Button, Form, Input, Modal } from 'antd';
+import { Form, Input } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import { ModalProps } from 'antd/es/modal';
+
 import UniversitySelect from '../UniversitySelect/UniversitySelect';
 import courseModel from '../../models/course';
+import CreateModal, { CreateModalProps } from '../CreateModal/CreateModal';
 
-interface CreateCourseModalProps extends RouteComponentProps, FormComponentProps, ModalProps {
-  handleToggleModal: () => void;
+interface CreateCourseModalProps extends CreateModalProps, RouteComponentProps, FormComponentProps {
+
 }
 
 const CreateCourseModal: React.FC<CreateCourseModalProps> = (
@@ -49,29 +50,10 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
   };
 
   return (
-    <Modal
-      title="Create course"
+    <CreateModal
+      title="Create a course"
       visible={visible}
-      onOk={handleToggleModal}
-      onCancel={handleToggleModal}
-      footer={
-        [
-          <Button
-            key="submit"
-            form="create-course-modal-form"
-            htmlType="submit"
-            type="primary"
-          >
-            Submit
-          </Button>,
-          <Button
-            key="cancel"
-            onClick={handleToggleModal}
-          >
-            Cancel
-          </Button>
-        ]
-      }
+      handleToggleModal={handleToggleModal}
     >
       <Form
         onSubmit={handleSubmit}
@@ -146,12 +128,8 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
         </Form.Item>
 
       </Form>
-    </Modal>
+    </CreateModal>
   );
 };
 
-export default withRouter(
-  Form.create<CreateCourseModalProps>()(
-    CreateCourseModal
-  )
-);
+export default withRouter(Form.create<CreateCourseModalProps>()(CreateCourseModal));
