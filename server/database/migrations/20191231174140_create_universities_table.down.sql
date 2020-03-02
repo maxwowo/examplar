@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS universities;
+DROP TABLE IF EXISTS universities CASCADE;
