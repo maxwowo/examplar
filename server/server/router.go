@@ -77,6 +77,8 @@ func newRouter() *chi.Mux {
 	})
 
 	router.Route("/exams", func(router chi.Router) {
+		router.Post("/", exam.Create)
+
 		router.Route("/{examID}", func(router chi.Router) {
 			router.Use(exam.Context)
 
