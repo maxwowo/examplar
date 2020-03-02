@@ -57,7 +57,6 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
     >
       <Form
         onSubmit={handleSubmit}
-        id="create-course-modal-form"
       >
 
         <Form.Item
