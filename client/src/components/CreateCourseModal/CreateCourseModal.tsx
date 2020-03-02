@@ -2,12 +2,12 @@ import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Button, Form, Input, Modal } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
+import { ModalProps } from 'antd/es/modal';
 import UniversitySelect from '../UniversitySelect/UniversitySelect';
 import courseModel from '../../models/course';
 
-interface CreateCourseModalProps extends RouteComponentProps, FormComponentProps {
+interface CreateCourseModalProps extends RouteComponentProps, FormComponentProps, ModalProps {
   handleToggleModal: () => void;
-  visible: boolean;
 }
 
 const CreateCourseModal: React.FC<CreateCourseModalProps> = (
