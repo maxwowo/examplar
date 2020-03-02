@@ -49,6 +49,7 @@ func newRouter() *chi.Mux {
 	// Initializing all controllers
 	health := new(controllers.HealthController)
 	course := new(controllers.CourseController)
+	exam := new(controllers.ExamController)
 	university := new(controllers.UniversityController)
 	notFound := new(controllers.NotFoundController)
 
@@ -70,6 +71,14 @@ func newRouter() *chi.Mux {
 
 		router.Route("/{courseID}", func(router chi.Router) {
 			router.Use(course.Context)
+
+			router.Get("/", course.Get)
+		})
+	})
+
+	router.Route("/exams", func(router chi.Router) {
+		router.Route("/{examID}", func(router chi.Router) {
+			router.Use(exam.Context)
 
 			router.Get("/", course.Get)
 		})
