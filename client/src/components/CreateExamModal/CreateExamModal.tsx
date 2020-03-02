@@ -28,7 +28,8 @@ const CreateExamModal: React.FC<CreateExamModalProps> = (
       handleToggleModal={handleToggleModal}
     >
       <Form
-
+        onSubmit={() => {
+        }}
       >
         <Form.Item
           hasFeedback
