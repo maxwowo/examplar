@@ -53,3 +53,38 @@ func (e Exam) Create(examPayload forms.CreateExam) (*Exam, error) {
 
 	return &exam, err
 }
+
+func (e Exam) GetByCourseID(courseID int) ([]Exam, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		SELECT id, exam_year, exam_term, course_id
+		FROM exams
+		WHERE course_id = $1
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query(courseID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var exams = make([]Exam, 0)
+
+	for rows.Next() {
+		var exam Exam
+
+		err := rows.Scan(&exam.ID, &exam.ExamYear, &exam.ExamTerm, &exam.CourseID)
+		if err != nil {
+			return nil, err
+		}
+
+		exams = append(exams, exam)
+	}
+
+	return exams, nil
+}
