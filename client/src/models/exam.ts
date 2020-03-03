@@ -1,33 +1,31 @@
-import qs from 'query-string';
-
 import client, { ClientError, ClientResponse } from '../services/networking';
 
-export interface Course {
+export interface Exam {
   id: number;
-  code: string;
-  name: string;
-  universityId: number;
+  examYear: number;
+  examTerm: number;
+  courseId: number;
 }
 
-interface CourseBody {
-  courses: Course[];
+interface ExamBody {
+  exams: Exam[];
 }
 
 interface GetBody {
-  course: Course;
+  exam: Exam;
 }
 
 interface CreateBody {
-  course: Course;
+  exam: Exam;
 }
 
-const courseModel = {
+const examModel = {
   get: (
-    courseId: number
+    examId: number
   ): Promise<GetBody> => (
     client
       .get(
-        `/courses/${courseId}`
+        `/exams/${examId}`
       )
       .then(
         (
@@ -45,17 +43,17 @@ const courseModel = {
       )
   ),
   create: (
-    courseCode: string,
-    courseName: string,
-    universityId: number
+    examYear: number,
+    examTerm: number,
+    courseId: number
   ): Promise<CreateBody> => (
     client
       .post(
-        '/courses',
+        '/exams',
         {
-          code: courseCode,
-          name: courseName,
-          universityId: universityId
+          examYear: examYear,
+          examTerm: examTerm,
+          courseId: courseId
         }
       )
       .then(
@@ -74,24 +72,15 @@ const courseModel = {
       )
   ),
   search: (
-    course?: string | null,
-    universityId?: string | null
-  ): Promise<CourseBody> => (
+    courseId: number
+  ): Promise<ExamBody> => (
     client
       .get(
-        qs.stringifyUrl(
-          {
-            url: '/courses',
-            query: {
-              course: course,
-              universityId: universityId
-            }
-          }
-        )
+        `/courses/${courseId}/exams`
       )
       .then(
         (
-          res: ClientResponse<CourseBody>
+          res: ClientResponse<ExamBody>
         ) => (
           res.data
         )
@@ -106,4 +95,4 @@ const courseModel = {
   )
 };
 
-export default courseModel;
+export default examModel;
