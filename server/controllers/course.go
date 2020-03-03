@@ -60,7 +60,7 @@ func (c CourseController) GetExams(w http.ResponseWriter, r *http.Request) {
 		log.Panic("Could not read course ID context value.")
 	}
 
-	exams, err := examModel.GetByCourseID(course.ID)
+	exams, err := examModel.SearchByCourseID(course.ID)
 	if err != nil {
 		log.Panic(err)
 	}

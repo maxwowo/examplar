@@ -54,7 +54,7 @@ func (e Exam) Create(examPayload forms.CreateExam) (*Exam, error) {
 	return &exam, err
 }
 
-func (e Exam) GetByCourseID(courseID int) ([]Exam, error) {
+func (e Exam) SearchByCourseID(courseID int) ([]Exam, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
