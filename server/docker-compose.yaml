@@ -2,7 +2,7 @@ version: "3.7"
 services:
   server:
     container_name: examplar_server
-    image: server
+    image: examplar_server
     build: .
     volumes:
       - /var/lib/examplar/server:/var/log/server
