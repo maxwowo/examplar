@@ -7,6 +7,11 @@ import CourseResults from '../../components/CourseResults/CourseResults';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import courseModel, { Course } from '../../models/course';
 import { notifyConnectionError } from '../../tools/errorNotifier';
+import universityModel from '../../models/university';
+
+export interface CourseItem extends Course {
+  universityName: string;
+}
 
 interface SearchPageProps extends RouteComponentProps {
 
@@ -27,9 +32,9 @@ const SearchPage: React.FC<SearchPageProps> = (
   ] = React.useState(true);
 
   const [
-    courses,
-    setCourses
-  ] = React.useState<Course[]>([]);
+    courseItems,
+    setCourseItems
+  ] = React.useState<CourseItem[]>([]);
 
   React.useEffect(
     () => {
@@ -38,8 +43,24 @@ const SearchPage: React.FC<SearchPageProps> = (
         universityId
       )
         .then(res => {
-          setCourses(res.courses);
-          setLoading(false);
+          Promise
+            .all(
+              res.courses
+                .map(course => (
+                  universityModel
+                    .get(course.universityId)
+                    .then(res => (
+                      {
+                        ...course,
+                        universityName: res.university.name
+                      }
+                    ))
+                ))
+            )
+            .then(res => {
+              setCourseItems(res);
+              setLoading(false);
+            });
         })
         .catch(err => {
           notifyConnectionError(
@@ -60,7 +81,7 @@ const SearchPage: React.FC<SearchPageProps> = (
         <SearchBar/>
         <CourseResults
           loading={loading}
-          courses={courses}
+          courseItems={courseItems}
         />
       </PageContent>
     </PageLayout>

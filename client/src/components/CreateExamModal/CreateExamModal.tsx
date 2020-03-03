@@ -3,11 +3,14 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Form } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 
-import CreateModal, { CreateModalProps } from '../CreateModal/CreateModal';
+import CreateModal from '../CreateModal/CreateModal';
+import { ToggleableModalProps } from '../ToggleableModal/ToggleableModal';
 import YearSelect from '../YearSelect/YearSelect';
 import TermSelect from '../TermSelect/TermSelect';
 
-interface CreateExamModalProps extends CreateModalProps, RouteComponentProps, FormComponentProps {
+interface CreateExamModalProps extends ToggleableModalProps,
+  RouteComponentProps,
+  FormComponentProps {
 
 }
 
@@ -19,12 +22,13 @@ const CreateExamModal: React.FC<CreateExamModalProps> = (
     form
   }
 ) => {
-
+  const FORM_ID = 'create-exam-modal-form';
 
   return (
     <CreateModal
       title='Create an exam'
       visible={visible}
+      formId={FORM_ID}
       handleToggleModal={handleToggleModal}
     >
       <Form

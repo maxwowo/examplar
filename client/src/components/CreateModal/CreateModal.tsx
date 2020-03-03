@@ -1,9 +1,9 @@
 import React from 'react';
 
 import ToggleableModal, { ToggleableModalProps } from '../ToggleableModal/ToggleableModal';
-import CreateModalFooter from '../CreateModalFooter/CreateModalFooter';
+import CreateModalFooter, { CreateModalFooterProps } from '../CreateModalFooter/CreateModalFooter';
 
-export interface CreateModalProps extends ToggleableModalProps {
+export interface CreateModalProps extends ToggleableModalProps, CreateModalFooterProps {
 
 }
 
@@ -11,6 +11,7 @@ const CreateModal: React.FC<CreateModalProps> = (
   {
     visible,
     handleToggleModal,
+    formId,
     ...rest
   }
 ) => (
@@ -20,6 +21,7 @@ const CreateModal: React.FC<CreateModalProps> = (
     footer={
       <CreateModalFooter
         handleToggleModal={handleToggleModal}
+        formId={formId}
       />
     }
     {...rest}

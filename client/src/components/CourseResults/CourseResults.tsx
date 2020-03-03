@@ -2,18 +2,18 @@ import React from 'react';
 import { Icon, List, Spin, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 
-import { Course } from '../../models/course';
+import { CourseItem } from '../../pages/SearchPage/SearchPage';
 import EmptyCourseResults from '../EmptyCourseResults/EmptyCourseResults';
 
 interface CourseResultsProps {
   loading: boolean;
-  courses: Course[];
+  courseItems: CourseItem[];
 }
 
 const CourseResults: React.FC<CourseResultsProps> = (
   {
     loading,
-    courses
+    courseItems
   }
 ) => (
   <List
@@ -23,7 +23,7 @@ const CourseResults: React.FC<CourseResultsProps> = (
         Search results
       </Typography.Text>
     }
-    dataSource={courses}
+    dataSource={courseItems}
     locale={
       {
         emptyText: (
@@ -46,17 +46,17 @@ const CourseResults: React.FC<CourseResultsProps> = (
         )
       }
     }
-    renderItem={course => (
+    renderItem={courseItem => (
       <List.Item>
         <List.Item.Meta
           title={
             <Link
-              to={`/courses/${course.id}`}
+              to={`/courses/${courseItem.id}`}
             >
-              {course.name}
+              {courseItem.name}
             </Link>
           }
-          description={`${course.code} @ something`}
+          description={`${courseItem.code} @ ${courseItem.universityName}`}
         />
       </List.Item>
     )}

@@ -5,9 +5,12 @@ import { FormComponentProps } from 'antd/lib/form';
 
 import UniversitySelect from '../UniversitySelect/UniversitySelect';
 import courseModel from '../../models/course';
-import CreateModal, { CreateModalProps } from '../CreateModal/CreateModal';
+import CreateModal from '../CreateModal/CreateModal';
+import { ToggleableModalProps } from '../ToggleableModal/ToggleableModal';
 
-interface CreateCourseModalProps extends CreateModalProps, RouteComponentProps, FormComponentProps {
+interface CreateCourseModalProps extends ToggleableModalProps,
+  RouteComponentProps,
+  FormComponentProps {
 
 }
 
@@ -19,6 +22,8 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
     form
   }
 ) => {
+  const FORM_ID = 'create-course-modal-form';
+
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement>
   ) => {
@@ -53,10 +58,12 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
     <CreateModal
       title="Create a course"
       visible={visible}
+      formId={FORM_ID}
       handleToggleModal={handleToggleModal}
     >
       <Form
         onSubmit={handleSubmit}
+        id={FORM_ID}
       >
 
         <Form.Item

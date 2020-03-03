@@ -1,26 +1,28 @@
 import React from 'react';
 import { Button } from 'antd';
 
-interface CreateModalFooterProps {
+export interface CreateModalFooterProps {
   handleToggleModal: () => void;
+  formId: string;
 }
 
 const CreateModalFooter: React.FC<CreateModalFooterProps> = (
   {
-    handleToggleModal
+    handleToggleModal,
+    formId
   }
 ) => (
   <React.Fragment>
     <Button
-      key="submit"
-      form="create-course-modal-form"
-      htmlType="submit"
-      type="primary"
+      key='submit'
+      form={formId}
+      htmlType='submit'
+      type='primary'
     >
       Submit
     </Button>,
     <Button
-      key="cancel"
+      key='cancel'
       onClick={handleToggleModal}
     >
       Cancel
