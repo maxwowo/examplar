@@ -4,9 +4,9 @@ import { Button, Card, Layout, Typography } from 'antd';
 import classes from './CourseSider.module.less';
 
 interface CourseSiderProps {
-  courseName: string;
-  courseCode: string;
-  universityName: string;
+  courseName: string | undefined;
+  courseCode: string | undefined;
+  universityName: string | undefined;
 }
 
 const CourseSider: React.FC<CourseSiderProps> = (

@@ -7,6 +7,8 @@ import PageContent from '../../components/PageContent/PageContent';
 import courseModel, { Course } from '../../models/course';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 import universityModel, { University } from '../../models/university';
+import CourseSider from '../../components/CourseSider/CourseSider';
+import CourseContent from '../../components/CourseContent/CourseContent';
 
 interface CoursePageMatchParams {
   courseId: string;
@@ -87,7 +89,19 @@ const CoursePage: React.FC<CoursePageProps> = (
             xs={24}
             md={10}
           >
-            course sider
+            <CourseSider
+              courseName={course?.name}
+              courseCode={course?.code}
+              universityName={university?.name}
+            />
+          </Col>
+          <Col
+            xs={24}
+            md={12}
+          >
+            <CourseContent
+              exams={[]}
+            />
           </Col>
         </Row>
       </PageContent>
