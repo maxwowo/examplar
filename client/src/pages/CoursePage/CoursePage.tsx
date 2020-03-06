@@ -29,36 +29,52 @@ const CoursePage: React.FC<CoursePageProps> = (
     setCourse
   ] = React.useState<Course>();
 
+  React.useEffect(
+    () => {
+      courseModel
+        .get(
+          courseId
+        )
+        .then(res => {
+          setCourse(res.course);
+        })
+        .catch(err => {
+          notifyConnectionError(
+            err,
+            'Could not obtain course details.'
+          );
+        });
+    },
+    [courseId]
+  );
+
   const [
     university,
     setUniversity
   ] = React.useState<University>();
 
-  courseModel.get(
-    courseId
-  )
-    .then(res => {
-      setCourse(res.course);
-
-      // universityModel.get(
-      //   res.course.universityId
-      // )
-      //   .then(res => {
-      //     setUniversity(res.university);
-      //   })
-      //   .catch(err => {
-      //     notifyConnectionError(
-      //       err,
-      //       'Could not obtain university details.'
-      //     );
-      //   });
-    })
-    .catch(err => {
-      notifyConnectionError(
-        err,
-        'Could not obtain course details.'
-      );
-    });
+  React.useEffect(
+    () => {
+      if (course !== undefined) {
+        universityModel
+          .get(
+            course.universityId
+          )
+          .then(res => {
+            setUniversity(res.university);
+          })
+          .catch(err => {
+            notifyConnectionError(
+              err,
+              'Could not obtain university details.'
+            );
+          });
+      }
+    },
+    [
+      course
+    ]
+  );
 
   return (
     <PageLayout>

@@ -22,7 +22,9 @@ const universityModel = {
     universityId: number
   ): Promise<GetBody> => (
     client
-      .get(`/universities/${universityId}`)
+      .get(
+        `/universities/${universityId}`
+      )
       .then(
         (
           res: ClientResponse<GetBody>
