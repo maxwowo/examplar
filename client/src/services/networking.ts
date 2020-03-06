@@ -21,7 +21,7 @@ interface Networking {
 const clientInstance: AxiosInstance = Axios.create(
   {
     baseURL: isDev() ? 'http://localhost:8080' : 'https://server.examplar.org',
-    timeout: 1000,
+    timeout: 4000,
     responseType: 'json',
     headers: {
       'Content-Type': 'application/json'
