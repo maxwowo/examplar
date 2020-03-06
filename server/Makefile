@@ -34,7 +34,7 @@ run: build ## Build and run in development mode.
 run-docker: build-docker ## Build and run in detached development mode.
 	@docker run \
 	--rm \
-	--name examplar_server \
+	--name examplar-server \
 	-v /var/lib/examplar/server:/var/log/examplar_server \
 	-p 8080:8080 \
 	examplar_server
@@ -60,7 +60,7 @@ migrations-generate: ## Generate migration files.
 ifdef name
 	@docker run \
 	--rm \
-	--name generate_migration \
+	--name generate-migration \
 	-v $(MIGRATIONS_PATH):/migrations \
 	-u $(shell id -u $($USER)):$(shell id -g $($USER)) \
 	--network host migrate/migrate \
@@ -87,7 +87,7 @@ database-start: ## Start the database in Docker.
 	@mkdir -p /var/lib/examplar/data
 	@docker run \
 	--rm \
-	--name examplar_database \
+	--name examplar-database \
 	-v /var/lib/examplar/data:/var/lib/postgresql/data \
 	-e POSTGRES_USER=examplar \
 	-e POSTGRES_PASSWORD=examplar \
@@ -97,7 +97,7 @@ database-start: ## Start the database in Docker.
 
 .PHONY: database-stop
 database-stop: ## Stop the database in Docker.
-	@docker stop examplar_database
+	@docker stop examplar-database
 
 .PHONY: universities-load
 universities-load: ## Fill the universities table with details of universities from all over the world.

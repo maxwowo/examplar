@@ -1,8 +1,8 @@
 version: "3.7"
 services:
   server:
-    container_name: examplar_server
-    image: examplar_server
+    container_name: examplar-server
+    image: examplar-server
     build: .
     volumes:
       - /var/lib/examplar/server:/var/log/server
@@ -11,7 +11,7 @@ services:
     depends_on:
       - database
   database:
-    container_name: examplar_database
+    container_name: examplar-database
     image: postgres:latest
     restart: always
     ports:
