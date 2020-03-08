@@ -3,7 +3,6 @@ import { Col, Layout, Row } from 'antd';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import PageLayout from '../../components/PageLayout/PageLayout';
-import PageContent from '../../components/PageContent/PageContent';
 import courseModel, { Course } from '../../models/course';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 import universityModel, { University } from '../../models/university';
@@ -81,36 +80,34 @@ const CoursePage: React.FC<CoursePageProps> = (
 
   return (
     <PageLayout>
-      <PageContent>
-        <Layout
-          className={classes.layout}
+      <Layout
+        className={classes.layout}
+      >
+        <Row
+          type='flex'
+          justify='space-between'
+          className={classes.layoutRow}
         >
-          <Row
-            type='flex'
-            justify='space-between'
-            className={classes.layoutRow}
+          <Col
+            xs={24}
+            md={8}
           >
-            <Col
-              xs={24}
-              md={8}
-            >
-              <CourseSider
-                courseName={course?.name}
-                courseCode={course?.code}
-                universityName={university?.name}
-              />
-            </Col>
-            <Col
-              xs={24}
-              md={14}
-            >
-              <CourseContent
-                exams={[]}
-              />
-            </Col>
-          </Row>
-        </Layout>
-      </PageContent>
+            <CourseSider
+              courseName={course?.name}
+              courseCode={course?.code}
+              universityName={university?.name}
+            />
+          </Col>
+          <Col
+            xs={24}
+            md={14}
+          >
+            <CourseContent
+              exams={[]}
+            />
+          </Col>
+        </Row>
+      </Layout>
     </PageLayout>
   );
 };

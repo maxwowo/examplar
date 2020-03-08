@@ -2,7 +2,6 @@ import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import PageLayout from '../../components/PageLayout/PageLayout';
-import PageContent from '../../components/PageContent/PageContent';
 import CourseResults from '../../components/CourseResults/CourseResults';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import courseModel, { Course } from '../../models/course';
@@ -77,13 +76,11 @@ const SearchPage: React.FC<SearchPageProps> = (
 
   return (
     <PageLayout>
-      <PageContent>
-        <SearchBar/>
-        <CourseResults
-          loading={loading}
-          courseItems={courseItems}
-        />
-      </PageContent>
+      <SearchBar/>
+      <CourseResults
+        loading={loading}
+        courseItems={courseItems}
+      />
     </PageLayout>
   );
 };
