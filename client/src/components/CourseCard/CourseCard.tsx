@@ -27,6 +27,7 @@ const CourseCard: React.FC<CourseCardProps> = (
     <Typography.Title>
       {courseName} ({courseCode})
     </Typography.Title>
+
     <Typography.Paragraph>
       {universityName}
     </Typography.Paragraph>
