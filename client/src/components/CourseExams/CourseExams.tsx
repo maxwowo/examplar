@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Empty, List, Typography } from 'antd';
 
 import { Exam } from '../../models/exam';
+import classes from './CourseExams.module.less';
 
 const LIST_HEADER = (
   <Typography.Text>
@@ -30,6 +31,7 @@ const CourseExams: React.FC<CourseExamsProps> = (
     size='large'
     header={LIST_HEADER}
     dataSource={exams}
+    className={classes.examsList}
     locale={
       {
         emptyText: EMPTY
