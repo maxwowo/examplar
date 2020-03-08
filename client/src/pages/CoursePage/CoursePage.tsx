@@ -30,6 +30,11 @@ const CoursePage: React.FC<CoursePageProps> = (
     setCourse
   ] = React.useState<Course>();
 
+  const [
+    courseLoading,
+    setCourseLoading
+  ] = React.useState(true);
+
   React.useEffect(
     () => {
       courseModel
@@ -38,6 +43,7 @@ const CoursePage: React.FC<CoursePageProps> = (
         )
         .then(res => {
           setCourse(res.course);
+          setCourseLoading(false);
         })
         .catch(err => {
           notifyConnectionError(
@@ -54,6 +60,11 @@ const CoursePage: React.FC<CoursePageProps> = (
     setUniversity
   ] = React.useState<University>();
 
+  const [
+    universityLoading,
+    setUniversityLoading
+  ] = React.useState(true);
+
   React.useEffect(
     () => {
       if (course !== undefined) {
@@ -63,6 +74,7 @@ const CoursePage: React.FC<CoursePageProps> = (
           )
           .then(res => {
             setUniversity(res.university);
+            setUniversityLoading(false);
           })
           .catch(err => {
             notifyConnectionError(
@@ -86,6 +98,8 @@ const CoursePage: React.FC<CoursePageProps> = (
           courseName={course?.name}
           courseCode={course?.code}
           universityName={university?.name}
+          courseLoading={courseLoading}
+          universityLoading={universityLoading}
         />
         <CourseContent
           exams={[]}
