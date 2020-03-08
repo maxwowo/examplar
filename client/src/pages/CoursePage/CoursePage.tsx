@@ -6,7 +6,7 @@ import courseModel, { Course } from '../../models/course';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 import universityModel, { University } from '../../models/university';
 import CourseCard from '../../components/CourseCard/CourseCard';
-import CourseContent from '../../components/CourseContent/CourseContent';
+import CourseExams from '../../components/CourseExams/CourseExams';
 import classes from './CoursePage.module.less';
 
 interface CoursePageMatchParams {
@@ -101,7 +101,7 @@ const CoursePage: React.FC<CoursePageProps> = (
           courseLoading={courseLoading}
           universityLoading={universityLoading}
         />
-        <CourseContent
+        <CourseExams
           exams={[]}
         />
       </div>

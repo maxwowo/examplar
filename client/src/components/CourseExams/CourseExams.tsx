@@ -17,11 +17,11 @@ const EMPTY = (
   />
 );
 
-interface CourseContentProps {
+interface CourseExamsProps {
   exams: Exam[];
 }
 
-const CourseContent: React.FC<CourseContentProps> = (
+const CourseExams: React.FC<CourseExamsProps> = (
   {
     exams
   }
@@ -51,4 +51,4 @@ const CourseContent: React.FC<CourseContentProps> = (
   />
 );
 
-export default CourseContent;
+export default CourseExams;
