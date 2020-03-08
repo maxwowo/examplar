@@ -1,13 +1,15 @@
 import React from 'react';
 import { Button, Card, Typography } from 'antd';
 
-interface CourseSiderProps {
+import classes from './CourseCard.module.less';
+
+interface CourseCardProps {
   courseName: string | undefined;
   courseCode: string | undefined;
   universityName: string | undefined;
 }
 
-const CourseSider: React.FC<CourseSiderProps> = (
+const CourseCard: React.FC<CourseCardProps> = (
   {
     courseName,
     courseCode,
@@ -30,10 +32,12 @@ const CourseSider: React.FC<CourseSiderProps> = (
       Add exam
     </Button>
 
-    <Button>
+    <Button
+      className={classes.followButton}
+    >
       Follow course
     </Button>
   </Card>
 );
 
-export default CourseSider;
+export default CourseCard;

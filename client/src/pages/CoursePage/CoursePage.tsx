@@ -5,7 +5,7 @@ import PageLayout from '../../components/PageLayout/PageLayout';
 import courseModel, { Course } from '../../models/course';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 import universityModel, { University } from '../../models/university';
-import CourseSider from '../../components/CourseSider/CourseSider';
+import CourseCard from '../../components/CourseCard/CourseCard';
 import CourseContent from '../../components/CourseContent/CourseContent';
 import classes from './CoursePage.module.less';
 
@@ -82,7 +82,7 @@ const CoursePage: React.FC<CoursePageProps> = (
       <div
         className={classes.coursePage}
       >
-        <CourseSider
+        <CourseCard
           courseName={course?.name}
           courseCode={course?.code}
           universityName={university?.name}
