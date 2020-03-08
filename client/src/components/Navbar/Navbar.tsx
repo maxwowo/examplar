@@ -20,7 +20,6 @@ const Navbar: React.FC<NavbarProps> = () => (
         type="flex"
         align="middle"
         justify="space-between"
-        className="container-width"
       >
 
         <Col>
