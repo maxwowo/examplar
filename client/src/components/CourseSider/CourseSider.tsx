@@ -1,7 +1,5 @@
 import React from 'react';
-import { Button, Card, Layout, Typography } from 'antd';
-
-import classes from './CourseSider.module.less';
+import { Button, Card, Typography } from 'antd';
 
 interface CourseSiderProps {
   courseName: string | undefined;
@@ -16,26 +14,26 @@ const CourseSider: React.FC<CourseSiderProps> = (
     universityName
   }
 ) => (
-  <Layout.Sider
-    width='100%'
-    className={classes.sider}
+  <Card
+    bordered={false}
   >
-    <Card
-      title={courseName}
-      bordered={false}
-      className={classes.card}
-    >
-      <Typography.Paragraph>
-        {courseCode} @ {universityName}
-      </Typography.Paragraph>
+    <Typography.Title>
+      {courseName} ({courseCode})
+    </Typography.Title>
+    <Typography.Paragraph>
+      {universityName}
+    </Typography.Paragraph>
 
-      <Button
-        type='primary'
-      >
-        Add exam
-      </Button>
-    </Card>
-  </Layout.Sider>
+    <Button
+      type='primary'
+    >
+      Add exam
+    </Button>
+
+    <Button>
+      Follow course
+    </Button>
+  </Card>
 );
 
 export default CourseSider;

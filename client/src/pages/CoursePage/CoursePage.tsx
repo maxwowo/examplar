@@ -1,5 +1,4 @@
 import React from 'react';
-import { Col, Layout, Row } from 'antd';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import PageLayout from '../../components/PageLayout/PageLayout';
@@ -80,34 +79,18 @@ const CoursePage: React.FC<CoursePageProps> = (
 
   return (
     <PageLayout>
-      <Layout
-        className={classes.layout}
+      <div
+        className={classes.coursePage}
       >
-        <Row
-          type='flex'
-          justify='space-between'
-          className={classes.layoutRow}
-        >
-          <Col
-            xs={24}
-            md={8}
-          >
-            <CourseSider
-              courseName={course?.name}
-              courseCode={course?.code}
-              universityName={university?.name}
-            />
-          </Col>
-          <Col
-            xs={24}
-            md={14}
-          >
-            <CourseContent
-              exams={[]}
-            />
-          </Col>
-        </Row>
-      </Layout>
+        <CourseSider
+          courseName={course?.name}
+          courseCode={course?.code}
+          universityName={university?.name}
+        />
+        <CourseContent
+          exams={[]}
+        />
+      </div>
     </PageLayout>
   );
 };
