@@ -13,15 +13,12 @@ const Navbar: React.FC<NavbarProps> = () => (
   <Layout.Header
     className={classes.navbar}
   >
-    <div
-      className={classes.navbarBody}
-    >
       <Row
         type="flex"
         align="middle"
         justify="space-between"
+        className={classes.navbarBody}
       >
-
         <Col>
           <Link
             to="/"
@@ -41,9 +38,7 @@ const Navbar: React.FC<NavbarProps> = () => (
             }}
           />
         </Col>
-
       </Row>
-    </div>
   </Layout.Header>
 );
 

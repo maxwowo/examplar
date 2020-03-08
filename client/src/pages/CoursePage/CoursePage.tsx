@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row } from 'antd';
+import { Col, Layout, Row } from 'antd';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import PageLayout from '../../components/PageLayout/PageLayout';
@@ -9,6 +9,7 @@ import { notifyConnectionError } from '../../tools/errorNotifier';
 import universityModel, { University } from '../../models/university';
 import CourseSider from '../../components/CourseSider/CourseSider';
 import CourseContent from '../../components/CourseContent/CourseContent';
+import classes from './CoursePage.module.less';
 
 interface CoursePageMatchParams {
   courseId: string;
@@ -81,29 +82,34 @@ const CoursePage: React.FC<CoursePageProps> = (
   return (
     <PageLayout>
       <PageContent>
-        <Row
-          type='flex'
-          justify='space-between'
+        <Layout
+          className={classes.layout}
         >
-          <Col
-            xs={24}
-            md={10}
+          <Row
+            type='flex'
+            justify='space-between'
+            className={classes.layoutRow}
           >
-            <CourseSider
-              courseName={course?.name}
-              courseCode={course?.code}
-              universityName={university?.name}
-            />
-          </Col>
-          <Col
-            xs={24}
-            md={12}
-          >
-            <CourseContent
-              exams={[]}
-            />
-          </Col>
-        </Row>
+            <Col
+              xs={24}
+              md={8}
+            >
+              <CourseSider
+                courseName={course?.name}
+                courseCode={course?.code}
+                universityName={university?.name}
+              />
+            </Col>
+            <Col
+              xs={24}
+              md={14}
+            >
+              <CourseContent
+                exams={[]}
+              />
+            </Col>
+          </Row>
+        </Layout>
       </PageContent>
     </PageLayout>
   );

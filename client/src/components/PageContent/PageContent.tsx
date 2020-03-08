@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import { Layout } from 'antd';
 
 import classes from './PageContent.module.less';
 
@@ -13,11 +14,11 @@ const PageContent: React.FC<PageContentProps> = (
     className
   }
 ) => (
-  <div
+  <Layout.Content
     className={classNames(className, classes.pageContent)}
   >
     {children}
-  </div>
+  </Layout.Content>
 );
 
 export default PageContent;
