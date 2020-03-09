@@ -36,6 +36,21 @@ func (e ExamController) Context(next http.Handler) http.Handler {
 	})
 }
 
+func (e ExamController) Get(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	exam, ok := ctx.Value("exam").(*models.Exam)
+	if !ok {
+		log.Panic("Could not read exam ID context value.")
+	}
+
+	responder.RespondData(w, struct {
+		Exam models.Exam `json:"exam"`
+	}{
+		Exam: *exam,
+	})
+}
+
 func (e ExamController) Create(w http.ResponseWriter, r *http.Request) {
 	var examPayload forms.CreateExam
 

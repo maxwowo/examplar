@@ -83,7 +83,7 @@ func newRouter() *chi.Mux {
 		router.Route("/{examID}", func(router chi.Router) {
 			router.Use(exam.Context)
 
-			router.Get("/", course.Get)
+			router.Get("/", exam.Get)
 		})
 	})
 
