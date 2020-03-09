@@ -8,6 +8,7 @@ import universityModel, { University } from '../../models/university';
 import CourseCard from '../../components/CourseCard/CourseCard';
 import CourseExams from '../../components/CourseExams/CourseExams';
 import classes from './CoursePage.module.less';
+import examModel, { Exam } from '../../models/exam';
 
 interface CoursePageMatchParams {
   courseId: string;
@@ -52,7 +53,9 @@ const CoursePage: React.FC<CoursePageProps> = (
           );
         });
     },
-    [courseId]
+    [
+      courseId
+    ]
   );
 
   const [
@@ -89,6 +92,38 @@ const CoursePage: React.FC<CoursePageProps> = (
     ]
   );
 
+  const [
+    exams,
+    setExams
+  ] = React.useState<Exam[]>([]);
+
+  const [
+    examsLoading,
+    setExamsLoading
+  ] = React.useState(true);
+
+  React.useEffect(
+    () => {
+      examModel
+        .search(
+          courseId
+        )
+        .then(res => {
+          setExams(res.exams);
+          setExamsLoading(false);
+        })
+        .catch(err => {
+          notifyConnectionError(
+            err,
+            'Could not obtain exams.'
+          );
+        });
+    },
+    [
+      courseId
+    ]
+  );
+
   return (
     <PageLayout>
       <div
@@ -103,7 +138,8 @@ const CoursePage: React.FC<CoursePageProps> = (
           universityLoading={universityLoading}
         />
         <CourseExams
-          exams={[]}
+          exams={exams}
+          loading={examsLoading}
         />
       </div>
     </PageLayout>

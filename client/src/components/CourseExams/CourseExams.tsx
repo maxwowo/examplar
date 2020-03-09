@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Empty, List, Typography } from 'antd';
+import { Empty, Icon, List, Spin, Typography } from 'antd';
+import { ListProps } from 'antd/lib/list';
 
 import { Exam } from '../../models/exam';
 import classes from './CourseExams.module.less';
@@ -18,19 +19,36 @@ const EMPTY = (
   />
 );
 
-interface CourseExamsProps {
+interface CourseExamsProps extends ListProps<Exam> {
+  loading: boolean;
   exams: Exam[];
 }
 
 const CourseExams: React.FC<CourseExamsProps> = (
   {
-    exams
+    exams,
+    loading
   }
 ) => (
   <List
     size='large'
     header={LIST_HEADER}
     dataSource={exams}
+    loading={
+      {
+        spinning: loading,
+        indicator: (
+          <Spin
+            indicator={
+              <Icon
+                type='loading'
+                spin
+              />
+            }
+          />
+        )
+      }
+    }
     className={classes.examsList}
     locale={
       {
