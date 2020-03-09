@@ -25,6 +25,12 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
   },
   ref: React.Ref<Select<number>>
   ) => {
+
+  const [
+    loading,
+    setLoading
+  ] = React.useState(true);
+
   const [
     selectValue,
     setSelectValue
@@ -34,12 +40,16 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
 
   React.useEffect(
     () => {
+
+      setLoading(true);
+
       universityModel.search(
         selectValue
       )
         .then(res => {
           if (selectValue === res.query) {
             setOptions(res.universities);
+            setLoading(false);
           }
         })
         .catch(err => {
@@ -84,6 +94,7 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
         showSearch
         placeholder={placeholder}
         size={size}
+        loading={loading}
         notFoundContent={
           <Empty
             description='No matching universities'
