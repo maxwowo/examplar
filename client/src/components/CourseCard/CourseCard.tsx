@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card, Typography } from 'antd';
-
 import classes from './CourseCard.module.less';
+import CreateExamModal from '../CreateExamModal/CreateExamModal';
 
 interface CourseCardProps {
   courseName: string | undefined;
@@ -19,31 +19,49 @@ const CourseCard: React.FC<CourseCardProps> = (
     courseLoading,
     universityLoading
   }
-) => (
-  <Card
-    loading={courseLoading || universityLoading}
-    bordered={false}
-  >
-    <Typography.Title>
-      {courseName} ({courseCode})
-    </Typography.Title>
+) => {
 
-    <Typography.Paragraph>
-      {universityName}
-    </Typography.Paragraph>
+  const [
+    modalVisible,
+    setModalVisible
+  ] = React.useState(false);
 
-    <Button
-      type='primary'
+  const handleToggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
+
+  return (
+    <Card
+      loading={courseLoading || universityLoading}
+      bordered={false}
     >
-      Add exam
-    </Button>
+      <Typography.Title>
+        {courseName} ({courseCode})
+      </Typography.Title>
 
-    <Button
-      className={classes.followButton}
-    >
-      Follow course
-    </Button>
-  </Card>
-);
+      <Typography.Paragraph>
+        {universityName}
+      </Typography.Paragraph>
+
+      <CreateExamModal
+        visible={modalVisible}
+        handleToggleModal={handleToggleModal}
+      />
+
+      <Button
+        type='primary'
+        onClick={handleToggleModal}
+      >
+        Add exam
+      </Button>
+
+      <Button
+        className={classes.followButton}
+      >
+        Follow course
+      </Button>
+    </Card>
+  );
+};
 
 export default CourseCard;

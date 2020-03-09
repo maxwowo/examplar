@@ -8,6 +8,7 @@ interface EmptyCourseResultsProps {
 }
 
 const EmptyCourseResults: React.FC<EmptyCourseResultsProps> = () => {
+
   const [
     modalVisible,
     setModalVisible
