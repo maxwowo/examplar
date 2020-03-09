@@ -7,15 +7,18 @@ import CreateModal from '../CreateModal/CreateModal';
 import { ToggleableModalProps } from '../ToggleableModal/ToggleableModal';
 import YearSelect from '../YearSelect/YearSelect';
 import TermSelect from '../TermSelect/TermSelect';
+import examModel from '../../models/exam';
+import { notifyError } from '../../tools/errorNotifier';
 
 interface CreateExamModalProps extends ToggleableModalProps,
   RouteComponentProps,
   FormComponentProps {
-
+  courseId: number;
 }
 
 const CreateExamModal: React.FC<CreateExamModalProps> = (
   {
+    courseId,
     history,
     visible,
     handleToggleModal,
@@ -23,6 +26,41 @@ const CreateExamModal: React.FC<CreateExamModalProps> = (
   }
 ) => {
   const FORM_ID = 'create-exam-modal-form';
+
+  const handleSubmit = (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    form.validateFields(
+      (
+        err,
+        {
+          examYear,
+          examTerm
+        }
+      ) => {
+        if (!err) {
+          examModel
+            .create(
+              examYear,
+              examTerm,
+              courseId
+            )
+            .then(res => {
+              history.push(`/exams/${res.exam.id}`);
+            })
+            .catch(err => {
+              notifyError(
+                err,
+                'Create exam failed',
+                'Could not create the exam.'
+              );
+            });
+        }
+      }
+    );
+  };
 
   return (
     <CreateModal
@@ -32,8 +70,8 @@ const CreateExamModal: React.FC<CreateExamModalProps> = (
       handleToggleModal={handleToggleModal}
     >
       <Form
-        onSubmit={() => {
-        }}
+        onSubmit={handleSubmit}
+        id={FORM_ID}
       >
         <Form.Item
           hasFeedback

@@ -21,7 +21,7 @@ const YearSelect: React.ForwardRefExoticComponent<YearSelectProps> = React.forwa
     placeholder,
     onChange
   },
-  ref: React.Ref<any>
+  ref: React.Ref<Select<number>>
   ) => {
     return (
       <Select

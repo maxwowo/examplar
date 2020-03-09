@@ -7,6 +7,7 @@ import UniversitySelect from '../UniversitySelect/UniversitySelect';
 import courseModel from '../../models/course';
 import CreateModal from '../CreateModal/CreateModal';
 import { ToggleableModalProps } from '../ToggleableModal/ToggleableModal';
+import { notifyError } from '../../tools/errorNotifier';
 
 interface CreateCourseModalProps extends ToggleableModalProps,
   RouteComponentProps,
@@ -48,8 +49,11 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
               history.push(`/courses/${res.course.id}`);
             })
             .catch(err => {
-              console.error(err);
-              console.error('Create course failed');
+              notifyError(
+                err,
+                'Create course failed',
+                'Could not create the course.'
+              );
             });
         }
       }

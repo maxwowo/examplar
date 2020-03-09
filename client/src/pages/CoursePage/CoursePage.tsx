@@ -95,6 +95,7 @@ const CoursePage: React.FC<CoursePageProps> = (
         className={classes.coursePage}
       >
         <CourseCard
+          courseId={courseId}
           courseName={course?.name}
           courseCode={course?.code}
           universityName={university?.name}

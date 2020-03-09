@@ -1,6 +1,6 @@
 import { notification } from 'antd';
 
-const notifyError = (
+export const notifyError = (
   err: Error,
   title: string,
   description: string

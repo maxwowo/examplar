@@ -4,6 +4,7 @@ import classes from './CourseCard.module.less';
 import CreateExamModal from '../CreateExamModal/CreateExamModal';
 
 interface CourseCardProps {
+  courseId: number;
   courseName: string | undefined;
   courseCode: string | undefined;
   universityName: string | undefined;
@@ -13,6 +14,7 @@ interface CourseCardProps {
 
 const CourseCard: React.FC<CourseCardProps> = (
   {
+    courseId,
     courseName,
     courseCode,
     universityName,
@@ -44,6 +46,7 @@ const CourseCard: React.FC<CourseCardProps> = (
       </Typography.Paragraph>
 
       <CreateExamModal
+        courseId={courseId}
         visible={modalVisible}
         handleToggleModal={handleToggleModal}
       />
