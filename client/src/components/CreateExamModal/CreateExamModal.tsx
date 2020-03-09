@@ -50,7 +50,9 @@ const CreateExamModal: React.FC<CreateExamModalProps> = (
               ]
             }
           )(
-            <YearSelect/>
+            <YearSelect
+              placeholder='Enter exam year'
+            />
           )}
         </Form.Item>
 
@@ -69,7 +71,9 @@ const CreateExamModal: React.FC<CreateExamModalProps> = (
               ]
             }
           )(
-            <TermSelect/>
+            <TermSelect
+              placeholder='Enter exam term'
+            />
           )}
         </Form.Item>
       </Form>

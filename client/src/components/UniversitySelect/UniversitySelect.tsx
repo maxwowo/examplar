@@ -9,9 +9,6 @@ export interface UniversitySelectProps {
   handleUniversityChange?: (
     value: number
   ) => void;
-  onChange?: (
-    value: number
-  ) => void;
 }
 
 const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & SelectProps> = React.forwardRef((
@@ -77,14 +74,15 @@ const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & 
     };
 
     const handleChange = (
-      value: number
+      value: number,
+      option: React.ReactElement | React.ReactElement[]
     ) => {
       if (handleUniversityChange) {
         handleUniversityChange(value);
       }
 
       if (onChange) {
-        onChange(value);
+        onChange(value, option);
       }
     };
 

@@ -38,18 +38,20 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
           universityId
         }
       ) => {
-        courseModel.create(
-          courseCode,
-          courseName,
-          universityId
-        )
-          .then(res => {
-            history.push(`/courses/${res.course.id}`);
-          })
-          .catch(err => {
-            console.error(err);
-            console.error('Create course failed');
-          });
+        if (!err) {
+          courseModel.create(
+            courseCode,
+            courseName,
+            universityId
+          )
+            .then(res => {
+              history.push(`/courses/${res.course.id}`);
+            })
+            .catch(err => {
+              console.error(err);
+              console.error('Create course failed');
+            });
+        }
       }
     );
   };

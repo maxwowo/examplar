@@ -2,11 +2,11 @@ import React from 'react';
 import { Select } from 'antd';
 import { SelectProps } from 'antd/lib/select';
 
-const maxTerm = 6;
+const MAX_TERM = 6;
 
 const terms = Array
   .from(
-    Array(maxTerm)
+    Array(MAX_TERM)
       .keys()
   )
   .map(i => i + 1);
@@ -17,12 +17,15 @@ interface TermSelectProps extends SelectProps {
 
 const TermSelect: React.ForwardRefExoticComponent<TermSelectProps> = React.forwardRef((
   {
-    ...rest
+    placeholder,
+    onChange
   },
   ref: React.Ref<Select<number>>
   ) => (
     <Select
       ref={ref}
+      placeholder={placeholder}
+      onChange={onChange}
     >
       {terms.map(
         (
