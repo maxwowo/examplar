@@ -5,6 +5,7 @@ import Landing from './LandingPage/LandingPage';
 import SearchPage from './SearchPage/SearchPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import CoursePage from './CoursePage/CoursePage';
+import ExamPage from './ExamPage/ExamPage';
 
 interface RouterProps {
 
@@ -25,6 +26,10 @@ const Router: React.FC<RouterProps> = () => (
       <Route
         path='/courses/:courseId'
         component={CoursePage}
+      />
+      <Route
+        path='/exams/:examId'
+        component={ExamPage}
       />
       <Route
         path='*'
