@@ -1,20 +1,24 @@
 import React from 'react';
 import { DatePicker } from 'antd';
-import { DatePickerProps } from 'antd/es/date-picker/interface';
+import { DatePickerDecorator, DatePickerProps } from 'antd/es/date-picker/interface';
+
+import classes from './YearSelect.module.less';
 
 interface YearSelectProps extends DatePickerProps {
 
 }
 
-const YearSelect: React.FC<YearSelectProps> = (
+const YearSelect: React.ForwardRefExoticComponent<YearSelectProps> = React.forwardRef((
   {
     ...rest
-  }
-) => (
-  <DatePicker
-    mode='year'
-    {...rest}
-  />
+  },
+  ref: React.Ref<DatePickerDecorator>
+  ) => (
+    <DatePicker
+      className={classes.yearSelect}
+      mode='year'
+    />
+  )
 );
 
 export default YearSelect;

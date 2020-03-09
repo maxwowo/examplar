@@ -11,11 +11,11 @@ const terms = Array
   )
   .map(i => i + 1);
 
-interface TermSelectProps {
+interface TermSelectProps extends SelectProps {
 
 }
 
-const TermSelect: React.ForwardRefExoticComponent<TermSelectProps & SelectProps> = React.forwardRef((
+const TermSelect: React.ForwardRefExoticComponent<TermSelectProps> = React.forwardRef((
   {
     ...rest
   },
