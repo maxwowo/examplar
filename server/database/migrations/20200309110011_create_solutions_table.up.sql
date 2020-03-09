@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS solutions
+(
+    id      SERIAL PRIMARY KEY,
+    content INTEGER NOT NULL,
+    exam_id INTEGER NOT NULL REFERENCES exams
+);
