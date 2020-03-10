@@ -3,6 +3,8 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Col, Row } from 'antd';
 
 import PageLayout from '../../components/PageLayout/PageLayout';
+import examModel, { Exam } from '../../models/exam';
+import { notifyConnectionError } from '../../tools/errorNotifier';
 import classes from './ExamPage.module.less';
 
 interface ExamPageMatchingParams {
@@ -19,6 +21,32 @@ const ExamPage: React.FC<ExamPageProps> = (
   }
 ) => {
   const examId = Number(match.params.examId);
+
+  const [
+    exam,
+    setExam
+  ] = React.useState<Exam>();
+
+  React.useEffect(
+    () => {
+      examModel
+        .get(
+          examId
+        )
+        .then(res => {
+          setExam(res.exam);
+        })
+        .catch(err => {
+          notifyConnectionError(
+            err,
+            'Could not obtain exam details.'
+          );
+        });
+    },
+    [
+      examId
+    ]
+  );
 
   return (
     <PageLayout>
