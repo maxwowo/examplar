@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Col, Row } from 'antd';
+import { Card, Col, Row } from 'antd';
 
 import PageLayout from '../../components/PageLayout/PageLayout';
 import examModel, { Exam } from '../../models/exam';
@@ -50,24 +50,28 @@ const ExamPage: React.FC<ExamPageProps> = (
 
   return (
     <PageLayout>
-      <Row
+      <Card
+        bordered={false}
         className={classes.examPage}
-        type='flex'
-        justify='space-between'
       >
-        <Col
-          xs={8}
-          md={6}
+        <Row
+          type='flex'
+          justify='space-between'
         >
-          ay
-        </Col>
-        <Col
-          xs={16}
-          md={18}
-        >
-          ay!
-        </Col>
-      </Row>
+          <Col
+            xs={8}
+            md={6}
+          >
+            ay
+          </Col>
+          <Col
+            xs={16}
+            md={18}
+          >
+            ay!
+          </Col>
+        </Row>
+      </Card>
     </PageLayout>
   );
 };
