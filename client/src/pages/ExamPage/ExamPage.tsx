@@ -5,6 +5,7 @@ import { Card } from 'antd';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import examModel, { Exam } from '../../models/exam';
 import ExamNavbar from '../../components/ExamNavbar/ExamNavbar';
+import ExamContent from '../../components/ExamContent/ExamContent';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 import classes from './ExamPage.module.less';
 
@@ -56,6 +57,7 @@ const ExamPage: React.FC<ExamPageProps> = (
         className={classes.examPage}
       >
         <ExamNavbar/>
+        <ExamContent/>
       </Card>
     </PageLayout>
   );
