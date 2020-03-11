@@ -1,19 +1,24 @@
 import React from 'react';
 import { Layout } from 'antd';
+import classNames from 'classnames';
 
 import classes from './FullPage.module.less';
 
-interface FullPageProps extends React.HTMLAttributes<HTMLElement> {
-
+export interface FullPageProps extends React.HTMLAttributes<HTMLElement> {
+  fixedHeight?: boolean;
 }
 
 const FullPage: React.FC<FullPageProps> = (
   {
+    fixedHeight,
     children
   }
 ) => (
   <Layout
-    className={classes.fullPage}
+    className={classNames(
+      classes.fullPage,
+      fixedHeight ? classes.fixedHeight : null
+    )}
   >
     {children}
   </Layout>

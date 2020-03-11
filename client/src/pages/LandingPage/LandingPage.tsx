@@ -10,7 +10,9 @@ interface LandingPageProps {
 }
 
 const LandingPage: React.FC<LandingPageProps> = () => (
-  <PageLayout>
+  <PageLayout
+    fixedHeight
+  >
     <Centered>
       <TitleBox/>
       <SearchBar/>

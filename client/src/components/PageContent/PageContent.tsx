@@ -15,7 +15,10 @@ const PageContent: React.FC<PageContentProps> = (
   }
 ) => (
   <Layout.Content
-    className={classNames(className, classes.pageContent)}
+    className={classNames(
+      className,
+      classes.pageContent
+    )}
   >
     {children}
   </Layout.Content>
