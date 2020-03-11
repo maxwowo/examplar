@@ -1,9 +1,12 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import { Card } from 'antd';
 
 import PageLayout from '../../components/PageLayout/PageLayout';
 import examModel, { Exam } from '../../models/exam';
+import ExamNavbar from '../../components/ExamNavbar/ExamNavbar';
 import { notifyConnectionError } from '../../tools/errorNotifier';
+import classes from './ExamPage.module.less';
 
 interface ExamPageMatchingParams {
   examId: string;
@@ -48,7 +51,12 @@ const ExamPage: React.FC<ExamPageProps> = (
 
   return (
     <PageLayout>
-      hi
+      <Card
+        bordered={false}
+        className={classes.examPage}
+      >
+        <ExamNavbar/>
+      </Card>
     </PageLayout>
   );
 };
