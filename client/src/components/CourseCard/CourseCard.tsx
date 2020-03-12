@@ -10,8 +10,7 @@ interface CourseCardProps {
   courseName: string | undefined;
   courseCode: string | undefined;
   universityName: string | undefined;
-  courseLoading: boolean;
-  universityLoading: boolean;
+  loading: boolean;
 }
 
 const CourseCard: React.FC<CourseCardProps> = (
@@ -20,8 +19,7 @@ const CourseCard: React.FC<CourseCardProps> = (
     courseName,
     courseCode,
     universityName,
-    courseLoading,
-    universityLoading
+    loading
   }
 ) => {
 
@@ -36,7 +34,7 @@ const CourseCard: React.FC<CourseCardProps> = (
 
   return (
     <Card
-      loading={courseLoading || universityLoading}
+      loading={loading}
       bordered={false}
     >
       <Typography.Title>

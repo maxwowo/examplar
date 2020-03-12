@@ -56,10 +56,12 @@ const ExamPage: React.FC<ExamPageProps> = (
     ]
   );
 
+  const cardLoading: boolean[] = [examLoading];
+
   return (
     <PageLayout>
       <Card
-        loading={examLoading}
+        loading={cardLoading.every(curr => curr)}
         bordered={false}
         className={classes.examPage}
       >

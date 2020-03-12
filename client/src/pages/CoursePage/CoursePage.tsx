@@ -124,6 +124,8 @@ const CoursePage: React.FC<CoursePageProps> = (
     ]
   );
 
+  const courseCardLoading: boolean[] = [courseLoading, universityLoading];
+
   return (
     <PageLayout>
       <div
@@ -134,8 +136,7 @@ const CoursePage: React.FC<CoursePageProps> = (
           courseName={course?.name}
           courseCode={course?.code}
           universityName={university?.name}
-          courseLoading={courseLoading}
-          universityLoading={universityLoading}
+          loading={courseCardLoading.every(curr => curr)}
         />
         <CourseExams
           exams={exams}
