@@ -7,6 +7,7 @@ import examModel, { Exam } from '../../models/exam';
 import ExamNavbar from '../../components/ExamNavbar/ExamNavbar';
 import ExamContent from '../../components/ExamContent/ExamContent';
 import { notifyConnectionError } from '../../tools/errorNotifier';
+import courseModel, { Course } from '../../models/course';
 import classes from './ExamPage.module.less';
 
 interface ExamPageMatchingParams {
@@ -56,7 +57,44 @@ const ExamPage: React.FC<ExamPageProps> = (
     ]
   );
 
-  const cardLoading: boolean[] = [examLoading];
+  const [
+    course,
+    setCourse
+  ] = React.useState<Course>();
+
+  const [
+    courseLoading,
+    setCourseLoading
+  ] = React.useState(true);
+
+  React.useEffect(
+    () => {
+      if (exam !== undefined) {
+        courseModel
+          .get(
+            exam.courseId
+          )
+          .then(res => {
+            setCourse(res.course);
+            setCourseLoading(false);
+          })
+          .catch(err => {
+            notifyConnectionError(
+              err,
+              'Could not obtain course details.'
+            );
+          });
+      }
+    },
+    [
+      exam
+    ]
+  );
+
+  const cardLoading: boolean[] = [
+    examLoading,
+    courseLoading
+  ];
 
   return (
     <PageLayout>
