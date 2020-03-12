@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 
 import classes from './Latex.module.less';
 
@@ -7,30 +6,31 @@ interface LatexProps {
 
 }
 
-class Latex extends Component<LatexProps> {
-
-  renderMathJax = () => {
-    const curr = ReactDOM.findDOMNode(this);
-    (window as any).MathJax.Hub.Queue(['Typeset', (window as any).MathJax.Hub, curr]);
+const Latex: React.FC<LatexProps> = (
+  {
+    children
+  }
+) => {
+  const renderMathJax = () => {
+    (window as any).MathJax.Hub.Queue(['Typeset', (window as any).MathJax.Hub]);
   };
 
-  componentDidUpdate(): void {
-    this.renderMathJax();
-  }
+  React.useEffect(
+    () => {
+      renderMathJax();
+    },
+    []
+  );
 
-  componentDidMount(): void {
-    this.renderMathJax();
-  }
+  // renderMathJax();
 
-  render(): React.ReactElement {
-    return (
-      <p
-        className={classes.latex}
-      >
-        {this.props.children}
-      </p>
-    );
-  }
-}
+  return (
+    <p
+      className={classes.latex}
+    >
+      {children}
+    </p>
+  );
+};
 
 export default Latex;
