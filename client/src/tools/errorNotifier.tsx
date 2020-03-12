@@ -25,3 +25,12 @@ export const notifyConnectionError = (
     description
   );
 };
+
+export const notifyNotImplemented = () => {
+  notification.info(
+    {
+      message: 'Not implemented',
+      description: 'This feature has not been implemented yet!'
+    }
+  );
+};

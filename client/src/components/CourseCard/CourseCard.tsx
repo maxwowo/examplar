@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Card, Typography } from 'antd';
-import classes from './CourseCard.module.less';
+
+import { notifyNotImplemented } from '../../tools/errorNotifier';
 import CreateExamModal from '../CreateExamModal/CreateExamModal';
+import classes from './CourseCard.module.less';
 
 interface CourseCardProps {
   courseId: number;
@@ -60,6 +62,7 @@ const CourseCard: React.FC<CourseCardProps> = (
 
       <Button
         className={classes.followButton}
+        onClick={notifyNotImplemented}
       >
         Follow course
       </Button>
