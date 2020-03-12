@@ -8,6 +8,7 @@ import ExamNavbar from '../../components/ExamNavbar/ExamNavbar';
 import ExamContent from '../../components/ExamContent/ExamContent';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 import courseModel, { Course } from '../../models/course';
+import { Solution } from '../../models/solution';
 import classes from './ExamPage.module.less';
 
 interface ExamPageMatchingParams {
@@ -91,9 +92,31 @@ const ExamPage: React.FC<ExamPageProps> = (
     ]
   );
 
+  const [
+    solution,
+    setSolution
+  ] = React.useState<Solution>();
+
+  const [
+    solutionLoading,
+    setSolutionLoading
+  ] = React.useState(true);
+
+  React.useEffect(
+    () => {
+      if (exam !== undefined) {
+
+      }
+    },
+    [
+      exam
+    ]
+  );
+
   const cardLoading: boolean[] = [
     examLoading,
-    courseLoading
+    courseLoading,
+    solutionLoading
   ];
 
   return (
