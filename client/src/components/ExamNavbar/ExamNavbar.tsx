@@ -26,30 +26,43 @@ const ExamNavbar: React.FC<ExamNavbarProps> = () => (
       </Breadcrumb>
     </Col>
     <Col>
-      <Icon
-        type='edit'
-        onClick={notifyNotImplemented}
-        className={classes.iconButton}
-      />
-      <Icon
-        type='star'
-        onClick={notifyNotImplemented}
-        className={classes.iconButton}
-      />
-      <Icon
-        type='eye'
-        onClick={notifyNotImplemented}
-        className={classNames(
-          classes.iconButton,
-          classes.lastIcon
-        )}
-      />
+      <div
+        className={classes.leftIcons}
+      >
+        <Icon
+          type='edit'
+          onClick={notifyNotImplemented}
+          className={classes.iconButton}
+        />
+        <Icon
+          type='star'
+          onClick={notifyNotImplemented}
+          className={classes.iconButton}
+        />
+        <Icon
+          type='eye'
+          onClick={notifyNotImplemented}
+          className={classNames(
+            classes.iconButton,
+            classes.lastIcon
+          )}
+        />
+      </div>
       <Button
         type='primary'
         onClick={notifyNotImplemented}
       >
         Share
       </Button>
+      <div
+        className={classes.rightIcons}
+      >
+        <Icon
+          type='more'
+          onClick={notifyNotImplemented}
+          className={classes.iconButton}
+        />
+      </div>
     </Col>
   </Row>
 );
