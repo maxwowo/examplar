@@ -29,6 +29,11 @@ const ExamPage: React.FC<ExamPageProps> = (
     setExam
   ] = React.useState<Exam>();
 
+  const [
+    examLoading,
+    setExamLoading
+  ] = React.useState(true);
+
   React.useEffect(
     () => {
       examModel
@@ -37,7 +42,7 @@ const ExamPage: React.FC<ExamPageProps> = (
         )
         .then(res => {
           setExam(res.exam);
-          console.log(res.exam);
+          setExamLoading(false);
         })
         .catch(err => {
           notifyConnectionError(
@@ -54,6 +59,7 @@ const ExamPage: React.FC<ExamPageProps> = (
   return (
     <PageLayout>
       <Card
+        loading={examLoading}
         bordered={false}
         className={classes.examPage}
       >
