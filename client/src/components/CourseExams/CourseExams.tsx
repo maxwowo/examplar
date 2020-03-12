@@ -62,7 +62,7 @@ const CourseExams: React.FC<CourseExamsProps> = (
             <Link
               to={`/exams/${exam.id}`}
             >
-              {exam.examYear} term {exam.examTerm}
+              {exam.examYear} Term {exam.examTerm}
             </Link>
           }
         />

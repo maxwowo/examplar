@@ -99,11 +99,14 @@ const ExamPage: React.FC<ExamPageProps> = (
   return (
     <PageLayout>
       <Card
-        loading={cardLoading.every(curr => curr)}
+        loading={cardLoading.some(curr => curr)}
         bordered={false}
         className={classes.examPage}
       >
-        <ExamNavbar/>
+        <ExamNavbar
+          exam={exam}
+          course={course}
+        />
         <ExamContent/>
       </Card>
     </PageLayout>

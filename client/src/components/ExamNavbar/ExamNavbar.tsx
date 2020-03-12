@@ -1,15 +1,24 @@
 import React from 'react';
 import { Breadcrumb, Button, Col, Icon, Row, Tooltip } from 'antd';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { notifyNotImplemented } from '../../tools/errorNotifier';
+import { Course } from '../../models/course';
+import { Exam } from '../../models/exam';
 import classes from './ExamNavbar.module.less';
 
 interface ExamNavbarProps {
-
+  course?: Course;
+  exam?: Exam;
 }
 
-const ExamNavbar: React.FC<ExamNavbarProps> = () => (
+const ExamNavbar: React.FC<ExamNavbarProps> = (
+  {
+    course,
+    exam
+  }
+) => (
   <Row
     type='flex'
     align='middle'
@@ -18,10 +27,14 @@ const ExamNavbar: React.FC<ExamNavbarProps> = () => (
     <Col>
       <Breadcrumb>
         <Breadcrumb.Item>
-          Some
+          <Link
+            to={course ? `/courses/${course.id}` : ''}
+          >
+            {course ? course.code : null}
+          </Link>
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          Path
+          {exam ? `${exam.examYear} Term ${exam.examTerm}` : null}
         </Breadcrumb.Item>
       </Breadcrumb>
     </Col>
