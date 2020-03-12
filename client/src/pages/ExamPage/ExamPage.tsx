@@ -37,6 +37,7 @@ const ExamPage: React.FC<ExamPageProps> = (
         )
         .then(res => {
           setExam(res.exam);
+          console.log(res.exam);
         })
         .catch(err => {
           notifyConnectionError(

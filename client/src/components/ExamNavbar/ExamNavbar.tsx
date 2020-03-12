@@ -1,6 +1,5 @@
 import React from 'react';
 import { Breadcrumb, Button, Col, Icon, Row } from 'antd';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import classes from './ExamNavbar.module.less';
@@ -17,13 +16,6 @@ const ExamNavbar: React.FC<ExamNavbarProps> = () => (
   >
     <Col>
       <Breadcrumb>
-        <Breadcrumb.Item>
-          <Link
-            to='/'
-          >
-            Home
-          </Link>
-        </Breadcrumb.Item>
         <Breadcrumb.Item>
           Some
         </Breadcrumb.Item>
