@@ -1,4 +1,5 @@
 import React from 'react';
+import { Empty } from 'antd';
 
 import { Solution } from '../../models/solution';
 import classes from './ExamContent.module.less';
@@ -15,7 +16,9 @@ const ExamContent: React.FC<ExamContentProps> = (
   <div
     className={classes.examContent}
   >
-    {solution?.content}
+    {solution !== undefined && solution.content.length === 0 ? <Empty
+      description='No solution yet'
+    /> : solution?.content}
   </div>
 );
 
