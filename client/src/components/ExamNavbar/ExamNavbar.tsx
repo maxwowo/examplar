@@ -28,13 +28,13 @@ const ExamNavbar: React.FC<ExamNavbarProps> = (
       <Breadcrumb>
         <Breadcrumb.Item>
           <Link
-            to={course ? `/courses/${course.id}` : ''}
+            to={`/courses/${course?.id}`}
           >
-            {course ? course.code : null}
+            {course?.code}
           </Link>
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          {exam ? `${exam.examYear} Term ${exam.examTerm}` : null}
+          {`${exam?.examYear} Term ${exam?.examTerm}`}
         </Breadcrumb.Item>
       </Breadcrumb>
     </Col>
