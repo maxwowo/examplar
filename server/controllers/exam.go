@@ -74,3 +74,23 @@ func (e ExamController) Create(w http.ResponseWriter, r *http.Request) {
 		Exam: *exam,
 	})
 }
+
+func (e ExamController) GetSolution(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	exam, ok := ctx.Value("exam").(*models.Exam)
+	if !ok {
+		log.Panic("Could not read exam ID context value.")
+	}
+
+	solution, err := solutionModel.SearchByExamID(exam.ID)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	responder.RespondData(w, struct {
+		Solution models.Solution `json:"solution"`
+	}{
+		Solution: *solution,
+	})
+}

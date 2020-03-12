@@ -71,3 +71,23 @@ func (s Solution) CreateEmpty(examID int) error {
 
 	return err
 }
+
+func (s Solution) SearchByExamID(examID int) (*Solution, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		SELECT id, content, exam_id
+		FROM solutions
+		WHERE exam_id = $1
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer stmt.Close()
+
+	var solution Solution
+
+	err = stmt.QueryRow(examID).Scan(&solution.ID, &solution.Content, &solution.ExamID)
+
+	return &solution, err
+}
