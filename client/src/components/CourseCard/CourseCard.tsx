@@ -1,24 +1,24 @@
 import React from 'react';
 import { Button, Card, Typography } from 'antd';
 
+import { Course } from '../../models/course';
+import { University } from '../../models/university';
 import { notifyNotImplemented } from '../../tools/errorNotifier';
 import CreateExamModal from '../CreateExamModal/CreateExamModal';
 import classes from './CourseCard.module.less';
 
 interface CourseCardProps {
   courseId: number;
-  courseName: string | undefined;
-  courseCode: string | undefined;
-  universityName: string | undefined;
+  course?: Course;
+  university?: University;
   loading: boolean;
 }
 
 const CourseCard: React.FC<CourseCardProps> = (
   {
     courseId,
-    courseName,
-    courseCode,
-    universityName,
+    course,
+    university,
     loading
   }
 ) => {
@@ -38,11 +38,11 @@ const CourseCard: React.FC<CourseCardProps> = (
       bordered={false}
     >
       <Typography.Title>
-        {courseName} ({courseCode})
+        {course?.name} ({course?.code})
       </Typography.Title>
 
       <Typography.Paragraph>
-        {universityName}
+        {university?.name}
       </Typography.Paragraph>
 
       <CreateExamModal

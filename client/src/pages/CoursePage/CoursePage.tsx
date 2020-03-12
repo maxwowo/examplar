@@ -136,9 +136,8 @@ const CoursePage: React.FC<CoursePageProps> = (
       >
         <CourseCard
           courseId={courseId}
-          courseName={course?.name}
-          courseCode={course?.code}
-          universityName={university?.name}
+          course={course}
+          university={university}
           loading={courseCardLoading.some(curr => curr)}
         />
         <CourseExams
