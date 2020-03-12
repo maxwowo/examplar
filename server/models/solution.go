@@ -52,3 +52,22 @@ func (s Solution) Create(solutionPaylaod forms.CreateSolution) (*Solution, error
 
 	return &solution, err
 }
+
+func (s Solution) CreateEmpty(examID int) error {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		INSERT INTO solutions
+		(id, content, exam_id)
+		VALUES
+		(DEFAULT, '', $1)
+		RETURNING id, content, exam_id
+	`)
+	if err != nil {
+		return err
+	}
+
+	_, err = stmt.Query(examID)
+
+	return err
+}

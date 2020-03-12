@@ -51,7 +51,11 @@ func (e Exam) Create(examPayload forms.CreateExam) (*Exam, error) {
 
 	err = stmt.QueryRow(examPayload.ExamYear, examPayload.ExamTerm, examPayload.CourseID).Scan(&exam.ID, &exam.ExamYear, &exam.ExamTerm, &exam.CourseID)
 
-	return &exam, err
+	if err != nil {
+		return nil, err
+	}
+
+	return &exam, new(Solution).CreateEmpty(exam.ID)
 }
 
 func (e Exam) SearchByCourseID(courseID int) ([]Exam, error) {
