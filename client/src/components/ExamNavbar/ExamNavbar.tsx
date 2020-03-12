@@ -1,5 +1,5 @@
 import React from 'react';
-import { Breadcrumb, Button, Col, Icon, Row } from 'antd';
+import { Breadcrumb, Button, Col, Icon, Row, Tooltip } from 'antd';
 import classNames from 'classnames';
 
 import { notifyNotImplemented } from '../../tools/errorNotifier';
@@ -29,24 +29,39 @@ const ExamNavbar: React.FC<ExamNavbarProps> = () => (
       <div
         className={classes.leftIcons}
       >
-        <Icon
-          type='edit'
-          onClick={notifyNotImplemented}
-          className={classes.iconButton}
-        />
-        <Icon
-          type='star'
-          onClick={notifyNotImplemented}
-          className={classes.iconButton}
-        />
-        <Icon
-          type='eye'
-          onClick={notifyNotImplemented}
-          className={classNames(
-            classes.iconButton,
-            classes.lastIcon
-          )}
-        />
+        <Tooltip
+          title='Edit solution'
+          placement='bottom'
+        >
+          <Icon
+            type='edit'
+            onClick={notifyNotImplemented}
+            className={classes.iconButton}
+          />
+        </Tooltip>
+        <Tooltip
+          title='Save for later'
+          placement='bottom'
+        >
+          <Icon
+            type='star'
+            onClick={notifyNotImplemented}
+            className={classes.iconButton}
+          />
+        </Tooltip>
+        <Tooltip
+          title='Start watching'
+          placement='bottom'
+        >
+          <Icon
+            type='eye'
+            onClick={notifyNotImplemented}
+            className={classNames(
+              classes.iconButton,
+              classes.lastIcon
+            )}
+          />
+        </Tooltip>
       </div>
       <Button
         type='primary'
