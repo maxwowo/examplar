@@ -63,6 +63,28 @@ const solutionModel = {
           throw err;
         }
       )
+  ),
+  search: (
+    examId: number
+  ): Promise<GetBody> => (
+    client
+      .get(
+        `/exams/${examId}/solution`
+      )
+      .then(
+        (
+          res: ClientResponse<GetBody>
+        ) => (
+          res.data
+        )
+      )
+      .catch(
+        (
+          err: ClientError
+        ) => {
+          throw err;
+        }
+      )
   )
 };
 

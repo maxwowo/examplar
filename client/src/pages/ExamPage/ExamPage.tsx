@@ -8,7 +8,7 @@ import ExamNavbar from '../../components/ExamNavbar/ExamNavbar';
 import ExamContent from '../../components/ExamContent/ExamContent';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 import courseModel, { Course } from '../../models/course';
-import { Solution } from '../../models/solution';
+import solutionModel, { Solution } from '../../models/solution';
 import classes from './ExamPage.module.less';
 
 interface ExamPageMatchingParams {
@@ -105,7 +105,20 @@ const ExamPage: React.FC<ExamPageProps> = (
   React.useEffect(
     () => {
       if (exam !== undefined) {
-
+        solutionModel
+          .search(
+            exam.id
+          )
+          .then(res => {
+            setSolution(res.solution);
+            setSolutionLoading(false);
+          })
+          .catch(err => {
+            notifyConnectionError(
+              err,
+              'Could not obtain solution details.'
+            );
+          });
       }
     },
     [
@@ -130,7 +143,9 @@ const ExamPage: React.FC<ExamPageProps> = (
           exam={exam}
           course={course}
         />
-        <ExamContent/>
+        <ExamContent
+          solution={solution}
+        />
       </Card>
     </PageLayout>
   );
