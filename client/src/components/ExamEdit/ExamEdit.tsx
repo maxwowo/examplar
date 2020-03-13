@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 import { Button, Col, Input, Row } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 
 import { Exam } from '../../models/exam';
 import { Course } from '../../models/course';
-import { Solution } from '../../models/solution';
+import { Solution, solutionModel } from '../../models/solution';
 import ExamBreadcrumb from '../ExamBreadcrumb/ExamBreadcrumb';
+import { notifyConnectionError } from '../../tools/errorNotifier';
 import classes from './ExamEdit.module.less';
 
-interface ExamEditProps {
+interface ExamEditProps extends RouteComponentProps {
   exam?: Exam;
   course?: Course;
   solution?: Solution;
@@ -16,13 +17,46 @@ interface ExamEditProps {
 
 const ExamEdit: React.FC<ExamEditProps> = (
   {
+    history,
     exam,
     course,
     solution
   }
 ) => {
-  const handleExamSubmit = () => {
 
+  const [
+    content,
+    setContent
+  ] = React.useState<string | undefined>(solution?.content);
+
+  const handleExamSubmit = () => {
+    if (solution !== undefined) {
+      solutionModel
+        .update(
+          solution.id,
+          content ? content : ''
+        )
+        .then(() => {
+          history.push(`/exams/${exam?.id}`);
+        })
+        .catch(err => {
+          notifyConnectionError(
+            err,
+            'Could not obtain exam solution.'
+          );
+        });
+    }
+  };
+
+  const handleTextAreaOnChange: ChangeEventHandler<HTMLTextAreaElement> = (
+    {
+      target: {
+        value
+      }
+    }
+  ) => {
+    console.log(value);
+    setContent(value);
   };
 
   return (
@@ -32,7 +66,8 @@ const ExamEdit: React.FC<ExamEditProps> = (
         course={course}
       />
       <Input.TextArea
-        value={solution?.content}
+        value={content}
+        onChange={handleTextAreaOnChange}
         placeholder='Start contributing now!'
         autoSize={
           {
@@ -49,6 +84,7 @@ const ExamEdit: React.FC<ExamEditProps> = (
         <Col>
           <Button
             type='primary'
+            onClick={handleExamSubmit}
             className={classes.submitButton}
           >
             Submit
@@ -66,4 +102,4 @@ const ExamEdit: React.FC<ExamEditProps> = (
   );
 };
 
-export default ExamEdit;
+export default withRouter(ExamEdit);

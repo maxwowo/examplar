@@ -14,7 +14,11 @@ interface CreateBody {
   solution: Solution;
 }
 
-const solutionModel = {
+interface UpdateBody {
+
+}
+
+export const solutionModel = {
   get: (
     solutionId: number
   ): Promise<GetBody> => (
@@ -38,7 +42,7 @@ const solutionModel = {
       )
   ),
   create: (
-    content: number,
+    content: string,
     examId: number
   ): Promise<CreateBody> => (
     client
@@ -54,6 +58,32 @@ const solutionModel = {
           res: ClientResponse<CreateBody>
         ) => (
           res.data
+        )
+      )
+      .catch(
+        (
+          err: ClientError
+        ) => {
+          throw err;
+        }
+      )
+  ),
+  update: (
+    id: number,
+    content: string
+  ): Promise<UpdateBody> => (
+    client
+      .put(
+        `/solutions/${id}`,
+        {
+          content: content
+        }
+      )
+      .then(
+        (
+          res: ClientResponse<CreateBody>
+        ) => (
+          res
         )
       )
       .catch(
