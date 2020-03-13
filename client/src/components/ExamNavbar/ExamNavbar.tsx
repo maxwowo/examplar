@@ -1,9 +1,9 @@
 import React from 'react';
-import { Breadcrumb, Button, Col, Icon, Row, Tooltip } from 'antd';
-import { Link } from 'react-router-dom';
+import { Button, Col, Icon, Row, Tooltip } from 'antd';
 import classNames from 'classnames';
 
 import { notifyNotImplemented } from '../../tools/errorNotifier';
+import ExamBreadcrumb from '../ExamBreadcrumb/ExamBreadcrumb';
 import { Course } from '../../models/course';
 import { Exam } from '../../models/exam';
 import classes from './ExamNavbar.module.less';
@@ -27,18 +27,10 @@ const ExamNavbar: React.FC<ExamNavbarProps> = (
     justify='space-between'
   >
     <Col>
-      <Breadcrumb>
-        <Breadcrumb.Item>
-          <Link
-            to={`/courses/${course?.id}`}
-          >
-            {course?.code}
-          </Link>
-        </Breadcrumb.Item>
-        <Breadcrumb.Item>
-          {`${exam?.examYear} Term ${exam?.examTerm}`}
-        </Breadcrumb.Item>
-      </Breadcrumb>
+      <ExamBreadcrumb
+        exam={exam}
+        course={course}
+      />
     </Col>
     <Col>
       <div
