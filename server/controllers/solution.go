@@ -36,7 +36,7 @@ func (s SolutionController) Context(next http.Handler) http.Handler {
 	})
 }
 
-func (s SolutionController) Get(w http.ResponseWriter, r *http.Request) {
+func (s SolutionController) getContext(r *http.Request) *models.Solution {
 	ctx := r.Context()
 
 	solution, ok := ctx.Value("solution").(*models.Solution)
@@ -44,10 +44,14 @@ func (s SolutionController) Get(w http.ResponseWriter, r *http.Request) {
 		log.Panic("Could not read solution ID context value.")
 	}
 
+	return solution
+}
+
+func (s SolutionController) Get(w http.ResponseWriter, r *http.Request) {
 	responder.RespondData(w, struct {
 		Solution models.Solution `json:"solution"`
 	}{
-		Solution: *solution,
+		Solution: *s.getContext(r),
 	})
 }
 
@@ -76,12 +80,7 @@ func (s SolutionController) Create(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s SolutionController) Update(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	solution, ok := ctx.Value("solution").(*models.Solution)
-	if !ok {
-		log.Panic("Could not read solution ID context value.")
-	}
+	solution := s.getContext(r)
 
 	var solutionPayload forms.UpdateSolution
 

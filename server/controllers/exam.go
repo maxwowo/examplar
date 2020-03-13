@@ -36,7 +36,7 @@ func (e ExamController) Context(next http.Handler) http.Handler {
 	})
 }
 
-func (e ExamController) Get(w http.ResponseWriter, r *http.Request) {
+func (e ExamController) getContext(r *http.Request) *models.Exam {
 	ctx := r.Context()
 
 	exam, ok := ctx.Value("exam").(*models.Exam)
@@ -44,10 +44,14 @@ func (e ExamController) Get(w http.ResponseWriter, r *http.Request) {
 		log.Panic("Could not read exam ID context value.")
 	}
 
+	return exam
+}
+
+func (e ExamController) Get(w http.ResponseWriter, r *http.Request) {
 	responder.RespondData(w, struct {
 		Exam models.Exam `json:"exam"`
 	}{
-		Exam: *exam,
+		Exam: *e.getContext(r),
 	})
 }
 
@@ -76,12 +80,7 @@ func (e ExamController) Create(w http.ResponseWriter, r *http.Request) {
 }
 
 func (e ExamController) GetSolution(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	exam, ok := ctx.Value("exam").(*models.Exam)
-	if !ok {
-		log.Panic("Could not read exam ID context value.")
-	}
+	exam := e.getContext(r)
 
 	solution, err := solutionModel.SearchByExamID(exam.ID)
 	if err != nil {

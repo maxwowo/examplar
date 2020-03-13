@@ -34,7 +34,7 @@ func (u UniversityController) Context(next http.Handler) http.Handler {
 	})
 }
 
-func (u UniversityController) Get(w http.ResponseWriter, r *http.Request) {
+func (u UniversityController) getContext(r *http.Request) *models.University {
 	ctx := r.Context()
 
 	university, ok := ctx.Value("university").(*models.University)
@@ -42,10 +42,14 @@ func (u UniversityController) Get(w http.ResponseWriter, r *http.Request) {
 		log.Panic("Could not read university ID context value.")
 	}
 
+	return university
+}
+
+func (u UniversityController) Get(w http.ResponseWriter, r *http.Request) {
 	responder.RespondData(w, struct {
 		University models.University `json:"university"`
 	}{
-		University: *university,
+		University: *u.getContext(r),
 	})
 }
 
