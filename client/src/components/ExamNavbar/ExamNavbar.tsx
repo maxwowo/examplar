@@ -11,14 +11,12 @@ import classes from './ExamNavbar.module.less';
 interface ExamNavbarProps {
   course?: Course;
   exam?: Exam;
-  handleToggleDisplayExam: () => void;
 }
 
 const ExamNavbar: React.FC<ExamNavbarProps> = (
   {
     course,
     exam,
-    handleToggleDisplayExam
   }
 ) => (
   <Row
@@ -42,7 +40,6 @@ const ExamNavbar: React.FC<ExamNavbarProps> = (
         >
           <Icon
             type='edit'
-            onClick={handleToggleDisplayExam}
             className={classes.iconButton}
           />
         </Tooltip>

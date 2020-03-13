@@ -10,7 +10,6 @@ interface ExamDisplayProps {
   exam?: Exam;
   course?: Course;
   solution?: Solution;
-  handleToggleDisplayExam: () => void;
 }
 
 const ExamDisplay: React.FC<ExamDisplayProps> = (
@@ -18,14 +17,12 @@ const ExamDisplay: React.FC<ExamDisplayProps> = (
     exam,
     course,
     solution,
-    handleToggleDisplayExam
   }
 ) => (
   <div>
     <ExamNavbar
       exam={exam}
       course={course}
-      handleToggleDisplayExam={handleToggleDisplayExam}
     />
     <ExamContent
       solution={solution}

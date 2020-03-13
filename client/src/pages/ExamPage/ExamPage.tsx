@@ -8,7 +8,6 @@ import { notifyConnectionError } from '../../tools/errorNotifier';
 import courseModel, { Course } from '../../models/course';
 import solutionModel, { Solution } from '../../models/solution';
 import ExamDisplay from '../../components/ExamDisplay/ExamDisplay';
-import ExamEdit from '../../components/ExamEdit/ExamEdit';
 import classes from './ExamPage.module.less';
 
 interface ExamPageMatchingParams {
@@ -126,15 +125,6 @@ const ExamPage: React.FC<ExamPageProps> = (
     ]
   );
 
-  const [
-    isDisplayingExam,
-    setIsDisplayingExam
-  ] = React.useState(true);
-
-  const handleToggleDisplayExam = () => {
-    setIsDisplayingExam(!isDisplayingExam);
-  };
-
   const cardLoading: boolean[] = [
     examLoading,
     courseLoading,
@@ -148,18 +138,11 @@ const ExamPage: React.FC<ExamPageProps> = (
         bordered={false}
         className={classes.examPage}
       >
-        {
-          isDisplayingExam
-            ?
-            <ExamDisplay
-              exam={exam}
-              course={course}
-              solution={solution}
-              handleToggleDisplayExam={handleToggleDisplayExam}
-            />
-            :
-            <ExamEdit/>
-        }
+        <ExamDisplay
+          exam={exam}
+          course={course}
+          solution={solution}
+        />
       </Card>
     </PageLayout>
   );
