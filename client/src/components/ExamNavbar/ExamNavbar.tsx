@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Col, Icon, Row, Tooltip } from 'antd';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { notifyNotImplemented } from '../../tools/errorNotifier';
@@ -38,10 +39,14 @@ const ExamNavbar: React.FC<ExamNavbarProps> = (
           title='Edit solution'
           placement='bottom'
         >
-          <Icon
-            type='edit'
-            className={classes.iconButton}
-          />
+          <Link
+            to={`/exams/${exam?.id}/edit`}
+          >
+            <Icon
+              type='edit'
+              className={classes.iconButton}
+            />
+          </Link>
         </Tooltip>
         <Tooltip
           title='Save for later'
