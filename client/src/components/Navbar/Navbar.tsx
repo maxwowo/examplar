@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Col, Icon, Layout, Row } from 'antd';
+import { Button, Col, Layout, Row } from 'antd';
 
 import Logo from '../Logo/Logo';
+import { notifyNotImplemented } from '../../tools/errorNotifier';
 import classes from './Navbar.module.less';
 
 interface NavbarProps {
@@ -30,13 +31,18 @@ const Navbar: React.FC<NavbarProps> = () => (
         </Col>
 
         <Col>
-          <Icon
-            className={classes.icon}
-            type="github"
-            onClick={() => {
-              window.open('https://github.com/maxwowo/examplar', '_blank');
-            }}
-          />
+          <Button
+            type='link'
+            onClick={notifyNotImplemented}
+            className={classes.loginButton}
+          >
+            Login
+          </Button>
+          <Button
+            onClick={notifyNotImplemented}
+          >
+            Sign up
+          </Button>
         </Col>
       </Row>
   </Layout.Header>
