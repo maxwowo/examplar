@@ -39,6 +39,8 @@ const Navbar: React.FC<NavbarProps> = () => (
             Login
           </Button>
           <Button
+            ghost
+            type='primary'
             onClick={notifyNotImplemented}
           >
             Sign up
