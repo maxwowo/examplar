@@ -7,3 +7,10 @@ database:
 
 server:
   address: :8080
+
+mail:
+  address: examplarmail@gmail.com
+  password: examplar
+  outgoing:
+    domain: smtp.gmail.com
+    port: 587

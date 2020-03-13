@@ -2,17 +2,20 @@ package mailer
 
 import (
 	"fmt"
+	"github.com/maxwowo/examplar/configuration"
 	"log"
 	"net/smtp"
 )
 
 func Send(recipient string, subject string, body string) {
-	SMTPDomain := "smtp.gmail.com"
-	SMTPPort := "587"
+	config := configuration.GetConfig()
+
+	SMTPDomain := config.GetString("mail.outgoing.domain")
+	SMTPPort := config.GetString("mail.outgoing.port")
 	SMTPServer := fmt.Sprintf("%s:%s", SMTPDomain, SMTPPort)
 
-	sender := "examplarmail@gmail.com"
-	password := "examplar"
+	sender := config.GetString("mail.address")
+	password := config.GetString("mail.password")
 
 	auth := smtp.PlainAuth("", sender, password, SMTPDomain)
 
