@@ -72,8 +72,8 @@ else
 	@echo 'Usage: make migrations-generate name=example'
 endif
 
-.PHONY: migrations-run
-migrations-run: ## Run migrations.
+.PHONY: migrations-up
+migrations-up: ## Run up migrations.
 	@docker run \
 	--rm \
 	-v $(MIGRATIONS_PATH):/migrations \
@@ -81,6 +81,16 @@ migrations-run: ## Run migrations.
 	-path=/migrations/ \
 	-database $(DATABASE_URL) \
 	up
+
+.PHONY: migrations-down
+migrations-down: ## Run down migrations.
+	@docker run \
+	--rm \
+	-v $(MIGRATIONS_PATH):/migrations \
+	--network host migrate/migrate \
+	-path=/migrations/ \
+	-database $(DATABASE_URL) \
+	down --all
 
 .PHONY: database-start
 database-start: ## Start the database in Docker.
