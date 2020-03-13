@@ -106,6 +106,7 @@ func newRouter() *chi.Mux {
 			router.Use(solution.Context)
 
 			router.Get("/", solution.Get)
+			router.Put("/", solution.Update)
 		})
 	})
 

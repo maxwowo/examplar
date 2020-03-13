@@ -74,3 +74,30 @@ func (s SolutionController) Create(w http.ResponseWriter, r *http.Request) {
 		Solution: *solution,
 	})
 }
+
+func (s SolutionController) Update(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	solution, ok := ctx.Value("solution").(*models.Solution)
+	if !ok {
+		log.Panic("Could not read solution ID context value.")
+	}
+
+	var solutionPayload forms.UpdateSolution
+
+	// Malformed JSON solution payload
+	err := json.NewDecoder(r.Body).Decode(&solutionPayload)
+	if err != nil {
+		responder.RespondError(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Update solution
+	err = solutionModel.Update(solution, solutionPayload)
+	if err != nil {
+		responder.RespondError(w, "Invalid solution ID.", http.StatusBadRequest)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}

@@ -31,7 +31,7 @@ func (s Solution) Get(ID int) (*Solution, error) {
 	return &solution, err
 }
 
-func (s Solution) Create(solutionPaylaod forms.CreateSolution) (*Solution, error) {
+func (s Solution) Create(solutionPayload forms.CreateSolution) (*Solution, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -48,9 +48,27 @@ func (s Solution) Create(solutionPaylaod forms.CreateSolution) (*Solution, error
 
 	var solution Solution
 
-	err = stmt.QueryRow(solutionPaylaod.Content, solutionPaylaod.ExamID).Scan(&solution.ID, &solution.Content, &solution.ExamID)
+	err = stmt.QueryRow(solutionPayload.Content, solutionPayload.ExamID).Scan(&solution.ID, &solution.Content, &solution.ExamID)
 
 	return &solution, err
+}
+
+func (s Solution) Update(solution *Solution, solutionPayload forms.UpdateSolution) error {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		UPDATE solutions
+		SET content = $2
+		WHERE id = $1
+	`)
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Query(solution.ID, solutionPayload.Content)
+
+	return err
 }
 
 func (s Solution) CreateEmpty(examID int) error {
