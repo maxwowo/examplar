@@ -24,6 +24,6 @@ func Send(recipient string, subject string, body string) {
 	err := smtp.SendMail(SMTPServer, auth, sender, []string{recipient}, []byte(message))
 
 	if err != nil {
-		log.Printf("SMTP error: %s", err)
+		log.Printf("SMTP error: %s\n", err)
 	}
 }
