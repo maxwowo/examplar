@@ -3,12 +3,11 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Card } from 'antd';
 
 import PageLayout from '../../components/PageLayout/PageLayout';
-import examModel, { Exam } from '../../models/exam';
-import { notifyConnectionError } from '../../tools/errorNotifier';
-import courseModel, { Course } from '../../models/course';
-import solutionModel, { Solution } from '../../models/solution';
 import ExamDisplay from '../../components/ExamDisplay/ExamDisplay';
+import useExam from '../../hooks/useExam';
+import useCourse from '../../hooks/useCourse';
 import classes from './ExamPage.module.less';
+import useSolution from '../../hooks/useSolution';
 
 interface ExamPageMatchingParams {
   examId: string;
@@ -27,103 +26,18 @@ const ExamPage: React.FC<ExamPageProps> = (
 
   const [
     exam,
-    setExam
-  ] = React.useState<Exam>();
-
-  const [
-    examLoading,
-    setExamLoading
-  ] = React.useState(true);
-
-  React.useEffect(
-    () => {
-      examModel
-        .get(
-          examId
-        )
-        .then(res => {
-          setExam(res.exam);
-          setExamLoading(false);
-        })
-        .catch(err => {
-          notifyConnectionError(
-            err,
-            'Could not obtain exam details.'
-          );
-        });
-    },
-    [
-      examId
-    ]
-  );
+    examLoading
+  ] = useExam(examId);
 
   const [
     course,
-    setCourse
-  ] = React.useState<Course>();
-
-  const [
-    courseLoading,
-    setCourseLoading
-  ] = React.useState(true);
-
-  React.useEffect(
-    () => {
-      if (exam !== undefined) {
-        courseModel
-          .get(
-            exam.courseId
-          )
-          .then(res => {
-            setCourse(res.course);
-            setCourseLoading(false);
-          })
-          .catch(err => {
-            notifyConnectionError(
-              err,
-              'Could not obtain course details.'
-            );
-          });
-      }
-    },
-    [
-      exam
-    ]
-  );
+    courseLoading
+  ] = useCourse(exam);
 
   const [
     solution,
-    setSolution
-  ] = React.useState<Solution>();
-
-  const [
-    solutionLoading,
-    setSolutionLoading
-  ] = React.useState(true);
-
-  React.useEffect(
-    () => {
-      if (exam !== undefined) {
-        solutionModel
-          .search(
-            exam.id
-          )
-          .then(res => {
-            setSolution(res.solution);
-            setSolutionLoading(false);
-          })
-          .catch(err => {
-            notifyConnectionError(
-              err,
-              'Could not obtain solution details.'
-            );
-          });
-      }
-    },
-    [
-      exam
-    ]
-  );
+    solutionLoading
+  ] = useSolution(exam);
 
   const cardLoading: boolean[] = [
     examLoading,
