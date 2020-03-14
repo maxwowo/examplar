@@ -7,6 +7,7 @@ import { notifyNotImplemented } from '../../tools/errorNotifier';
 import ExamBreadcrumb from '../ExamBreadcrumb/ExamBreadcrumb';
 import { Course } from '../../models/course';
 import { Exam } from '../../models/exam';
+import TooltipIconButton from '../TooltipIconButton/TooltipIconButton';
 import IconButton from '../IconButton/IconButton';
 import classes from './ExamNavbar.module.less';
 
@@ -48,19 +49,19 @@ const ExamNavbar: React.FC<ExamNavbarProps> = (
           <Link
             to={`/exams/${exam?.id}/edit`}
           >
-            <IconButton
+            <TooltipIconButton
               iconType='edit'
               tooltipTitle='Edit solution'
               tooltipPlacement='bottom'
             />
           </Link>
-          <IconButton
+          <TooltipIconButton
             iconType='star'
             tooltipTitle='Save for later'
             tooltipPlacement='bottom'
             onClick={notifyNotImplemented}
           />
-          <IconButton
+          <TooltipIconButton
             iconType='eye'
             tooltipTitle='Start watching'
             tooltipPlacement='bottom'
@@ -81,9 +82,7 @@ const ExamNavbar: React.FC<ExamNavbarProps> = (
           className={classes.rightIcons}
         >
           <IconButton
-            iconType='more'
-            tooltipTitle='More options'
-            tooltipPlacement='bottom'
+            type='more'
             onClick={notifyNotImplemented}
           />
         </div>

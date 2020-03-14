@@ -1,40 +1,29 @@
 import React from 'react';
-import { TooltipPlacement } from 'antd/lib/tooltip';
-import { Icon, Tooltip } from 'antd';
 import classNames from 'classnames';
-
+import { Icon } from 'antd';
 import classes from './IconButton.module.less';
 
 interface IconButtonProps extends React.HTMLAttributes<HTMLElement> {
-  iconType: string;
-  tooltipTitle: string;
-  tooltipPlacement: TooltipPlacement;
+  type: string;
 }
 
 const IconButton: React.FC<IconButtonProps> = (
   {
-    iconType,
-    tooltipTitle,
-    tooltipPlacement,
+    type,
     onClick,
     className
   }
 ) => (
-  <Tooltip
-    title={tooltipTitle}
-    placement={tooltipPlacement}
-  >
-    <Icon
-      type={iconType}
-      className={
-        classNames(
-          classes.iconButton,
-          className
-        )
-      }
-      onClick={onClick}
-    />
-  </Tooltip>
+  <Icon
+    type={type}
+    className={
+      classNames(
+        classes.iconButton,
+        className
+      )
+    }
+    onClick={onClick}
+  />
 );
 
 export default IconButton;
