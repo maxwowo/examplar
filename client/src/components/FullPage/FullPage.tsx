@@ -15,10 +15,12 @@ const FullPage: React.FC<FullPageProps> = (
   }
 ) => (
   <Layout
-    className={classNames(
-      classes.fullPage,
-      fixedHeight ? classes.fixedHeight : null
-    )}
+    className={
+      classNames(
+        classes.fullPage,
+        fixedHeight ? classes.fixedHeight : null
+      )
+    }
   >
     {children}
   </Layout>

@@ -1,0 +1,20 @@
+@import '~antd/es/style/themes/default';
+
+.iconButton {
+  font-size: 1.5 * @font-size-base;
+  vertical-align: middle;
+  padding: @padding-xs;
+  border-radius: 3px;
+  transition: 0.3s;
+  color: rgb(66, 82, 110);
+
+  &:hover {
+    background-color: @layout-body-background;
+    cursor: pointer;
+  }
+
+  &:active {
+    transition: 0s;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}

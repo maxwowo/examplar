@@ -1,13 +1,13 @@
 import React from 'react';
-import { Button, Col, Icon, notification, Row, Tooltip } from 'antd';
+import { Button, Col, Icon, notification, Row } from 'antd';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 import { notifyNotImplemented } from '../../tools/errorNotifier';
 import ExamBreadcrumb from '../ExamBreadcrumb/ExamBreadcrumb';
 import { Course } from '../../models/course';
 import { Exam } from '../../models/exam';
+import IconButton from '../IconButton/IconButton';
 import classes from './ExamNavbar.module.less';
 
 interface ExamNavbarProps {
@@ -45,42 +45,27 @@ const ExamNavbar: React.FC<ExamNavbarProps> = (
         <div
           className={classes.leftIcons}
         >
-          <Tooltip
-            title='Edit solution'
-            placement='bottom'
+          <Link
+            to={`/exams/${exam?.id}/edit`}
           >
-            <Link
-              to={`/exams/${exam?.id}/edit`}
-            >
-              <Icon
-                type='edit'
-                className={classes.iconButton}
-              />
-            </Link>
-          </Tooltip>
-          <Tooltip
-            title='Save for later'
-            placement='bottom'
-          >
-            <Icon
-              type='star'
-              onClick={notifyNotImplemented}
-              className={classes.iconButton}
+            <IconButton
+              iconType='edit'
+              tooltipTitle='Edit solution'
+              tooltipPlacement='bottom'
             />
-          </Tooltip>
-          <Tooltip
-            title='Start watching'
-            placement='bottom'
-          >
-            <Icon
-              type='eye'
-              onClick={notifyNotImplemented}
-              className={classNames(
-                classes.iconButton,
-                classes.lastIcon
-              )}
-            />
-          </Tooltip>
+          </Link>
+          <IconButton
+            iconType='star'
+            tooltipTitle='Save for later'
+            tooltipPlacement='bottom'
+            onClick={notifyNotImplemented}
+          />
+          <IconButton
+            iconType='eye'
+            tooltipTitle='Start watching'
+            tooltipPlacement='bottom'
+            onClick={notifyNotImplemented}
+          />
         </div>
         <CopyToClipboard
           text={window.location.toString()}

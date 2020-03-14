@@ -13,10 +13,12 @@ const Centered: React.FC<CenteredProps> = (
   }
 ) => (
   <div
-    className={classNames(
-      classes.centered,
-      className
-    )}
+    className={
+      classNames(
+        classes.centered,
+        className
+      )
+    }
   >
     <div>
       {children}

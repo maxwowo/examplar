@@ -14,10 +14,12 @@ const Logo: React.FC<LogoProps> = (
   }
 ) => (
   <div
-    className={classNames(
-      classes.logo,
-      className
-    )}
+    className={
+      classNames(
+        classes.logo,
+        className
+      )
+    }
   >
     <Typography.Text
       className={classes.exam}
