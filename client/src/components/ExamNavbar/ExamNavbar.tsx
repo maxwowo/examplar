@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Icon, notification, Row } from 'antd';
+import { Button, Col, notification, Row } from 'antd';
 import { Link } from 'react-router-dom';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
@@ -80,10 +80,11 @@ const ExamNavbar: React.FC<ExamNavbarProps> = (
         <div
           className={classes.rightIcons}
         >
-          <Icon
-            type='more'
+          <IconButton
+            iconType='more'
+            tooltipTitle='More options'
+            tooltipPlacement='bottom'
             onClick={notifyNotImplemented}
-            className={classes.iconButton}
           />
         </div>
       </Col>
