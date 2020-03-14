@@ -16,7 +16,22 @@ const Latex: React.FC<LatexProps> = (
   <div
     className={classes.latex}
   >
-    <LatexNext>
+    <LatexNext
+      delimiters={
+        [
+          {
+            left: '\\(',
+            right: '\\)',
+            display: false
+          },
+          {
+            left: '\\[',
+            right: '\\]',
+            display: true
+          }
+        ]
+      }
+    >
       {children}
     </LatexNext>
   </div>
