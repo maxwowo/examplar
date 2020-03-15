@@ -37,6 +37,7 @@ const SearchPage: React.FC<SearchPageProps> = (
 
   React.useEffect(
     () => {
+      setLoading(true);
       courseModel.search(
         course,
         universityId
