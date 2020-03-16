@@ -18,7 +18,7 @@ const Dropdown: React.FC<DropdownProps> = (
     {...rest}
   >
     <div
-      className={classes.dropdown}
+      className={classes.dropdownDiv}
     >
       {children}
     </div>
