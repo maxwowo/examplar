@@ -10,7 +10,6 @@ import ExamContent from '../ExamContent/ExamContent';
 import ExamBreadcrumb from '../ExamBreadcrumb/ExamBreadcrumb';
 import { notifyConnectionError, notifyNotImplemented } from '../../tools/errorNotifier';
 import IconButton from '../IconButton/IconButton';
-import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import classes from './ExamEdit.module.less';
 
 interface ExamEditProps extends RouteComponentProps {
@@ -72,11 +71,17 @@ const ExamEdit: React.FC<ExamEditProps> = (
   };
 
   const moreMenu = (
-    <DropdownMenu>
+    <Menu>
       <Menu.Item
         onClick={toggleIsPreview}
       >
-        Preview
+        {
+          isPreview
+            ?
+            'Back to edit'
+            :
+            'Preview'
+        }
       </Menu.Item>
       <Menu.Item
         onClick={notifyNotImplemented}
@@ -93,7 +98,7 @@ const ExamEdit: React.FC<ExamEditProps> = (
       >
         Revert to last published version
       </Menu.Item>
-    </DropdownMenu>
+    </Menu>
   );
 
   return (
@@ -110,57 +115,34 @@ const ExamEdit: React.FC<ExamEditProps> = (
           />
         </Col>
         <Col>
-          {
-            isPreview
-              ?
-              (
-                <Button
-                  type='default'
-                  onClick={toggleIsPreview}
-                >
-                  Back to edit
-                </Button>
-              )
-              :
-              (
-                <React.Fragment>
-                  <Button
-                    type='primary'
-                    onClick={handleExamSubmit}
-                    className={classes.rowButton}
-                  >
-                    Submit
-                  </Button>
-                  <Link
-                    to={`/exams/${exam?.id}`}
-                    className={classes.rowButton}
-                  >
-                    <Button>
-                      Cancel
-                    </Button>
-                  </Link>
-                </React.Fragment>
-              )
-          }
-          {
-            !isPreview
-            &&
-            (
-              <Dropdown
-                overlay={moreMenu}
-                trigger={
-                  [
-                    'click'
-                  ]
-                }
-                placement='bottomRight'
-              >
-                <IconButton
-                  type='more'
-                />
-              </Dropdown>
-            )
-          }
+          <Button
+            type='primary'
+            onClick={handleExamSubmit}
+            className={classes.rowButton}
+          >
+            Submit
+          </Button>
+          <Link
+            to={`/exams/${exam?.id}`}
+            className={classes.rowButton}
+          >
+            <Button>
+              Cancel
+            </Button>
+          </Link>
+          <Dropdown
+            overlay={moreMenu}
+            trigger={
+              [
+                'click'
+              ]
+            }
+            placement='bottomRight'
+          >
+            <IconButton
+              type='more'
+            />
+          </Dropdown>
         </Col>
       </Row>
       {

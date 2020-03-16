@@ -11,11 +11,13 @@ interface DropdownProps extends AntDropDownProps {
 const Dropdown: React.FC<DropdownProps> = (
   {
     children,
+
     ...rest
   }
 ) => (
   <AntDropdown
     {...rest}
+    overlayClassName={classes.overlay}
   >
     <div
       className={classes.dropdownDiv}
