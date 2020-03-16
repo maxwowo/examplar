@@ -8,7 +8,7 @@ import { Solution, solutionModel } from '../../models/solution';
 import Dropdown from '../Dropdown/Dropdown';
 import ExamContent from '../ExamContent/ExamContent';
 import ExamBreadcrumb from '../ExamBreadcrumb/ExamBreadcrumb';
-import { notifyConnectionError } from '../../tools/errorNotifier';
+import { notifyConnectionError, notifyNotImplemented } from '../../tools/errorNotifier';
 import IconButton from '../IconButton/IconButton';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import classes from './ExamEdit.module.less';
@@ -78,6 +78,21 @@ const ExamEdit: React.FC<ExamEditProps> = (
       >
         Preview
       </Menu.Item>
+      <Menu.Item
+        onClick={notifyNotImplemented}
+      >
+        Publish without notifying watchers
+      </Menu.Item>
+      <Menu.Item
+        onClick={notifyNotImplemented}
+      >
+        View changes
+      </Menu.Item>
+      <Menu.Item
+        onClick={notifyNotImplemented}
+      >
+        Revert to last published version
+      </Menu.Item>
     </DropdownMenu>
   );
 
@@ -100,10 +115,10 @@ const ExamEdit: React.FC<ExamEditProps> = (
               ?
               (
                 <Button
-                  type='primary'
+                  type='default'
                   onClick={toggleIsPreview}
                 >
-                  Edit
+                  Back to edit
                 </Button>
               )
               :
