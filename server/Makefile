@@ -55,8 +55,8 @@ stop-bundle: ## Stop the server and database in Docker.
 run-production: build ## Build and run in production mode.
 	@$(BUILD_PATH) -e production
 
-.PHONY: migrations-generate
-migrations-generate: ## Generate migration files.
+.PHONY: generate-migrations
+generate-migrations: ## Generate migration files.
 ifdef name
 	@docker run \
 	--rm \
@@ -69,7 +69,7 @@ ifdef name
 	-dir /migrations \
 	$(name)
 else
-	@echo 'Usage: make migrations-generate name=example'
+	@echo 'Usage: make generate-migrations name=example'
 endif
 
 .PHONY: migrations-up
@@ -92,8 +92,8 @@ migrations-down: ## Run down migrations.
 	-database $(DATABASE_URL) \
 	down --all
 
-.PHONY: database-start
-database-start: ## Start the database in Docker.
+.PHONY: start-database
+start-database: ## Start the database in Docker.
 	@mkdir -p /var/lib/examplar/data
 	@docker run \
 	--rm \
@@ -105,12 +105,12 @@ database-start: ## Start the database in Docker.
 	-p 5432:5432 \
 	postgres
 
-.PHONY: database-stop
-database-stop: ## Stop the database in Docker.
+.PHONY: stop-database
+stop-database: ## Stop the database in Docker.
 	@docker stop examplar-database
 
-.PHONY: universities-load
-universities-load: ## Fill the universities table with details of universities from all over the world.
+.PHONY: load-universities
+load-universities: ## Fill the universities table with details of universities from all over the world.
 	@docker run \
 	--rm \
 	-v $(shell pwd):/usr/src/examplar_server \
