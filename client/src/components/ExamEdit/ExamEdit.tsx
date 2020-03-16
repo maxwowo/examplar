@@ -1,10 +1,11 @@
 import React, { ChangeEventHandler } from 'react';
-import { Button, Col, Dropdown, Input, Menu, Row } from 'antd';
+import { Button, Col, Input, Menu, Row } from 'antd';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 
 import { Exam } from '../../models/exam';
 import { Course } from '../../models/course';
 import { Solution, solutionModel } from '../../models/solution';
+import Dropdown from '../Dropdown/Dropdown';
 import ExamContent from '../ExamContent/ExamContent';
 import ExamBreadcrumb from '../ExamBreadcrumb/ExamBreadcrumb';
 import { notifyConnectionError } from '../../tools/errorNotifier';
@@ -138,11 +139,9 @@ const ExamEdit: React.FC<ExamEditProps> = (
                 }
                 placement='bottomRight'
               >
-                <div style={{ all: 'unset' }}>
-                  <IconButton
-                    type='more'
-                  />
-                </div>
+                <IconButton
+                  type='more'
+                />
               </Dropdown>
             )
           }
