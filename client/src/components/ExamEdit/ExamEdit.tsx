@@ -5,6 +5,8 @@ import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Exam } from '../../models/exam';
 import { Course } from '../../models/course';
 import { Solution, solutionModel } from '../../models/solution';
+import TooltipIconButton from '../TooltipIconButton/TooltipIconButton';
+import ExamContent from '../ExamContent/ExamContent';
 import ExamBreadcrumb from '../ExamBreadcrumb/ExamBreadcrumb';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 import classes from './ExamEdit.module.less';
@@ -23,6 +25,15 @@ const ExamEdit: React.FC<ExamEditProps> = (
     solution
   }
 ) => {
+
+  const [
+    isPreview,
+    setIsPreview
+  ] = React.useState(false);
+
+  const handleSwitchChange = () => {
+    setIsPreview(!isPreview);
+  };
 
   const [
     content,
@@ -55,49 +66,64 @@ const ExamEdit: React.FC<ExamEditProps> = (
       }
     }
   ) => {
-    console.log(value);
     setContent(value);
   };
 
   return (
     <div>
-      <ExamBreadcrumb
-        exam={exam}
-        course={course}
-      />
-      <Input.TextArea
-        value={content}
-        onChange={handleTextAreaOnChange}
-        placeholder='Start contributing now!'
-        autoSize={
-          {
-            minRows: 4
-          }
-        }
-        className={classes.textArea}
-      />
       <Row
         type='flex'
         align='middle'
-        justify='end'
+        justify='space-between'
       >
+        <Col>
+          <ExamBreadcrumb
+            exam={exam}
+            course={course}
+          />
+        </Col>
         <Col>
           <Button
             type='primary'
             onClick={handleExamSubmit}
-            className={classes.submitButton}
+            className={classes.rowButton}
           >
             Submit
           </Button>
           <Link
             to={`/exams/${exam?.id}`}
+            className={classes.rowButton}
           >
             <Button>
               Cancel
             </Button>
           </Link>
+          <TooltipIconButton
+            iconType='more'
+            tooltipTitle='More actions'
+            tooltipPlacement='bottom'
+          />
         </Col>
       </Row>
+      {
+        isPreview
+          ?
+          <ExamContent
+            solution={solution}
+          />
+          :
+          <Input.TextArea
+            value={content}
+            onChange={handleTextAreaOnChange}
+            placeholder='Start contributing now!'
+            autoSize={
+              {
+                minRows: 4
+              }
+            }
+            className={classes.textArea}
+          />
+      }
     </div>
   );
 };
