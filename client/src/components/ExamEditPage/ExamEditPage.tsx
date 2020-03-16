@@ -39,7 +39,7 @@ const ExamEditPage: React.FC<ExamEditPageProps> = (
     solutionLoading
   ] = useSolution(exam);
 
-  const cardLoading: boolean[] = [
+  const loading: boolean[] = [
     examLoading,
     courseLoading,
     solutionLoading
@@ -48,7 +48,7 @@ const ExamEditPage: React.FC<ExamEditPageProps> = (
   return (
     <PageLayout>
       <Card
-        loading={cardLoading.some(curr => curr)}
+        loading={loading.some(curr => curr)}
         bordered={false}
         className={classes.examEditPage}
       >
