@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler } from 'react';
-import { Button, Col, Input, Menu, Row } from 'antd';
+import { Button, Col, Input, Menu, notification, Row } from 'antd';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 
 import { Exam } from '../../models/exam';
@@ -50,6 +50,12 @@ const ExamEdit: React.FC<ExamEditProps> = (
         )
         .then(() => {
           history.push(`/exams/${exam?.id}`);
+          notification.success(
+            {
+              message: 'Update successful',
+              description: 'Solution has been successfully updated.'
+            }
+          );
         })
         .catch(err => {
           notifyConnectionError(
