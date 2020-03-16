@@ -1,14 +1,14 @@
 import React, { ChangeEventHandler } from 'react';
-import { Button, Col, Input, Row } from 'antd';
+import { Button, Col, Dropdown, Input, Menu, Row } from 'antd';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 
 import { Exam } from '../../models/exam';
 import { Course } from '../../models/course';
 import { Solution, solutionModel } from '../../models/solution';
-import TooltipIconButton from '../TooltipIconButton/TooltipIconButton';
 import ExamContent from '../ExamContent/ExamContent';
 import ExamBreadcrumb from '../ExamBreadcrumb/ExamBreadcrumb';
 import { notifyConnectionError } from '../../tools/errorNotifier';
+import IconButton from '../IconButton/IconButton';
 import classes from './ExamEdit.module.less';
 
 interface ExamEditProps extends RouteComponentProps {
@@ -31,7 +31,7 @@ const ExamEdit: React.FC<ExamEditProps> = (
     setIsPreview
   ] = React.useState(false);
 
-  const handleSwitchChange = () => {
+  const toggleIsPreview = () => {
     setIsPreview(!isPreview);
   };
 
@@ -69,6 +69,16 @@ const ExamEdit: React.FC<ExamEditProps> = (
     setContent(value);
   };
 
+  const moreMenu = (
+    <Menu>
+      <Menu.Item
+        onClick={toggleIsPreview}
+      >
+        Preview
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <div>
       <Row
@@ -98,11 +108,21 @@ const ExamEdit: React.FC<ExamEditProps> = (
               Cancel
             </Button>
           </Link>
-          <TooltipIconButton
-            iconType='more'
-            tooltipTitle='More actions'
-            tooltipPlacement='bottom'
-          />
+          <Dropdown
+            overlay={moreMenu}
+            trigger={
+              [
+                'click'
+              ]
+            }
+            placement='bottomRight'
+          >
+            <div style={{ all: 'unset' }}>
+              <IconButton
+                type='more'
+              />
+            </div>
+          </Dropdown>
         </Col>
       </Row>
       {
