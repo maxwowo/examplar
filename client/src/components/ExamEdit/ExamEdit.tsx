@@ -10,6 +10,7 @@ import ExamContent from '../ExamContent/ExamContent';
 import ExamBreadcrumb from '../ExamBreadcrumb/ExamBreadcrumb';
 import { notifyConnectionError } from '../../tools/errorNotifier';
 import IconButton from '../IconButton/IconButton';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import classes from './ExamEdit.module.less';
 
 interface ExamEditProps extends RouteComponentProps {
@@ -71,13 +72,13 @@ const ExamEdit: React.FC<ExamEditProps> = (
   };
 
   const moreMenu = (
-    <Menu>
+    <DropdownMenu>
       <Menu.Item
         onClick={toggleIsPreview}
       >
         Preview
       </Menu.Item>
-    </Menu>
+    </DropdownMenu>
   );
 
   return (
