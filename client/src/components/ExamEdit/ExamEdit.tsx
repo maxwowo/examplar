@@ -93,36 +93,59 @@ const ExamEdit: React.FC<ExamEditProps> = (
           />
         </Col>
         <Col>
-          <Button
-            type='primary'
-            onClick={handleExamSubmit}
-            className={classes.rowButton}
-          >
-            Submit
-          </Button>
-          <Link
-            to={`/exams/${exam?.id}`}
-            className={classes.rowButton}
-          >
-            <Button>
-              Cancel
-            </Button>
-          </Link>
-          <Dropdown
-            overlay={moreMenu}
-            trigger={
-              [
-                'click'
-              ]
-            }
-            placement='bottomRight'
-          >
-            <div style={{ all: 'unset' }}>
-              <IconButton
-                type='more'
-              />
-            </div>
-          </Dropdown>
+          {
+            isPreview
+              ?
+              (
+                <Button
+                  type='primary'
+                  onClick={toggleIsPreview}
+                >
+                  Edit
+                </Button>
+              )
+              :
+              (
+                <React.Fragment>
+                  <Button
+                    type='primary'
+                    onClick={handleExamSubmit}
+                    className={classes.rowButton}
+                  >
+                    Submit
+                  </Button>
+                  <Link
+                    to={`/exams/${exam?.id}`}
+                    className={classes.rowButton}
+                  >
+                    <Button>
+                      Cancel
+                    </Button>
+                  </Link>
+                </React.Fragment>
+              )
+          }
+          {
+            !isPreview
+            &&
+            (
+              <Dropdown
+                overlay={moreMenu}
+                trigger={
+                  [
+                    'click'
+                  ]
+                }
+                placement='bottomRight'
+              >
+                <div style={{ all: 'unset' }}>
+                  <IconButton
+                    type='more'
+                  />
+                </div>
+              </Dropdown>
+            )
+          }
         </Col>
       </Row>
       {
