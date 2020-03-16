@@ -4,7 +4,7 @@ import solutionModel, { Solution } from '../models/solution';
 import { notifyConnectionError } from '../tools/errorNotifier';
 
 const useSolution = (
-  exam: Exam | undefined
+  exam?: Exam
 ): [
   Solution | undefined,
   boolean

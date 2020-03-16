@@ -25,7 +25,7 @@ const ExamDisplay: React.FC<ExamDisplayProps> = (
       course={course}
     />
     <ExamContent
-      solution={solution}
+      content={solution?.content}
     />
   </div>
 );

@@ -167,7 +167,7 @@ const ExamEdit: React.FC<ExamEditProps> = (
         isPreview
           ?
           <ExamContent
-            solution={solution}
+            content={content}
           />
           :
           <Input.TextArea

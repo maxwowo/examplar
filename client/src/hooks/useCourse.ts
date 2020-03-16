@@ -4,7 +4,7 @@ import courseModel, { Course } from '../models/course';
 import { notifyConnectionError } from '../tools/errorNotifier';
 
 const useCourse = (
-  exam: Exam | undefined
+  exam?: Exam
 ): [
   Course | undefined,
   boolean
