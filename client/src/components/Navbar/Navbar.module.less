@@ -21,5 +21,17 @@
 }
 
 .loginButton {
-  margin-right: @padding-xs;
+  margin-right: @padding-lg;
+
+  @media only screen and (max-width: @screen-md) {
+    margin-right: @padding-md;
+  }
+
+  @media only screen and (max-width: @screen-sm) {
+    margin-right: @padding-sm;
+  }
+
+  @media only screen and (max-width: @screen-xs) {
+    margin-right: @padding-xs;
+  }
 }
