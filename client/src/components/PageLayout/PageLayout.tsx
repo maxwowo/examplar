@@ -4,7 +4,6 @@ import { BackTop } from 'antd';
 import Navbar from '../Navbar/Navbar';
 import FullPage, { FullPageProps } from '../FullPage/FullPage';
 import PageContent from '../PageContent/PageContent';
-import classes from './PageLayout.module.less';
 
 interface PageLayoutProps extends FullPageProps {
 
@@ -23,9 +22,7 @@ const PageLayout: React.FC<PageLayoutProps> = (
     <PageContent>
       {children}
     </PageContent>
-    <BackTop
-      className={classes.backTop}
-    />
+    <BackTop/>
   </FullPage>
 );
 
