@@ -1,6 +1,6 @@
 import React from 'react';
 import { ModalProps } from 'antd/es/modal';
-import { Modal } from 'antd';
+import Modal from '../Modal/Modal';
 
 export interface ToggleableModalProps extends ModalProps {
   visible: boolean;
@@ -16,10 +16,10 @@ const ToggleableModal: React.FC<ToggleableModalProps> = (
   }
 ) => (
   <Modal
+    {...rest}
     visible={visible}
     onOk={handleToggleModal}
     onCancel={handleToggleModal}
-    {...rest}
   >
     {children}
   </Modal>

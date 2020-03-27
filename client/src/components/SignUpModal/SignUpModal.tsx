@@ -1,17 +1,17 @@
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { Button, Form, Input, Modal, Typography } from 'antd';
+import { Button, Form, Input, Typography } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import { ModalProps } from 'antd/lib/modal';
 
 import Logo from '../Logo/Logo';
 import Space from '../Space/Space';
+import ToggleableModal, { ToggleableModalProps } from '../ToggleableModal/ToggleableModal';
 import classes from './SignUpModal.module.less';
 
-interface SignUpModalProps extends ModalProps,
+interface SignUpModalProps extends ToggleableModalProps,
   RouteComponentProps,
   FormComponentProps {
-  handleToggleModal: () => void;
+
 }
 
 const SignUpModal: React.FC<SignUpModalProps> = (
@@ -32,12 +32,10 @@ const SignUpModal: React.FC<SignUpModalProps> = (
   };
 
   return (
-    <Modal
+    <ToggleableModal
       visible={visible}
-      onOk={handleToggleModal}
-      onCancel={handleToggleModal}
+      handleToggleModal={handleToggleModal}
       footer={null}
-      width={400}
     >
       <Logo
         className={classes.logo}
@@ -141,7 +139,7 @@ const SignUpModal: React.FC<SignUpModalProps> = (
           Sign In
         </Typography.Text>
       </div>
-    </Modal>
+    </ToggleableModal>
   );
 };
 
