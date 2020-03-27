@@ -1,24 +1,19 @@
 import React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Button, Form, Input, Typography } from 'antd';
+import classes from '../AuthModal/AuthModal.module.less';
 import { FormComponentProps } from 'antd/lib/form';
 
-import Logo from '../Logo/Logo';
 import Space from '../Space/Space';
-import ToggleableModal, { ToggleableModalProps } from '../ToggleableModal/ToggleableModal';
-import classes from './SignUpModal.module.less';
+import { notifyNotImplemented } from '../../tools/errorNotifier';
 
-interface SignUpModalProps extends ToggleableModalProps,
-  RouteComponentProps,
-  FormComponentProps {
-
+interface SignUpFormProps extends FormComponentProps {
+  toggleModalIsLogin: () => void;
 }
 
-const SignUpModal: React.FC<SignUpModalProps> = (
+const SignUpForm: React.FC<SignUpFormProps> = (
   {
-    visible,
-    handleToggleModal,
-    form
+    form,
+    toggleModalIsLogin
   }
 ) => {
   const FORM_ID = 'sign-up-modal-form';
@@ -32,14 +27,7 @@ const SignUpModal: React.FC<SignUpModalProps> = (
   };
 
   return (
-    <ToggleableModal
-      visible={visible}
-      handleToggleModal={handleToggleModal}
-      footer={null}
-    >
-      <Logo
-        className={classes.logo}
-      />
+    <React.Fragment>
       <Form
         onSubmit={handleSubmit}
         id={FORM_ID}
@@ -58,7 +46,7 @@ const SignUpModal: React.FC<SignUpModalProps> = (
         )(
           <Input
             placeholder='Username'
-            className={classes.formItem}
+            className={classes.formInput}
           />
         )}
 
@@ -69,14 +57,14 @@ const SignUpModal: React.FC<SignUpModalProps> = (
               {
                 required: true,
                 whitespace: true,
-                message: 'Please enter the email.'
+                message: 'Please enter your email.'
               }
             ]
           }
         )(
           <Input
             placeholder='Email address'
-            className={classes.formItem}
+            className={classes.formInput}
           />
         )}
 
@@ -87,7 +75,7 @@ const SignUpModal: React.FC<SignUpModalProps> = (
               {
                 required: true,
                 type: 'integer',
-                message: 'Please enter the password.'
+                message: 'Please enter your password.'
               }
             ]
           }
@@ -95,7 +83,7 @@ const SignUpModal: React.FC<SignUpModalProps> = (
           <Input
             placeholder='Password'
             type='password'
-            className={classes.formItem}
+            className={classes.formInput}
           />
         )}
 
@@ -114,18 +102,18 @@ const SignUpModal: React.FC<SignUpModalProps> = (
           <Input
             placeholder='Confirm password'
             type='password'
-            className={classes.formItem}
+            className={classes.formInput}
           />
         )}
+
+        <Button
+          type='primary'
+          onClick={notifyNotImplemented}
+          className={classes.submitButton}
+        >
+          Sign Up
+        </Button>
       </Form>
-
-      <Button
-        type='primary'
-        className={classes.button}
-      >
-        Sign Up
-      </Button>
-
       <div
         className={classes.switchModal}
       >
@@ -133,14 +121,15 @@ const SignUpModal: React.FC<SignUpModalProps> = (
           Have an account?
         </Typography.Text>
         <Space/>
-        <Typography.Text
-          className={classes.signInLink}
+        <span
+          onClick={toggleModalIsLogin}
+          className={classes.spanLink}
         >
-          Sign In
-        </Typography.Text>
+          Login
+        </span>
       </div>
-    </ToggleableModal>
+    </React.Fragment>
   );
 };
 
-export default withRouter(Form.create<SignUpModalProps>()(SignUpModal));
+export default Form.create<SignUpFormProps>()(SignUpForm);

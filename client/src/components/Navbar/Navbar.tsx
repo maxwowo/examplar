@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Layout, Row } from 'antd';
 
-import SignUpModal from '../SignUpModal/SignUpModal';
+import AuthModal from '../AuthModal/AuthModal';
 import Logo from '../Logo/Logo';
-import { notifyNotImplemented } from '../../tools/errorNotifier';
 import classes from './Navbar.module.less';
 
 interface NavbarProps {
@@ -14,16 +13,20 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = () => {
 
   const [
-    signUpOpen,
-    setSignUpOpen
-  ] = React.useState(false);
-
-  const [
     loginOpen,
     setLoginOpen
   ] = React.useState(false);
 
-  const handleSignUpClicked = () => {
+  const [
+    signUpOpen,
+    setSignUpOpen
+  ] = React.useState(false);
+
+  const toggleLoginModal = () => {
+    setLoginOpen(!loginOpen);
+  };
+
+  const toggleSignUpModal = () => {
     setSignUpOpen(!signUpOpen);
   };
 
@@ -48,22 +51,28 @@ const Navbar: React.FC<NavbarProps> = () => {
         </Col>
 
         <Col>
+          <AuthModal
+            visible={loginOpen}
+            isLogin={true}
+            handleToggleModal={toggleLoginModal}
+          />
           <Button
             type='link'
-            onClick={notifyNotImplemented}
+            onClick={toggleLoginModal}
             className={classes.loginButton}
           >
             Login
           </Button>
 
-          <SignUpModal
+          <AuthModal
             visible={signUpOpen}
-            handleToggleModal={handleSignUpClicked}
+            isLogin={false}
+            handleToggleModal={toggleSignUpModal}
           />
           <Button
             ghost
             type='primary'
-            onClick={handleSignUpClicked}
+            onClick={toggleSignUpModal}
           >
             Sign up
           </Button>

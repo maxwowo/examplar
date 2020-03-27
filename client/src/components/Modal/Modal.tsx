@@ -9,13 +9,17 @@ interface ModalProps extends AntModalProps {
 const Modal: React.FC<ModalProps> = (
   {
     children,
+    className,
     ...rest
   }
 ) => (
   <AntModal
     {...rest}
     width={400}
+    centered
+    className={className}
   >
+
     {children}
   </AntModal>
 );
