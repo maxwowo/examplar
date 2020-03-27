@@ -11,26 +11,27 @@ export interface UniversitySelectProps {
   ) => void;
 }
 
-const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & SelectProps> = React.forwardRef((
-  {
-    placeholder,
-    size,
-    className,
-    handleUniversityChange,
-    onChange,
-    id,
-  },
-  ref: React.Ref<Select<number>>
+const UniversitySelect: React.ForwardRefExoticComponent<UniversitySelectProps & SelectProps> = React.forwardRef(
+  (
+    {
+      placeholder,
+      size,
+      className,
+      handleUniversityChange,
+      onChange,
+      id
+    },
+    ref: React.Ref<Select<number>>
   ) => {
 
-  const [
-    loading,
-    setLoading
-  ] = React.useState(true);
+    const [
+      loading,
+      setLoading
+    ] = React.useState(true);
 
-  const [
-    selectValue,
-    setSelectValue
+    const [
+      selectValue,
+      setSelectValue
   ] = React.useState<string>(
     ''
   );
