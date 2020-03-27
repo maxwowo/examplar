@@ -119,6 +119,11 @@ load-universities: ## Fill the universities table with details of universities f
 	golang:latest \
 	go run /usr/src/examplar_server/$(TOOLS_PATH)/uniloader/uniloader.go
 
+.PHONY: refresh
+refresh: ## Re-runs all migrations and reloads the universities back into the database
+refresh:
+	@make migrations-down && make migrations-up && make load-universities
+
 .PHONY: clean
 clean: ## Clean project and previous builds.
 	@rm -rf $(BUILD_PATH)
