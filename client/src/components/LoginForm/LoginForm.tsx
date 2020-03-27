@@ -83,6 +83,7 @@ const LoginForm: React.FC<LoginFormProps> = (
       >
         <Col>
           <span
+            onClick={notifyNotImplemented}
             className={classes.spanLink}
           >
             Forgot password?
