@@ -10,24 +10,17 @@ import classes from './AuthModal.module.less';
 
 interface AuthModalProps extends ToggleableModalProps, FormComponentProps {
   isLogin: boolean;
+  toggleIsLogin: () => void;
 }
 
 const AuthModal: React.FC<AuthModalProps> = (
   {
     visible,
     handleToggleModal,
-    isLogin
+    isLogin,
+    toggleIsLogin
   }
 ) => {
-
-  const [
-    modalIsLogin,
-    setModalIsLogin
-  ] = React.useState<boolean>(isLogin);
-
-  const toggleModalIsLogin = () => {
-    setModalIsLogin(!modalIsLogin);
-  };
 
   return (
     <ToggleableModal
@@ -40,14 +33,14 @@ const AuthModal: React.FC<AuthModalProps> = (
       />
 
       {
-        modalIsLogin
+        isLogin
           ?
           <LoginForm
-            toggleModalIsLogin={toggleModalIsLogin}
+            toggleIsLogin={toggleIsLogin}
           />
           :
           <SignUpForm
-            toggleModalIsLogin={toggleModalIsLogin}
+            toggleIsLogin={toggleIsLogin}
           />
       }
 

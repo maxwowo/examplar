@@ -13,21 +13,31 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = () => {
 
   const [
-    loginOpen,
-    setLoginOpen
-  ] = React.useState(false);
+    isLogin,
+    setIsLogin
+  ] = React.useState<boolean>(false);
 
-  const [
-    signUpOpen,
-    setSignUpOpen
-  ] = React.useState(false);
-
-  const toggleLoginModal = () => {
-    setLoginOpen(!loginOpen);
+  const toggleIsLogin = () => {
+    setIsLogin(!isLogin);
   };
 
-  const toggleSignUpModal = () => {
-    setSignUpOpen(!signUpOpen);
+  const [
+    authOpen,
+    setAuthOpen
+  ] = React.useState(false);
+
+  const toggleAuthModal = () => {
+    setAuthOpen(!authOpen);
+  };
+
+  const handleLoginClicked = () => {
+    setIsLogin(true);
+    toggleAuthModal();
+  };
+
+  const handleSignUpClicked = () => {
+    setIsLogin(false);
+    toggleAuthModal();
   };
 
   return (
@@ -51,28 +61,25 @@ const Navbar: React.FC<NavbarProps> = () => {
         </Col>
 
         <Col>
-          <AuthModal
-            visible={loginOpen}
-            isLogin={true}
-            handleToggleModal={toggleLoginModal}
-          />
           <Button
             type='link'
-            onClick={toggleLoginModal}
+            onClick={handleLoginClicked}
             className={classes.loginButton}
           >
             Login
           </Button>
 
           <AuthModal
-            visible={signUpOpen}
-            isLogin={false}
-            handleToggleModal={toggleSignUpModal}
+            visible={authOpen}
+            isLogin={isLogin}
+            handleToggleModal={toggleAuthModal}
+            toggleIsLogin={toggleIsLogin}
           />
+
           <Button
             ghost
             type='primary'
-            onClick={toggleSignUpModal}
+            onClick={handleSignUpClicked}
           >
             Sign up
           </Button>

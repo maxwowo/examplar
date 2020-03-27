@@ -6,13 +6,13 @@ import { FormComponentProps } from 'antd/lib/form';
 import { notifyNotImplemented } from '../../tools/errorNotifier';
 
 interface LoginFormProps extends FormComponentProps {
-  toggleModalIsLogin: () => void;
+  toggleIsLogin: () => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = (
   {
     form,
-    toggleModalIsLogin
+    toggleIsLogin
   }
 ) => {
   const FORM_ID = 'login-modal-form';
@@ -91,7 +91,7 @@ const LoginForm: React.FC<LoginFormProps> = (
 
         <Col>
           <span
-            onClick={toggleModalIsLogin}
+            onClick={toggleIsLogin}
             className={classes.spanLink}
           >
             Sign Up

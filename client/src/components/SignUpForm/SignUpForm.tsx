@@ -7,13 +7,13 @@ import Space from '../Space/Space';
 import { notifyNotImplemented } from '../../tools/errorNotifier';
 
 interface SignUpFormProps extends FormComponentProps {
-  toggleModalIsLogin: () => void;
+  toggleIsLogin: () => void;
 }
 
 const SignUpForm: React.FC<SignUpFormProps> = (
   {
     form,
-    toggleModalIsLogin
+    toggleIsLogin
   }
 ) => {
   const FORM_ID = 'sign-up-modal-form';
@@ -122,7 +122,7 @@ const SignUpForm: React.FC<SignUpFormProps> = (
         </Typography.Text>
         <Space/>
         <span
-          onClick={toggleModalIsLogin}
+          onClick={toggleIsLogin}
           className={classes.spanLink}
         >
           Login
