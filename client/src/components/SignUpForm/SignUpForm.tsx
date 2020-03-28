@@ -64,6 +64,7 @@ const SignUpForm: React.FC<SignUpFormProps> = (
         )(
           <Input
             placeholder='Email address'
+            type='email'
             className={classes.formInput}
           />
         )}
