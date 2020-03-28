@@ -70,6 +70,9 @@ const LoginForm: React.FC<LoginFormProps> = (
 
         <Button
           type='primary'
+          key='submit'
+          form={FORM_ID}
+          htmlType='submit'
           onClick={notifyNotImplemented}
           className={classes.submitButton}
         >

@@ -108,6 +108,9 @@ const SignUpForm: React.FC<SignUpFormProps> = (
 
         <Button
           type='primary'
+          key='submit'
+          form={FORM_ID}
+          htmlType='submit'
           onClick={notifyNotImplemented}
           className={classes.submitButton}
         >
