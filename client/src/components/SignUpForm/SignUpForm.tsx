@@ -32,90 +32,120 @@ const SignUpForm: React.FC<SignUpFormProps> = (
         onSubmit={handleSubmit}
         id={FORM_ID}
       >
-        {form.getFieldDecorator(
-          'username',
-          {
-            rules: [
-              {
-                required: true,
-                whitespace: true,
-                message: 'Please enter your username.'
-              }
-            ]
-          }
-        )(
-          <Input
-            placeholder='Username'
-            className={classes.formInput}
-          />
-        )}
-
-        {form.getFieldDecorator(
-          'email',
-          {
-            rules: [
-              {
-                required: true,
-                whitespace: true,
-                message: 'Please enter your email.'
-              }
-            ]
-          }
-        )(
-          <Input
-            placeholder='Email address'
-            type='email'
-            className={classes.formInput}
-          />
-        )}
-
-        {form.getFieldDecorator(
-          'password',
-          {
-            rules: [
-              {
-                required: true,
-                whitespace: true,
-                message: 'Please enter your password.'
-              }
-            ]
-          }
-        )(
-          <Input.Password
-            placeholder='Password'
-            className={classes.formInput}
-          />
-        )}
-
-        {form.getFieldDecorator(
-          'passwordConfirm',
-          {
-            rules: [
-              {
-                required: true,
-                whitespace: true,
-                message: 'Please confirm your password.'
-              }
-            ]
-          }
-        )(
-          <Input.Password
-            placeholder='Confirm password'
-            className={classes.formInput}
-          />
-        )}
-
-        <Button
-          type='primary'
-          key='submit'
-          form={FORM_ID}
-          htmlType='submit'
-          onClick={notifyNotImplemented}
-          className={classes.submitButton}
+        <Form.Item
+          hasFeedback
         >
-          Sign Up
-        </Button>
+          {form.getFieldDecorator(
+            'username',
+            {
+              rules: [
+                {
+                  required: true,
+                  whitespace: true,
+                  message: 'Please enter your username.'
+                }
+              ]
+            }
+          )(
+            <Input
+              placeholder='Username'
+            />
+          )}
+        </Form.Item>
+
+        <Form.Item
+          hasFeedback
+        >
+          {form.getFieldDecorator(
+            'email',
+            {
+              rules: [
+                {
+                  required: true,
+                  whitespace: true,
+                  message: 'Please enter your email.'
+                },
+                {
+                  type: 'email',
+                  message: 'E-mail not valid.'
+                }
+              ]
+            }
+          )(
+            <Input
+              placeholder='E-mail address'
+            />
+          )}
+        </Form.Item>
+
+        <Form.Item
+          hasFeedback
+        >
+          {form.getFieldDecorator(
+            'password',
+            {
+              rules: [
+                {
+                  required: true,
+                  whitespace: true,
+                  message: 'Please enter your password.'
+                }
+              ]
+            }
+          )(
+            <Input.Password
+              placeholder='Password'
+            />
+          )}
+        </Form.Item>
+
+        <Form.Item
+          hasFeedback
+        >
+          {form.getFieldDecorator(
+            'passwordConfirm',
+            {
+              rules: [
+                {
+                  required: true,
+                  whitespace: true,
+                  message: 'Please confirm your password.'
+                },
+                {
+                  validator: (
+                    rule,
+                    value,
+                    callback
+                  ) => {
+                    if (value && value !== form.getFieldValue('password')) {
+                      callback('Inconsistent passwords.');
+                    }
+                    callback();
+                  }
+                }
+              ]
+            }
+          )(
+            <Input.Password
+              placeholder='Confirm password'
+            />
+          )}
+        </Form.Item>
+
+        <Form.Item>
+          <Button
+            type='primary'
+            key='submit'
+            form={FORM_ID}
+            htmlType='submit'
+            onClick={notifyNotImplemented}
+            className={classes.submitButton}
+          >
+            Sign Up
+          </Button>
+        </Form.Item>
       </Form>
+
       <div
         className={classes.switchModal}
       >
@@ -130,6 +160,7 @@ const SignUpForm: React.FC<SignUpFormProps> = (
           Login
         </span>
       </div>
+
     </React.Fragment>
   );
 };

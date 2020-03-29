@@ -31,52 +31,56 @@ const LoginForm: React.FC<LoginFormProps> = (
         onSubmit={handleSubmit}
         id={FORM_ID}
       >
-        {form.getFieldDecorator(
-          'usernameEmail',
-          {
-            rules: [
-              {
-                required: true,
-                whitespace: true,
-                message: 'Please enter your username or E-mail.'
-              }
-            ]
-          }
-        )(
-          <Input
-            placeholder='Username or E-mail'
-            className={classes.formInput}
-          />
-        )}
+        <Form.Item>
+          {form.getFieldDecorator(
+            'usernameEmail',
+            {
+              rules: [
+                {
+                  required: true,
+                  whitespace: true,
+                  message: 'Please enter your username or E-mail.'
+                }
+              ]
+            }
+          )(
+            <Input
+              placeholder='Username or E-mail'
+            />
+          )}
+        </Form.Item>
 
-        {form.getFieldDecorator(
-          'password',
-          {
-            rules: [
-              {
-                required: true,
-                whitespace: true,
-                message: 'Please enter your password.'
-              }
-            ]
-          }
-        )(
-          <Input.Password
-            placeholder='Password'
-            className={classes.formInput}
-          />
-        )}
+        <Form.Item>
+          {form.getFieldDecorator(
+            'password',
+            {
+              rules: [
+                {
+                  required: true,
+                  whitespace: true,
+                  message: 'Please enter your password.'
+                }
+              ]
+            }
+          )(
+            <Input.Password
+              placeholder='Password'
+            />
+          )}
+        </Form.Item>
 
-        <Button
-          type='primary'
-          key='submit'
-          form={FORM_ID}
-          htmlType='submit'
-          onClick={notifyNotImplemented}
-          className={classes.submitButton}
-        >
-          Login
-        </Button>
+        <Form.Item>
+          <Button
+            type='primary'
+            key='submit'
+            form={FORM_ID}
+            htmlType='submit'
+            onClick={notifyNotImplemented}
+            className={classes.submitButton}
+          >
+            Login
+          </Button>
+        </Form.Item>
       </Form>
 
       <Row
