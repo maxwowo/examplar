@@ -20,8 +20,6 @@ type dataResponse struct {
 }
 
 func encodeResponse(w http.ResponseWriter, response interface{}) {
-	w.Header().Set("Content-Type", "application/json")
-
 	err := json.NewEncoder(w).Encode(response)
 	if err != nil {
 		log.Panic(err)
