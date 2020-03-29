@@ -61,9 +61,8 @@ const LoginForm: React.FC<LoginFormProps> = (
             ]
           }
         )(
-          <Input
+          <Input.Password
             placeholder='Password'
-            type='password'
             className={classes.formInput}
           />
         )}

@@ -75,15 +75,14 @@ const SignUpForm: React.FC<SignUpFormProps> = (
             rules: [
               {
                 required: true,
-                type: 'integer',
+                whitespace: true,
                 message: 'Please enter your password.'
               }
             ]
           }
         )(
-          <Input
+          <Input.Password
             placeholder='Password'
-            type='password'
             className={classes.formInput}
           />
         )}
@@ -94,15 +93,14 @@ const SignUpForm: React.FC<SignUpFormProps> = (
             rules: [
               {
                 required: true,
-                type: 'integer',
-                message: 'Please confirm the password.'
+                whitespace: true,
+                message: 'Please confirm your password.'
               }
             ]
           }
         )(
-          <Input
+          <Input.Password
             placeholder='Confirm password'
-            type='password'
             className={classes.formInput}
           />
         )}
