@@ -118,7 +118,7 @@ const SignUpForm: React.FC<SignUpFormProps> = (
                     callback
                   ) => {
                     if (value && value !== form.getFieldValue('password')) {
-                      callback('Inconsistent passwords.');
+                      callback('Passwords do not match.');
                     }
                     callback();
                   }
