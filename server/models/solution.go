@@ -11,7 +11,7 @@ type Solution struct {
 	ExamID  int    `json:"examId"`
 }
 
-func (s Solution) Get(ID int) (*Solution, error) {
+func (s *Solution) Get(ID int) (*Solution, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -31,7 +31,7 @@ func (s Solution) Get(ID int) (*Solution, error) {
 	return &solution, err
 }
 
-func (s Solution) Create(solutionPayload forms.CreateSolution) (*Solution, error) {
+func (s *Solution) Create(solutionPayload forms.CreateSolution) (*Solution, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -53,7 +53,7 @@ func (s Solution) Create(solutionPayload forms.CreateSolution) (*Solution, error
 	return &solution, err
 }
 
-func (s Solution) Update(solution *Solution, solutionPayload forms.UpdateSolution) error {
+func (s *Solution) Update(solution *Solution, solutionPayload forms.UpdateSolution) error {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -71,7 +71,7 @@ func (s Solution) Update(solution *Solution, solutionPayload forms.UpdateSolutio
 	return err
 }
 
-func (s Solution) CreateEmpty(examID int) error {
+func (s *Solution) CreateEmpty(examID int) error {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -90,7 +90,7 @@ func (s Solution) CreateEmpty(examID int) error {
 	return err
 }
 
-func (s Solution) SearchByExamID(examID int) (*Solution, error) {
+func (s *Solution) SearchByExamID(examID int) (*Solution, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`

@@ -31,7 +31,7 @@ func buildCourses(rows *sql.Rows) ([]Course, error) {
 	return courses, nil
 }
 
-func (c Course) Get(ID int) (*Course, error) {
+func (c *Course) Get(ID int) (*Course, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -51,7 +51,7 @@ func (c Course) Get(ID int) (*Course, error) {
 	return &course, err
 }
 
-func (c Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
+func (c *Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -73,7 +73,7 @@ func (c Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
 	return &course, err
 }
 
-func (c Course) SearchByCourse(course string) ([]Course, error) {
+func (c *Course) SearchByCourse(course string) ([]Course, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -97,7 +97,7 @@ func (c Course) SearchByCourse(course string) ([]Course, error) {
 	return buildCourses(rows)
 }
 
-func (c Course) SearchByCourseUniversity(course string, university int) ([]Course, error) {
+func (c *Course) SearchByCourseUniversity(course string, university int) ([]Course, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`

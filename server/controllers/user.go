@@ -14,7 +14,7 @@ type UserController struct{}
 
 var userModel = new(models.User)
 
-func (u UserController) Register(w http.ResponseWriter, r *http.Request) {
+func (u *UserController) Register(w http.ResponseWriter, r *http.Request) {
 	var registerPayload forms.Register
 
 	// Malformed JSON register payload

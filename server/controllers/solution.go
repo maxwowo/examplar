@@ -16,7 +16,7 @@ type SolutionController struct{}
 
 var solutionModel = new(models.Solution)
 
-func (s SolutionController) Context(next http.Handler) http.Handler {
+func (s *SolutionController) Context(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		solutionID := chi.URLParam(r, "solutionID")
 
@@ -36,7 +36,7 @@ func (s SolutionController) Context(next http.Handler) http.Handler {
 	})
 }
 
-func (s SolutionController) getContext(r *http.Request) *models.Solution {
+func (s *SolutionController) getContext(r *http.Request) *models.Solution {
 	ctx := r.Context()
 
 	solution, ok := ctx.Value("solution").(*models.Solution)
@@ -47,7 +47,7 @@ func (s SolutionController) getContext(r *http.Request) *models.Solution {
 	return solution
 }
 
-func (s SolutionController) Get(w http.ResponseWriter, r *http.Request) {
+func (s *SolutionController) Get(w http.ResponseWriter, r *http.Request) {
 	responder.RespondData(w, struct {
 		Solution models.Solution `json:"solution"`
 	}{
@@ -55,7 +55,7 @@ func (s SolutionController) Get(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (s SolutionController) Create(w http.ResponseWriter, r *http.Request) {
+func (s *SolutionController) Create(w http.ResponseWriter, r *http.Request) {
 	var solutionPayload forms.CreateSolution
 
 	// Malformed JSON solution payload
@@ -79,7 +79,7 @@ func (s SolutionController) Create(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (s SolutionController) Update(w http.ResponseWriter, r *http.Request) {
+func (s *SolutionController) Update(w http.ResponseWriter, r *http.Request) {
 	solution := s.getContext(r)
 
 	var solutionPayload forms.UpdateSolution

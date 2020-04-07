@@ -13,7 +13,7 @@ type User struct {
 	Activated bool   `json:"activated"`
 }
 
-func (u User) GetByEmail(email string, activated bool) (*User, error) {
+func (u *User) GetByEmail(email string, activated bool) (*User, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -33,7 +33,7 @@ func (u User) GetByEmail(email string, activated bool) (*User, error) {
 	return &account, err
 }
 
-func (u User) Create(registerPayload forms.Register) (*User, error) {
+func (u *User) Create(registerPayload forms.Register) (*User, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`

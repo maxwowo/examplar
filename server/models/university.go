@@ -11,7 +11,7 @@ type University struct {
 	Domain string `json:"domain"`
 }
 
-func (u University) SearchByName(name string) ([]University, error) {
+func (u *University) SearchByName(name string) ([]University, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -46,7 +46,7 @@ func (u University) SearchByName(name string) ([]University, error) {
 	return universities, nil
 }
 
-func (u University) Get(ID int) (*University, error) {
+func (u *University) Get(ID int) (*University, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
