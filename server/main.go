@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"github.com/maxwowo/examplar/packages/tokenizer"
 
 	"github.com/maxwowo/examplar/configuration"
 	"github.com/maxwowo/examplar/database"
@@ -15,5 +16,6 @@ func main() {
 
 	configuration.Initialize(*environment)
 	database.Initialize()
+	tokenizer.Initialize()
 	server.Initialize()
 }
