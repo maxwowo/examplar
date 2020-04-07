@@ -17,7 +17,7 @@ type CourseController struct{}
 
 var courseModel = new(models.Course)
 
-func (c *CourseController) Context(next http.Handler) http.Handler {
+func (c CourseController) Context(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		courseID := chi.URLParam(r, "courseID")
 
@@ -37,7 +37,7 @@ func (c *CourseController) Context(next http.Handler) http.Handler {
 	})
 }
 
-func (c *CourseController) getContext(r *http.Request) *models.Course {
+func (c CourseController) getContext(r *http.Request) *models.Course {
 	ctx := r.Context()
 
 	course, ok := ctx.Value("course").(*models.Course)
@@ -48,7 +48,7 @@ func (c *CourseController) getContext(r *http.Request) *models.Course {
 	return course
 }
 
-func (c *CourseController) Get(w http.ResponseWriter, r *http.Request) {
+func (c CourseController) Get(w http.ResponseWriter, r *http.Request) {
 	course := c.getContext(r)
 
 	responder.RespondData(w, struct {
@@ -58,7 +58,7 @@ func (c *CourseController) Get(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (c *CourseController) GetExams(w http.ResponseWriter, r *http.Request) {
+func (c CourseController) GetExams(w http.ResponseWriter, r *http.Request) {
 	course := c.getContext(r)
 
 	exams, err := examModel.SearchByCourseID(course.ID)
@@ -73,7 +73,7 @@ func (c *CourseController) GetExams(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (c *CourseController) Create(w http.ResponseWriter, r *http.Request) {
+func (c CourseController) Create(w http.ResponseWriter, r *http.Request) {
 	var coursePayload forms.CreateCourse
 
 	// Malformed JSON course payload
@@ -98,7 +98,7 @@ func (c *CourseController) Create(w http.ResponseWriter, r *http.Request) {
 }
 
 // Searches for courses with matching course and university values
-func (c *CourseController) Search(w http.ResponseWriter, r *http.Request) {
+func (c CourseController) Search(w http.ResponseWriter, r *http.Request) {
 	var courses []models.Course
 	var err error
 

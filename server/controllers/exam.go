@@ -16,7 +16,7 @@ type ExamController struct{}
 
 var examModel = new(models.Exam)
 
-func (e *ExamController) Context(next http.Handler) http.Handler {
+func (e ExamController) Context(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		examID := chi.URLParam(r, "examID")
 
@@ -36,7 +36,7 @@ func (e *ExamController) Context(next http.Handler) http.Handler {
 	})
 }
 
-func (e *ExamController) getContext(r *http.Request) *models.Exam {
+func (e ExamController) getContext(r *http.Request) *models.Exam {
 	ctx := r.Context()
 
 	exam, ok := ctx.Value("exam").(*models.Exam)
@@ -47,7 +47,7 @@ func (e *ExamController) getContext(r *http.Request) *models.Exam {
 	return exam
 }
 
-func (e *ExamController) Get(w http.ResponseWriter, r *http.Request) {
+func (e ExamController) Get(w http.ResponseWriter, r *http.Request) {
 	responder.RespondData(w, struct {
 		Exam models.Exam `json:"exam"`
 	}{
@@ -55,7 +55,7 @@ func (e *ExamController) Get(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (e *ExamController) Create(w http.ResponseWriter, r *http.Request) {
+func (e ExamController) Create(w http.ResponseWriter, r *http.Request) {
 	var examPayload forms.CreateExam
 
 	// Malformed JSON exam payload
@@ -79,7 +79,7 @@ func (e *ExamController) Create(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (e *ExamController) GetSolution(w http.ResponseWriter, r *http.Request) {
+func (e ExamController) GetSolution(w http.ResponseWriter, r *http.Request) {
 	exam := e.getContext(r)
 
 	solution, err := solutionModel.SearchByExamID(exam.ID)

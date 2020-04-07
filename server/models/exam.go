@@ -12,7 +12,7 @@ type Exam struct {
 	CourseID int `json:"courseId"`
 }
 
-func (e *Exam) Get(ID int) (*Exam, error) {
+func (e Exam) Get(ID int) (*Exam, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -32,7 +32,7 @@ func (e *Exam) Get(ID int) (*Exam, error) {
 	return &exam, err
 }
 
-func (e *Exam) Create(examPayload forms.CreateExam) (*Exam, error) {
+func (e Exam) Create(examPayload forms.CreateExam) (*Exam, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
@@ -58,7 +58,7 @@ func (e *Exam) Create(examPayload forms.CreateExam) (*Exam, error) {
 	return &exam, new(Solution).CreateEmpty(exam.ID)
 }
 
-func (e *Exam) SearchByCourseID(courseID int) ([]Exam, error) {
+func (e Exam) SearchByCourseID(courseID int) ([]Exam, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`

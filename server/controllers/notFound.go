@@ -7,7 +7,7 @@ import (
 
 type NotFoundController struct{}
 
-func (n *NotFoundController) Handle(w http.ResponseWriter, _ *http.Request) {
+func (n NotFoundController) Handle(w http.ResponseWriter, _ *http.Request) {
 	status := http.StatusNotFound
 	statusText := http.StatusText(status)
 
