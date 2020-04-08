@@ -12,6 +12,8 @@ import (
 	"github.com/maxwowo/examplar/middlewares"
 )
 
+const EmailValidateRoute = "/email/validate"
+
 func newRouter() *chi.Mux {
 	router := chi.NewRouter()
 
@@ -53,6 +55,7 @@ func newRouter() *chi.Mux {
 
 		// Handle valid / invalid tokens
 		router.Use(middlewares.Authenticator)
+
 	})
 
 	router.Route("/courses", func(router chi.Router) {

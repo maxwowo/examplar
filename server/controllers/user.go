@@ -44,11 +44,11 @@ func (u *UserController) Register(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Send registration confirmation email to user
-	mailer.SendRegistrationConfirmation(user)
+	mailer.SendEmailConfirmation(user)
 
 	responder.RespondData(w, struct {
 		Token string `json:"token"`
 	}{
-		Token: tokenizer.Encode(user.ID),
+		Token: tokenizer.EncodeUserToken(user.ID),
 	})
 }
