@@ -50,15 +50,6 @@ func newRouter() *chi.Mux {
 	// All routes
 	router.Get("/health", health.Status)
 
-	// Protected routes
-	router.Group(func(router chi.Router) {
-		// Seek, verify and validate JWT tokens
-		router.Use(jwtauth.Verifier(tokenizer.GetUserToken().TokenAuth))
-
-		// Handle valid / invalid tokens
-		router.Use(middlewares.Authenticator)
-	})
-
 	router.Route("/users", func(router chi.Router) {
 		router.Group(func(router chi.Router) {
 			// Seek, verify and validate JWT tokens
@@ -68,6 +59,16 @@ func newRouter() *chi.Mux {
 			router.Use(middlewares.Authenticator)
 
 			router.Post("/activate", user.Activate)
+		})
+
+		router.Group(func(router chi.Router) {
+			// Seek, verify and validate JWT tokens
+			router.Use(jwtauth.Verifier(tokenizer.GetUserToken().TokenAuth))
+
+			// Handle valid / invalid tokens
+			router.Use(middlewares.Authenticator)
+
+			router.Post("/current", user.Current)
 		})
 
 		router.Post("/", user.Register)

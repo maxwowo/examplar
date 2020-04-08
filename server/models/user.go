@@ -14,6 +14,13 @@ type User struct {
 	Activated bool   `json:"activated"`
 }
 
+type CurrentUser struct {
+	ID        int    `json:"id"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	Activated bool   `json:"activated"`
+}
+
 func (u User) Get(userID int) (*User, error) {
 	db := database.GetDatabase()
 
@@ -32,6 +39,26 @@ func (u User) Get(userID int) (*User, error) {
 	err = stmt.QueryRow(userID).Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.Activated)
 
 	return &user, err
+}
+
+func (u User) GetCurrent(userID int) (*CurrentUser, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		SELECT users.id, users.username, users.email, users.activated
+		FROM users
+		WHERE users.id = $1
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer terminator.TerminateStatement(stmt)
+
+	var currentUser CurrentUser
+
+	err = stmt.QueryRow(userID).Scan(&currentUser.ID, &currentUser.Username, &currentUser.Email, &currentUser.Activated)
+
+	return &currentUser, err
 }
 
 func (u User) GetByUsername(username string) (*User, error) {

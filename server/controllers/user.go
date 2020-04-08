@@ -30,9 +30,9 @@ func (u UserController) Activate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	IntUserID := int(userID)
+	intUserID := int(userID)
 
-	user, err := userModel.SetActivated(IntUserID)
+	user, err := userModel.SetActivated(intUserID)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -125,5 +125,33 @@ func (u UserController) Login(w http.ResponseWriter, r *http.Request) {
 		Token string `json:"token"`
 	}{
 		Token: tokenizer.EncodeUserToken(user.ID),
+	})
+}
+
+func (u UserController) Current(w http.ResponseWriter, r *http.Request) {
+	_, claims, err := jwtauth.FromContext(r.Context())
+	if err != nil {
+		log.Panic("Failed to retrieve claims during current user retrieval.")
+	}
+
+	userID, ok := claims[tokenizer.GetUserToken().TokenClaim].(float64)
+	if !ok {
+		responder.RespondError(w, "Malformed JWT.", http.StatusBadRequest)
+		return
+	}
+
+	intUserID := int(userID)
+
+	currentUser, err := userModel.GetCurrent(intUserID)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	responder.RespondData(w, struct {
+		User  models.CurrentUser `json:"user"`
+		Token string             `json:"string"`
+	}{
+		User:  *currentUser,
+		Token: tokenizer.EncodeUserToken(currentUser.ID),
 	})
 }
