@@ -2,9 +2,11 @@ import React from 'react';
 import { Button, Form, Input, Typography } from 'antd';
 import classes from '../AuthModal/AuthModal.module.less';
 import { FormComponentProps } from 'antd/lib/form';
+import crypto from 'crypto';
 
 import Space from '../Space/Space';
-import { notifyNotImplemented } from '../../tools/errorNotifier';
+import { notifyError, notifyNotImplemented } from '../../tools/errorNotifier';
+import userModel from '../../models/user';
 
 interface SignUpFormProps extends FormComponentProps {
   toggleIsLogin: () => void;
@@ -23,7 +25,38 @@ const SignUpForm: React.FC<SignUpFormProps> = (
   ) => {
     e.preventDefault();
 
-    form.validateFields();
+    form.validateFields(
+      (
+        err,
+        {
+          username,
+          email,
+          password
+        }
+      ) => {
+        if (!err) {
+          const hash = crypto.createHash('sha256');
+
+          hash.write(password);
+
+          userModel.create(
+            username,
+            email,
+            hash.digest('base64')
+          )
+            .then(res => {
+              console.log(res);
+            })
+            .catch(err => {
+              notifyError(
+                err,
+                'Registration failed.',
+                'Could not create user.'
+              );
+            });
+        }
+      }
+    );
   };
 
   return (
