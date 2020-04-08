@@ -2,14 +2,15 @@ package mailer
 
 import (
 	"fmt"
+	"log"
+	"net/smtp"
+
 	"github.com/maxwowo/examplar/configuration"
 	"github.com/maxwowo/examplar/models"
 	"github.com/maxwowo/examplar/packages/tokenizer"
-	"log"
-	"net/smtp"
 )
 
-func Send(recipient string, subject string, body string) {
+func send(recipient string, subject string, body string) {
 	config := configuration.GetConfig()
 
 	SMTPDomain := config.GetString("mail.outgoing.domain")
@@ -28,6 +29,12 @@ func Send(recipient string, subject string, body string) {
 	if err != nil {
 		log.Printf("SMTP error: %s\n", err)
 	}
+}
+
+func Send(recipient string, subject string, body string) {
+	go func() {
+		send(recipient, subject, body)
+	}()
 }
 
 func SendActivationEmail(user *models.User) {

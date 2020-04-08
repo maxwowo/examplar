@@ -2,14 +2,16 @@ package controllers
 
 import (
 	"encoding/json"
+	"log"
+	"net/http"
+
 	"github.com/go-chi/jwtauth"
+
 	"github.com/maxwowo/examplar/forms"
 	"github.com/maxwowo/examplar/models"
 	"github.com/maxwowo/examplar/packages/mailer"
 	"github.com/maxwowo/examplar/packages/responder"
 	"github.com/maxwowo/examplar/packages/tokenizer"
-	"log"
-	"net/http"
 )
 
 type UserController struct{}
@@ -53,6 +55,17 @@ func (u UserController) Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Check if username already exists
+	existsUsername, err := userModel.ExistsUsername(registerPayload.Username)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	if existsUsername {
+		responder.RespondError(w, "Username has already been taken.", http.StatusConflict)
+		return
+	}
+
 	// Check if an activated user with same email already exists
 	existsActivatedEmail, err := userModel.ExistsActivatedEmail(registerPayload.Email)
 	if err != nil {
@@ -72,13 +85,23 @@ func (u UserController) Register(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Send activation email to user
-	go func() {
-		mailer.SendActivationEmail(user)
-	}()
+	mailer.SendActivationEmail(user)
 
 	responder.RespondData(w, struct {
 		Token string `json:"token"`
 	}{
 		Token: tokenizer.EncodeUserToken(user.ID),
 	})
+}
+
+func (u UserController) Login(w http.ResponseWriter, r *http.Request) {
+	var loginPayload forms.Login
+
+	// Malformed JSON register payload
+	err := json.NewDecoder(r.Body).Decode(&loginPayload)
+	if err != nil {
+		responder.RespondError(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
 }

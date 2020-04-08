@@ -95,6 +95,26 @@ func (u User) ExistsActivatedEmail(email string) (bool, error) {
 	return count == 1, err
 }
 
+func (u User) ExistsUsername(username string) (bool, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		SELECT COUNT(users.id)
+		FROM users
+		WHERE users.username = $1
+	`)
+	if err != nil {
+		return false, err
+	}
+	defer terminator.TerminateStatement(stmt)
+
+	var count int
+
+	err = stmt.QueryRow(username).Scan(&count)
+
+	return count == 1, err
+}
+
 func (u User) Create(registerPayload forms.Register) (*User, error) {
 	db := database.GetDatabase()
 
