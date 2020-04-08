@@ -104,4 +104,26 @@ func (u UserController) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Check if user exists
+	existsUser, err := userModel.ExistsUsernamePassword(loginPayload)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	if !existsUser {
+		responder.RespondError(w, "Incorrect credentials.", http.StatusUnauthorized)
+		return
+	}
+
+	// Get user
+	user, err := userModel.GetByUsername(loginPayload.Username)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	responder.RespondData(w, struct {
+		Token string `json:"token"`
+	}{
+		Token: tokenizer.EncodeUserToken(user.ID),
+	})
 }

@@ -34,6 +34,26 @@ func (u User) Get(userID int) (*User, error) {
 	return &user, err
 }
 
+func (u User) GetByUsername(username string) (*User, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		SELECT users.id, users.username, users.email, users.password, users.activated
+		FROM users
+		WHERE users.username = $1
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer terminator.TerminateStatement(stmt)
+
+	var user User
+
+	err = stmt.QueryRow(username).Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.Activated)
+
+	return &user, err
+}
+
 func (u User) DeleteByInactiveEmail(email string) error {
 	db := database.GetDatabase()
 
@@ -135,4 +155,24 @@ func (u User) Create(registerPayload forms.Register) (*User, error) {
 	err = stmt.QueryRow(registerPayload.Username, registerPayload.Email, registerPayload.Password).Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.Activated)
 
 	return &user, err
+}
+
+func (u User) ExistsUsernamePassword(loginPayload forms.Login) (bool, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		SELECT COUNT(users.id)
+		FROM users
+		WHERE users.username = $1 AND users.password = $2
+	`)
+	if err != nil {
+		return false, err
+	}
+	defer terminator.TerminateStatement(stmt)
+
+	var count int
+
+	err = stmt.QueryRow(loginPayload.Username, loginPayload.Password).Scan(&count)
+
+	return count == 1, err
 }

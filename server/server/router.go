@@ -1,13 +1,16 @@
 package server
 
 import (
-	"github.com/go-chi/cors"
-	"github.com/maxwowo/examplar/packages/tokenizer"
 	"time"
+
+	"github.com/go-chi/cors"
+
+	"github.com/maxwowo/examplar/packages/tokenizer"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/jwtauth"
+
 	"github.com/maxwowo/examplar/controllers"
 	"github.com/maxwowo/examplar/middlewares"
 )
@@ -68,6 +71,7 @@ func newRouter() *chi.Mux {
 		})
 
 		router.Post("/", user.Register)
+		router.Post("/login", user.Login)
 	})
 
 	router.Route("/courses", func(router chi.Router) {
