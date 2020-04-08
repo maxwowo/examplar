@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/go-chi/jwtauth"
 	"github.com/maxwowo/examplar/forms"
 	"github.com/maxwowo/examplar/models"
@@ -23,9 +22,29 @@ func (u UserController) Activate(w http.ResponseWriter, r *http.Request) {
 		log.Panic("Failed to retrieve claims during user activation.")
 	}
 
-	for key, val := range claims {
-		fmt.Printf("Key: %v, value: %v\n", key, val)
+	userID, ok := claims[tokenizer.GetActivationToken().TokenClaim].(float64)
+	if !ok {
+		responder.RespondError(w, "Malformed JWT.", http.StatusBadRequest)
+		return
 	}
+
+	IntUserID := int(userID)
+
+	user, err := userModel.SetActivated(IntUserID)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	err = userModel.DeleteByInactiveEmail(user.Email)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	responder.RespondData(w, struct {
+		User models.User `json:"user"`
+	}{
+		User: *user,
+	})
 }
 
 func (u UserController) Register(w http.ResponseWriter, r *http.Request) {

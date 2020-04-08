@@ -14,6 +14,67 @@ type User struct {
 	Activated bool   `json:"activated"`
 }
 
+func (u User) Get(userID int) (*User, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		SELECT users.id, users.username, users.email, users.password, users.activated
+		FROM users
+		WHERE users.id = $1
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer terminator.TerminateStatement(stmt)
+
+	var user User
+
+	err = stmt.QueryRow(userID).Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.Activated)
+
+	return &user, err
+}
+
+func (u User) DeleteByInactiveEmail(email string) error {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		DELETE FROM users
+		WHERE users.email = $1 AND users.activated = false
+	`)
+	if err != nil {
+		return err
+	}
+	defer terminator.TerminateStatement(stmt)
+
+	_, err = stmt.Query(email)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (u User) SetActivated(userID int) (*User, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		UPDATE users 
+		SET activated = true
+		WHERE users.id = $1
+		RETURNING users.id, users.username, users.email, users.password, users.activated
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer terminator.TerminateStatement(stmt)
+
+	var user User
+
+	err = stmt.QueryRow(userID).Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.Activated)
+
+	return &user, err
+}
+
 func (u User) ExistsActivatedEmail(email string) (bool, error) {
 	db := database.GetDatabase()
 
