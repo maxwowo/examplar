@@ -40,11 +40,7 @@ func (u UserController) Activate(w http.ResponseWriter, r *http.Request) {
 		log.Panic(err)
 	}
 
-	responder.RespondData(w, struct {
-		User models.User `json:"user"`
-	}{
-		User: *user,
-	})
+	responder.RespondData(w, struct{}{})
 }
 
 func (u UserController) Register(w http.ResponseWriter, r *http.Request) {
