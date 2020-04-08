@@ -7,6 +7,7 @@ import NotFoundPage from './NotFoundPage/NotFoundPage';
 import CoursePage from './CoursePage/CoursePage';
 import ExamPage from './ExamPage/ExamPage';
 import ExamEditPage from '../components/ExamEditPage/ExamEditPage';
+import ActivationPage from './ActivationPage/ActivationPage';
 
 interface RouterProps {
 
@@ -37,6 +38,10 @@ const Router: React.FC<RouterProps> = () => (
         exact
         path='/exams/:examId/edit'
         component={ExamEditPage}
+      />
+      <Route
+        path='/email/validate/:token'
+        component={ActivationPage}
       />
       <Route
         path='*'

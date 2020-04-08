@@ -11,6 +11,10 @@ interface CreateBody {
   token: string;
 }
 
+interface ActivateBody {
+
+}
+
 const userModel = {
   create: (
     username: string,
@@ -29,6 +33,34 @@ const userModel = {
       .then(
         (
           res: ClientResponse<CreateBody>
+        ) => (
+          res.data
+        )
+      )
+      .catch(
+        (
+          err: ClientError
+        ) => {
+          throw err;
+        }
+      )
+  ),
+  activate: (
+    token: string
+  ): Promise<ActivateBody> => (
+    client
+      .post(
+        '/users/activate',
+        undefined,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      )
+      .then(
+        (
+          res: ClientResponse<ActivateBody>
         ) => (
           res.data
         )
