@@ -67,7 +67,7 @@ func newRouter() *chi.Mux {
 			router.Post("/activate", user.Activate)
 		})
 
-		router.Post("/register", user.Register)
+		router.Post("/", user.Register)
 	})
 
 	router.Route("/courses", func(router chi.Router) {
