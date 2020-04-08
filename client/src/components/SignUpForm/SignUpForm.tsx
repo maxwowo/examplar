@@ -5,7 +5,7 @@ import { FormComponentProps } from 'antd/lib/form';
 import crypto from 'crypto';
 
 import Space from '../Space/Space';
-import { notifyError, notifyNotImplemented } from '../../tools/errorNotifier';
+import { notifyError } from '../../tools/errorNotifier';
 import userModel from '../../models/user';
 
 interface SignUpFormProps extends FormComponentProps {
@@ -171,7 +171,6 @@ const SignUpForm: React.FC<SignUpFormProps> = (
             key='submit'
             form={FORM_ID}
             htmlType='submit'
-            onClick={notifyNotImplemented}
             className={classes.submitButton}
           >
             Sign Up
