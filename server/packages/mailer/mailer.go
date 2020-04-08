@@ -34,7 +34,7 @@ func SendActivationEmail(user *models.User) {
 	token := tokenizer.EncodeActivationToken(user.ID)
 
 	subject := "[Examplar] Confirm E-mail Address"
-	body := fmt.Sprintf("Welcome %s!\n\nThanks for signing up with Examplar!\nYou must follow this link to activate your account:\nhttps://examplar.org/email/validate/%s\n\nHave fun contributing, and don't hesitate to contact us with your feedback.", user.Username, token)
+	body := fmt.Sprintf("Welcome %s!\n\nThanks for signing up with Examplar!\nPlease follow this link to activate your account:\nhttps://examplar.org/email/validate/%s\n\nHave fun contributing, and don't hesitate to contact us with your feedback.", user.Username, token)
 
 	Send(user.Email, subject, body)
 }

@@ -14,24 +14,24 @@ type User struct {
 	Activated bool   `json:"activated"`
 }
 
-func (u User) GetByEmail(email string, activated bool) (*User, error) {
+func (u User) ExistsActivatedEmail(email string) (bool, error) {
 	db := database.GetDatabase()
 
 	stmt, err := db.Prepare(`
-		SELECT users.id, users.username, users.email, users.password, users.activated
+		SELECT COUNT(users.id)
 		FROM users
-		WHERE users.email = $1 AND users.activated = $2
+		WHERE users.email = $1 AND users.activated = true
 	`)
 	if err != nil {
-		return nil, err
+		return false, err
 	}
 	defer terminator.TerminateStatement(stmt)
 
-	var account User
+	var count int
 
-	err = stmt.QueryRow(email, activated).Scan(&account.ID, &account.Username, &account.Email, &account.Password, &account.Activated)
+	err = stmt.QueryRow(email).Scan(&count)
 
-	return &account, err
+	return count == 1, err
 }
 
 func (u User) Create(registerPayload forms.Register) (*User, error) {

@@ -22,6 +22,7 @@ func (u UserController) Activate(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Panic("Failed to retrieve claims during user activation.")
 	}
+
 	for key, val := range claims {
 		fmt.Printf("Key: %v, value: %v\n", key, val)
 	}
@@ -38,26 +39,27 @@ func (u UserController) Register(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Check if an activated user with same email already exists
-	user, err := userModel.GetByEmail(registerPayload.Email, true)
+	existsActivatedEmail, err := userModel.ExistsActivatedEmail(registerPayload.Email)
 	if err != nil {
-		responder.RespondError(w, "Failed to check if activated user with same email already exists", http.StatusInternalServerError)
-		return
+		log.Panic(err)
 	}
 
-	if user != nil {
+	if existsActivatedEmail {
 		responder.RespondError(w, "Email has already been taken.", http.StatusConflict)
 		return
 	}
 
 	// Create user record
-	user, err = userModel.Create(registerPayload)
+	user, err := userModel.Create(registerPayload)
 	if err != nil {
 		responder.RespondError(w, "Failed to register user.", http.StatusInternalServerError)
 		return
 	}
 
 	// Send activation email to user
-	mailer.SendActivationEmail(user)
+	go func() {
+		mailer.SendActivationEmail(user)
+	}()
 
 	responder.RespondData(w, struct {
 		Token string `json:"token"`
