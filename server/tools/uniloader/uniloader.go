@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"flag"
+	"github.com/maxwowo/examplar/packages/terminator"
 	"log"
 	"os"
 
@@ -71,7 +72,7 @@ func insert(db *sql.DB, university university) {
 	if err != nil {
 		log.Panic(err)
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	_, err = stmt.Exec(university.Name, university.Domains[0])
 	if err != nil {

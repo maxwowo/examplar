@@ -5,6 +5,7 @@ import (
 	"github.com/maxwowo/examplar/database"
 	"github.com/maxwowo/examplar/forms"
 	"github.com/maxwowo/examplar/packages/skylar"
+	"github.com/maxwowo/examplar/packages/terminator"
 )
 
 type Course struct {
@@ -42,7 +43,7 @@ func (c Course) Get(ID int) (*Course, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	var course Course
 
@@ -64,7 +65,7 @@ func (c Course) Create(coursePayload forms.CreateCourse) (*Course, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	var course Course
 
@@ -86,7 +87,7 @@ func (c Course) SearchByCourse(course string) ([]Course, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	rows, err := stmt.Query(skylar.LikePad(course))
 	if err != nil {
@@ -110,7 +111,7 @@ func (c Course) SearchByCourseUniversity(course string, university int) ([]Cours
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	rows, err := stmt.Query(skylar.LikePad(course), university)
 	if err != nil {

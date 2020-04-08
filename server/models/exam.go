@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/maxwowo/examplar/database"
 	"github.com/maxwowo/examplar/forms"
+	"github.com/maxwowo/examplar/packages/terminator"
 )
 
 type Exam struct {
@@ -23,7 +24,7 @@ func (e Exam) Get(ID int) (*Exam, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	var exam Exam
 
@@ -45,7 +46,7 @@ func (e Exam) Create(examPayload forms.CreateExam) (*Exam, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	var exam Exam
 
@@ -69,7 +70,7 @@ func (e Exam) SearchByCourseID(courseID int) ([]Exam, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	rows, err := stmt.Query(courseID)
 	if err != nil {

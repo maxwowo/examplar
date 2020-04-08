@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/maxwowo/examplar/database"
 	"github.com/maxwowo/examplar/forms"
+	"github.com/maxwowo/examplar/packages/terminator"
 )
 
 type User struct {
@@ -24,7 +25,7 @@ func (u User) GetByEmail(email string, activated bool) (*User, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	var account User
 
@@ -46,7 +47,7 @@ func (u User) Create(registerPayload forms.Register) (*User, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	var user User
 

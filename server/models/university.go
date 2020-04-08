@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/maxwowo/examplar/database"
 	"github.com/maxwowo/examplar/packages/skylar"
+	"github.com/maxwowo/examplar/packages/terminator"
 )
 
 type University struct {
@@ -22,7 +23,7 @@ func (u University) SearchByName(name string) ([]University, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	rows, err := stmt.Query(skylar.LikePad(name))
 	if err != nil {
@@ -57,7 +58,7 @@ func (u University) Get(ID int) (*University, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	var university University
 

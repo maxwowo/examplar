@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/maxwowo/examplar/database"
 	"github.com/maxwowo/examplar/forms"
+	"github.com/maxwowo/examplar/packages/terminator"
 )
 
 type Solution struct {
@@ -22,7 +23,7 @@ func (s Solution) Get(ID int) (*Solution, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	var solution Solution
 
@@ -44,7 +45,7 @@ func (s Solution) Create(solutionPayload forms.CreateSolution) (*Solution, error
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	var solution Solution
 
@@ -64,7 +65,7 @@ func (s Solution) Update(solution *Solution, solutionPayload forms.UpdateSolutio
 	if err != nil {
 		return err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	_, err = stmt.Query(solution.ID, solutionPayload.Content)
 
@@ -101,7 +102,7 @@ func (s Solution) SearchByExamID(examID int) (*Solution, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer stmt.Close()
+	defer terminator.TerminateStatement(stmt)
 
 	var solution Solution
 

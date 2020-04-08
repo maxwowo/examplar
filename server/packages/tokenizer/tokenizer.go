@@ -12,36 +12,38 @@ type Token struct {
 	TokenAuth  *jwtauth.JWTAuth
 }
 
-var tk *Token
+var userToken *Token
+var activationToken *Token
 
 func Initialize() {
-	token := &Token{
+	userToken = &Token{
 		TokenClaim: "user_id",
-		TokenAuth:  jwtauth.New("HS256", []byte("secret"), nil),
+		TokenAuth:  jwtauth.New("HS256", []byte("user-token-secret"), nil),
 	}
 
-	tk = token
+	activationToken = &Token{
+		TokenClaim: "user_id",
+		TokenAuth:  jwtauth.New("HS256", []byte("activation-token-secret"), nil),
+	}
 
 	log.Printf("DEBUG: a sample user JWT for user ID 1 is %s\n\n", EncodeUserToken(1))
-	log.Printf("DEBUG: a sample email confirmation JWT for user ID 1 is %s\n\n", EncodeEmailConfirmationToken(1))
+	log.Printf("DEBUG: a sample activation JWT for user ID 1 is %s\n\n", EncodeActivationToken(1))
 }
 
-func GetToken() *Token {
-	return tk
+func GetUserToken() *Token {
+	return userToken
 }
 
-func encode(id int, expiryIn time.Duration) (string, error) {
-	claims := jwt.MapClaims{tk.TokenClaim: id}
-	jwtauth.SetIssuedNow(claims)
-	jwtauth.SetExpiryIn(claims, expiryIn)
-
-	_, tokenString, err := tk.TokenAuth.Encode(claims)
-
-	return tokenString, err
+func GetActivationToken() *Token {
+	return activationToken
 }
 
 func EncodeUserToken(id int) string {
-	tokenString, err := encode(id, 4*24*time.Hour)
+	claims := jwt.MapClaims{userToken.TokenClaim: id}
+	jwtauth.SetIssuedNow(claims)
+	jwtauth.SetExpiryIn(claims, 4*24*time.Hour)
+
+	_, tokenString, err := userToken.TokenAuth.Encode(claims)
 	if err != nil {
 		log.Panic("Failed to encode user token.")
 	}
@@ -49,10 +51,14 @@ func EncodeUserToken(id int) string {
 	return tokenString
 }
 
-func EncodeEmailConfirmationToken(id int) string {
-	tokenString, err := encode(id, 3*time.Hour)
+func EncodeActivationToken(id int) string {
+	claims := jwt.MapClaims{userToken.TokenClaim: id}
+	jwtauth.SetIssuedNow(claims)
+	jwtauth.SetExpiryIn(claims, 3*time.Hour)
+
+	_, tokenString, err := activationToken.TokenAuth.Encode(claims)
 	if err != nil {
-		log.Panic("Failed to encode email confirmation token.")
+		log.Panic("Failed to encode activation token.")
 	}
 
 	return tokenString

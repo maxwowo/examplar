@@ -2,17 +2,30 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
+	"github.com/go-chi/jwtauth"
 	"github.com/maxwowo/examplar/forms"
 	"github.com/maxwowo/examplar/models"
 	"github.com/maxwowo/examplar/packages/mailer"
 	"github.com/maxwowo/examplar/packages/responder"
 	"github.com/maxwowo/examplar/packages/tokenizer"
+	"log"
 	"net/http"
 )
 
 type UserController struct{}
 
 var userModel = new(models.User)
+
+func (u UserController) Activate(w http.ResponseWriter, r *http.Request) {
+	_, claims, err := jwtauth.FromContext(r.Context())
+	if err != nil {
+		log.Panic("Failed to retrieve claims during user activation.")
+	}
+	for key, val := range claims {
+		fmt.Printf("Key: %v, value: %v\n", key, val)
+	}
+}
 
 func (u UserController) Register(w http.ResponseWriter, r *http.Request) {
 	var registerPayload forms.Register
@@ -43,8 +56,8 @@ func (u UserController) Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Send registration confirmation email to user
-	mailer.SendEmailConfirmation(user)
+	// Send activation email to user
+	mailer.SendActivationEmail(user)
 
 	responder.RespondData(w, struct {
 		Token string `json:"token"`

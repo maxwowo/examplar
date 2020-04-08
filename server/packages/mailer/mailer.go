@@ -5,7 +5,6 @@ import (
 	"github.com/maxwowo/examplar/configuration"
 	"github.com/maxwowo/examplar/models"
 	"github.com/maxwowo/examplar/packages/tokenizer"
-	"github.com/maxwowo/examplar/server"
 	"log"
 	"net/smtp"
 )
@@ -31,11 +30,11 @@ func Send(recipient string, subject string, body string) {
 	}
 }
 
-func SendEmailConfirmation(user *models.User) {
-	token := tokenizer.EncodeEmailConfirmationToken(user.ID)
+func SendActivationEmail(user *models.User) {
+	token := tokenizer.EncodeActivationToken(user.ID)
 
 	subject := "[Examplar] Confirm E-mail Address"
-	body := fmt.Sprintf("Welcome %s!\n\nThanks for signing up with Examplar!\nYou must follow this link to activate your account:\nhttps://examplar.org%s/%s\n\nHave fun contributing, and don't hesitate to contact us with your feedback.", user.Username, server.EmailValidateRoute, token)
+	body := fmt.Sprintf("Welcome %s!\n\nThanks for signing up with Examplar!\nYou must follow this link to activate your account:\nhttps://examplar.org/email/validate/%s\n\nHave fun contributing, and don't hesitate to contact us with your feedback.", user.Username, token)
 
 	Send(user.Email, subject, body)
 }

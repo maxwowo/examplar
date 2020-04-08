@@ -12,8 +12,6 @@ import (
 	"github.com/maxwowo/examplar/middlewares"
 )
 
-const EmailValidateRoute = "/email/validate"
-
 func newRouter() *chi.Mux {
 	router := chi.NewRouter()
 
@@ -43,15 +41,27 @@ func newRouter() *chi.Mux {
 	exam := new(controllers.ExamController)
 	university := new(controllers.UniversityController)
 	solution := new(controllers.SolutionController)
+	user := new(controllers.UserController)
 	notFound := new(controllers.NotFoundController)
 
 	// All routes
 	router.Get("/health", health.Status)
 
+	// User activation routes
+	router.Group(func(router chi.Router) {
+		// Seek, verify and validate JWT tokens
+		router.Use(jwtauth.Verifier(tokenizer.GetActivationToken().TokenAuth))
+
+		// Handle valid / invalid tokens
+		router.Use(middlewares.Authenticator)
+
+		router.Get("/user/activate", user.Activate)
+	})
+
 	// Protected routes
 	router.Group(func(router chi.Router) {
 		// Seek, verify and validate JWT tokens
-		router.Use(jwtauth.Verifier(tokenizer.GetToken().TokenAuth))
+		router.Use(jwtauth.Verifier(tokenizer.GetUserToken().TokenAuth))
 
 		// Handle valid / invalid tokens
 		router.Use(middlewares.Authenticator)
