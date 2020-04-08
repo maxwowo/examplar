@@ -14,7 +14,7 @@ type UniversityController struct{}
 
 var universityModel = new(models.University)
 
-func (u *UniversityController) Context(next http.Handler) http.Handler {
+func (u UniversityController) Context(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		universityID := chi.URLParam(r, "universityID")
 
@@ -34,7 +34,7 @@ func (u *UniversityController) Context(next http.Handler) http.Handler {
 	})
 }
 
-func (u *UniversityController) getContext(r *http.Request) *models.University {
+func (u UniversityController) getContext(r *http.Request) *models.University {
 	ctx := r.Context()
 
 	university, ok := ctx.Value("university").(*models.University)
@@ -45,7 +45,7 @@ func (u *UniversityController) getContext(r *http.Request) *models.University {
 	return university
 }
 
-func (u *UniversityController) Get(w http.ResponseWriter, r *http.Request) {
+func (u UniversityController) Get(w http.ResponseWriter, r *http.Request) {
 	responder.RespondData(w, struct {
 		University models.University `json:"university"`
 	}{
@@ -53,7 +53,7 @@ func (u *UniversityController) Get(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (u *UniversityController) Search(w http.ResponseWriter, r *http.Request) {
+func (u UniversityController) Search(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 
 	name := query.Get("name")
