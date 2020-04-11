@@ -12,6 +12,7 @@ const CreateModal: React.FC<CreateModalProps> = (
     visible,
     handleToggleModal,
     formId,
+    loading,
     ...rest
   }
 ) => (
@@ -21,6 +22,7 @@ const CreateModal: React.FC<CreateModalProps> = (
     footer={
       <CreateModalFooter
         handleToggleModal={handleToggleModal}
+        loading={loading}
         formId={formId}
       />
     }
