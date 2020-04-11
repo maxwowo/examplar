@@ -10,15 +10,22 @@ import userModel from '../../models/user';
 
 interface SignUpFormProps extends FormComponentProps {
   toggleIsLogin: () => void;
+  handleToggleModal?: () => void;
 }
 
 const SignUpForm: React.FC<SignUpFormProps> = (
   {
     form,
-    toggleIsLogin
+    toggleIsLogin,
+    handleToggleModal
   }
 ) => {
   const FORM_ID = 'sign-up-modal-form';
+
+  const [
+    loading,
+    setLoading
+  ] = React.useState(false);
 
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement>
@@ -35,6 +42,8 @@ const SignUpForm: React.FC<SignUpFormProps> = (
         }
       ) => {
         if (!err) {
+          setLoading(true);
+
           const hash = crypto.createHash('sha256');
 
           hash.write(password);
@@ -45,9 +54,14 @@ const SignUpForm: React.FC<SignUpFormProps> = (
             hash.digest('base64')
           )
             .then(res => {
+              setLoading(false);
+              if (handleToggleModal !== undefined) {
+                handleToggleModal();
+              }
               console.log(res);
             })
             .catch(err => {
+              setLoading(false);
               notifyError(
                 err,
                 'Registration failed.',
@@ -172,6 +186,7 @@ const SignUpForm: React.FC<SignUpFormProps> = (
             form={FORM_ID}
             htmlType='submit'
             className={classes.submitButton}
+            loading={loading}
           >
             Sign Up
           </Button>

@@ -41,6 +41,7 @@ const AuthModal: React.FC<AuthModalProps> = (
           :
           <SignUpForm
             toggleIsLogin={toggleIsLogin}
+            handleToggleModal={handleToggleModal}
           />
       }
 
