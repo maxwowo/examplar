@@ -37,18 +37,26 @@ const ExamEdit: React.FC<ExamEditProps> = (
   };
 
   const [
+    loading,
+    setLoading
+  ] = React.useState(false);
+
+  const [
     content,
     setContent
   ] = React.useState<string | undefined>(solution?.content);
 
   const handleExamSubmit = () => {
     if (solution !== undefined) {
+      setLoading(true);
+
       solutionModel
         .update(
           solution.id,
           content ? content : ''
         )
         .then(() => {
+          setLoading(false);
           history.push(`/exams/${exam?.id}`);
           notification.success(
             {
@@ -58,6 +66,7 @@ const ExamEdit: React.FC<ExamEditProps> = (
           );
         })
         .catch(err => {
+          setLoading(false);
           notifyConnectionError(
             err,
             'Could not obtain exam solution.'
@@ -125,6 +134,7 @@ const ExamEdit: React.FC<ExamEditProps> = (
             type='primary'
             onClick={handleExamSubmit}
             className={classes.rowButton}
+            loading={loading}
           >
             Submit
           </Button>
