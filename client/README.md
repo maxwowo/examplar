@@ -1,5 +1,7 @@
 # Stack
 
+The Examplar client is built with
+
 - React
 - Redux
 - TypeScript
