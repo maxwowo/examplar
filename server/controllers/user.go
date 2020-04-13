@@ -149,7 +149,7 @@ func (u UserController) Current(w http.ResponseWriter, r *http.Request) {
 
 	responder.RespondData(w, struct {
 		User  models.CurrentUser `json:"user"`
-		Token string             `json:"string"`
+		Token string             `json:"token"`
 	}{
 		User:  *currentUser,
 		Token: tokenizer.EncodeUserToken(currentUser.ID),
