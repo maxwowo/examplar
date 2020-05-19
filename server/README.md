@@ -1,6 +1,10 @@
-# Endpoints
+# Stack
 
-You can access the Examplar server endpoints by connecting to [https://server.examplar.org](https://server.examplar.org).
+The Examplar server is built with 
+
+- Go
+- Chi
+- PostgreSQL
 
 # Setting up
 

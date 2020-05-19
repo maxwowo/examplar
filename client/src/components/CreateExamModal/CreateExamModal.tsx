@@ -27,6 +27,11 @@ const CreateExamModal: React.FC<CreateExamModalProps> = (
 ) => {
   const FORM_ID = 'create-exam-modal-form';
 
+  const [
+    loading,
+    setLoading
+  ] = React.useState(false);
+
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement>
   ) => {
@@ -41,6 +46,8 @@ const CreateExamModal: React.FC<CreateExamModalProps> = (
         }
       ) => {
         if (!err) {
+          setLoading(true);
+
           examModel
             .create(
               examYear,
@@ -48,9 +55,11 @@ const CreateExamModal: React.FC<CreateExamModalProps> = (
               courseId
             )
             .then(res => {
+              setLoading(false);
               history.push(`/exams/${res.exam.id}`);
             })
             .catch(err => {
+              setLoading(false);
               notifyError(
                 err,
                 'Create exam failed',
@@ -68,6 +77,7 @@ const CreateExamModal: React.FC<CreateExamModalProps> = (
       visible={visible}
       formId={FORM_ID}
       handleToggleModal={handleToggleModal}
+      loading={loading}
     >
       <Form
         onSubmit={handleSubmit}

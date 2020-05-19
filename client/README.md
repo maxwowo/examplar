@@ -1,3 +1,12 @@
+# Stack
+
+The Examplar client is built with
+
+- React
+- Redux
+- TypeScript
+- Axios
+
 # Setting up
 
 Since the Examplar client is written in React, it is very straightforward to run it. 

@@ -2,14 +2,16 @@ package controllers
 
 import (
 	"encoding/json"
+	"log"
+	"net/http"
+
 	"github.com/go-chi/jwtauth"
+
 	"github.com/maxwowo/examplar/forms"
 	"github.com/maxwowo/examplar/models"
 	"github.com/maxwowo/examplar/packages/mailer"
 	"github.com/maxwowo/examplar/packages/responder"
 	"github.com/maxwowo/examplar/packages/tokenizer"
-	"log"
-	"net/http"
 )
 
 type UserController struct{}
@@ -28,9 +30,9 @@ func (u UserController) Activate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	IntUserID := int(userID)
+	intUserID := int(userID)
 
-	user, err := userModel.SetActivated(IntUserID)
+	user, err := userModel.SetActivated(intUserID)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -53,6 +55,17 @@ func (u UserController) Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Check if username already exists
+	existsUsername, err := userModel.ExistsUsername(registerPayload.Username)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	if existsUsername {
+		responder.RespondError(w, "Username has already been taken.", http.StatusConflict)
+		return
+	}
+
 	// Check if an activated user with same email already exists
 	existsActivatedEmail, err := userModel.ExistsActivatedEmail(registerPayload.Email)
 	if err != nil {
@@ -72,13 +85,73 @@ func (u UserController) Register(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Send activation email to user
-	go func() {
-		mailer.SendActivationEmail(user)
-	}()
+	mailer.SendActivationEmail(user)
 
 	responder.RespondData(w, struct {
 		Token string `json:"token"`
 	}{
 		Token: tokenizer.EncodeUserToken(user.ID),
+	})
+}
+
+func (u UserController) Login(w http.ResponseWriter, r *http.Request) {
+	var loginPayload forms.Login
+
+	// Malformed JSON register payload
+	err := json.NewDecoder(r.Body).Decode(&loginPayload)
+	if err != nil {
+		responder.RespondError(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Check if user exists
+	existsUser, err := userModel.ExistsUsernamePassword(loginPayload)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	if !existsUser {
+		responder.RespondError(w, "Incorrect credentials.", http.StatusUnauthorized)
+		return
+	}
+
+	// Get user
+	user, err := userModel.GetByUsername(loginPayload.Username)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	responder.RespondData(w, struct {
+		Token string `json:"token"`
+	}{
+		Token: tokenizer.EncodeUserToken(user.ID),
+	})
+}
+
+func (u UserController) Current(w http.ResponseWriter, r *http.Request) {
+	_, claims, err := jwtauth.FromContext(r.Context())
+	if err != nil {
+		log.Panic("Failed to retrieve claims during current user retrieval.")
+	}
+
+	userID, ok := claims[tokenizer.GetUserToken().TokenClaim].(float64)
+	if !ok {
+		responder.RespondError(w, "Malformed JWT.", http.StatusBadRequest)
+		return
+	}
+
+	intUserID := int(userID)
+
+	currentUser, err := userModel.GetCurrent(intUserID)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	responder.RespondData(w, struct {
+		User  models.CurrentUser `json:"user"`
+		Token string             `json:"token"`
+	}{
+		User:  *currentUser,
+		Token: tokenizer.EncodeUserToken(currentUser.ID),
 	})
 }

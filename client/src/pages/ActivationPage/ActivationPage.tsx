@@ -71,7 +71,8 @@ const ActivationPage: React.FC<ActivationPageProps> = (
             ?
             <Result
               status='success'
-              title='Successfully activated your account!'
+              title='Success!'
+              subTitle='Your account has been activated.'
               extra={
                 <Button
                   type='primary'

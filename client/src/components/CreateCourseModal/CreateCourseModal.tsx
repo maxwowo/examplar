@@ -25,6 +25,11 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
 ) => {
   const FORM_ID = 'create-course-modal-form';
 
+  const [
+    loading,
+    setLoading
+  ] = React.useState(false);
+
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement>
   ) => {
@@ -40,15 +45,19 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
         }
       ) => {
         if (!err) {
+          setLoading(true);
+
           courseModel.create(
             courseCode,
             courseName,
             universityId
           )
             .then(res => {
+              setLoading(false);
               history.push(`/courses/${res.course.id}`);
             })
             .catch(err => {
+              setLoading(false);
               notifyError(
                 err,
                 'Create course failed',
@@ -66,6 +75,7 @@ const CreateCourseModal: React.FC<CreateCourseModalProps> = (
       visible={visible}
       formId={FORM_ID}
       handleToggleModal={handleToggleModal}
+      loading={loading}
     >
       <Form
         onSubmit={handleSubmit}

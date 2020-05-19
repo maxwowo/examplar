@@ -14,6 +14,13 @@ type User struct {
 	Activated bool   `json:"activated"`
 }
 
+type CurrentUser struct {
+	ID        int    `json:"id"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	Activated bool   `json:"activated"`
+}
+
 func (u User) Get(userID int) (*User, error) {
 	db := database.GetDatabase()
 
@@ -30,6 +37,46 @@ func (u User) Get(userID int) (*User, error) {
 	var user User
 
 	err = stmt.QueryRow(userID).Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.Activated)
+
+	return &user, err
+}
+
+func (u User) GetCurrent(userID int) (*CurrentUser, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		SELECT users.id, users.username, users.email, users.activated
+		FROM users
+		WHERE users.id = $1
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer terminator.TerminateStatement(stmt)
+
+	var currentUser CurrentUser
+
+	err = stmt.QueryRow(userID).Scan(&currentUser.ID, &currentUser.Username, &currentUser.Email, &currentUser.Activated)
+
+	return &currentUser, err
+}
+
+func (u User) GetByUsername(username string) (*User, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		SELECT users.id, users.username, users.email, users.password, users.activated
+		FROM users
+		WHERE users.username = $1
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer terminator.TerminateStatement(stmt)
+
+	var user User
+
+	err = stmt.QueryRow(username).Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.Activated)
 
 	return &user, err
 }
@@ -95,6 +142,26 @@ func (u User) ExistsActivatedEmail(email string) (bool, error) {
 	return count == 1, err
 }
 
+func (u User) ExistsUsername(username string) (bool, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		SELECT COUNT(users.id)
+		FROM users
+		WHERE users.username = $1
+	`)
+	if err != nil {
+		return false, err
+	}
+	defer terminator.TerminateStatement(stmt)
+
+	var count int
+
+	err = stmt.QueryRow(username).Scan(&count)
+
+	return count == 1, err
+}
+
 func (u User) Create(registerPayload forms.Register) (*User, error) {
 	db := database.GetDatabase()
 
@@ -115,4 +182,24 @@ func (u User) Create(registerPayload forms.Register) (*User, error) {
 	err = stmt.QueryRow(registerPayload.Username, registerPayload.Email, registerPayload.Password).Scan(&user.ID, &user.Username, &user.Email, &user.Password, &user.Activated)
 
 	return &user, err
+}
+
+func (u User) ExistsUsernamePassword(loginPayload forms.Login) (bool, error) {
+	db := database.GetDatabase()
+
+	stmt, err := db.Prepare(`
+		SELECT COUNT(users.id)
+		FROM users
+		WHERE users.username = $1 AND users.password = $2
+	`)
+	if err != nil {
+		return false, err
+	}
+	defer terminator.TerminateStatement(stmt)
+
+	var count int
+
+	err = stmt.QueryRow(loginPayload.Username, loginPayload.Password).Scan(&count)
+
+	return count == 1, err
 }

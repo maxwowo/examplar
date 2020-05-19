@@ -1,13 +1,16 @@
 package server
 
 import (
-	"github.com/go-chi/cors"
-	"github.com/maxwowo/examplar/packages/tokenizer"
 	"time"
+
+	"github.com/go-chi/cors"
+
+	"github.com/maxwowo/examplar/packages/tokenizer"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/jwtauth"
+
 	"github.com/maxwowo/examplar/controllers"
 	"github.com/maxwowo/examplar/middlewares"
 )
@@ -47,15 +50,6 @@ func newRouter() *chi.Mux {
 	// All routes
 	router.Get("/health", health.Status)
 
-	// Protected routes
-	router.Group(func(router chi.Router) {
-		// Seek, verify and validate JWT tokens
-		router.Use(jwtauth.Verifier(tokenizer.GetUserToken().TokenAuth))
-
-		// Handle valid / invalid tokens
-		router.Use(middlewares.Authenticator)
-	})
-
 	router.Route("/users", func(router chi.Router) {
 		router.Group(func(router chi.Router) {
 			// Seek, verify and validate JWT tokens
@@ -67,7 +61,18 @@ func newRouter() *chi.Mux {
 			router.Post("/activate", user.Activate)
 		})
 
+		router.Group(func(router chi.Router) {
+			// Seek, verify and validate JWT tokens
+			router.Use(jwtauth.Verifier(tokenizer.GetUserToken().TokenAuth))
+
+			// Handle valid / invalid tokens
+			router.Use(middlewares.Authenticator)
+
+			router.Post("/current", user.Current)
+		})
+
 		router.Post("/", user.Register)
+		router.Post("/login", user.Login)
 	})
 
 	router.Route("/courses", func(router chi.Router) {

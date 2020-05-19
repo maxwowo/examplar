@@ -4,12 +4,14 @@ import { Button } from 'antd';
 export interface CreateModalFooterProps {
   handleToggleModal: () => void;
   formId: string;
+  loading: boolean;
 }
 
 const CreateModalFooter: React.FC<CreateModalFooterProps> = (
   {
     handleToggleModal,
-    formId
+    formId,
+    loading
   }
 ) => (
   <React.Fragment>
@@ -18,6 +20,7 @@ const CreateModalFooter: React.FC<CreateModalFooterProps> = (
       form={formId}
       htmlType='submit'
       type='primary'
+      loading={loading}
     >
       Submit
     </Button>,
