@@ -4,8 +4,6 @@ services:
     container_name: examplar-server
     image: examplar-server
     build: .
-    volumes:
-      - /var/lib/examplar/server:/var/log/server
     ports:
       - "8080:8080"
     depends_on:
@@ -17,7 +15,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - /var/lib/examplar/data:/var/lib/postgresql/data
+      - /opt/containers/examplar/data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: "examplar"
       POSTGRES_PASSWORD: "examplar"
